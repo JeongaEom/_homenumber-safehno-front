@@ -1,0 +1,214 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/layouts/login.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup>\n\n</script>\n\n<template>\n  <div class=\"login\">\n    <header>\n      <div class=\"inners\">\n        <img src=\"@/assets/images/logo_g.png\" alt=\"홈넘버 로고(글씨 회색 버전)\">\n      </div>\n    </header>\n    <section>\n      <div class=\"inners\">\n        <slot/>\n      </div>\n    </section>\n  </div>\n</template>\n\n<style lang=\"scss\" scoped>\n  header {\n    .inners {\n      width: 12rem;\n      padding: 4.5rem 1.2rem;\n    }\n  }\n\n  @media (max-width: 768px) {\n    .login {\n      height: 100%;\n      overflow-x: auto;\n      overflow-y: hidden;\n    }\n  }\n</style>",
+      "start": 1713853554003,
+      "end": 1713853554286,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853554286,
+      "end": 1713853554286,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "const _sfc_main = {}\nimport { createElementVNode as _createElementVNode, renderSlot as _renderSlot, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\"\nimport _imports_0 from '@/assets/images/logo_g.png'\n\n\nconst _withScopeId = n => (_pushScopeId(\"data-v-55d82745\"),n=n(),_popScopeId(),n)\nconst _hoisted_1 = { class: \"login\" }\nconst _hoisted_2 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/_createElementVNode(\"header\", null, [\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"inners\" }, [\n    /*#__PURE__*/_createElementVNode(\"img\", {\n      src: _imports_0,\n      alt: \"홈넘버 로고(글씨 회색 버전)\"\n    })\n  ])\n], -1))\nconst _hoisted_3 = { class: \"inners\" }\n\nfunction _sfc_render(_ctx, _cache) {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _hoisted_2,\n    _createElementVNode(\"section\", null, [\n      _createElementVNode(\"div\", _hoisted_3, [\n        _renderSlot(_ctx.$slots, \"default\", {}, undefined, true)\n      ])\n    ])\n  ]))\n}\n\nimport \"C:/Workspace/GitLab/homenumber-safehno-front/layouts/login.vue?vue&type=style&index=0&scoped=55d82745&lang.scss\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__scopeId',\"data-v-55d82745\"]])",
+      "start": 1713853554286,
+      "end": 1713853554289,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1713853554289,
+      "end": 1713853554289,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853554289,
+      "end": 1713853554290,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853554290,
+      "end": 1713853554290,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853554290,
+      "end": 1713853554290,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853554290,
+      "end": 1713853554290,
+      "order": "normal"
+    }
+  ]
+}

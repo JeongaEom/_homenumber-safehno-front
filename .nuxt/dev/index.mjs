@@ -101,7 +101,9 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {
+    "envMode": "DEV"
+  }
 };
 const envOptions = {
   prefix: "NITRO_",

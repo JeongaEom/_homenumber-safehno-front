@@ -1,0 +1,297 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue?vue&type=style&index=0&scoped=2bde2522&lang.scss?inline&used",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\n  .subs-title {\n    border: 1px solid #171A22;\n    border-top: none;\n    border-bottom: none;\n    div {\n      font-size: 24px;\n      font-weight: bold;\n      height: 56px;\n      background-color: $c-g100;\n      margin: 0 1.5rem;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n    }\n  }\n\n  .textDatas {\n    margin: 10px 0;\n  }\n\n  .t-title {\n    font-size: 18px;\n    font-weight: bold;\n  }\n\n  .terms {\n    margin-bottom: 40px;\n    &:last-child {\n      margin-bottom: 0;\n    }\n  }\n\n  .inputDatas {\n    margin-bottom: 20px;\n  }\n",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue"
+        ],
+        "names": [],
+        "mappings": ";EAoNE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACnB,CAAC,CAAC,EAAE;MACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;MACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;MACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;MACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;MACzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;MAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;MACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;MACnB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACzB;EACF;;EAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC;EAChB;;EAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACP,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;EACnB;;EAEA,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACL,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACnB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;MACX,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;IAClB;EACF;;EAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;EACrB",
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<script setup>\n  import { reactive, watch, computed } from 'vue';\n  import { useEndDataStore } from '@/stores/endData';\n\n  const endDataStore = useEndDataStore();\n\n  definePageMeta({\n  });\n\n  const d = reactive({\n    text: '01',\n    all: '0',\n    dataList: [\n      {\n        id: '1',\n        toptitle: '서비스 이용 약관',\n        type: '필수',\n        name: '개인정보 제3자 제공 동의',\n        data: `\n          <div id=\"checkText\">\n            <p>회사는 원칙적으로 이용자 동의 없이 개인정보를 외부에 제공하지 않습니다.</p>\n            <br/>\n            <div class=\"box\">\n              <p>이용자 동의 후 개인정보 제공이 발생하는 경우</p>\n              <br/>\n              <p> 1) 이용자가 서비스 이용을 위해 직접 자신의 개인정보를 제3자에게 제공하는 것에 대해 동의한 경우이며, 회사는 이용자에게 '개인정보를 제공받는 자,</p>\n            </div>\n          </div>\n        `,\n        checked: false,\n     },\n      {\n        id: '2',\n        toptitle: '개인정보 수집 및 이용동의',\n        type: '선택',\n        name: '개인정보 제3자 제공 동의2',\n        data: `\n          <div id=\"checkText\">\n            <p>회사는 원칙적으로 이용자 동의 없이 개인정보를 외부에 제공하지 않습니다.</p>\n            <br/>\n            <div class=\"box\">\n              <p>이용자 동의 후 개인정보 제공이 발생하는 경우</p>\n              <br/>\n              <p> 1) 이용자가 서비스 이용을 위해 직접 자신의 개인정보를 제3자에게 제공하는 것에 대해 동의한 경우이며, 회사는 이용자에게 '개인정보를 제공받는 자,</p>\n            </div>\n          </div>\n        `,\n        checked: false,\n     },\n    ],\n    isActive: '',\n    completed: false,\n  });\n\n  const titleText = computed(() => (d.text === '01' ? '이용약관 동의' : '회원정보 입력'));\n  const btnText = computed(() => (d.text === '01' ? '다음' : '확인'));\n\n  // 01 이용약관 동의 (체크박스)\n  const allRequiredChecked = computed(() => {\n    return d.dataList.filter(item => item.type === '필수').every(item => item.checked);\n  });\n\n  watch(allRequiredChecked, (newVal) => {\n    d.isActive = newVal;\n  });\n\n  // 02 회원정보 입력\n  const doubleClick = () => {\n    // 중복확인\n  }\n\n  const eventHpClick = () => {\n    // 휴대폰 본인 인증\n  }\n\n  const eventClick = (data) => {\n    if(data === '01') {\n      d.text = '02'; // 회원정보 입력\n    } else if(data === '02') {\n      d.text = '03';\n      endDataStore.endData = '3'; // 회원 가입 완료\n      d.completed = true;\n    }\n  }\n</script>\n\n<template>\n  <TitleSign :text=\"d.text\" />\n  <div\n    class=\"subs-title\"\n    v-if=\"d.text !== '03'\"\n  >\n    <div>{{ titleText }}</div>\n  </div>\n  <section v-if=\"!d.completed\">\n    <div class=\"contents\">\n      <div v-if=\"d.text === '01'\">\n        <div>\n          <input\n            type=\"checkbox\"\n            :id=\"`checkbox-${d.all}`\"\n            class=\"custom-checkbox\"\n            v-model=\"d.all\"\n            @change=\"toggleAll($event.target.checked)\"\n          />\n          <label :for=\"`checkbox-${d.all}`\">\n            모두 확인, 동의합니다.\n          </label>\n        </div>\n        <div\n          class=\"terms\"\n          v-for=\"item in d.dataList\"\n          >\n          <div class=\"t-title\">{{ item.toptitle }}</div>\n          <div class=\"textDatas\">\n            <div class=\"inner\" v-html=\"item.data\"></div>\n          </div>\n          <input\n            type=\"checkbox\"\n            :id=\"`checkbox-${item.id}`\"\n            class=\"custom-checkbox\"\n            v-model=\"item.checked\"\n          />\n          <label :for=\"`checkbox-${item.id}`\">\n            <span\n              :class=\"item.type === '필수' ? 'essential':'select'\"\n            >\n              [{{ item.type }}]&nbsp;\n            </span>\n            {{ item.name }}\n          </label>\n        </div>\n      </div>\n      <div v-if=\"d.text === '02'\">\n        <div class=\"inputDatas\">\n          <div class=\"inner\">\n            <ul>\n              <li>\n                <div class=\"input-text\">아이디</div>\n                <div>\n                  <ul>\n                    <li>\n                      <div>\n                        <input\n                          type=\"text\"\n                          placeholder=\"아이디\"\n                        >\n                      </div>\n                      <div>\n                        <button\n                      class=\"bg-w line\"\n                      @click=\"doubleClick\"\n                    >\n                      중복확인\n                    </button>\n                      </div>\n                    </li>\n                  </ul>\n                </div>\n              </li>\n              <li>\n                <div class=\"input-text\">비밀번호 <span>*</span></div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"비밀번호\"\n                  >\n                </div>\n              </li>\n              <li>\n                <div class=\"input-text\">비밀번호 확인 <span>*</span></div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"비밀번호 확인\"\n                  >\n                </div>\n              </li>\n              <li>\n                <div class=\"input-text\">이메일 <span>*</span></div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"이메일\"\n                  >\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n        <button\n          class=\"bg-w line-hp\"\n          @click=\"eventHpClick\"\n        >\n          휴대폰 본인 인증\n        </button>\n      </div>\n    </div>\n    <button\n      :class=\"d.isActive ? 'red-active':'default'\"\n      @click=\"eventClick(d.text)\"\n    >\n      {{ btnText }}\n    </button>\n  </section>\n\n  <section v-if=\"d.completed\">\n    <completed/>\n  </section>\n</template>\n\n<style lang=\"scss\" scoped>\n  .subs-title {\n    border: 1px solid #171A22;\n    border-top: none;\n    border-bottom: none;\n    div {\n      font-size: 24px;\n      font-weight: bold;\n      height: 56px;\n      background-color: $c-g100;\n      margin: 0 1.5rem;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n    }\n  }\n\n  .textDatas {\n    margin: 10px 0;\n  }\n\n  .t-title {\n    font-size: 18px;\n    font-weight: bold;\n  }\n\n  .terms {\n    margin-bottom: 40px;\n    &:last-child {\n      margin-bottom: 0;\n    }\n  }\n\n  .inputDatas {\n    margin-bottom: 20px;\n  }\n</style>"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853556544,
+      "end": 1713853556544,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": ".subs-title{border:1px solid #171a22;border-bottom:none;border-top:none}.subs-title div{align-items:center;background-color:#f0f2f4;display:flex;font-size:24px;font-weight:700;height:56px;justify-content:center;margin:0 1.5rem}.textDatas{margin:10px 0}.t-title{font-size:18px;font-weight:700}.terms{margin-bottom:40px}.terms:last-child{margin-bottom:0}.inputDatas{margin-bottom:20px}",
+      "start": 1713853556544,
+      "end": 1713853556785,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue",
+        "mappings": "AACE,YAGE,4DACA,gBAOE,mBAHA,wBCHG,CDKH,aALA,eACA,gBACA,YAKA,uBAHA,gBAOJ,WACE,cAGF,SACE,eACA,gBAGF,OACE,mBACA,kBACE,gBAIJ,YACE",
+        "names": [],
+        "ignoreList": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue",
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/_variables.scss"
+        ],
+        "sourcesContent": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556785,
+      "end": 1713853556785,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556785,
+      "end": 1713853556785,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556785,
+      "end": 1713853556785,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": ".subs-title[data-v-2bde2522]{border:1px solid #171a22;border-bottom:none;border-top:none}.subs-title div[data-v-2bde2522]{align-items:center;background-color:#f0f2f4;display:flex;font-size:24px;font-weight:700;height:56px;justify-content:center;margin:0 1.5rem}.textDatas[data-v-2bde2522]{margin:10px 0}.t-title[data-v-2bde2522]{font-size:18px;font-weight:700}.terms[data-v-2bde2522]{margin-bottom:40px}.terms[data-v-2bde2522]:last-child{margin-bottom:0}.inputDatas[data-v-2bde2522]{margin-bottom:20px}",
+      "start": 1713853556785,
+      "end": 1713853556788,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue",
+        "mappings": "AAAA,6BAAY,wBAAwB,CAAC,kBAAkB,CAAC,eAAe,CAAC,iCAAgB,kBAAkB,CAAC,wBAAwB,CAAC,YAAY,CAAC,cAAc,CAAC,eAAe,CAAC,WAAW,CAAC,sBAAsB,CAAC,eAAe,CAAC,4BAAW,aAAa,CAAC,0BAAS,cAAc,CAAC,eAAe,CAAC,wBAAO,kBAAkB,CAAC,mCAAkB,eAAe,CAAC,6BAAY,kBAAkB",
+        "names": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/signup/index.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556788,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "export default \".subs-title[data-v-2bde2522]{border:1px solid #171a22;border-bottom:none;border-top:none}.subs-title div[data-v-2bde2522]{align-items:center;background-color:#f0f2f4;display:flex;font-size:24px;font-weight:700;height:56px;justify-content:center;margin:0 1.5rem}.textDatas[data-v-2bde2522]{margin:10px 0}.t-title[data-v-2bde2522]{font-size:18px;font-weight:700}.terms[data-v-2bde2522]{margin-bottom:40px}.terms[data-v-2bde2522]:last-child{margin-bottom:0}.inputDatas[data-v-2bde2522]{margin-bottom:20px}\"",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556790,
+      "end": 1713853556790,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556791,
+      "end": 1713853556791,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556791,
+      "end": 1713853556791,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556791,
+      "end": 1713853556791,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556791,
+      "end": 1713853556791,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal"
+    }
+  ]
+}

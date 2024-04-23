@@ -5,7 +5,7 @@ export const API_HOST =
   import.meta.env.MODE === "dev"
   //   ? "https://dev-metasafe-api.homenumbermeta.com/msafe/v1" :
   // import.meta.env.MODE === "json"
-    ? "'http://localhost:5000/safehno/v1" :
+    ? "http://localhost:5000/safehno/v1/" :
     "";
 
 // export const FE_DOMAIN =

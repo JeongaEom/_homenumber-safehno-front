@@ -1,0 +1,272 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/style.scss",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "/* colors - start */\n\n.bg-w {\n  background-color: $wt;\n}\n\n.bg-g {\n  background-color: $c-g50;\n}\n\n/* colors - end */\n\n/* 기본 설정 - start */\n\nhtml{\n  width: 100%;\n  height: 100%;\n}\nbody {\n  margin: auto;\n}\n\n@media (min-width: 769px) {\n  body {\n    width: 480px;\n    height: 820px;\n    // border: 1px solid $c-g900;\n  }\n}\n\n@media (max-width: 768px) {\n  body {\n    width: 100%;\n    height: 100%;\n    max-width: 480px;\n  }\n}\n\n* {\n  color: $c-g800;\n}\n\np {\n  line-height: 1.3;\n}\n\ninput,\nbutton\n{\n  width: 100%;\n  height: 45px;\n}\n\ninput {\n  padding: 0 14px;\n  border: 1px solid $c-g400;\n  border-radius: 6px;\n  font-weight: bold;\n}\n\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  height: 24px;\n}\n\nbutton {\n  text-align: center;\n  font-weight: bold;\n  border-radius: 4px;\n  -webkit-border-radius: 4px;\n  -moz-border-radius: 4px;\n  -ms-border-radius: 4px;\n  -o-border-radius: 4px;\n}\n\n/* 기본 설정 - end */\n\n/* 공통 - start */\n\nheader {\n  width: 100%;\n  border: 1px solid #171A22;\n  border-bottom: none;\n  .inners {\n    margin: auto;\n  }\n}\n\n.title-top {\n  border: 1px solid #171A22;\n  border-top: none;\n  border-bottom: none;\n}\n\nsection {\n  border: 1px solid #171A22;\n  border-top: none;\n  overflow: auto;\n  >.contents {\n    overflow-y: auto;\n    overflow-x: hidden;\n    margin: 1rem 0 2rem;\n    width: 100%;\n    &::-webkit-scrollbar { /* 스크롤바의 폭 너비 */\n      width: 8px;\n    }\n    &::-webkit-scrollbar-thumb {\n        background: $c-g500; /* 스크롤바 색상 */\n        border-radius: 10px; /* 스크롤바 둥근 테두리 */\n    }\n    &::-webkit-scrollbar-track {\n      background-color: $c-g200;  /*스크롤바 뒷 배경 색상*/\n    }\n\n    .dataList{ /* 홈넘버 리스트 */\n      >ul {\n        >li {\n          margin-bottom: 14px;\n          &:last-child {\n            margin-bottom: 0;\n          }\n          >div.default-line {\n            border-color: $c-g200;\n          }\n          >div.active-line {\n            border-color: $c-b500;\n          }\n          >div {\n            padding: 18px;\n            border: 1px solid;\n            border-radius: 4px;\n            -webkit-border-radius: 4px;\n            -moz-border-radius: 4px;\n            -ms-border-radius: 4px;\n            -o-border-radius: 4px;\n            >ul {\n              &:nth-child(1) {\n                li {\n                  display: flex;\n                  margin: 8px 0;\n                  &:nth-child(1) {\n                    font-weight: 900;\n                    font-size: 20px;\n                  }\n                  &:nth-child(2) {\n                    font-weight: 600;\n                    font-size: 18px;\n                    div {\n                      height: 18px;\n                      &:nth-child(1) {\n                        border-right: 1px solid $c-g400;\n                      }\n                      &:nth-child(2) {\n                        padding-left: 6px;\n                      }\n                    }\n                  }\n                  &:nth-child(3) {\n                    font-weight: 300;\n                    font-size: 14px;\n                    div {\n                      &:nth-child(2) {\n                        line-height: 16px;\n                      }\n                    }\n                  }\n                  div {\n                    &:nth-child(1) {\n                      padding-right: 6px;\n                    }\n                  }\n                }\n              }\n              &:nth-child(2) {\n                display: flex;\n                li {\n                  &:nth-child(1) {\n                    div.default {\n                      color: $c-g800;\n                    }\n                    div.red-active {\n                      color: $c-b500;\n                    }\n                    >div {\n                      height: 30px;\n                      display: flex;\n                      align-items: center;\n                      justify-content: flex-end;\n                      >span {\n                        margin-left: 6px;\n                        >img {\n                          width: 24px;\n                        }\n                      }\n                    }\n                  }\n                  &:nth-child(2) {\n                    button {\n                      background-color: $wt;\n                      border: 1px solid $c-g300;\n                      color: $fg;\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n  .bottom {\n    border-top: 1px solid $c-g600;\n  }\n}\n\n@media (min-width: 769px) {\n  .title-top {\n    padding: 1.5rem 1.5rem 0;\n  }\n\n  section {\n    padding: 1.5rem;\n    >.contents {\n      padding: 0 1rem;\n      /* 기본 높이 (수정x) | 수정 시 각각의 별도 페이지에서 지정 */\n      height: 530px;\n      .dataList{\n        >ul {\n          >li {\n            >div {\n              display: flex;\n              >ul {\n                &:nth-child(1) {\n                  width: 80%;\n                }\n                &:nth-child(2) {\n                  width: 20%;\n                  flex-direction: column;\n                  justify-content: space-between;\n                  li {\n                    &:nth-child(2) {\n                      button {\n                        height: 40px;\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n    .bottom {\n      padding-top: 2rem;\n    }\n  }\n}\n\n@media (max-width: 768px) {\n  .title-top {\n    padding: 1.5rem 0 1rem;\n  }\n\n  section {\n    padding: 0.8rem;\n    >.contents {\n      padding: 0 0.8rem;\n      /* 기본 높이 (수정x) | 수정 시 각각의 별도 페이지에서 지정 */\n      min-height: 460px;\n      .dataList{\n        >ul {\n          >li {\n            >div {\n              >ul {\n                &:nth-child(2) {\n                  justify-content: space-between;\n                  align-items: center;\n                  li {\n                    &:nth-child(2) {\n                      button {\n                        width: 100px;\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n    >.bottom {\n      padding: 1.5rem 0;\n    }\n  }\n}\n\n/* button */\nbutton.line {\n  color: $c-g600;\n  border: 1px solid $c-g300;\n}\n\nbutton.line-active {\n  color: $c-b500;\n  border: 1.8px solid $c-b500;\n}\n\nbutton.line-hp {\n  color: $c-g600;\n  border: 1px solid $c-g900;\n}\n\nbutton.default {\n  box-shadow: 0 5px 10px $c-g200;\n  background-color: $c-g300;\n  color: $c-g500;\n  border: none;\n}\nbutton.red-active {\n  box-shadow: 0 5px 10px $c-b200;\n  background-color: $c-b500;\n  color: $wt;\n  border: none;\n}\n\n/* margin */\n.mb-btm-6 {\n  margin-bottom: 6px;\n}\n\n.mb-btm-20 {\n  margin-bottom: 20px;\n}\n\n/* 체크박스 */\n.custom-checkbox {\n  /* 체크박스를 숨김 */\n  opacity: 0;\n  position: absolute;\n  & + label { // 비활성화\n    /* 라벨 디자인 */\n    position: relative;\n    padding-left: 30px;\n    cursor: pointer;\n    height: 24px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: center;\n    font-weight: 600;\n    &:before {\n      /* 체크박스 대신 보여질 박스 */\n      content: '';\n      position: absolute;\n      left: 0;\n      top: 0;\n      width: 18px;\n      height: 18px;\n      background: $wt; /* 배경색 */\n      border: 2px solid $c-g400;\n      border-radius: 5px;\n    }\n    &:after {\n      /* 체크 표시 디자인 */\n      content: '';\n      position: absolute;\n      left: 8px;\n      top: 2px;\n      width: 4px;\n      height: 12px;\n      border: solid $c-g400; /* 체크표시 */\n      border-width: 0 2px 2px 0;\n      transform: rotate(45deg);\n    }\n    span.essential {\n      color: $c-b500;\n    }\n    span.select {\n      color: $c-g500;\n    }\n  }\n  &:checked {\n    & + label { // 활성화\n      &:before {\n        /* 체크됐을 때의 디자인 */\n        border: 2px solid $c-b500;\n        background: $c-b500; /* 배경색 변경 */\n      }\n      &:after {\n        /* 체크 표시 디자인 */\n        content: '';\n        position: absolute;\n        left: 8px;\n        top: 2px;\n        width: 4px;\n        height: 12px;\n        border: solid $wt; /* 체크표시 */\n        border-width: 0 2px 2px 0;\n        transform: rotate(45deg);\n      }\n    }\n  }\n}\n\n.textDatas {\n  border: 1px solid $c-g300;\n  padding: 10px;\n  padding-right: 6px;\n  border-radius: 3px;\n  >.inner{\n    color: $c-g700;\n    overflow-y: auto;\n    overflow-x: hidden;\n    height: 120px;\n    padding-right: 5px;\n    &::-webkit-scrollbar { /* 스크롤바의 폭 너비 */\n      width: 8px;\n    }\n    &::-webkit-scrollbar-thumb {\n        background: $c-g500; /* 스크롤바 색상 */\n        border-radius: 10px; /* 스크롤바 둥근 테두리 */\n    }\n    &::-webkit-scrollbar-track {\n      background-color: $c-g200;  /*스크롤바 뒷 배경 색상*/\n    }\n  }\n}\n\n/* 홈넘버 발급/수정 */\n.top {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-bottom: 1.5rem;\n  border-bottom: 2px solid $c-g700;\n}\n\n/* input 디자인 폼 */\n.input-text {\n  font-weight: bold;\n  span {\n    color: $c-b500;\n  }\n}\n\n@media (min-width: 769px) {\n  .input-text {\n    font-size: 18px;\n  }\n}\n\n@media (max-width: 768px) {\n  .input-text {\n    margin-bottom: 10px;\n  }\n}\n\n.inputDatas {\n  .inner {\n    ul {\n      >li {\n        &:last-child {\n          margin-bottom: 0;\n        }\n        >div {\n          &:nth-child(2) {\n            ul {\n              >li {\n                display: flex;\n                justify-content: space-between;\n                >div {\n                  &:nth-child(1) {\n                    width: 60%;\n                  }\n                  &:nth-child(2) {\n                    width: 40%;\n                    margin-left: 10px;\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n@media (min-width: 769px) {\n  .inputDatas {\n    .inner {\n      ul {\n        >li.addInp {\n          align-items: flex-start;\n          >div{\n            &:nth-child(1) {\n              padding: 14px 0;\n            }\n          }\n        }\n        >li {\n          margin-bottom: 10px;\n          display: flex;\n          justify-content: space-between;\n          align-items: center;\n          >div {\n            &:nth-child(1) {\n              width: 30%;\n            }\n            &:nth-child(2) {\n              display: flex;\n              justify-content: space-between;\n              align-items: center;\n              width: 70%;\n              ul {\n                >li {\n                  align-items: center;\n                }\n              }\n            }\n            }\n          }\n        }\n      }\n    }\n  }\n\n@media (max-width: 768px) {\n  .inputDatas {\n    .inner {\n      ul {\n        >li {\n          margin-bottom: 20px;\n          >div {\n            &:nth-child(2) {\n              ul {\n                >li {\n                  flex-direction: row;\n                  >div {\n                    width: 100%;\n                    &:nth-child(1) {\n                      margin-bottom: 10px;\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n/* 공통 - end */\n",
+      "start": 1713853555984,
+      "end": 1713853556079,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556079,
+      "end": 1713853556079,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556079,
+      "end": 1713853556079,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556079,
+      "end": 1713853556079,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556079,
+      "end": 1713853556079,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853556079,
+      "end": 1713853556079,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853556079,
+      "end": 1713853556079,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": ".bg-w{background-color:#fff}.bg-g{background-color:#f8f8f9}html{height:100%;width:100%}body{margin:auto}@media (min-width:769px){body{height:820px;width:480px}}@media (max-width:768px){body{height:100%;max-width:480px;width:100%}}*{color:#212936}p{line-height:1.3}button,input{height:45px;width:100%}input{border:1px solid #9da3ae;border-radius:6px;font-weight:700;padding:0 14px}input[type=checkbox],input[type=radio]{height:24px}button{border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;font-weight:700;text-align:center}header{border:1px solid #171a22;border-bottom:none;width:100%}header .inners{margin:auto}.title-top{border:1px solid #171a22;border-bottom:none;border-top:none}section{border:1px solid #171a22;border-top:none;overflow:auto}section>.contents{margin:1rem 0 2rem;overflow-x:hidden;overflow-y:auto;width:100%}section>.contents::-webkit-scrollbar{width:8px}section>.contents::-webkit-scrollbar-thumb{background:#6c727f;border-radius:10px}section>.contents::-webkit-scrollbar-track{background-color:#e5e7eb}section>.contents .dataList>ul>li{margin-bottom:14px}section>.contents .dataList>ul>li:last-child{margin-bottom:0}section>.contents .dataList>ul>li>div.default-line{border-color:#e5e7eb}section>.contents .dataList>ul>li>div.active-line{border-color:#e32924}section>.contents .dataList>ul>li>div{border:1px solid;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;padding:18px}section>.contents .dataList>ul>li>div>ul:first-child li{display:flex;margin:8px 0}section>.contents .dataList>ul>li>div>ul:first-child li:first-child{font-size:20px;font-weight:900}section>.contents .dataList>ul>li>div>ul:first-child li:nth-child(2){font-size:18px;font-weight:600}section>.contents .dataList>ul>li>div>ul:first-child li:nth-child(2) div{height:18px}section>.contents .dataList>ul>li>div>ul:first-child li:nth-child(2) div:first-child{border-right:1px solid #9da3ae}section>.contents .dataList>ul>li>div>ul:first-child li:nth-child(2) div:nth-child(2){padding-left:6px}section>.contents .dataList>ul>li>div>ul:first-child li:nth-child(3){font-size:14px;font-weight:300}section>.contents .dataList>ul>li>div>ul:first-child li:nth-child(3) div:nth-child(2){line-height:16px}section>.contents .dataList>ul>li>div>ul:first-child li div:first-child{padding-right:6px}section>.contents .dataList>ul>li>div>ul:nth-child(2){display:flex}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:first-child div.default{color:#212936}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:first-child div.red-active{color:#e32924}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:first-child>div{align-items:center;display:flex;height:30px;justify-content:flex-end}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:first-child>div>span{margin-left:6px}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:first-child>div>span>img{width:24px}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:nth-child(2) button{background-color:#fff;border:1px solid #d1d5db;color:#212936}section .bottom{border-top:1px solid #4d5562}@media (min-width:769px){.title-top{padding:1.5rem 1.5rem 0}section{padding:1.5rem}section>.contents{height:530px;padding:0 1rem}section>.contents .dataList>ul>li>div{display:flex}section>.contents .dataList>ul>li>div>ul:first-child{width:80%}section>.contents .dataList>ul>li>div>ul:nth-child(2){flex-direction:column;justify-content:space-between;width:20%}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:nth-child(2) button{height:40px}section .bottom{padding-top:2rem}}@media (max-width:768px){.title-top{padding:1.5rem 0 1rem}section{padding:.8rem}section>.contents{min-height:460px;padding:0 .8rem}section>.contents .dataList>ul>li>div>ul:nth-child(2){align-items:center;justify-content:space-between}section>.contents .dataList>ul>li>div>ul:nth-child(2) li:nth-child(2) button{width:100px}section>.bottom{padding:1.5rem 0}}button.line{border:1px solid #d1d5db;color:#4d5562}button.line-active{border:1.8px solid #e32924;color:#e32924}button.line-hp{border:1px solid #171a22;color:#4d5562}button.default{background-color:#d1d5db;border:none;box-shadow:0 5px 10px #e5e7eb;color:#6c727f}button.red-active{background-color:#e32924;border:none;box-shadow:0 5px 10px #ffd1d0;color:#fff}.mb-btm-6{margin-bottom:6px}.mb-btm-20{margin-bottom:20px}.custom-checkbox{opacity:0;position:absolute}.custom-checkbox+label{align-items:center;cursor:pointer;display:flex;font-weight:600;height:24px;margin-bottom:10px;padding-left:30px;position:relative}.custom-checkbox+label:before{background:#fff;border:2px solid #9da3ae;border-radius:5px;content:\"\";height:18px;left:0;position:absolute;top:0;width:18px}.custom-checkbox+label:after{border:solid #9da3ae;border-width:0 2px 2px 0;content:\"\";height:12px;left:8px;position:absolute;top:2px;transform:rotate(45deg);width:4px}.custom-checkbox+label span.essential{color:#e32924}.custom-checkbox+label span.select{color:#6c727f}.custom-checkbox:checked+label:before{background:#e32924;border:2px solid #e32924}.custom-checkbox:checked+label:after{border:solid #fff;border-width:0 2px 2px 0;content:\"\";height:12px;left:8px;position:absolute;top:2px;transform:rotate(45deg);width:4px}.textDatas{border:1px solid #d1d5db;border-radius:3px;padding:10px 6px 10px 10px}.textDatas>.inner{color:#394150;height:120px;overflow-x:hidden;overflow-y:auto;padding-right:5px}.textDatas>.inner::-webkit-scrollbar{width:8px}.textDatas>.inner::-webkit-scrollbar-thumb{background:#6c727f;border-radius:10px}.textDatas>.inner::-webkit-scrollbar-track{background-color:#e5e7eb}.top{align-items:center;border-bottom:2px solid #394150;display:flex;justify-content:space-between;padding-bottom:1.5rem}.input-text{font-weight:700}.input-text span{color:#e32924}@media (min-width:769px){.input-text{font-size:18px}}@media (max-width:768px){.input-text{margin-bottom:10px}}.inputDatas .inner ul>li:last-child{margin-bottom:0}.inputDatas .inner ul>li>div:nth-child(2) ul>li{display:flex;justify-content:space-between}.inputDatas .inner ul>li>div:nth-child(2) ul>li>div:first-child{width:60%}.inputDatas .inner ul>li>div:nth-child(2) ul>li>div:nth-child(2){margin-left:10px;width:40%}@media (min-width:769px){.inputDatas .inner ul>li.addInp{align-items:flex-start}.inputDatas .inner ul>li.addInp>div:first-child{padding:14px 0}.inputDatas .inner ul>li{align-items:center;display:flex;justify-content:space-between;margin-bottom:10px}.inputDatas .inner ul>li>div:first-child{width:30%}.inputDatas .inner ul>li>div:nth-child(2){align-items:center;display:flex;justify-content:space-between;width:70%}.inputDatas .inner ul>li>div:nth-child(2) ul>li{align-items:center}}@media (max-width:768px){.inputDatas .inner ul>li{margin-bottom:20px}.inputDatas .inner ul>li>div:nth-child(2) ul>li{flex-direction:row}.inputDatas .inner ul>li>div:nth-child(2) ul>li>div{width:100%}.inputDatas .inner ul>li>div:nth-child(2) ul>li>div:first-child{margin-bottom:10px}}",
+      "start": 1713853556079,
+      "end": 1713853556327,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/style.scss",
+        "mappings": "AAEA,MACE,sBAGF,MACE,yBAOF,KAEE,YADA,WAGF,KACE,YAGF,yBACE,KAEE,aADA,aAMJ,yBACE,KAEE,YACA,gBAFA,YAMJ,EACE,cAGF,EACE,gBAGF,aAIE,YADA,WAIF,MAEE,yBACA,kBACA,gBAHA,eAMF,uCAEE,YAGF,OAGE,kBACA,0BACA,uBACA,sBACA,qBALA,gBADA,kBAaF,OAGE,4CAFA,WAGA,eACE,YAIJ,WAGE,4DAGF,QAEE,yCACA,cACA,kBAGE,mBADA,kBADA,gBAGA,WACA,qCACE,UAEF,2CACI,kBCjGC,CDkGD,mBAEJ,2CACE,yBAKE,kCACE,mBACA,6CACE,gBAEF,mDACE,qBAEF,kDACE,qBAEF,sCAEE,iBACA,kBACA,0BACA,uBACA,sBACA,qBANA,aASI,wDACE,aACA,aACA,oEAEE,eADA,gBAGF,qEAEE,eADA,gBAEA,yEACE,YACA,qFACE,+BAEF,sFACE,iBAIN,qEAEE,eADA,gBAGE,sFACE,iBAKJ,wEACE,kBAKR,sDACE,aAGI,iFACE,cAEF,oFACE,cAEF,yEAGE,mBADA,aADA,YAGA,yBACA,8EACE,gBACA,kFACE,WAMN,6EACE,qBCtMjB,CDuMiB,yBACA,cAWpB,gBACE,6BAIJ,yBACE,WACE,wBAGF,QACE,eACA,kBAGE,aAFA,eAMM,sCACE,aAEE,qDACE,UAEF,sDAEE,sBACA,8BAFA,UAKI,6EACE,YAWpB,gBACE,kBAKN,yBACE,WACE,sBAGF,QACE,cACA,kBAGE,iBAFA,gBAQU,sDAEE,mBADA,8BAII,6EACE,YAWpB,gBACE,kBAMN,YAEE,yBADA,cAIF,mBAEE,2BADA,cAIF,eAEE,yBADA,cAIF,eAEE,wBCrTO,CDuTP,YAHA,8BAEA,cAGF,kBAEE,wBC9SO,CDgTP,YAHA,8BAEA,WAKF,UACE,kBAGF,WACE,mBAIF,iBAEE,UACA,kBACA,uBAQE,mBAJA,eAGA,aAEA,gBAJA,YACA,mBAHA,kBADA,kBAQA,8BAQE,eCxWD,CDyWC,yBACA,kBARA,WAKA,YAHA,OADA,kBAEA,MACA,WAMF,6BASE,8CAPA,WAKA,YAHA,SADA,kBAEA,QAKA,wBAJA,UAMF,sCACE,cAEF,mCACE,cAKA,sCAGE,kBC/WC,CD8WD,yBAGF,qCASE,2CAPA,WAKA,YAHA,SADA,kBAEA,QAKA,wBAJA,UAUR,WACE,yBAGA,kBADA,2BAEA,kBACE,aChZK,CDmZL,aADA,kBADA,gBAGA,kBACA,qCACE,UAEF,2CACI,kBC3ZC,CD4ZD,mBAEJ,2CACE,yBAMN,KAGE,mBAEA,gCAJA,aACA,8BAEA,sBAKF,YACE,gBACA,iBACE,cAIJ,yBACE,YACE,gBAIJ,yBACE,YACE,oBAQI,oCACE,gBAKI,gDACE,aACA,8BAEE,gEACE,UAEF,iEAEE,iBADA,UAapB,yBAIQ,gCACE,uBAEE,gDACE,eAIN,yBAIE,mBAFA,aACA,8BAFA,mBAKE,yCACE,UAEF,0CAGE,mBAFA,aACA,8BAEA,UAEE,gDACE,oBAWlB,yBAIQ,yBACE,mBAIM,gDACE,mBACA,oDACE,WACA,gEACE",
+        "names": [],
+        "ignoreList": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/style.scss",
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/_variables.scss"
+        ],
+        "sourcesContent": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556328,
+      "end": 1713853556328,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556329,
+      "end": 1713853556329,
+      "order": "normal"
+    }
+  ]
+}

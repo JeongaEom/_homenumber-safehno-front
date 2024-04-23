@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useAppStore } from "@/stores/app";
 
-import { API_DEBUG, API_HOST } from "./setting/appSettings";
+// import { API_DEBUG, API_HOST } from "./setting/appSettings";
 // import { default as authTknReiss } from "./auth/authTknReiss";
 
 // export { default as authSignout } from "./auth/authSignout";
-export { default as authSignin } from "./auth/authSignin";
+// export { default as authSignin } from "./auth/authSignin";
 // export { default as authTknVerify } from "./auth/authTknVerify";
 // export { default as authTknReiss } from "./auth/authTknReiss";
+
+
+// 환경 변수에서 값을 읽어오거나, 기본값을 사용합니다.
+const API_HOST = process.env.API_HOST || "http://localhost:5000";
+const API_DEBUG = process.env.API_DEBUG || true;
 
 const app = useAppStore();
 
@@ -54,7 +59,6 @@ const defaultErrorProc = (error) => {
 
 export const call = async (settings) => {
   const {
-    type,
     id,
     endpoint,
     method,

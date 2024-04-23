@@ -1,0 +1,272 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/common.scss?inline&used",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "/* ----------------------------------\n * Fonts\n * ---------------------------------- */\n@font-face {\n\tfont-family: Pretendard;\n\tsrc: url(/fonts/pretendard/Pretendard-Regular.woff2) format('woff2');\n  font-weight: 400;\n}\n\n@font-face {\n\tfont-family: Pretendard;\n\tsrc: url(/fonts/pretendard/Pretendard-Medium.woff2) format('woff2');\n  font-weight: 500;\n}\n\n@font-face {\n\tfont-family: Pretendard;\n\tsrc: url(/fonts/pretendard/Pretendard-SemiBold.woff2) format('woff2');\n  font-weight: 600;\n}\n\n@font-face {\n\tfont-family: Pretendard;\n\tsrc: url(/fonts/pretendard/Pretendard-Bold.woff2) format('woff2');\n  font-weight: 700;\n}\n\n\n/* ----------------------------------\n * Root\n * ---------------------------------- */\n\n\nhtml,\nbody {\n  font-family: Pretendard, Apple SD Gothic Neo, nanumgothic, 나눔고딕, arial, sans-serif;\n}\n\n* {\n\tbox-sizing: border-box;\n}\n\na {\n  color: inherit;\n  text-decoration: none;\n}\n\nimg {\n  width: 100%;\n  height: auto;\n}\n\n/* c-modal */\n.c-modal {\n  --outerMargin: 50px;\n  position: fixed;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  &__inner {\n    background: #fff;\n    position: absolute;\n    width: calc(100vw - var(--outerMargin)*2);\n    transform: translate(-50%, -50%);\n    left: 50%;\n    top: 50%;\n    max-height: calc(100vh - var(--outerMargin)*2);\n    border-radius: 8px;\n  }\n  &__mid {\n    padding-left: 40px;\n    padding-right: 40px;\n    max-height: calc(100vh - var(--outerMargin)*2 - var(--topHeight) - var(--botHeight));\n    overflow: auto;\n  }\n  &__bot {\n    padding: 20px 40px 36px 40px;\n    text-align: right;\n  }\n  &__title {\n    padding: 36px 90px 24px 40px;\n    font-size: 20px;\n    line-height: 1.4;\n    font-weight: 700;\n  }\n  &__close {\n    position: absolute;\n    right: 35px;\n    top: 30px;\n    padding: 7px;\n    font-size: 24px;\n    background-color: transparent;\n    color: $c-b500;\n  }\n  &__confirm-btn {\n    min-width: 124px;\n  }\n}\n\n:global(.c-modal__inner) {\n  max-width: 600px;\n}\n",
+      "start": 1713853555913,
+      "end": 1713853555933,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853555933,
+      "end": 1713853555933,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853555933,
+      "end": 1713853555933,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853555933,
+      "end": 1713853555933,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853555933,
+      "end": 1713853555933,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853555933,
+      "end": 1713853555933,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853555933,
+      "end": 1713853555933,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": "@charset \"UTF-8\";@font-face{font-family:Pretendard;font-weight:400;src:url(/fonts/pretendard/Pretendard-Regular.woff2) format(\"woff2\")}@font-face{font-family:Pretendard;font-weight:500;src:url(/fonts/pretendard/Pretendard-Medium.woff2) format(\"woff2\")}@font-face{font-family:Pretendard;font-weight:600;src:url(/fonts/pretendard/Pretendard-SemiBold.woff2) format(\"woff2\")}@font-face{font-family:Pretendard;font-weight:700;src:url(/fonts/pretendard/Pretendard-Bold.woff2) format(\"woff2\")}body,html{font-family:Pretendard,Apple SD Gothic Neo,nanumgothic,나눔고딕,arial,sans-serif}*{box-sizing:border-box}a{color:inherit;text-decoration:none}img{height:auto;width:100%}.c-modal{--outerMargin:50px;height:100%;left:0;position:fixed;top:0;width:100%;z-index:9999}.c-modal__inner{background:#fff;border-radius:8px;left:50%;max-height:calc(100vh - var(--outerMargin)*2);position:absolute;top:50%;transform:translate(-50%,-50%);width:calc(100vw - var(--outerMargin)*2)}.c-modal__mid{max-height:calc(100vh - var(--outerMargin)*2 - var(--topHeight) - var(--botHeight));overflow:auto;padding-left:40px;padding-right:40px}.c-modal__bot{padding:20px 40px 36px;text-align:right}.c-modal__title{font-size:20px;font-weight:700;line-height:1.4;padding:36px 90px 24px 40px}.c-modal__close{background-color:transparent;color:#e32924;font-size:24px;padding:7px;position:absolute;right:35px;top:30px}.c-modal__confirm-btn{min-width:124px}:global(.c-modal__inner){max-width:600px}",
+      "start": 1713853555933,
+      "end": 1713853556011,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/common.scss",
+        "mappings": "AAiCA,iBA9BA,WACC,uBAEC,gBADD,oEAID,WACC,uBAEC,gBADD,mEAID,WACC,uBAEC,gBADD,qEAID,WACC,uBAEC,gBADD,iEAUD,UAEE,6EAGF,EACC,sBAGD,EACE,cACA,qBAGF,IAEE,YADA,WAKF,SACE,mBAKA,YAHA,OADA,eAEA,MACA,WAEA,aACA,gBACE,gBAOA,kBAHA,SAEA,8CALA,kBAIA,QAFA,+BADA,yCAOF,cAGE,oFACA,cAHA,kBACA,mBAIF,cACE,uBACA,iBAEF,gBAEE,eAEA,gBADA,gBAFA,4BAKF,gBAME,6BACA,aCzEK,CDuEL,eADA,YAHA,kBACA,WACA,SAMF,sBACE,gBAIJ,yBACE",
+        "names": [],
+        "ignoreList": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/common.scss",
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/_variables.scss"
+        ],
+        "sourcesContent": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556011,
+      "end": 1713853556011,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556011,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "export default \"@charset \\\"UTF-8\\\";@font-face{font-family:Pretendard;font-weight:400;src:url(/fonts/pretendard/Pretendard-Regular.woff2) format(\\\"woff2\\\")}@font-face{font-family:Pretendard;font-weight:500;src:url(/fonts/pretendard/Pretendard-Medium.woff2) format(\\\"woff2\\\")}@font-face{font-family:Pretendard;font-weight:600;src:url(/fonts/pretendard/Pretendard-SemiBold.woff2) format(\\\"woff2\\\")}@font-face{font-family:Pretendard;font-weight:700;src:url(/fonts/pretendard/Pretendard-Bold.woff2) format(\\\"woff2\\\")}body,html{font-family:Pretendard,Apple SD Gothic Neo,nanumgothic,나눔고딕,arial,sans-serif}*{box-sizing:border-box}a{color:inherit;text-decoration:none}img{height:auto;width:100%}.c-modal{--outerMargin:50px;height:100%;left:0;position:fixed;top:0;width:100%;z-index:9999}.c-modal__inner{background:#fff;border-radius:8px;left:50%;max-height:calc(100vh - var(--outerMargin)*2);position:absolute;top:50%;transform:translate(-50%,-50%);width:calc(100vw - var(--outerMargin)*2)}.c-modal__mid{max-height:calc(100vh - var(--outerMargin)*2 - var(--topHeight) - var(--botHeight));overflow:auto;padding-left:40px;padding-right:40px}.c-modal__bot{padding:20px 40px 36px;text-align:right}.c-modal__title{font-size:20px;font-weight:700;line-height:1.4;padding:36px 90px 24px 40px}.c-modal__close{background-color:transparent;color:#e32924;font-size:24px;padding:7px;position:absolute;right:35px;top:30px}.c-modal__confirm-btn{min-width:124px}:global(.c-modal__inner){max-width:600px}\"",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556012,
+      "end": 1713853556012,
+      "order": "normal"
+    }
+  ]
+}

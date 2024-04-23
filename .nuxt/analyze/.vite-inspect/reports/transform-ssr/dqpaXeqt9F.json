@@ -1,0 +1,264 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/components/TitleTop.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup>\n  import { useRouter } from 'vue-router';\n\n  const router = useRouter();\n\n  const p = defineProps({\n    link: { type: Boolean, default: false }, // 이전페이지 사용 여부\n    linkAddress: { type: String, default: \"\" }, //이전으로 이동 시 링크\n    text: { type: String, default: \"\" },\n  });\n\n  const eventClick = () => {\n    router.push(p.linkAddress);\n  }\n</script>\n\n<template>\n  <div class=\"title-top\">\n    <div class=\"inner\">\n      <button\n        v-if=\"p.link\"\n        @click=\"eventClick\"\n      >\n        <img src=\"@/assets/images/arrow-left.png\" alt=\"이전페이지로\">\n      </button>\n      <div>{{ p.text }}</div>\n    </div>\n  </div>\n</template>\n\n<style lang=\"scss\" scoped>\n  .title-top {\n    .inner{\n      width: 100%;\n      height: 50px;\n      display: flex;\n      align-items: center;\n      padding-bottom: 1.5rem;\n      border-bottom: 2px solid $c-g700;\n      button {\n        width: 24px;\n        position: absolute;\n        border: none;\n        background: none;\n      }\n      div {\n        width: 100%;\n        text-align: center;\n        font-size: 24px;\n        font-weight: bold;\n      }\n    }\n  }\n</style>",
+      "start": 1713853556460,
+      "end": 1713853556586,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556586,
+      "end": 1713853556586,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import { mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\nimport _imports_0 from '@/assets/images/arrow-left.png'\n\n\nimport { useRouter } from 'vue-router';\n\n  \nconst _sfc_main = {\n  __name: 'TitleTop',\n  __ssrInlineRender: true,\n  props: {\n    link: { type: Boolean, default: false }, // 이전페이지 사용 여부\n    linkAddress: { type: String, default: \"\" }, //이전으로 이동 시 링크\n    text: { type: String, default: \"\" },\n  },\n  setup(__props) {\n\n  const router = useRouter();\n\n  const p = __props;\n\n  const eventClick = () => {\n    router.push(p.linkAddress);\n  }\n\nreturn (_ctx, _push, _parent, _attrs) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"title-top\" }, _attrs))} data-v-423d6989><div class=\"inner\" data-v-423d6989>`)\n  if (p.link) {\n    _push(`<button data-v-423d6989><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"이전페이지로\" data-v-423d6989></button>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`<div data-v-423d6989>${_ssrInterpolate(p.text)}</div></div></div>`)\n}\n}\n\n}\n\n\nimport \"C:/Workspace/GitLab/homenumber-safehno-front/components/TitleTop.vue?vue&type=style&index=0&scoped=423d6989&lang.scss\"\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"components/TitleTop.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['__scopeId',\"data-v-423d6989\"]])",
+      "start": 1713853556587,
+      "end": 1713853556588,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/components/TitleTop.vue"
+        ],
+        "sourcesContent": [
+          "<script setup>\n  import { useRouter } from 'vue-router';\n\n  const router = useRouter();\n\n  const p = defineProps({\n    link: { type: Boolean, default: false }, // 이전페이지 사용 여부\n    linkAddress: { type: String, default: \"\" }, //이전으로 이동 시 링크\n    text: { type: String, default: \"\" },\n  });\n\n  const eventClick = () => {\n    router.push(p.linkAddress);\n  }\n</script>\n\n<template>\n  <div class=\"title-top\">\n    <div class=\"inner\">\n      <button\n        v-if=\"p.link\"\n        @click=\"eventClick\"\n      >\n        <img src=\"@/assets/images/arrow-left.png\" alt=\"이전페이지로\">\n      </button>\n      <div>{{ p.text }}</div>\n    </div>\n  </div>\n</template>\n\n<style lang=\"scss\" scoped>\n  .title-top {\n    .inner{\n      width: 100%;\n      height: 50px;\n      display: flex;\n      align-items: center;\n      padding-bottom: 1.5rem;\n      border-bottom: 2px solid $c-g700;\n      button {\n        width: 24px;\n        position: absolute;\n        border: none;\n        background: none;\n      }\n      div {\n        width: 100%;\n        text-align: center;\n        font-size: 24px;\n        font-weight: bold;\n      }\n    }\n  }\n</style>"
+        ],
+        "names": [],
+        "mappings": ";;;;;AACE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzC;AACA,CAAC;;;;;;;;;;AAHa;AACd,CAAC,CAEC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC7B;AACA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAIR,CAAC;AACL;AACA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC;;;;;;;;;;;;;"
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556588,
+      "end": 1713853556588,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556588,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556590,
+      "end": 1713853556590,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556590,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556590,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556591,
+      "end": 1713853556591,
+      "order": "normal"
+    }
+  ]
+}

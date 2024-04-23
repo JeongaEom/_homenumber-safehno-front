@@ -1,0 +1,297 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue?vue&type=style&index=0&scoped=a864612b&lang.scss",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\n  .top {\n    justify-content: flex-start;\n    div {\n      font-size: 18px;\n      font-weight: bold;\n      &:first-child {\n        width: 30%;\n        padding-left: 10px;\n        margin-right:10px;\n        margin-bottom: 0;\n      }\n    }\n  }\n\n  .phone {\n    div {\n      &:nth-child(1) {\n        font-size: 15px;\n        line-height: 1.2rem;\n      }\n      &:nth-child(2) {\n        line-height: 1.5rem;\n        margin-top: 20px;\n        ul {\n          li {\n            &:nth-child(1) {\n              margin-bottom: 10px;\n            }\n            &:nth-child(2) {\n              margin-bottom: 10px;\n            }\n            div.input-box {\n              display: flex;\n              justify-content: space-between;\n            }\n            div {\n\n            }\n            button {\n              width: 200px;\n              margin-left: 10px;\n            }\n          }\n        }\n      }\n    }\n  }\n\n  .red {\n    font-weight: bold;\n    margin-top: 20px;\n    line-height: 1.3rem;\n    color: $c-b500;\n  }\n",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue"
+        ],
+        "names": [],
+        "mappings": "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",
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<script setup>\n  import { reactive } from \"vue\";\n  import { useEndDataStore } from '@/stores/endData'\n  import { formaNb } from '@/utils';\n\n  const endDataStore = useEndDataStore()\n\n  definePageMeta({\n    // middleware: [\n    //   function (to, from) {\n    //     // 로직 inline 정의\n    //  },\n    //   'app',\n    // ],\n  });\n\n  const d = reactive({\n    link: true,\n    linkAddress: \"/homnumberList\",\n    text: \"홈넘버 수정\",\n    isPhone: false,\n    isActive: false,\n    homeNb: '10010001005',\n    isNext: true, // true는 휴대폰 인증 | false는 수정\n    completed: false,\n    isReadOnly: true,\n  });\n\n  const btn1EventClick = () => {\n    d.isPhone = true;\n  }\n\n  const btn2EventClick = () => {\n    // 필수입력 완료시\n    d.isActive = true;\n  }\n\n  const nextClick = () => {\n    if(d.isNext) {\n      if(d.isActive) {\n        d.isNext = false;\n        // d.isActive = false;\n      }\n    } else if(!d.isNext) {\n      // if(d.isActive) {\n        endDataStore.endData = \"2\"; // 수정\n        d.completed = true;\n      // }\n    }\n  }\n</script>\n\n<template>\n  <TitleTop\n  :link=\"d.link\"\n  :linkAddress=\"d.linkAddress\"\n  :text=\"d.text\"\n  />\n  <section v-if=\"!d.completed\">\n    <div class=\"top\" v-if=\"!d.isNext\">\n      <div class=\"input-text\">홈넘버 <span>*</span></div>\n      <div>{{ formaNb(d.homeNb) }}</div>\n    </div>\n    <div class=\"contents\">\n      <div class=\"phone\" v-if=\"d.isNext\">\n        <div>\n          외부로부터 회원님의 정보를 더 안전하게 보호하기 위한 방법입니다.&nbsp;\n          본인 확인을 위해 회원가입 시 입력하신 휴대폰 번호로 인증하여 주시기 바랍니다.\n        </div>\n        <div>\n          <ul>\n            <li class=\"input-text\">휴대폰 번호 <span>*</span></li>\n            <li>\n              <div class=\"input-box\">\n                <input\n                  type=\"text\"\n                  placeholder=\"\"\n                  :readonly=\"d.isReadOnly\"\n                >\n                <button class=\"bg-w line\" @click=\"btn1EventClick\">인증번호 전송</button>\n              </div>\n            </li>\n            <li class=\"input-box\" v-if=\"d.isPhone\">\n              <div class=\"input-box\">\n                <input\n                  type=\"text\"\n                  placeholder=\"\"\n                >\n                <button class=\"bg-w line\" @click=\"btn2EventClick\">인증번호 확인</button>\n              </div>\n              <div>\n                *3분 이내로 인증번호(6자리)를 입력해주세요.<br/>\n                *인증번호 재전송은 1분내 1회만 가능합니다.\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n      <div class=\"modifi\" v-if=\"!d.isNext\">\n        <div class=\"inputDatas\">\n          <div class=\"inner\">\n            <ul>\n              <li>\n                <div class=\"input-text\">이름 <span>*</span></div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"\"\n                  >\n                </div>\n              </li>\n              <li>\n                <div class=\"input-text\">휴대폰 번호 <span>*</span></div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"\"\n                  >\n                </div>\n              </li>\n              <li class=\"addInp\">\n                <div class=\"input-text\">배송지 주소 <span>*</span></div>\n                <div>\n                  <ul>\n                    <li>\n                        <div>\n                          <input\n                            type=\"text\"\n                            placeholder=\"\"\n                            disabled\n                          >\n                        </div>\n                        <div>\n                          <button class=\"bg-w line\">우편번호 찾기</button>\n                        </div>\n                    </li>\n                    <li>\n                      <input\n                        type=\"text\"\n                        placeholder=\"\"\n                        disabled\n                      >\n                    </li>\n                    <li>\n                      <input\n                        type=\"text\"\n                        placeholder=\"\"\n                      >\n                    </li>\n                  </ul>\n                </div>\n              </li>\n              <li>\n                <div class=\"input-text\">주소 별칭</div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"\"\n                  >\n                </div>\n              </li>\n              <li>\n                <div class=\"input-text\">보안키 <span>*</span></div>\n                <div>\n                  <input\n                    type=\"text\"\n                    placeholder=\"\"\n                  >\n                </div>\n              </li>\n            </ul>\n            <div class=\"red\">\n              홈넘버 정보를 수정하더라도 이전에 주문한 보안 택배의 배송지 정보는 변경되지 않습니다.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <button\n      :class=\"d.isActive ? 'red-active':'default'\"\n      @click=\"nextClick\"\n    >\n      확인\n    </button>\n  </section>\n\n  <section v-if=\"d.completed\">\n    <completed/>\n  </section>\n</template>\n\n<style lang=\"scss\" scoped>\n  .top {\n    justify-content: flex-start;\n    div {\n      font-size: 18px;\n      font-weight: bold;\n      &:first-child {\n        width: 30%;\n        padding-left: 10px;\n        margin-right:10px;\n        margin-bottom: 0;\n      }\n    }\n  }\n\n  .phone {\n    div {\n      &:nth-child(1) {\n        font-size: 15px;\n        line-height: 1.2rem;\n      }\n      &:nth-child(2) {\n        line-height: 1.5rem;\n        margin-top: 20px;\n        ul {\n          li {\n            &:nth-child(1) {\n              margin-bottom: 10px;\n            }\n            &:nth-child(2) {\n              margin-bottom: 10px;\n            }\n            div.input-box {\n              display: flex;\n              justify-content: space-between;\n            }\n            div {\n\n            }\n            button {\n              width: 200px;\n              margin-left: 10px;\n            }\n          }\n        }\n      }\n    }\n  }\n\n  .red {\n    font-weight: bold;\n    margin-top: 20px;\n    line-height: 1.3rem;\n    color: $c-b500;\n  }\n</style>"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853556540,
+      "end": 1713853556540,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": ".top{justify-content:flex-start}.top div{font-size:18px;font-weight:700}.top div:first-child{margin-bottom:0;margin-right:10px;padding-left:10px;width:30%}.phone div:first-child{font-size:15px;line-height:1.2rem}.phone div:nth-child(2){line-height:1.5rem;margin-top:20px}.phone div:nth-child(2) ul li:first-child,.phone div:nth-child(2) ul li:nth-child(2){margin-bottom:10px}.phone div:nth-child(2) ul li div.input-box{display:flex;justify-content:space-between}.phone div:nth-child(2) ul li button{margin-left:10px;width:200px}.red{color:#e32924;font-weight:700;line-height:1.3rem;margin-top:20px}",
+      "start": 1713853556540,
+      "end": 1713853556785,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue",
+        "mappings": "AACE,KACE,2BACA,SACE,eACA,gBACA,qBAIE,gBADA,kBADA,kBADA,UAUF,uBACE,eACA,mBAEF,wBACE,mBACA,gBAMI,qFACE,mBAEF,4CACE,aACA,8BAKF,qCAEE,iBADA,YASZ,KAIE,aChCK,CD6BL,gBAEA,mBADA",
+        "names": [],
+        "ignoreList": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue",
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/_variables.scss"
+        ],
+        "sourcesContent": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556785,
+      "end": 1713853556785,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556785,
+      "end": 1713853556785,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556785,
+      "end": 1713853556785,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": ".top[data-v-a864612b]{justify-content:flex-start}.top div[data-v-a864612b]{font-size:18px;font-weight:700}.top div[data-v-a864612b]:first-child{margin-bottom:0;margin-right:10px;padding-left:10px;width:30%}.phone div[data-v-a864612b]:first-child{font-size:15px;line-height:1.2rem}.phone div[data-v-a864612b]:nth-child(2){line-height:1.5rem;margin-top:20px}.phone div:nth-child(2) ul li[data-v-a864612b]:first-child,.phone div:nth-child(2) ul li[data-v-a864612b]:nth-child(2){margin-bottom:10px}.phone div:nth-child(2) ul li div.input-box[data-v-a864612b]{display:flex;justify-content:space-between}.phone div:nth-child(2) ul li button[data-v-a864612b]{margin-left:10px;width:200px}.red[data-v-a864612b]{color:#e32924;font-weight:700;line-height:1.3rem;margin-top:20px}",
+      "start": 1713853556786,
+      "end": 1713853556788,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue",
+        "mappings": "AAAA,sBAAK,0BAA0B,CAAC,0BAAS,cAAc,CAAC,eAAe,CAAC,sCAAqB,eAAe,CAAC,iBAAiB,CAAC,iBAAiB,CAAC,SAAS,CAAC,wCAAuB,cAAc,CAAC,kBAAkB,CAAC,yCAAwB,kBAAkB,CAAC,eAAe,CAAC,uHAAqF,kBAAkB,CAAC,6DAA4C,YAAY,CAAC,6BAA6B,CAAC,sDAAqC,gBAAgB,CAAC,WAAW,CAAC,sBAAK,aAAa,CAAC,eAAe,CAAC,kBAAkB,CAAC,eAAe",
+        "names": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/modification/index.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556788,
+      "end": 1713853556788,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556789,
+      "end": 1713853556789,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556789,
+      "end": 1713853556791,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853556791,
+      "end": 1713853556791,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556792,
+      "end": 1713853556792,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556793,
+      "end": 1713853556793,
+      "order": "normal"
+    }
+  ]
+}

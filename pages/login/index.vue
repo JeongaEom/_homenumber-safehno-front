@@ -1,8 +1,8 @@
 <script setup>
-  import { reactive } from "vue";
+  import { reactive, ref } from "vue";
   import { useRouter } from 'vue-router';
   // import { useAppStore } from '@/stores/app'
-  import { authSignin } from "@/api";
+  // import { authSignin } from "@/api";
 
   const router = useRouter();
   // const appStore = useAppStore()
@@ -22,6 +22,25 @@
     texts: "",
     btntexts: "",
   });
+
+  const signin = ref(
+    [
+      {
+        id: "user1",
+        pwd: "1234",
+        tokenIssuId: "someRandomAccessToken123",
+        encData: "임시aaa",
+        sign: ""
+      },
+      {
+        id: "user2",
+        pwd: "1234",
+        tokenIssuId: "someRandomAccessToken456",
+        encData: "임시bbb",
+        sign: ""
+      }
+    ]
+  );
 
   const homnumberInquiry = () => {
     router.push('/homenumberInquiry');
@@ -45,23 +64,36 @@
       d.btntexts = "재시도";
     }
 
-    if (
-      await authSignin(
-        d.id,
-        d.pwd,
-        d.tokenIssuId,
-        d.encData,
-        d.sign,
-      )
-    ) {
+    // signin.value.forEach(user => {
+    //   console.log('user.id :',user.id);
+    //   console.log('user.pwd: ',user.pwd);
+    // });
+
+  if (
+    d.id === signin.value[0].id && d.pwd === signin.value[0].pwd
+  ){
+    // if (
+    //   await authSignin(
+    //     d.id,
+    //     d.pwd,
+    //     d.tokenIssuId,
+    //     d.encData,
+    //     d.sign,
+    //   )
+    // ) {
       router.push('/homnumberList');
-    }
-
-
+      //임시
+      commonHeaders["Authorization"] = signin.value[0].tokenIssuId;
+      // app.isLoggedIn = true;
+    // }
+  }
+    console.log(signin.value[0]);
+    console.log(commonHeaders["Authorization"]);
     console.log('d.idType : ', d.idType);
     console.log('d.texts', d.texts);
     console.log('d.id : ', d.id);
     console.log('d.pwd : ', d.pwd);
+    localstrogr
   }
 
   const signupClick = () => {

@@ -1,0 +1,233 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/stores/endData.ts",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "interface EndDataState {\n  endData: string;\n}\n\nexport const useEndDataStore = defineStore('endData', {\n  // 상태를 반환하는 함수입니다.\n  state: (): EndDataState => ({\n    endData: \"\", // \"1\"이면 발급 | \"2\"이면 수정 | \"3\"이면 회원가입완료\n  }),\n  actions: {\n  }\n})\n\nif(import.meta.hot) {  //HMR\n  import.meta.hot.accept(acceptHMRUpdate(useEndDataStore, import.meta.hot))\n}",
+      "start": 1713853554542,
+      "end": 1713853554671,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "export const useEndDataStore = defineStore(\"endData\", {\n  // 상태를 반환하는 함수입니다.\n  state: () => ({\n    endData: \"\"\n    // \"1\"이면 발급 | \"2\"이면 수정 | \"3\"이면 회원가입완료\n  }),\n  actions: {}\n});\nif (import.meta.hot) {\n  import.meta.hot.accept(acceptHMRUpdate(useEndDataStore, import.meta.hot));\n}\n",
+      "start": 1713853554671,
+      "end": 1713853554768,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/stores/endData.ts"
+        ],
+        "sourcesContent": [
+          "interface EndDataState {\n  endData: string;\n}\n\nexport const useEndDataStore = defineStore('endData', {\n  // 상태를 반환하는 함수입니다.\n  state: (): EndDataState => ({\n    endData: \"\", // \"1\"이면 발급 | \"2\"이면 수정 | \"3\"이면 회원가입완료\n  }),\n  actions: {\n  }\n})\n\nif(import.meta.hot) {  //HMR\n  import.meta.hot.accept(acceptHMRUpdate(useEndDataStore, import.meta.hot))\n}"
+        ],
+        "mappings": "AAIO,aAAM,kBAAkB,YAAY,WAAW;AAAA;AAAA,EAEpD,OAAO,OAAqB;AAAA,IAC1B,SAAS;AAAA;AAAA,EACX;AAAA,EACA,SAAS,CACT;AACF,CAAC;AAED,IAAG,YAAY,KAAK;AAClB,cAAY,IAAI,OAAO,gBAAgB,iBAAiB,YAAY,GAAG,CAAC;AAC1E;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853554768,
+      "end": 1713853554768,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "result": "export const useEndDataStore = defineStore(\"endData\", {\n  // 상태를 반환하는 함수입니다.\n  state: () => ({\n    endData: \"\"\n    // \"1\"이면 발급 | \"2\"이면 수정 | \"3\"이면 회원가입완료\n  }),\n  actions: {}\n});\nif (void 0) {\n  (void 0).accept(acceptHMRUpdate(useEndDataStore, void 0));\n}\n",
+      "start": 1713853554768,
+      "end": 1713853554842,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "result": "import { defineStore, acceptHMRUpdate } from 'C:/Workspace/GitLab/homenumber-safehno-front/node_modules/@pinia/nuxt/dist/runtime/composables';\nexport const useEndDataStore = defineStore(\"endData\", {\n  // 상태를 반환하는 함수입니다.\n  state: () => ({\n    endData: \"\"\n    // \"1\"이면 발급 | \"2\"이면 수정 | \"3\"이면 회원가입완료\n  }),\n  actions: {}\n});\nif (void 0) {\n  (void 0).accept(acceptHMRUpdate(useEndDataStore, void 0));\n}\n",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "post",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          ""
+        ],
+        "names": [],
+        "mappings": ";AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzC,CAAC,CAAC,CAAC,CAAC,CAAC;AACL,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC;AACH,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5D,CAAC;"
+      }
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853554842,
+      "end": 1713853554842,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1713853554842,
+      "end": 1713853554843,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1713853554843,
+      "end": 1713853554843,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853554843,
+      "end": 1713853554843,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853554843,
+      "end": 1713853554843,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853554843,
+      "end": 1713853554843,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853554843,
+      "end": 1713853554843,
+      "order": "normal"
+    }
+  ]
+}

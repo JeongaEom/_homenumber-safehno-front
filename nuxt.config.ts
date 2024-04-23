@@ -1,11 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
 export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
   ],
   imports: {
     dirs: ["./stores"],
+  },
+  runtimeConfig: {
+    public: {
+      envMode: "DEV", // can be overridden by NUXT_PUBLIC_ENV_MODE environment variable
+    },
   },
   css: [
     '@/assets/css/reset.css', // css 리셋

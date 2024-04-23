@@ -1,0 +1,214 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/components/popup.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup>\n  const p = defineProps({\n    isVisible: { type: Boolean, default: \"\" },\n    idType: { type: String, default: \"\" },\n    texts: { type: String, default: \"\" },\n    btntexts: { type: String, default: \"\" },\n  });\n\n  const emit = defineEmits(['update:isVisible']);\n\n  const closeClick = () => {\n    emit('update:isVisible', false);\n  };\n</script>\n\n<template>\n  <div class=\"popup\" v-if=\"p.isVisible\">\n    <div class=\"inner\">\n      <div class=\"top-ct\">\n        <div>알림</div>\n        <div @click=\"closeClick\">X</div>\n      </div>\n      <div class=\"body-ct\">\n        {{ p.texts }}\n      </div>\n      <div class=\"bottom-ct\">\n        <button class=\"red-active\" @click=\"closeClick\">{{ p.btntexts }}</button>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style lang=\"scss\" scoped>\n  .popup {\n    position: fixed;\n    z-index: 1;\n    left: 0;\n    top: 0;\n    height: 100%;\n    overflow: auto;\n    /*background-color: rgba(0, 0, 0, 0.4);*/\n    .inner {\n      background-color: #fefefe;\n      margin: 17rem auto;\n      padding: 20px;\n      border: 1px solid $c-g400;\n      box-shadow: 0 5px 10px $c-g400;\n      .top-ct {\n        display: flex;\n        align-items: center;\n        div {\n          font-weight: bold;\n          &:nth-child(1) {\n            text-align: center;\n            width: 100%;\n            font-size: 20px;\n          }\n        }\n      }\n      .body-ct {\n        height: 100px;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        font-weight: 600;\n      }\n    }\n  }\n\n  @media (min-width: 481px) {\n    .popup {\n      width: 480px;\n      left: 36.3%;\n      .inner {\n        width: 350px;;\n      }\n    }\n  }\n\n  @media (max-width: 480px) {\n    .popup {\n      width: 100%;\n      .inner {\n        width: 80%;\n      }\n    }\n  }\n</style>",
+      "start": 1713853554546,
+      "end": 1713853554671,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853554671,
+      "end": 1713853554671,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\"\n\nconst _withScopeId = n => (_pushScopeId(\"data-v-6834d8ed\"),n=n(),_popScopeId(),n)\nconst _hoisted_1 = {\n  key: 0,\n  class: \"popup\"\n}\nconst _hoisted_2 = { class: \"inner\" }\nconst _hoisted_3 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/_createElementVNode(\"div\", null, \"알림\", -1))\nconst _hoisted_4 = { class: \"body-ct\" }\nconst _hoisted_5 = { class: \"bottom-ct\" }\n\n\nconst _sfc_main = {\n  __name: 'popup',\n  props: {\n    isVisible: { type: Boolean, default: \"\" },\n    idType: { type: String, default: \"\" },\n    texts: { type: String, default: \"\" },\n    btntexts: { type: String, default: \"\" },\n  },\n  emits: ['update:isVisible'],\n  setup(__props, { emit: __emit }) {\n\n  const p = __props;\n\n  const emit = __emit;\n\n  const closeClick = () => {\n    emit('update:isVisible', false);\n  };\n\nreturn (_ctx, _cache) => {\n  return (p.isVisible)\n    ? (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"div\", { class: \"top-ct\" }, [\n            _hoisted_3,\n            _createElementVNode(\"div\", { onClick: closeClick }, \"X\")\n          ]),\n          _createElementVNode(\"div\", _hoisted_4, _toDisplayString(p.texts), 1),\n          _createElementVNode(\"div\", _hoisted_5, [\n            _createElementVNode(\"button\", {\n              class: \"red-active\",\n              onClick: closeClick\n            }, _toDisplayString(p.btntexts), 1)\n          ])\n        ])\n      ]))\n    : _createCommentVNode(\"\", true)\n}\n}\n\n}\n\n\nimport \"C:/Workspace/GitLab/homenumber-safehno-front/components/popup.vue?vue&type=style&index=0&scoped=6834d8ed&lang.scss\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['__scopeId',\"data-v-6834d8ed\"]])",
+      "start": 1713853554671,
+      "end": 1713853554673,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853554673,
+      "end": 1713853554673,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853554673,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853554674,
+      "end": 1713853554674,
+      "order": "normal"
+    }
+  ]
+}

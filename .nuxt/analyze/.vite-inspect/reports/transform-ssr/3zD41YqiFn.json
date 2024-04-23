@@ -1,0 +1,272 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/middleware/router.global.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "// import { authTknReiss, userMenuList} from \"@/api\";\n\nexport default defineNuxtRouteMiddleware((to, from) => {\n//   window.dispatchEvent(new CustomEvent(\"before.route-start\"));\n//   const app = useAppStore();\n//   app.isRouting = true;\n//   const needAuth = to.meta.noAuth ? false : true;\n//   // Verify\n//   if(app.isVerified === null && needAuth) {\n//     app.isVerified = true;\n//     await authTknReiss();\n//  }\n//   // auth\n//   if(needAuth) {\n//     const res = await userMenuList();\n//     if(res === 4001) {\n//       window.addEventListener(\n//         \"after.route-changed\",\n//         () => {\n//           uAlert(\"접근 가능한 IP가 아닙니다. IP를 등록 후 이용해주세요.\");\n//        },\n//         { once: true}\n//       );\n//       return navigateTo(\"/noauth-ip-update\");\n//    }\n//  }\n})",
+      "start": 1713853556224,
+      "end": 1713853556355,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556355,
+      "end": 1713853556355,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "result": "export default defineNuxtRouteMiddleware((to, from) => {\n});\n",
+      "start": 1713853556355,
+      "end": 1713853556434,
+      "order": "normal",
+      "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"C:/Workspace/GitLab/homenumber-safehno-front/middleware/router.global.js\"],\n  \"sourcesContent\": [\"// import { authTknReiss, userMenuList} from \\\"@/api\\\";\\n\\nexport default defineNuxtRouteMiddleware((to, from) => {\\n//   window.dispatchEvent(new CustomEvent(\\\"before.route-start\\\"));\\n//   const app = useAppStore();\\n//   app.isRouting = true;\\n//   const needAuth = to.meta.noAuth ? false : true;\\n//   // Verify\\n//   if(app.isVerified === null && needAuth) {\\n//     app.isVerified = true;\\n//     await authTknReiss();\\n//  }\\n//   // auth\\n//   if(needAuth) {\\n//     const res = await userMenuList();\\n//     if(res === 4001) {\\n//       window.addEventListener(\\n//         \\\"after.route-changed\\\",\\n//         () => {\\n//           uAlert(\\\"접근 가능한 IP가 아닙니다. IP를 등록 후 이용해주세요.\\\");\\n//        },\\n//         { once: true}\\n//       );\\n//       return navigateTo(\\\"/noauth-ip-update\\\");\\n//    }\\n//  }\\n})\"],\n  \"mappings\": \"AAEA,eAAe,0BAA0B,CAAC,IAAI,SAAS;AAwBvD,CAAC;\",\n  \"names\": []\n}\n"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556435,
+      "end": 1713853556435,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "result": "import { defineNuxtRouteMiddleware } from '#app/composables/router';\nexport default defineNuxtRouteMiddleware((to, from) => {\n});\n",
+      "start": 1713853556435,
+      "end": 1713853556436,
+      "order": "post",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          ""
+        ],
+        "names": [],
+        "mappings": ";AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACxD,CAAC,CAAC,CAAC;"
+      }
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "result": "import { defineNuxtRouteMiddleware } from '#app/composables/router';\nexport default defineNuxtRouteMiddleware((to, from) => {\n});\n",
+      "start": 1713853556435,
+      "end": 1713853556436,
+      "order": "post",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          ""
+        ],
+        "names": [],
+        "mappings": ";AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACxD,CAAC,CAAC,CAAC;"
+      }
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556436,
+      "end": 1713853556436,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556436,
+      "end": 1713853556436,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556437,
+      "end": 1713853556437,
+      "order": "normal"
+    }
+  ]
+}

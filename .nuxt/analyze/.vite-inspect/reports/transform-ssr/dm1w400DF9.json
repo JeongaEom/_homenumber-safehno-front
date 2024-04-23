@@ -1,0 +1,297 @@
+{
+  "resolvedId": "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue?vue&type=style&index=0&scoped=cb5d0d7f&lang.scss",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\n  ul {\n    >li {\n      line-height: 20px;\n      margin-bottom: 20px;\n      div {\n        &:nth-child(1) {\n          font-weight: bold;\n          font-size: 18px;\n        }\n        &:nth-child(2) {\n          font-weight: 300;\n          color: $c-g600;\n        }\n      }\n    }\n  }\n\n  .textDatas {\n    margin-bottom: 30px;\n  }\n  ",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue"
+        ],
+        "names": [],
+        "mappings": ";EA4GE,CAAC,EAAE;IACD,CAAC,CAAC,EAAE;MACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;MACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;MACnB,CAAC,CAAC,EAAE;QACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;UACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;UACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;QACjB;QACA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;UACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;UAChB,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;QAChB;MACF;IACF;EACF;;EAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;EACrB",
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<script setup>\n  import { reactive } from \"vue\";\n\n  definePageMeta({\n    // middleware: [\n    //   function (to, from) {\n    //     // 로직 inline 정의\n    //  },\n    //   'app',\n    // ],\n  });\n\n  const d = reactive({\n    text: \"개인정보 제3자 제공 동의\",\n    isActive: false,\n    dataList: [\n      {\n        id: \"1\",\n        type: \"필수\",\n        name: \"개인정보 제3자 제공 동의\",\n        data: `\n          <div id=\"checkText\">\n            <p>회사는 원칙적으로 이용자 동의 없이 개인정보를 외부에 제공하지 않습니다.</p>\n            <br/>\n            <div class=\"box\">\n              <p>이용자 동의 후 개인정보 제공이 발생하는 경우</p>\n              <br/>\n              <p> 1) 이용자가 서비스 이용을 위해 직접 자신의 개인정보를 제3자에게 제공하는 것에 대해 동의한 경우이며, 회사는 이용자에게 '개인정보를 제공받는 자,</p>\n            </div>\n          </div>\n        `\n      },\n    ],\n    modelValue: false\n  });\n\n  const handleCheckboxChange = () => {\n    if(d.modelValue) {\n      d.isActive = true;\n    } else {\n      d.isActive = false;\n    }\n  }\n\n  const endClick = () => {\n    window.close();\n  }\n</script>\n\n<template>\n  <TitleTop :text=\"d.text\" />\n  <section>\n    <div class=\"contents\">\n      <div v-for=\"item in d.dataList\" :key=\"d.id\">\n        <input\n          type=\"checkbox\"\n          :id=\"`checkbox-${item.id}`\"\n          class=\"custom-checkbox\"\n          v-model=\"d.modelValue\"\n          @change=\"handleCheckboxChange\"\n        />\n        <label :for=\"`checkbox-${item.id}`\">\n          <span\n            :class=\"item.type === '필수' ? 'essential':'select'\"\n          >\n            [{{ item.type }}]&nbsp;\n          </span>\n          {{ item.name }}\n        </label>\n        <div class=\"textDatas\">\n          <div class=\"inner\" v-html=\"item.data\"></div>\n        </div>\n      </div>\n      <div>\n      <ul>\n        <li>\n          <div>제공받는 자</div>\n          <div>(주) 우리홈쇼핑</div>\n        </li>\n        <li>\n          <div>제공 목적</div>\n          <div>보안택배</div>\n        </li>\n        <li>\n          <div>제공 항목</div>\n          <div>홈넘버, 가상 홈넘버, 이름, 휴대폰 번호, 주소</div>\n        </li>\n        <li>\n          <div>보유 및 이용기간</div>\n          <div>배송완료 시 또는 법정 의무 보유 기간까지</div>\n        </li>\n        <li>\n          <div>거부권 및 불이익</div>\n          <div>이용자는 동의를 거부 할 수 있으나, 동의를 거부하 실 경우 서비스 이용이 제한됩니다.</div>\n        </li>\n      </ul>\n      </div>\n    </div>\n    <button\n      :class=\"d.isActive ? 'red-active':'default'\"\n      @click=\"endClick\"\n    >\n      확인\n    </button>\n  </section>\n</template>\n\n<style lang=\"scss\" scoped>\n  ul {\n    >li {\n      line-height: 20px;\n      margin-bottom: 20px;\n      div {\n        &:nth-child(1) {\n          font-weight: bold;\n          font-size: 18px;\n        }\n        &:nth-child(2) {\n          font-weight: 300;\n          color: $c-g600;\n        }\n      }\n    }\n  }\n\n  .textDatas {\n    margin-bottom: 30px;\n  }\n  </style>"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "order": "pre"
+    },
+    {
+      "name": "server-only-component-transform",
+      "start": 1713853556575,
+      "end": 1713853556575,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": "ul>li{line-height:20px;margin-bottom:20px}ul>li div:first-child{font-size:18px;font-weight:700}ul>li div:nth-child(2){color:#4d5562;font-weight:300}.textDatas{margin-bottom:30px}",
+      "start": 1713853556575,
+      "end": 1713853556813,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue",
+        "mappings": "AAEI,MACE,iBACA,mBAEE,sBAEE,eADA,gBAGF,uBAEE,aCDD,CDAC,gBAOR,WACE",
+        "names": [],
+        "ignoreList": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue",
+          "C:/Workspace/GitLab/homenumber-safehno-front/assets/scss/_variables.scss"
+        ],
+        "sourcesContent": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "ul>li[data-v-cb5d0d7f]{line-height:20px;margin-bottom:20px}ul>li div[data-v-cb5d0d7f]:first-child{font-size:18px;font-weight:700}ul>li div[data-v-cb5d0d7f]:nth-child(2){color:#4d5562;font-weight:300}.textDatas[data-v-cb5d0d7f]{margin-bottom:30px}",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue",
+        "mappings": "AAAA,uBAAM,gBAAgB,CAAC,kBAAkB,CAAC,uCAAsB,cAAc,CAAC,eAAe,CAAC,wCAAuB,aAAa,CAAC,eAAe,CAAC,4BAAW,kBAAkB",
+        "names": [],
+        "sources": [
+          "C:/Workspace/GitLab/homenumber-safehno-front/pages/personalInformation/index.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1713853556814,
+      "end": 1713853556814,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1713853556814,
+      "end": 1713853556815,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1713853556815,
+      "end": 1713853556815,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1713853556815,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1713853556816,
+      "end": 1713853556816,
+      "order": "normal"
+    }
+  ]
+}
