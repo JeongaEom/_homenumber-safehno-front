@@ -1,0 +1,31 @@
+{
+  "safehno": [{
+    "v1": [{
+      "auth" : [{
+        "signin": [
+          {
+            "id": "user1",
+            "pwd": "1234",
+            "tokenIssuId": "someRandomAccessToken123",
+            "encData": "임시aaa",
+            "sign": ""
+          },
+          {
+            "id": "user2",
+            "pwd": "1234",
+            "tokenIssuId": "someRandomAccessToken456",
+            "encData": "임시bbb",
+            "sign": ""
+          },
+          {
+            "id": "user3",
+            "pwd": "1234",
+            "tokenIssuId": "someRandomAccessToken78999",
+            "encData": "임시ccc",
+            "sign": ""
+          }
+        ]
+      }]
+    }]
+  }]
+}

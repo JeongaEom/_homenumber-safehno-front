@@ -1,0 +1,1 @@
+export { default } from "file:///C:/Workspace/GitLab/homenuber-popup-front/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

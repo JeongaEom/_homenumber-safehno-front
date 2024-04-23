@@ -1,0 +1,32 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+
+export default defineNuxtConfig({
+  modules: [
+    "@pinia/nuxt",
+  ],
+  imports: {
+    dirs: ["./stores"],
+  },
+  css: [
+    '@/assets/css/reset.css', // css 리셋
+    '@/assets/scss/common.scss', // 기본
+    '@/assets/scss/style.scss', // 스타일 설정
+  ],
+  components: true,
+  vite: {
+    // Vite 설정
+    css: {
+      preprocessorOptions: {
+        scss: { // 기본 컬러
+          additionalData: '@import "@/assets/scss/_variables.scss";',
+        },
+      },
+    },
+  },
+  build: {
+    // 빌드 설정
+  },
+  nitro: {
+    // Nitro 설정
+  },
+});
