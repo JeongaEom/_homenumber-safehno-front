@@ -1,1 +1,1 @@
-export { default } from "file:///C:/Workspace/GitLab/homenuber-popup-front/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
+export { default } from "file:///C:/Workspace/GitLab/homenumber-safehno-front/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
