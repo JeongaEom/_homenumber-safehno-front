@@ -5,7 +5,7 @@ import { API_DEBUG, API_HOST } from "./setting/appSettings";
 // import { default as authTknReiss } from "./auth/authTknReiss";
 
 // export { default as authSignout } from "./auth/authSignout";
-// export { default as authSignin } from "./auth/authSignin";
+export { default as authSignin } from "./auth/authSignin";
 // export { default as authTknVerify } from "./auth/authTknVerify";
 // export { default as authTknReiss } from "./auth/authTknReiss";
 
