@@ -6,6 +6,7 @@
   const router = useRouter();
 
   definePageMeta({
+    name: "homenumberInquiry",
     // middleware: [
     //   function (to, from) {
     //     // 로직 inline 정의

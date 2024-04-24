@@ -2,6 +2,7 @@
   import { reactive } from "vue";
 
   definePageMeta({
+    name: "serviceInfo",
     // middleware: [
     //   function (to, from) {
     //     // 로직 inline 정의

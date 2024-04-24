@@ -5,6 +5,7 @@
   const endDataStore = useEndDataStore()
 
   definePageMeta({
+    name: "issuance",
     // middleware: [
     //   function (to, from) {
     //     // 로직 inline 정의

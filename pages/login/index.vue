@@ -9,6 +9,7 @@
 
   definePageMeta({
     layout: "login",
+    name: "login",
   });
 
   const d = reactive({

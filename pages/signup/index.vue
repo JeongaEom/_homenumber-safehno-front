@@ -5,6 +5,7 @@
   const endDataStore = useEndDataStore();
 
   definePageMeta({
+    name: "signup",
   });
 
   const d = reactive({
@@ -28,7 +29,7 @@
           </div>
         `,
         checked: false,
-     },
+      },
       {
         id: '2',
         toptitle: '개인정보 수집 및 이용동의',

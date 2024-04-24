@@ -1,18 +1,15 @@
 import axios from "axios";
 import { useAppStore } from "@/stores/app";
 
-// import { API_DEBUG, API_HOST } from "./setting/appSettings";
-// import { default as authTknReiss } from "./auth/authTknReiss";
-
-// export { default as authSignout } from "./auth/authSignout";
+// import { API_DEBUG, API_HOST } from "./appSettings";
+export { default as tknEncValid } from "./tkn/tknEncValid";
 // export { default as authSignin } from "./auth/authSignin";
-// export { default as authTknVerify } from "./auth/authTknVerify";
-// export { default as authTknReiss } from "./auth/authTknReiss";
+
 
 
 // 환경 변수에서 값을 읽어오거나, 기본값을 사용합니다.
-const API_HOST = process.env.API_HOST || "http://localhost:5000";
-const API_DEBUG = process.env.API_DEBUG || true;
+const API_HOST = "http://localhost:5000" + "/safehno/v1";
+const API_DEBUG = true;
 
 const app = useAppStore();
 
@@ -63,7 +60,6 @@ export const call = async (settings) => {
     endpoint,
     method,
     headers,
-    withCredentials,
     beforeRequest,
     data = {},
     onResponse,
@@ -95,14 +91,10 @@ export const call = async (settings) => {
     method: method || "post",
     url: API_HOST + endpoint,
     headers: getPresetHeaders(headers),
-    data,
-    withCredentials: withCredentials !== undefined ? withCredentials : false,
+    data
   })
 
   .then((res) => {
-    if (app.isLoggedIn === null && headers === "DEFAULT") {
-      app.isLoggedIn = true;
-    }
     const { data, status, config } = res;
     API_DEBUG && console.log(`🟢 API - ${config.url}\n`);
     API_DEBUG && console.log(id);
@@ -115,6 +107,7 @@ export const call = async (settings) => {
       message: data.message,
     });
   })
+
   .catch(async (error) => {
     const code = error.response?.data?.code;
     const message = error.response?.data?.message;
@@ -126,14 +119,18 @@ export const call = async (settings) => {
       );
 
     const router = useRouter();
-    // 액세스 토큰 만료
-    if (code === 3000) {
-      if ((await authTknReiss()) && endpoint !== "/auth/tkn/verify") {
-        return call(settings);
-      } else {
-        return false;
+
+      // 액세스 토큰 만료
+      if (code === 3000) {
+        if(endpoint !== "/tkn/enc/valid") {
+          // '2.16 암호화 토큰 유효성 검사' 아닐때
+          return call(settings);
+        } else {
+          return false;
+        }
       }
-    }
+
+      ///// 작업중------
     // 4020: 토큰이상, 재로그인
     // 4022: 승인대기
     else if (code === 4020 || code === 4022) {
@@ -159,8 +156,8 @@ export const call = async (settings) => {
       return false;
     }
 
-    // 3004: 중복 로그인, 3002: 만료된 refresh토큰
-    else if (code === 3004 || code === 3002) {
+    // 3004: 중복 로그인
+    else if (code === 3004) {
       uAddError(9999, () => {
         uAlert(message, async () => {
           await authSignout();
@@ -186,6 +183,7 @@ export const call = async (settings) => {
     return false;
   })
   .finally(() => {
+    // 로딩 중
     app.apiQueue = app.apiQueue.filter((item) => item !== api);
     onFinally && onFinally();
   });

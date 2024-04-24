@@ -6,6 +6,7 @@
   const endDataStore = useEndDataStore()
 
   definePageMeta({
+    name: "modification",
     // middleware: [
     //   function (to, from) {
     //     // 로직 inline 정의
