@@ -1,8 +1,6 @@
 // import router from "@/router";
 import { useAppStore } from "@/stores/app";
 
-const app = useAppStore();
-
 export const formaNb = (Nb) => {
   if(Nb.length < 7) { // 문자열 길이가 7 미만인 경우 그대로 반환
     return Nb;
@@ -11,6 +9,7 @@ export const formaNb = (Nb) => {
 }
 
 export const uLogin = (acsTkn) => {
+  const app = useAppStore();
   commonHeaders["Authorization"] = acsTkn;
   app.isLoggedIn = true;
 };
@@ -25,7 +24,7 @@ export const uLogout = async () => {
 };
 
 export const uAddError = (priority, cb) => {
-
+  const app = useAppStore();
   // 라우팅중인 경우
   if (app.isRouting) {
     // 등록된 에러가 없으면

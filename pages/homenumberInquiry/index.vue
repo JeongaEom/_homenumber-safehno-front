@@ -137,6 +137,13 @@
 </template>
 
 <style lang="scss" scoped>
+  .contents {
+    min-height: 514px;
+  }
+  .contents.no-data {
+    min-height: 477px;
+  }
+
   @media (min-width: 769px) {
     .contents {
       .inner {
@@ -147,9 +154,6 @@
       p {
         text-align:center;
       }
-    }
-    .no-data {
-      height: 500px;
     }
   }
 
@@ -163,12 +167,6 @@
       br {
         display: none;
       }
-    }
-  }
-
-  @media (min-height: 821px) {
-    .no-data {
-      min-height: 500px;
     }
   }
 </style>

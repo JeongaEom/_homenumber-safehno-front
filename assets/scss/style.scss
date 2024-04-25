@@ -62,6 +62,9 @@ input[type="checkbox"],
 input[type="radio"] {
   height: 24px;
 }
+input[type="checkbox"] {
+  max-width: 400px;
+}
 
 button {
   text-align: center;
@@ -99,7 +102,7 @@ section {
   >.contents {
     overflow-y: auto;
     overflow-x: hidden;
-    margin: 1rem 0 2rem;
+    margin: 1.6rem 0 2.8rem;
     width: 100%;
     &::-webkit-scrollbar { /* 스크롤바의 폭 너비 */
       width: 8px;
@@ -116,6 +119,7 @@ section {
       >ul {
         >li {
           margin-bottom: 14px;
+          cursor: pointer;
           &:last-child {
             margin-bottom: 0;
           }
@@ -126,6 +130,7 @@ section {
             border-color: $c-b500;
           }
           >div {
+            display: flex;
             padding: 18px;
             border: 1px solid;
             border-radius: 4px;
@@ -135,6 +140,7 @@ section {
             -o-border-radius: 4px;
             >ul {
               &:nth-child(1) {
+                width: 80%;
                 li {
                   display: flex;
                   margin: 8px 0;
@@ -172,8 +178,11 @@ section {
                 }
               }
               &:nth-child(2) {
+                width: 20%;
+                flex-direction: column;
+                justify-content: space-between;
                 display: flex;
-                li {
+                >li {
                   &:nth-child(1) {
                     div.default {
                       color: $c-g800;
@@ -195,6 +204,8 @@ section {
                     }
                   }
                   &:nth-child(2) {
+                    flex-direction: column;
+                    justify-content: space-between;
                     button {
                       background-color: $wt;
                       border: 1px solid $c-g300;
@@ -211,6 +222,7 @@ section {
   }
   .bottom {
     border-top: 1px solid $c-g600;
+    padding: 1.5rem 0 1rem;
   }
 }
 
@@ -229,15 +241,8 @@ section {
         >ul {
           >li {
             >div {
-              display: flex;
               >ul {
-                &:nth-child(1) {
-                  width: 80%;
-                }
                 &:nth-child(2) {
-                  width: 20%;
-                  flex-direction: column;
-                  justify-content: space-between;
                   li {
                     &:nth-child(2) {
                       button {
@@ -269,18 +274,34 @@ section {
       padding: 0 0.8rem;
       /* 기본 높이 (수정x) | 수정 시 각각의 별도 페이지에서 지정 */
       min-height: 460px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  section {
+    >.contents {
       .dataList{
         >ul {
           >li {
             >div {
+              flex-direction: column;
               >ul {
+                width: 100% !important;
                 &:nth-child(2) {
-                  justify-content: space-between;
                   align-items: center;
-                  li {
+                  display: flex;
+                  flex-direction: row;
+                  >li {
+                    width: 50%;
+                    &:nth-child(1) {
+                      >div {
+                        justify-content: flex-start;
+                      }
+                    }
                     &:nth-child(2) {
                       button {
-                        width: 100px;
+                        width: 100%;
                       }
                     }
                   }
@@ -291,8 +312,27 @@ section {
         }
       }
     }
-    >.bottom {
-      padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 260px) {
+  section {
+    >.contents {
+      .dataList{
+        >ul {
+          >li {
+            >div {
+              >ul {
+                &:nth-child(1) {
+                  li {
+                    flex-direction: column;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

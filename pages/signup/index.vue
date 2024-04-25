@@ -47,7 +47,7 @@
           </div>
         `,
         checked: false,
-     },
+      },
     ],
     isActive: '',
     completed: false,
@@ -86,7 +86,7 @@
 </script>
 
 <template>
-  <TitleSign :text="d.text" />
+  <TitleSignup :text="d.text" />
   <div
     class="subs-title"
     v-if="d.text !== '03'"
@@ -211,6 +211,11 @@
 </template>
 
 <style lang="scss" scoped>
+  section {
+    >.contents {
+      min-height: 418px;
+    }
+  }
   .subs-title {
     border: 1px solid #171A22;
     border-top: none;

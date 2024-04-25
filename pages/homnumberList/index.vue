@@ -177,7 +177,7 @@
   @media (min-width: 769px) {
     section {
       >.contents {
-        height: 460px;
+        height: 438px;
       }
     }
   }
@@ -186,6 +186,7 @@
     section {
       >.contents {
         padding: 0 ;
+        min-height: 443px;
       }
     }
   }

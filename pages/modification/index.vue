@@ -205,6 +205,10 @@
     }
   }
 
+  .contents {
+    min-height: 514px;
+  }
+
   .phone {
     div {
       &:nth-child(1) {

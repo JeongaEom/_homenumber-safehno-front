@@ -44,7 +44,14 @@
 </script>
 
 <template>
-  <div class="contents">
+  <div
+    class="contents"
+    :class="{
+      issuance: endDataStore.endData === '1',
+      modification: endDataStore.endData === '2',
+      signup: endDataStore.endData === '3'
+    }"
+  >
     <div>
       <img src="@/assets/images/data-end.png" alt="홈넘버 데이터 없음">
       <div v-if="endDataStore.endData !== '3'">
@@ -84,4 +91,16 @@
       }
     }
   }
+
+@media (min-width: 400px) {
+  .issuance {
+    min-height: 514px;
+  }
+  .modification {
+    min-height: 514px;
+  }
+  .signup {
+    min-height: 476px;
+  }
+}
 </style>

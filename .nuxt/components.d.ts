@@ -1,7 +1,7 @@
 
 interface _GlobalComponents {
       'Header': typeof import("../components/Header.vue")['default']
-    'TitleSign': typeof import("../components/TitleSign.vue")['default']
+    'TitleSignup': typeof import("../components/TitleSignup.vue")['default']
     'TitleTop': typeof import("../components/TitleTop.vue")['default']
     'Completed': typeof import("../components/completed.vue")['default']
     'Modal': typeof import("../components/modal.vue")['default']
@@ -28,7 +28,7 @@ interface _GlobalComponents {
     'Html': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
       'LazyHeader': typeof import("../components/Header.vue")['default']
-    'LazyTitleSign': typeof import("../components/TitleSign.vue")['default']
+    'LazyTitleSignup': typeof import("../components/TitleSignup.vue")['default']
     'LazyTitleTop': typeof import("../components/TitleTop.vue")['default']
     'LazyCompleted': typeof import("../components/completed.vue")['default']
     'LazyModal': typeof import("../components/modal.vue")['default']
@@ -69,7 +69,7 @@ declare module 'vue' {
 }
 
 export const Header: typeof import("../components/Header.vue")['default']
-export const TitleSign: typeof import("../components/TitleSign.vue")['default']
+export const TitleSignup: typeof import("../components/TitleSignup.vue")['default']
 export const TitleTop: typeof import("../components/TitleTop.vue")['default']
 export const Completed: typeof import("../components/completed.vue")['default']
 export const Modal: typeof import("../components/modal.vue")['default']
@@ -96,7 +96,7 @@ export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const LazyHeader: typeof import("../components/Header.vue")['default']
-export const LazyTitleSign: typeof import("../components/TitleSign.vue")['default']
+export const LazyTitleSignup: typeof import("../components/TitleSignup.vue")['default']
 export const LazyTitleTop: typeof import("../components/TitleTop.vue")['default']
 export const LazyCompleted: typeof import("../components/completed.vue")['default']
 export const LazyModal: typeof import("../components/modal.vue")['default']

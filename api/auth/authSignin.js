@@ -3,7 +3,7 @@ import { call } from "@/api";
 const authSignin = ({ id, pwd, tokenIssuId, encData, sign }) => {
   return call({
     id: "2.3 표준창 로그인",
-    endpoint: "",
+    endpoint: "/auth/signin",
     headers: "PUBLIC",
     data: {
       id,

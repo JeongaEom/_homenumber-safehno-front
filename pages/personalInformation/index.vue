@@ -109,8 +109,8 @@
 <style lang="scss" scoped>
   ul {
     >li {
-      line-height: 20px;
-      margin-bottom: 20px;
+      line-height: 20.7px;
+    margin-bottom: 16px;
       div {
         &:nth-child(1) {
           font-weight: bold;
