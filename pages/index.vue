@@ -6,23 +6,49 @@
   const router = useRouter();
 
   definePageMeta({
+    layout: "default-none",
     name: "main",
   });
 
+  // const p = defineProps({
+  //   tokenIssuId: { type: String, default: "" },
+  // }); // 임시 업체 요청 데이터
 
-  onMounted(async () => {
-  // 라우터를 통해 로그인 페이지로 이동
-  await router.push('/login');
+  const d = reactive({
+    tokenIssuId: "1234", // 임시 api data
+  });
 
-  // 개발테스트 시에만 주석 제거 하여 팝업창 확인, '운영'에는 주석처리
-  const width = 480;
-  const height = 820;
-  const left = (window.screen.width / 2) - (width / 2);
-  const top = (window.screen.height / 2) - (height / 2);
-  const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-  window.open('http://localhost:3002/login', '_blank', windowFeatures);
+  onMounted(
+    async () => {
+      try {
+        const response = await $axios.$get('https://example.com/api/data')
+        responseData.value = response
+        // 데이터 처리 로직
+        console.log('test:',responseData.value)
+        // router.push('/login');
+      } catch (error) {
+        console.error('API 요청 중 오류 발생:', error)
+      }
+    },
+    () => {
+    // 업체에서 쿼리 파라미터 받은걸로 데이터 가져오기
+      // const params = new URLSearchParams(window.location.search);
+      // const key1 = params.get('key1'); // 'value1'
+      // const key2 = params.get('key2'); // 'value2'
 
-});
+      // console.log('key1: ', key1);
+      // console.log('key2: ', key2);
+
+      // if(p.tokenIssuId !== d.tokenIssuId){
+      //   if(!d.tokenIssuId){
+      //     alert ('유효성이 맞지 않습니다.');
+      //     window.close();
+      //   } else {
+      //     router.push('/login');
+      //   }
+      // }
+    }
+  );
 </script>
 
 <template></template>

@@ -3,12 +3,6 @@
 
   definePageMeta({
     name: "serviceInfo",
-    // middleware: [
-    //   function (to, from) {
-    //     // 로직 inline 정의
-    //  },
-    //   'app',
-    // ],
   });
 
   const d = reactive({

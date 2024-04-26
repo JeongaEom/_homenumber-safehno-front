@@ -1,6 +1,6 @@
 <script setup>
   useHead({
-    title: "HomNumber_표준창 서비스",
+    title: "HomNumber",
   });
 </script>
 

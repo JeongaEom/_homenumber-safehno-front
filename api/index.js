@@ -8,15 +8,15 @@ export { default as tknEncValid } from "./tkn/tknEncValid";
 
 
 // 환경 변수에서 값을 읽어오거나, 기본값을 사용합니다.
-const API_HOST = "http://localhost:5000" + "/safehno/v1";
+const API_HOST = "https://dev-hp-api.homenumber.co.kr/safehno/v1";
 const API_DEBUG = true;
 
 const app = useAppStore();
 
 export const commonHeaders = {
   "Content-Type": "application/json;charset=UTF-8",
-  appId: "HOMEHNHPWEB-POPUP",
-  appKey: "new1234", //임시번호
+  appId: "SAFEHNO",
+  appKey: "609af5e1-0047-49a5-93eb-c3a1db30fb92", //임시번호
   Authorization: null,
 };
 

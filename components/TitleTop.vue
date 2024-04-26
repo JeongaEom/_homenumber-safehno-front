@@ -11,7 +11,7 @@
 
   const eventClick = () => {
     router.push(p.linkAddress);
-  }
+  };
 </script>
 
 <template>

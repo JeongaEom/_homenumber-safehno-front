@@ -31,6 +31,11 @@ export default defineNuxtConfig({
         },
       },
     },
+    server: {
+      hmr: {
+        port: 3002,
+      }
+    },
   },
   build: {
     // 빌드 설정
