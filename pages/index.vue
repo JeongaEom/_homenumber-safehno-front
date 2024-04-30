@@ -1,54 +1,55 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
-  // import { tknEncValid } from '@/api';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { tknEncValid } from '@/api';
 
-  const router = useRouter();
+// 페이지 메타 설정
+definePageMeta({
+  layout: "default-none",
+  name: "main",
+});
 
-  definePageMeta({
-    layout: "default-none",
-    name: "main",
-  });
+// 반응형 데이터 선언
+// const token = ref("");
+// const tokenIssu = ref("");
+const tokenIssuId = ref("");
+const encData = ref("");
+const sign = ref("");
 
-  // const p = defineProps({
-  //   tokenIssuId: { type: String, default: "" },
-  // }); // 임시 업체 요청 데이터
+const router = useRouter();
 
-  const d = reactive({
-    tokenIssuId: "1234", // 임시 api data
-  });
+onMounted(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const dataParam = params.get('data');
 
-  onMounted(
-    async () => {
-      try {
-        const response = await $axios.$get('https://example.com/api/data')
-        responseData.value = response
-        // 데이터 처리 로직
-        console.log('test:',responseData.value)
-        // router.push('/login');
-      } catch (error) {
-        console.error('API 요청 중 오류 발생:', error)
-      }
-    },
-    () => {
-    // 업체에서 쿼리 파라미터 받은걸로 데이터 가져오기
-      // const params = new URLSearchParams(window.location.search);
-      // const key1 = params.get('key1'); // 'value1'
-      // const key2 = params.get('key2'); // 'value2'
+  if (dataParam) {
+    // URL 쿼리 파라미터로부터 데이터를 파싱합니다.
+    const data = JSON.parse(decodeURIComponent(dataParam));
+    console.log('수신된 데이터:', data);
+    tokenIssuId.value = data.tokenIssuId;
+    encData.value = data.encData
+    sign.value = data.sign
+    console.log('tokenIssuId.value:', tokenIssuId.value);
+    console.log('encData.value:', encData.value);
+    console.log('sign.value:', sign.value);
+  }
 
-      // console.log('key1: ', key1);
-      // console.log('key2: ', key2);
+  try {
+    await tknEncValid(tokenIssuId.value, encData.value, sign.value);
+    console.log('tokenIssuId:', tokenIssuId.value);
+    console.log('encData:', encData.value);
+    console.log('sign:', sign.value);
 
-      // if(p.tokenIssuId !== d.tokenIssuId){
-      //   if(!d.tokenIssuId){
-      //     alert ('유효성이 맞지 않습니다.');
-      //     window.close();
-      //   } else {
-      //     router.push('/login');
-      //   }
-      // }
-    }
-  );
+    // // if(token.value === tokenIssuId.value) {
+    // if(tokenIssuId.value) {
+    //   router.push('/login');
+    // }
+  }
+  catch (error) {
+    console.error('에러 처리:', error);
+    alert('암호화 토큰 유효성이 맞지않습니다. 다시 시도해주세요.');
+  }
+});
 </script>
 
 <template></template>

@@ -4,7 +4,7 @@ const authSignin = ({ id, pwd, tokenIssuId, encData, sign }) => {
   return call({
     id: "2.3 표준창 로그인",
     endpoint: "/auth/signin",
-    headers: "PUBLIC",
+    withCredentials: true,
     data: {
       id,
       pwd,

@@ -7,43 +7,52 @@ export { default as tknEncValid } from "./tkn/tknEncValid";
 
 
 
-// 환경 변수에서 값을 읽어오거나, 기본값을 사용합니다.
-const API_HOST = "https://dev-hp-api.homenumber.co.kr/safehno/v1";
+const API_HOST = "https://dev-hno-api.homenumber.co.kr/safehno/v1";
 const API_DEBUG = true;
 
-const app = useAppStore();
+// export const commonHeaders = {
+//   "Content-Type": "application/json;charset=UTF-8",
+//   appId: btoa("SAFEHNO"), // Base64로 인코딩
+//   apiKey: btoa("609af5e1-0047-49a5-93eb-c3a1db30fb92"), // Base64로 인코딩
+// };
 
 export const commonHeaders = {
   "Content-Type": "application/json;charset=UTF-8",
   appId: "SAFEHNO",
-  appKey: "609af5e1-0047-49a5-93eb-c3a1db30fb92", //임시번호
-  Authorization: null,
+  apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92",
 };
 
-export const getPresetHeaders = (headers) => {
-  if (typeof headers === "string") {
-    const base = {
+
+export const getPresetHeaders = (headers = {}) => {
+  // Authorization 없음 (서버에서 쿠키로 처리)
+  if (typeof headers === 'string') {
+    // headers가 문자열인 경우
+    return {
       "Content-Type": commonHeaders["Content-Type"],
       appId: commonHeaders["appId"],
-      appKey: commonHeaders["appKey"],
+      apikey: commonHeaders[" apikey"],
     };
-    switch (headers) {
-      case "DEFAULT":
-        return {
-          ...base,
-          Authorization: commonHeaders["Authorization"],
-        };
-      case "PUBLIC":
-        return base;
-    }
-  } else if (typeof headers === "function") {
-    return headers();
-  } else {
-    return headers;
   }
+
+  if (typeof headers === 'function') {
+    // headers가 함수인 경우
+    return headers();
+  }
+
+  if (typeof headers === 'object' && !Array.isArray(headers)) {
+    // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
+    return {
+      ...commonHeaders,
+      ...headers,
+    };
+  }
+
+  // headers가 없는 경우
+  return commonHeaders;
 };
 
 const defaultErrorProc = (error) => {
+  const app = useAppStore();
   console.log(error);
   console.log("app.isRouting - ", app.isRouting);
 
@@ -60,6 +69,7 @@ export const call = async (settings) => {
     endpoint,
     method,
     headers,
+    withCredentials,
     beforeRequest,
     data = {},
     onResponse,
@@ -83,6 +93,7 @@ export const call = async (settings) => {
     if (data[key] === null) delete data[key];
   });
 
+  const app = useAppStore();
   // 호출
   // 타겟 URL 설정
   // endpoint로 호출하는 경우(미리 정의된 HOST를 붙인다)
@@ -91,11 +102,13 @@ export const call = async (settings) => {
     method: method || "post",
     url: API_HOST + endpoint,
     headers: getPresetHeaders(headers),
-    data
+    data,
+    // (Authorization) 쿠키 기반 인증
+    withCredentials: withCredentials !== undefined ? withCredentials : false,
   })
 
   .then((res) => {
-    const { data, status, config } = res;
+    const { data, config } = res;
     API_DEBUG && console.log(`🟢 API - ${config.url}\n`);
     API_DEBUG && console.log(id);
     const resultData = JSON.stringify(data, null, 2);
@@ -120,20 +133,17 @@ export const call = async (settings) => {
 
     const router = useRouter();
 
-      // 액세스 토큰 만료
-      if (code === 3000) {
-        if(endpoint !== "/tkn/enc/valid") {
-          // '2.16 암호화 토큰 유효성 검사' 아닐때
-          return call(settings);
-        } else {
-          return false;
-        }
+    // 액세스 토큰 만료
+    if (code === 3000) {
+      if(endpoint !== "/tkn/enc/valid") {
+        // '2.16 암호화 토큰 유효성 검사' 아닐때
+        return call(settings);
+      } else {
+        return false;
       }
-
-      ///// 작업중------
-    // 4020: 토큰이상, 재로그인
-    // 4022: 승인대기
-    else if (code === 4020 || code === 4022) {
+    } else if (code === 4020 || code === 4022) {
+      // 4020: 토큰이상, 재로그인
+      // 4022: 승인대기
       uAddError(9999, () => {
         setTimeout(() => {
           uAlert(message);
@@ -143,10 +153,8 @@ export const call = async (settings) => {
       });
       router.push("/login");
       return false;
-    }
-
-    // 접근 불가 권한
-    else if (code === 4013) {
+    } else if (code === 4013) {
+      // 접근 불가 권한
       uAddError(9999, () => {
         setTimeout(() => {
           uAlert(message);
@@ -154,13 +162,11 @@ export const call = async (settings) => {
       });
       router.push("/");
       return false;
-    }
-
-    // 3004: 중복 로그인
-    else if (code === 3004) {
+    } else if (code === 3004) {
+      // 3004: 중복 로그인
       uAddError(9999, () => {
         uAlert(message, async () => {
-          await authSignout();
+        //   await authSignout();
         });
       });
       return false;
