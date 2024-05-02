@@ -3,6 +3,9 @@ interface AppState {
   isVerifing: boolean;
   isLoggedIn: boolean | null;
   apiQueue: any[];
+  tokenIssuId: string;
+  encData: string;
+  sign: string;
 }
 
 export const useAppStore = defineStore("app", {
@@ -11,6 +14,9 @@ export const useAppStore = defineStore("app", {
     isVerifing: false,
     isLoggedIn: null,
     apiQueue: [],
+    tokenIssuId: "",
+    encData: "",
+    sign: "",
   }),
   actions: {
   },

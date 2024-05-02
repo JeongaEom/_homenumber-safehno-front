@@ -42,6 +42,4 @@ export const uAddError = (priority, cb) => {
   }
 };
 
-export const uAlert = (...params) => useModalStore().alert(...params);
-
 export const uEnvMode = () => useRuntimeConfig().public.envMode;

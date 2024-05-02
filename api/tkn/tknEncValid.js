@@ -1,23 +1,29 @@
 import { call } from "@/api";
+import { useRouter } from 'vue-router';
 
 const tknEncValid = (tokenIssuId, encData, sign ) => {
-  return call({
-    id: "2.16 암호화 토큰 유효성 검사",
-    endpoint: "/tkn/enc/valid",
-    data: {
-      tokenIssuId,
-      encData,
-      sign
-    },
-    onResponse({ data, code, message }) {
-      // if (code === 2000) {
-      //   router.push('/login');
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      // return [ data, code, message ];
-    },
+  const router = useRouter();
+  return new Promise((resolve, reject) => {
+    call({
+      id: "2.16 암호화 토큰 유효성 검사",
+      endpoint: "/tkn/enc/valid",
+      data: {
+        tokenIssuId,
+        encData,
+        sign
+      },
+      onResponse({ data, code, message }) {
+        if (code === 2000) {
+          resolve({ data, code, message });
+          router.push('/login');
+        }
+      },
+      onError(error) { // API 호출 과정에서 발생한 네트워크 에러 처리
+        console.error('API 호출 에러:', error);
+        reject(error); // 호출 에러를 reject로 처리
+        window.close(); // 에러 후 창을 닫음
+      }
+    });
   });
 };
 

@@ -27,7 +27,7 @@
 
   const eventClick = async () => {
     try {
-      const responseData = await fetchMockData();
+      const Data = await fetchMockData();
 
       const width = 480;
       const height = 820;
@@ -36,10 +36,10 @@
       const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
 
       // 데이터를 URL 쿼리 파라미터로 추가
-      const url = `http://localhost:3002?data=${encodeURIComponent(JSON.stringify(responseData))}`;
+      const url = `http://localhost:3002?data=${encodeURIComponent(JSON.stringify(Data))}`;
       window.open(url, '_blank', windowFeatures);
 
-      console.log('데이터 전송 성공:', responseData);
+      console.log('데이터 전송 성공:', Data);
     } catch (error) {
       console.error('데이터 전송 실패:', error);
     }

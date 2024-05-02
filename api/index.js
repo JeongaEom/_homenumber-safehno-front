@@ -3,25 +3,18 @@ import { useAppStore } from "@/stores/app";
 
 // import { API_DEBUG, API_HOST } from "./appSettings";
 export { default as tknEncValid } from "./tkn/tknEncValid";
-// export { default as authSignin } from "./auth/authSignin";
+export { default as authSignin } from "./auth/authSignin";
 
 
 
 const API_HOST = "https://dev-hno-api.homenumber.co.kr/safehno/v1";
 const API_DEBUG = true;
 
-// export const commonHeaders = {
-//   "Content-Type": "application/json;charset=UTF-8",
-//   appId: btoa("SAFEHNO"), // Base64로 인코딩
-//   apiKey: btoa("609af5e1-0047-49a5-93eb-c3a1db30fb92"), // Base64로 인코딩
-// };
-
 export const commonHeaders = {
   "Content-Type": "application/json;charset=UTF-8",
   appId: "SAFEHNO",
   apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92",
 };
-
 
 export const getPresetHeaders = (headers = {}) => {
   // Authorization 없음 (서버에서 쿠키로 처리)
@@ -57,7 +50,7 @@ const defaultErrorProc = (error) => {
   console.log("app.isRouting - ", app.isRouting);
 
   uAddError(0, () => {
-    uAlert(error.response.data.message);
+    alert(error.response.data.message);
   });
 
   return false;
@@ -69,7 +62,7 @@ export const call = async (settings) => {
     endpoint,
     method,
     headers,
-    withCredentials,
+    // withCredentials,
     beforeRequest,
     data = {},
     onResponse,
@@ -104,7 +97,7 @@ export const call = async (settings) => {
     headers: getPresetHeaders(headers),
     data,
     // (Authorization) 쿠키 기반 인증
-    withCredentials: withCredentials !== undefined ? withCredentials : false,
+    // withCredentials: withCredentials !== undefined ? withCredentials : false,
   })
 
   .then((res) => {
@@ -146,7 +139,7 @@ export const call = async (settings) => {
       // 4022: 승인대기
       uAddError(9999, () => {
         setTimeout(() => {
-          uAlert(message);
+          alert(message);
           const modal = useModalStore();
           console.log(modal.items);
         });
@@ -157,7 +150,7 @@ export const call = async (settings) => {
       // 접근 불가 권한
       uAddError(9999, () => {
         setTimeout(() => {
-          uAlert(message);
+          alert(message);
         });
       });
       router.push("/");
@@ -165,8 +158,8 @@ export const call = async (settings) => {
     } else if (code === 3004) {
       // 3004: 중복 로그인
       uAddError(9999, () => {
-        uAlert(message, async () => {
-        //   await authSignout();
+        alert(message, async () => {
+          //   await authSignout();
         });
       });
       return false;
