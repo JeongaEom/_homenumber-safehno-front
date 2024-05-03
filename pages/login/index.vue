@@ -15,36 +15,11 @@
   const d = reactive({
     id: "",
     pwd: "",
-    tokenIssuId: "",
-    encData: "",
-    sign: "",
-    // tokenIssuId: app.tokenIssuId,
-    // encData: app.encData,
-    // sign: app.sign,
     isOpen: false, // popup 열기 여부
     idType: "",
     texts: "",
     btntexts: "재시도",
   });
-
-  // const signin = ref(
-  //   [
-  //     {
-  //       id: "user1",
-  //       pwd: "1234",
-  //       tokenIssuId: app.tokenIssuId,
-  //       encData: app.encData,
-  //       sign: app.sign
-  //     },
-  //     {
-  //       id: "user2",
-  //       pwd: "1234",
-  //       tokenIssuId: "someRandomAccessToken456",
-  //       encData: "임시bbb",
-  //       sign: ""
-  //     }
-  //   ]
-  // );
 
   const homnumberInquiry = () => {
     router.push('/homenumberInquiry');
@@ -58,57 +33,38 @@
     if (d.id === "") {
       d.idType = "01"
       d.texts = "아이디를 입력해주세요.";
+      return;
     }
 
     if (d.pwd === "") {
       d.idType = "02"
       d.texts = "패스워드(비밀번호)를 입력해주세요.";
+      return;
     }
 
     // 임시
-    if (!d.id && !d.pwd) {
-      d.idType = "03"
-      d.texts = "입력하신 정보와 일치하는 회원이 존재하지 않습니다.";
-    }
+    // if (!d.id && !d.pwd) {
+    //   d.idType = "03"
+    //   d.texts = "입력하신 정보와 일치하는 회원이 존재하지 않습니다.";
+    // }
 
+    const loginResult = await authSignin({
+      id: d.id,
+      pwd: d.pwd,
+      tokenIssuId: app.tokenIssuId,
+      encData: app.encData,
+      sign: app.sign,
+    });
 
-
-    // signin.value.forEach(user => {
-    //   console.log('user.id :',user.id);
-    //   console.log('user.pwd: ',user.pwd);
-    // });
-
-  // if (
-  //   d.id === signin.value[0].id && d.pwd === signin.value[0].pwd
-  // ){
-
-
-    if (
-      await authSignin(
-        d.id,
-        d.pwd,
-        d.tokenIssuId,
-        d.encData,
-        d.sign,
-      )
-    ) {
+    if (loginResult) {
       router.push('/homnumberList');
-      //임시
-      // app.isLoggedIn = true;
     }
-
-
-  // }
-    // console.log(signin.value[0]);
-    // console.log(commonHeaders["Authorization"]);
-    // console.log('d.idType : ', d.idType);
-    // console.log('d.texts', d.texts);
     console.log('d.id :', d.id);
     console.log('d.pwd :', d.pwd);
 
-    console.log('d.tokenIssuId :', d.tokenIssuId);
-    console.log('d.encData :', d.encData);
-    console.log('d.sign :', d.sign);
+    console.log('app.tokenIssuId :', app.tokenIssuId);
+    console.log('app.encData :', app.encData);
+    console.log('app.sign :', app.sign);
   }
 
   const signupClick = () => {

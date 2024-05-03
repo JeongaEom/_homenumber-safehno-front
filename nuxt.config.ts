@@ -1,9 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`
-})
-
 export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
@@ -31,11 +27,5 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-  build: {
-    // 빌드 설정
-  },
-  nitro: {
-    // Nitro 설정
   },
 });

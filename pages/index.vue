@@ -1,10 +1,8 @@
 <script setup>
   import { onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
   import { useAppStore } from '@/stores/app'
   import { tknEncValid } from '@/api';
 
-  const router = useRouter();
   const app = useAppStore();
 
   // 페이지 메타 설정
@@ -39,6 +37,7 @@
 
     console.log('응답:', response);
     console.log('응답코드:', response.code);
+
   });
 </script>
 

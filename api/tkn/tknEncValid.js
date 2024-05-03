@@ -16,12 +16,13 @@ const tknEncValid = (tokenIssuId, encData, sign ) => {
         if (code === 2000) {
           resolve({ data, code, message });
           router.push('/login');
+        } else {
+          reject(new Error(message));
         }
       },
       onError(error) { // API 호출 과정에서 발생한 네트워크 에러 처리
         console.error('API 호출 에러:', error);
-        reject(error); // 호출 에러를 reject로 처리
-        window.close(); // 에러 후 창을 닫음
+        window.close();
       }
     });
   });

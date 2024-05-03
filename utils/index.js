@@ -8,19 +8,19 @@ export const formaNb = (Nb) => {
   return `${Nb.substring(0, 3)}-${Nb.substring(3, 7)}-${Nb.substring(7)}`;
 }
 
-// export const uLogin = (acsTkn) => {
+// export const uLogin = () => {
 //   const app = useAppStore();
 //   // commonHeaders["Authorization"] = acsTkn;
 //   // 토큰을 쿠키에 저장
-//   useCookie('auth_token').value = acsTkn;
+//   // useCookie('auth_token').value = acsTkn;
 //   app.isLoggedIn = true;
 // };
 
 // export const uLogout = async () => {
 //   const app = useAppStore();
 //   // commonHeaders["Authorization"] = null;
-//   const authCookie = useCookie('auth_token');
-//   authCookie.value = ''; // 쿠키 값을 비움
+//   // const authCookie = useCookie('auth_token');
+//   // authCookie.value = ''; // 쿠키 값을 비움
 //   app.isLoggedIn = false;
 //   navigateTo("/login", { replace: true });
 // };

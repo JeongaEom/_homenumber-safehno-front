@@ -62,7 +62,7 @@ export const call = async (settings) => {
     endpoint,
     method,
     headers,
-    // withCredentials,
+    withCredentials,
     beforeRequest,
     data = {},
     onResponse,
@@ -96,8 +96,8 @@ export const call = async (settings) => {
     url: API_HOST + endpoint,
     headers: getPresetHeaders(headers),
     data,
-    // (Authorization) 쿠키 기반 인증
-    // withCredentials: withCredentials !== undefined ? withCredentials : false,
+    // 쿠키 기반 인증 (axios)
+    withCredentials: withCredentials !== undefined ? withCredentials : false,
   })
 
   .then((res) => {
