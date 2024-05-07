@@ -1,6 +1,6 @@
 <script setup>
   import { reactive } from "vue";
-  import { useEndDataStore } from '@/stores/endData'
+  import { useEndDataStore } from '@/stores'
   import { formaNb } from '@/utils';
 
   const endDataStore = useEndDataStore()
@@ -17,7 +17,7 @@
 
   const d = reactive({
     link: true,
-    linkAddress: "/homnumberList",
+    linkAddress: "/homenumberList",
     text: "홈넘버 수정",
     isPhone: false,
     isActive: false,
@@ -229,9 +229,6 @@
             div.input-box {
               display: flex;
               justify-content: space-between;
-            }
-            div {
-
             }
             button {
               width: 200px;

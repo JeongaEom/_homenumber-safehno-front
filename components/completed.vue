@@ -1,7 +1,7 @@
 <script setup>
   import { reactive, onMounted } from "vue";
   import { useRouter } from 'vue-router';
-  import { useEndDataStore } from '@/stores/endData';
+  import { useEndDataStore } from '@/stores';
 
   const router = useRouter();
   const endDataStore = useEndDataStore();
@@ -18,13 +18,13 @@
 
   const endnextClick = () => {
     // 로그인 시 홈넘버 조회로 이동
-    router.push('/homnumberList');
+    router.push('/homenumberList');
 
     // 비로그인 시 로그인으로 이동
     // router.push('/login');
 
     // if(isLoggedIn) {
-    //   router.push('/homnumberList');
+    //   router.push('/homenumberList');
     // } else {
     //   router.push('/login');
     // }

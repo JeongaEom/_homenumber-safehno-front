@@ -256,14 +256,14 @@ const client_manifest = {
     "prefetch": true,
     "preload": true
   },
-  "pages/homnumberList/index.vue": {
+  "pages/homenumberList/index.vue": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "file": "C1BXRrRS.js",
     "name": "index",
-    "src": "pages/homnumberList/index.vue",
+    "src": "pages/homenumberList/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "_6XUcukT8.js",

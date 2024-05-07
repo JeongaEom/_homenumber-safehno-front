@@ -670,7 +670,7 @@ const __nuxt_page_meta$9 = {
   // ],
 };
 const __nuxt_page_meta$8 = {
-  name: "homnumberList"
+  name: "homenumberList"
   // middleware: [
   //   function (to, from) {
   //     // 로직 inline 정의
@@ -732,8 +732,8 @@ const _routes = [
     component: () => import('./index-rBvE_-pj.mjs').then((m) => m.default || m)
   },
   {
-    name: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.name) ?? "homnumberList",
-    path: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.path) ?? "/homnumberList",
+    name: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.name) ?? "homenumberList",
+    path: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.path) ?? "/homenumberList",
     meta: __nuxt_page_meta$8 || {},
     alias: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.alias) || [],
     redirect: __nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.redirect,

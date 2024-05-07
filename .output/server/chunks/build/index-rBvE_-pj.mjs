@@ -41,7 +41,7 @@ const _sfc_main = {
       ]
     });
     const linkAddress = computed(() => {
-      return d.login ? "/homnumberList" : "/";
+      return d.login ? "/homenumberList" : "/";
     });
     const formatName = (name) => {
       if (name.length < 2) {

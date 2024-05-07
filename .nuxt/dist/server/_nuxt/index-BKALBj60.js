@@ -28,7 +28,7 @@ const _sfc_main = {
     useEndDataStore();
     const d = reactive({
       link: true,
-      linkAddress: "/homnumberList",
+      linkAddress: "/homenumberList",
       text: "홈넘버 수정",
       isPhone: false,
       isActive: false,

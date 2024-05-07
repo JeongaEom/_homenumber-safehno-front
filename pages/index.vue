@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted } from 'vue';
-  import { useAppStore } from '@/stores/app'
+  import { useAppStore } from '@/stores'
   import { tknEncValid } from '@/api';
 
   const app = useAppStore();

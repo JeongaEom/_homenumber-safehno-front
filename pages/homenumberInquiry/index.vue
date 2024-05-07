@@ -44,7 +44,7 @@
 });
 
   const linkAddress = computed(() => {
-    return d.login ? "/homnumberList" : "/"; // (임시) 로그인 여부
+    return d.login ? "/homenumberList" : "/"; // (임시) 로그인 여부
 });
 
   const eventClick = () => {

@@ -91,7 +91,7 @@ const _sfc_main = {
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/homnumberList/index.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/homenumberList/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-56d75df0"]]);

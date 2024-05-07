@@ -11,6 +11,6 @@ export const useEndDataStore = defineStore('endData', {
   }
 })
 
-if(import.meta.hot) {  //HMR
+if(import.meta.hot) { //HMR
   import.meta.hot.accept(acceptHMRUpdate(useEndDataStore, import.meta.hot))
 }

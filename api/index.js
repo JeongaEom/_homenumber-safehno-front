@@ -2,8 +2,10 @@ import axios from "axios";
 import { useAppStore } from "@/stores/app";
 
 // import { API_DEBUG, API_HOST } from "./appSettings";
-export { default as tknEncValid } from "./tkn/tknEncValid";
-export { default as authSignin } from "./auth/authSignin";
+export { default as tknEncValid } from "./tknEncValid";
+export { default as authSignin } from "./authSignin";
+export { default as hnoMyGet } from "./hnoMyGet";
+export { default as noauthHnoGet } from "./noauthHnoGet";
 
 
 
@@ -126,6 +128,7 @@ export const call = async (settings) => {
 
     const router = useRouter();
 
+    // 작업 중---------------------------------------
     // 액세스 토큰 만료
     if (code === 3000) {
       if(endpoint !== "/tkn/enc/valid") {

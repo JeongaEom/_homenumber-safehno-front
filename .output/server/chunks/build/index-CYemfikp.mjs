@@ -26,7 +26,7 @@ const _sfc_main = {
     useEndDataStore();
     const d = reactive({
       link: true,
-      linkAddress: "/homnumberList",
+      linkAddress: "/homenumberList",
       text: "\uD648\uB118\uBC84 \uBC1C\uAE09",
       isActive: false,
       completed: false

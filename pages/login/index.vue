@@ -1,20 +1,21 @@
 <script setup>
-  import { reactive, ref } from "vue";
+  import { reactive } from "vue";
   import { useRouter } from 'vue-router';
-  import { useAppStore } from '@/stores/app'
+  import { useAppStore, useAuthStore } from '@/stores'
   import { authSignin } from "@/api";
+
 
   const router = useRouter();
   const app = useAppStore();
+  const auth = useAuthStore();
 
   definePageMeta({
     layout: "login",
     name: "login",
+    // middleware: 'auth'
   });
 
   const d = reactive({
-    id: "",
-    pwd: "",
     isOpen: false, // popup 열기 여부
     idType: "",
     texts: "",
@@ -26,17 +27,18 @@
   }
 
   const loginClick = async () => {
-    if (!d.id || !d.pwd) {
+
+    if (!auth.id || !auth.pwd) {
       d.isOpen = true; // popup 열기 여부
     }
 
-    if (d.id === "") {
+    if (auth.id === "") {
       d.idType = "01"
       d.texts = "아이디를 입력해주세요.";
       return;
     }
 
-    if (d.pwd === "") {
+    if (auth.pwd === "") {
       d.idType = "02"
       d.texts = "패스워드(비밀번호)를 입력해주세요.";
       return;
@@ -49,22 +51,16 @@
     // }
 
     const loginResult = await authSignin({
-      id: d.id,
-      pwd: d.pwd,
+      id: auth.id,
+      pwd: auth.pwd,
       tokenIssuId: app.tokenIssuId,
       encData: app.encData,
-      sign: app.sign,
-    });
+      sign: app.sign
+    })
 
     if (loginResult) {
-      router.push('/homnumberList');
+      router.push('/homenumberList');
     }
-    console.log('d.id :', d.id);
-    console.log('d.pwd :', d.pwd);
-
-    console.log('app.tokenIssuId :', app.tokenIssuId);
-    console.log('app.encData :', app.encData);
-    console.log('app.sign :', app.sign);
   }
 
   const signupClick = () => {
@@ -80,13 +76,13 @@
   <div class="content">
     <div class="inner">
       <input
-        v-model="d.id"
+        v-model="auth.id"
         class="mb-btm-6"
         type="text"
         placeholder="아이디"
       >
       <input
-        v-model="d.pwd"
+        v-model="auth.pwd"
         class="mb-btm-20"
         type="password"
         placeholder="패스워드"

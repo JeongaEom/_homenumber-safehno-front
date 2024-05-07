@@ -1,12 +1,16 @@
 <script setup>
-  import { reactive } from "vue";
+  import { reactive, onMounted } from "vue";
   import { useRouter } from 'vue-router';
+  import { usehnoMyGetStore } from '@/stores'
+  import { hnoMyGet } from "@/api";
   import { formaNb } from '@/utils';
 
   const router = useRouter();
+  const myGetStore = usehnoMyGetStore();
 
   definePageMeta({
-    name: "homnumberList",
+    name: "homenumberList",
+    // middleware: 'auth',
     // middleware: [
     //   function (to, from) {
     //     // 로직 inline 정의
@@ -74,6 +78,21 @@
       router.push('/personalInformation');
     }
   }
+
+  const fetchHnoMyGet = async () => {
+    await hnoMyGet();
+    console.log('myGet.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
+    console.log('myGet.termsGrpCd: ', myGetStore.termsGrpCd);
+    console.log('myGet.hnos: ', myGetStore.hnos);
+  };
+
+  fetchHnoMyGet();
+
+  onMounted(
+    fetchHnoMyGet(),
+  );
+
+
 </script>
 
 <template>

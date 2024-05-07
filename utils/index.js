@@ -1,5 +1,6 @@
 // import router from "@/router";
 import { useAppStore } from "@/stores/app";
+import Cookies from 'js-cookie';
 
 export const formaNb = (Nb) => {
   if(Nb.length < 7) { // 문자열 길이가 7 미만인 경우 그대로 반환
@@ -8,13 +9,12 @@ export const formaNb = (Nb) => {
   return `${Nb.substring(0, 3)}-${Nb.substring(3, 7)}-${Nb.substring(7)}`;
 }
 
-// export const uLogin = () => {
-//   const app = useAppStore();
-//   // commonHeaders["Authorization"] = acsTkn;
-//   // 토큰을 쿠키에 저장
-//   // useCookie('auth_token').value = acsTkn;
-//   app.isLoggedIn = true;
-// };
+export const uLogin = (acsTkn) => {
+  const app = useAppStore();
+  Cookies.set('stdpAcsTkn', acsTkn);
+  app.isLoggedIn = true;
+  // navigateTo("/homenumberList", { replace: true }); // 필요에 따라 주석 해제 및 경로 조정
+};
 
 // export const uLogout = async () => {
 //   const app = useAppStore();

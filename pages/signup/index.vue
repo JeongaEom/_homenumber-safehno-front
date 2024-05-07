@@ -1,6 +1,6 @@
 <script setup>
   import { reactive, watch, computed } from 'vue';
-  import { useEndDataStore } from '@/stores/endData';
+  import { useEndDataStore } from '@/stores';
 
   const endDataStore = useEndDataStore();
 
