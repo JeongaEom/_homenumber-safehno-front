@@ -2,11 +2,11 @@ import axios from "axios";
 import { useAppStore } from "@/stores/app";
 
 // import { API_DEBUG, API_HOST } from "./appSettings";
-export { default as tknEncValid } from "./tknEncValid";
-export { default as authSignin } from "./authSignin";
-export { default as hnoMyGet } from "./hnoMyGet";
-export { default as noauthHnoGet } from "./noauthHnoGet";
-
+export { default as tknEncValid } from "./tknEncValid"; // 유효성
+export { default as sessionValid } from "./sessionValid"; // 세션 검사
+export { default as authSignin } from "./authSignin"; // 로그인
+export { default as hnoMyGet } from "./hnoMyGet"; // 홈넘버 조회 (로그인 시)
+export { default as noauthHnoGet } from "./noauthHnoGet"; // 홈넘버 조회 (비로그인 시)
 
 
 const API_HOST = "https://dev-hno-api.homenumber.co.kr/safehno/v1";

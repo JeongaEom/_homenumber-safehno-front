@@ -1,13 +1,10 @@
 <script setup>
   import { reactive } from "vue";
   import { useRouter } from 'vue-router';
-  import { useAppStore, useAuthStore } from '@/stores'
   import { authSignin } from "@/api";
 
 
   const router = useRouter();
-  const app = useAppStore();
-  const auth = useAuthStore();
 
   definePageMeta({
     layout: "login",
@@ -20,6 +17,11 @@
     idType: "",
     texts: "",
     btntexts: "재시도",
+    id: "",
+    pwa: "",
+    tokenIssuId: "240411132224EX7G",
+    encData: "j1l7oOjyXvGJmukvCRhQw6pVGACNQ8CpjRycl+oglPdzOk4NqK3ol94cpZuVlvlNUtOh/YNr+6Xtc5Q8WHv3qquTRTgNlaMy9b3CR6O4AxbAGvVkRNtzo9C26wmMez3BIwrT/2S7TDR+bppobVFcnw==",
+    sign: "mL3BWUrR7dflijDl/3HUuihL40cICf6FbO8CZCWf45U=",
   });
 
   const homnumberInquiry = () => {
@@ -28,17 +30,17 @@
 
   const loginClick = async () => {
 
-    if (!auth.id || !auth.pwd) {
+    if (!d.id || !d.pwd) {
       d.isOpen = true; // popup 열기 여부
     }
 
-    if (auth.id === "") {
+    if (d.id === "") {
       d.idType = "01"
       d.texts = "아이디를 입력해주세요.";
       return;
     }
 
-    if (auth.pwd === "") {
+    if (d.pwd === "") {
       d.idType = "02"
       d.texts = "패스워드(비밀번호)를 입력해주세요.";
       return;
@@ -51,11 +53,11 @@
     // }
 
     const loginResult = await authSignin({
-      id: auth.id,
-      pwd: auth.pwd,
-      tokenIssuId: app.tokenIssuId,
-      encData: app.encData,
-      sign: app.sign
+      id: d.id,
+      pwd: d.pwd,
+      tokenIssuId: d.tokenIssuId,
+      encData: d.encData,
+      sign: d.sign
     })
 
     if (loginResult) {
@@ -76,13 +78,13 @@
   <div class="content">
     <div class="inner">
       <input
-        v-model="auth.id"
+        v-model="d.id"
         class="mb-btm-6"
         type="text"
         placeholder="아이디"
       >
       <input
-        v-model="auth.pwd"
+        v-model="d.pwd"
         class="mb-btm-20"
         type="password"
         placeholder="패스워드"

@@ -1,8 +1,8 @@
 import { call } from "@/api";
-import { usehnoMyGetStore } from '@/stores'
+import { useHnoMyGetStore } from '@/stores'
 
 const hnoMyGet = () => {
-  const myGetStore = usehnoMyGetStore();
+  const myGetStore = useHnoMyGetStore();
   return call({
     id: "2.4 회원 홈넘버 조회",
     endpoint: "/hno/my/get",
@@ -13,7 +13,7 @@ const hnoMyGet = () => {
       myGetStore.termsGrpCd = data.termsGrpCd,
       myGetStore.hnos = data.hnos.map(hno => ({
         hnoNo: hno.hnoNo,
-        subCd: hno.subCd,
+        virtlHnoNo: hno.virtlHnoNo,
         nm: hno.nm,
         moblphonNo: hno.moblphonNo,
         postNo: hno.postNo,

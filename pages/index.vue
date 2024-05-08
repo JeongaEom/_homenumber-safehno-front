@@ -20,7 +20,6 @@
       const data = JSON.parse(decodeURIComponent(dataParam));
       console.log('수신된 데이터:', data);
       app.tokenIssuId = data.tokenIssuId;
-      // app.tokenIssuId = "240411132224EX";
       app.encData = data.encData
       app.sign = data.sign
 
