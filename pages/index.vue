@@ -8,39 +8,13 @@
     name: "main",
   });
 
-<<<<<<< HEAD
   const d = reactive({
-    tokenIssuId: "",
-    encData: "",
-    sign: "",
-=======
-  onMounted(async () => {
-    const params = new URLSearchParams(window.location.search);
-    const dataParam = params.get('data');
-
-    if (dataParam) {
-      // URL 쿼리 파라미터로부터 데이터를 파싱
-      const data = JSON.parse(decodeURIComponent(dataParam));
-      console.log('수신된 데이터:', data);
-      app.tokenIssuId = data.tokenIssuId;
-      app.encData = data.encData
-      app.sign = data.sign
-
-      console.log('app.tokenIssuId:', app.tokenIssuId);
-      console.log('app.encData:', app.encData);
-      console.log('app.sign:', app.sign);
-    }
-
-    const response = await tknEncValid(app.tokenIssuId, app.encData, app.sign);
-
-    console.log('tokenIssuId:', app.tokenIssuId);
-    console.log('encData:', app.encData);
-    console.log('sign:', app.sign);
-
-    console.log('응답:', response);
-    console.log('응답코드:', response.code);
-
->>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
+    // tokenIssuId: "",
+    // encData: "",
+    // sign: "",
+    tokenIssuId: "240411132224EX7G",
+    encData: "j1l7oOjyXvGJmukvCRhQw6pVGACNQ8CpjRycl+oglPdzOk4NqK3ol94cpZuVlvlNUtOh/YNr+6Xtc5Q8WHv3qquTRTgNlaMy9b3CR6O4AxbAGvVkRNtzo9C26wmMez3BIwrT/2S7TDR+bppobVFcnw==",
+    sign: "mL3BWUrR7dflijDl/3HUuihL40cICf6FbO8CZCWf45U="
   });
 
   onMounted(
@@ -66,8 +40,6 @@
       console.log('tokenIssuId:', d.tokenIssuId);
       console.log('encData:', d.encData);
       console.log('sign:', d.sign);
-
-      console.log('응답_유효성 검사:', response);
     }
   );
 </script>

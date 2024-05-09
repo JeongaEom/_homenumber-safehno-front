@@ -7,12 +7,12 @@
     "module": true,
     "resourceType": "script"
   },
-  "C:/Workspace/GitLab/homenumber-safehno-front/node_modules/nuxt/dist/app/entry.js": {
+  "E:/workspace/GitLab/homenumber-safehno-front/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "isEntry": true,
-    "file": "C:/Workspace/GitLab/homenumber-safehno-front/node_modules/nuxt/dist/app/entry.js"
+    "file": "E:/workspace/GitLab/homenumber-safehno-front/node_modules/nuxt/dist/app/entry.js"
   }
 }

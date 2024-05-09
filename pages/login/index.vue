@@ -17,14 +17,7 @@
     texts: "",
     btntexts: "재시도",
     id: "",
-<<<<<<< HEAD
     pwd: ""
-=======
-    pwa: "",
-    tokenIssuId: "240411132224EX7G",
-    encData: "j1l7oOjyXvGJmukvCRhQw6pVGACNQ8CpjRycl+oglPdzOk4NqK3ol94cpZuVlvlNUtOh/YNr+6Xtc5Q8WHv3qquTRTgNlaMy9b3CR6O4AxbAGvVkRNtzo9C26wmMez3BIwrT/2S7TDR+bppobVFcnw==",
-    sign: "mL3BWUrR7dflijDl/3HUuihL40cICf6FbO8CZCWf45U=",
->>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
   });
 
   const homnumberInquiry = () => {
@@ -56,18 +49,8 @@
     const loginResult = await authSignin(d.id, d.pwd);
     // document.cookie = `auth=${loginResult}`;
 
-<<<<<<< HEAD
     console.log('d.id: ', d.id);
     console.log('d.pwd: ', d.pwd);
-=======
-    const loginResult = await authSignin({
-      id: d.id,
-      pwd: d.pwd,
-      tokenIssuId: d.tokenIssuId,
-      encData: d.encData,
-      sign: d.sign
-    })
->>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
 
     if (loginResult) {
       // router.push('/homenumberList');
