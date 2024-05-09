@@ -1,8 +1,8 @@
 import { call } from "@/api";
-import { usehnoMyGetStore } from '@/stores'
+import { useHnoMyGetStore } from '@/stores'
 
 const hnoMyGet = () => {
-  const myGetStore = usehnoMyGetStore();
+  const myGetStore = useHnoMyGetStore();
   return call({
     id: "2.4 회원 홈넘버 조회",
     endpoint: "/safehno/v1/hno/my/get",
