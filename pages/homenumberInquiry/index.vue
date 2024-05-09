@@ -1,7 +1,7 @@
 <script setup>
   import { reactive, computed } from "vue";
   import { useRouter } from 'vue-router';
-  import { formaNb } from '@/utils';
+  import { formatNb } from '@/utils';
 
   const router = useRouter();
 
@@ -17,6 +17,7 @@
 
   const d = reactive({
     link: true,
+    linkAddress: "/login",
     text: "홈넘버로 조회",
     login: true, // (임시) 로그인 여부
     data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
@@ -43,9 +44,9 @@
     ],
 });
 
-  const linkAddress = computed(() => {
-    return d.login ? "/homenumberList" : "/"; // (임시) 로그인 여부
-});
+//   const linkAddress = computed(() => {
+//     return d.login ? "/homenumberList" : "/"; // (임시) 로그인 여부
+// });
 
   const eventClick = () => {
     d.data = true; // (임시) 조회
@@ -66,7 +67,7 @@
 <template>
   <TitleTop
   :link="d.link"
-  :linkAddress="linkAddress"
+  :linkAddress="d.linkAddress"
   :text="d.text"
   />
   <section>
@@ -101,12 +102,12 @@
             <div class="active-line">
               <ul>
                 <li>
-                  <div>{{ formaNb(item.homeNb) }}</div>
+                  <div>{{ formatNb(item.homeNb) }}</div>
                   <div>{{ item.info }}</div>
                 </li>
                 <li>
                   <div>{{ formatName(item.name) }}</div>
-                  <div>{{ formaNb(item.hp) }}</div>
+                  <div>{{ formatNb(item.hp) }}</div>
                 </li>
                 <li>
                   <div>{{ item.addressNb }}</div>

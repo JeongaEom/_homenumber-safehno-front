@@ -1,6 +1,6 @@
 interface Hno {
   hnoNo: string;
-  subCd: string;
+  virtlHnoNo: string;
   nm: string;
   moblphonNo: string;
   postNo: string;
@@ -22,7 +22,7 @@ export const usehnoMyGetStore = defineStore('hnoMyGet', {
     hnos: [
       {
         hnoNo: "",
-        subCd: "",
+        virtlHnoNo: "",
         nm: "",
         moblphonNo: "",
         postNo: "",

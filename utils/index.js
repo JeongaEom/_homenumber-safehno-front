@@ -1,8 +1,7 @@
 // import router from "@/router";
 import { useAppStore } from "@/stores/app";
-import Cookies from 'js-cookie';
 
-export const formaNb = (Nb) => {
+export const formatNb = (Nb) => {
   if(Nb.length < 7) { // 문자열 길이가 7 미만인 경우 그대로 반환
     return Nb;
   }

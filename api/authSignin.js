@@ -1,26 +1,17 @@
 import { call } from "@/api";
 
-const authSignin = ({
-  id,
-  pwd,
-  tokenIssuId,
-  encData,
-  sign
-}) => {
+const authSignin = (id, pwd) => {
   return call({
     id: "2.3 표준창 로그인",
-    endpoint: "/auth/signin",
+    endpoint: "/safehno/v1/auth/signin",
     withCredentials: true,
     data: {
       id,
-      pwd,
-      tokenIssuId,
-      encData,
-      sign
+      pwd
     },
     onResponse({ code, data }) {
       if (code === 2000) {
-        // uLogin(data.acsTkn);
+        // document.cookie = `auth=${data.acsTkn}; Secure; HttpOnly`;
         return true;
       } else {
         return false;

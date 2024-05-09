@@ -1,7 +1,7 @@
 <script setup>
   import { reactive } from "vue";
   import { useEndDataStore } from '@/stores'
-  import { formaNb } from '@/utils';
+  import { formatNb } from '@/utils';
 
   const endDataStore = useEndDataStore()
 
@@ -60,7 +60,7 @@
   <section v-if="!d.completed">
     <div class="top" v-if="!d.isNext">
       <div class="input-text">홈넘버 <span>*</span></div>
-      <div>{{ formaNb(d.homeNb) }}</div>
+      <div>{{ formatNb(d.homeNb) }}</div>
     </div>
     <div class="contents">
       <div class="phone" v-if="d.isNext">

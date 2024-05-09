@@ -5,15 +5,14 @@ const hnoMyGet = () => {
   const myGetStore = usehnoMyGetStore();
   return call({
     id: "2.4 회원 홈넘버 조회",
-    endpoint: "/hno/my/get",
+    endpoint: "/safehno/v1/hno/my/get",
     withCredentials: true,
-    data: {},
     onResponse({ code, data }) {
       myGetStore.infoProvAuthNo = data.infoProvAuthNo,
       myGetStore.termsGrpCd = data.termsGrpCd,
       myGetStore.hnos = data.hnos.map(hno => ({
         hnoNo: hno.hnoNo,
-        subCd: hno.subCd,
+        virtlHnoNo: hno.virtlHnoNo,
         nm: hno.nm,
         moblphonNo: hno.moblphonNo,
         postNo: hno.postNo,

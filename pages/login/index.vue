@@ -1,13 +1,9 @@
 <script setup>
   import { reactive } from "vue";
   import { useRouter } from 'vue-router';
-  import { useAppStore, useAuthStore } from '@/stores'
   import { authSignin } from "@/api";
 
-
   const router = useRouter();
-  const app = useAppStore();
-  const auth = useAuthStore();
 
   definePageMeta({
     layout: "login",
@@ -20,6 +16,8 @@
     idType: "",
     texts: "",
     btntexts: "재시도",
+    id: "",
+    pwd: ""
   });
 
   const homnumberInquiry = () => {
@@ -28,20 +26,18 @@
 
   const loginClick = async () => {
 
-    if (!auth.id || !auth.pwd) {
+    if (!d.id || !d.pwd) {
       d.isOpen = true; // popup 열기 여부
     }
 
-    if (auth.id === "") {
+    if (d.id === "") {
       d.idType = "01"
       d.texts = "아이디를 입력해주세요.";
-      return;
     }
 
-    if (auth.pwd === "") {
+    if (d.pwd === "") {
       d.idType = "02"
       d.texts = "패스워드(비밀번호)를 입력해주세요.";
-      return;
     }
 
     // 임시
@@ -49,17 +45,18 @@
     //   d.idType = "03"
     //   d.texts = "입력하신 정보와 일치하는 회원이 존재하지 않습니다.";
     // }
+    // e.preventDefault();
+    const loginResult = await authSignin(d.id, d.pwd);
+    // document.cookie = `auth=${loginResult}`;
 
-    const loginResult = await authSignin({
-      id: auth.id,
-      pwd: auth.pwd,
-      tokenIssuId: app.tokenIssuId,
-      encData: app.encData,
-      sign: app.sign
-    })
+    console.log('d.id: ', d.id);
+    console.log('d.pwd: ', d.pwd);
 
     if (loginResult) {
-      router.push('/homenumberList');
+      // router.push('/homenumberList');
+      router.push('/signup');
+    } else {
+      alert("로그인에 실패했습니다.");
     }
   }
 
@@ -76,13 +73,13 @@
   <div class="content">
     <div class="inner">
       <input
-        v-model="auth.id"
+        v-model="d.id"
         class="mb-btm-6"
         type="text"
         placeholder="아이디"
       >
       <input
-        v-model="auth.pwd"
+        v-model="d.pwd"
         class="mb-btm-20"
         type="password"
         placeholder="패스워드"

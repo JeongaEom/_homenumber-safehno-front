@@ -4,12 +4,13 @@ import { useAppStore } from "@/stores/app";
 // import { API_DEBUG, API_HOST } from "./appSettings";
 export { default as tknEncValid } from "./tknEncValid";
 export { default as authSignin } from "./authSignin";
-export { default as hnoMyGet } from "./hnoMyGet";
+// export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";
+export { default as termsAgree } from "./termsAgree";
 
 
 
-const API_HOST = "https://dev-hno-api.homenumber.co.kr/safehno/v1";
+const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 const API_DEBUG = true;
 
 export const commonHeaders = {
@@ -129,10 +130,10 @@ export const call = async (settings) => {
     const router = useRouter();
 
     // 작업 중---------------------------------------
-    // 액세스 토큰 만료
-    if (code === 3000) {
-      if(endpoint !== "/tkn/enc/valid") {
-        // '2.16 암호화 토큰 유효성 검사' 아닐때
+    // 유효성 검사
+    if (code === 3001) {
+      // if((await tknEncValid()) && endpoint !== "/session/valid") {
+      if(await tknEncValid()) {
         return call(settings);
       } else {
         return false;

@@ -1,51 +1,25 @@
 <script setup>
   import { reactive, onMounted } from "vue";
   import { useRouter } from 'vue-router';
-  import { usehnoMyGetStore } from '@/stores'
+  import { useHnoMyGetStore } from '@/stores'
   import { hnoMyGet } from "@/api";
-  import { formaNb } from '@/utils';
+  import { formatNb } from '@/utils';
 
   const router = useRouter();
-  const myGetStore = usehnoMyGetStore();
+  const myGetStore = useHnoMyGetStore();
 
   definePageMeta({
     name: "homenumberList",
     // middleware: 'auth',
-    // middleware: [
-    //   function (to, from) {
-    //     // 로직 inline 정의
-    //  },
-    //   'app',
-    // ],
   });
 
   const d = reactive({
     text: "홈넘버",
     selectedHomeNb: "",
-    list: [ // (임시)
-      {
-        homeNb: '10010001004',
-        info: '회사',
-        name: '홍길동',
-        hp: '01012345678',
-        addressNb: '06735',
-        address: '서울특별시 서초구 강남대로 241',
-        address1: '9층',
-      },
-      {
-        homeNb: '10010001005',
-        info: '회사2',
-        name: '홍길자',
-        hp: '01012345678',
-        addressNb: '06735',
-        address: '서울특별시 서초구 강남대로 241'
-      }
-    ],
-    // list: [],
     isActive: false,
   });
 
-  const hnbInquiry = () => {
+  const homenumberInquiry = () => {
     router.push('/homenumberInquiry');
   }
 
@@ -53,20 +27,25 @@
     router.push('/issuance');
   }
 
-  const formatName = (name) => {
-    if(name.length < 2) { // 이름이 2글자 미만인 경우 그대로 반환
-      return name;
-    }
-    return name.substring(0, 1) + '*' + name.substring(2);
-  }
-
   const selectClick = (item) => {
-    d.selectedHomeNb = item.homeNb;
-    if(d.selectedHomeNb === item.homeNb) {
+    d.selectedHomeNb = item;
+    if(d.selectedHomeNb === item) {
       d.isActive = true;
-    } else if(d.selectedHomeNb !== item.homeNb) {
+    } else if(d.selectedHomeNb !== item) {
       d.isActive = false
     }
+
+    // const index = d.selectedHomeNb.indexOf(item);
+    // if (index > -1) {
+    //   d.selectedHomeNb.splice(index, 1);
+    // } else {
+    //   d.selectedHomeNb.push(item);
+    // }
+    // d.isActive = d.selectedHomeNb.length > 0;
+
+    // console.log('d.selectedHomeNb_선택: ', d.selectedHomeNb);
+    // console.log('myGet.infoProvAuthNo_선택: ', myGetStore.infoProvAuthNo);
+    // console.log('myGet.termsGrpCd_선택: ', myGetStore.termsGrpCd);
   }
 
   const modifiClick = () => { // 수정
@@ -80,65 +59,67 @@
   }
 
   const fetchHnoMyGet = async () => {
-    await hnoMyGet();
+    const hnoMyGetResult = await hnoMyGet();
+    console.log('hnoMyGetResult: ', hnoMyGetResult);
+
     console.log('myGet.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
     console.log('myGet.termsGrpCd: ', myGetStore.termsGrpCd);
     console.log('myGet.hnos: ', myGetStore.hnos);
   };
 
-  fetchHnoMyGet();
-
-  onMounted(
-    fetchHnoMyGet(),
-  );
-
-
+  onMounted(() => {
+    fetchHnoMyGet();
+  });
 </script>
 
 <template>
   <TitleTop :text="d.text" />
   <section>
     <div class="top">
-      <button class="bg-w line-active" @click="hnbInquiry">홈넘버로 조회</button>
+      <button class="bg-w line-active" @click="homenumberInquiry">홈넘버로 조회</button>
       <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
     </div>
     <div class="contents">
-      <div class="notData" v-if="d.list.length === 0">
+      <div class="notData" v-if="myGetStore.hnos.length === 0">
         <img src="@/assets/images/data-no.png" alt="홈넘버 데이터 없음">
         <p>등록된 홈넘버가</p>
         <p>존재하지 않습니다.</p>
       </div>
       <div class="dataList" v-else>
         <ul>
-          <li v-for="item in d.list">
+          <li v-for="item in myGetStore.hnos">
             <div
-            :class="item.homeNb === d.selectedHomeNb ? 'active-line':'default-line'"
-            @click="selectClick(item)"
+              :class="item.virtlHnoNo === d.selectedHomeNb ? 'active-line':'default-line'"
+              @click="selectClick(item.virtlHnoNo)"
             >
               <ul>
                 <li>
-                  <div>{{ formaNb(item.homeNb) }}</div>
-                  <div>{{ item.info }}</div>
+                  <div>{{ formatNb(item.hnoNo) }}</div>
+                  <div>{{ item.addrNcm }}</div>
                 </li>
                 <li>
-                  <div>{{ formatName(item.name) }}</div>
-                  <div>{{ formaNb(item.hp) }}</div>
+                  <div>{{ item.nm }}</div>
+                  <div>{{ formatNb(item.moblphonNo) }}</div>
                 </li>
                 <li>
-                  <div>{{ item.addressNb }}</div>
+                  <div>{{ item.postNo }}</div>
                   <div>
-                    <div>{{ item.address }}</div>
-                    <div v-if="item.address1">{{ item.address1 }}</div>
+                    <div>{{ item.bassAddr }}</div>
+                    <div v-if="item.detailAddr">{{ item.detailAddr }}</div>
                   </div>
                 </li>
               </ul>
               <ul>
                 <li>
-                  <div :class="item.homeNb === d.selectedHomeNb ? 'red-active':'default'">
+                  <div :class="item.virtlHnoNo === d.selectedHomeNb ?  'red-active':'default'">
                     선택
                     <span>
-                      <img src="@/assets/images/checkIconOff.png" v-if="item.homeNb !== d.selectedHomeNb" alt="미선택">
-                      <img src="@/assets/images/checkIconOn.png"  v-if="item.homeNb === d.selectedHomeNb" alt="선택">
+                      <!-- <img
+                        :src="item.virtlHnoNo === d.selectedHomeNb ? '@/assets/images/checkIconOn.png':'@/assets/images/checkIconOff.png'"
+                        :alt="item.virtlHnoNo === d.selectedHomeNb ? '선택':'미선택'"
+                      > -->
+                      <img src="@/assets/images/checkIconOff.png" v-if="item.virtlHnoNo" alt="미선택">
+                      <img src="@/assets/images/checkIconOn.png" v-if="item.virtlHnoNo" alt="선택">
                     </span>
                   </div>
                 </li>
@@ -153,7 +134,7 @@
     </div>
     <button
       :class="d.isActive ? 'red-active':'default'"
-      v-if="d.list.length > 0"
+      v-if="myGetStore.hnos.length > 0"
       @click="nextClick"
     >
       다음

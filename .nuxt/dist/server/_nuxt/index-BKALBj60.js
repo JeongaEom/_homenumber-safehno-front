@@ -3,7 +3,7 @@ import { u as useEndDataStore, _ as __nuxt_component_1 } from "./completed-Dy6r2
 import { reactive, unref, useSSRContext } from "vue";
 import "hookable";
 import { ssrRenderComponent, ssrInterpolate, ssrIncludeBooleanAttr, ssrRenderClass } from "vue/server-renderer";
-import { f as formaNb } from "./index-DsWc4Nk_.js";
+import { f as formatNb } from "./index-DsWc4Nk_.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-1tPrXgE0.js";
 import "vue-router";
 import "destr";
@@ -50,7 +50,7 @@ const _sfc_main = {
       if (!d.completed) {
         _push(`<section data-v-0e1ceb89>`);
         if (!d.isNext) {
-          _push(`<div class="top" data-v-0e1ceb89><div class="input-text" data-v-0e1ceb89>홈넘버 <span data-v-0e1ceb89>*</span></div><div data-v-0e1ceb89>${ssrInterpolate(unref(formaNb)(d.homeNb))}</div></div>`);
+          _push(`<div class="top" data-v-0e1ceb89><div class="input-text" data-v-0e1ceb89>홈넘버 <span data-v-0e1ceb89>*</span></div><div data-v-0e1ceb89>${ssrInterpolate(unref(formatNb)(d.homeNb))}</div></div>`);
         } else {
           _push(`<!---->`);
         }

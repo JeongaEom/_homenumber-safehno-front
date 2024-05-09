@@ -1,5 +1,6 @@
 <script setup>
   import { reactive } from "vue";
+  import { termsAgree } from "@/api";
 
   definePageMeta({
     name: "personalInformation",
@@ -14,6 +15,12 @@
   const d = reactive({
     text: "개인정보 제3자 제공 동의",
     isActive: false,
+    hnoNo: "",
+    subCd: "",
+    infoProvAuthNo: "",
+    termsCd: "1010005",
+    termsVer: "",
+    isMyHnoYn: "Y",
     dataList: [
       {
         id: "1",
@@ -43,8 +50,17 @@
     }
   }
 
-  const endClick = () => {
-    window.close();
+  const endClick = async () => {
+    const termsAgree = await termsAgree(
+      d.hnoNo,
+      d.subCd,
+      d.infoProvAuthNo,
+      d.termsCd,
+      d.termsVer,
+      d.isMyHnoYn
+    );
+    console.log('termsAgree: ', termsAgree);
+    // window.close();
   }
 </script>
 

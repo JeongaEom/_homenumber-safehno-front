@@ -3,7 +3,7 @@ import { reactive, unref, useSSRContext } from "vue";
 import { useRouter } from "vue-router";
 import "hookable";
 import { ssrRenderComponent, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate } from "vue/server-renderer";
-import { f as formaNb } from "./index-DsWc4Nk_.js";
+import { f as formatNb } from "./index-DsWc4Nk_.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-1tPrXgE0.js";
 import "./app-JHcOLCEC.js";
 import "destr";
@@ -72,7 +72,7 @@ const _sfc_main = {
       } else {
         _push(`<div class="dataList" data-v-56d75df0><ul data-v-56d75df0><!--[-->`);
         ssrRenderList(d.list, (item) => {
-          _push(`<li data-v-56d75df0><div class="${ssrRenderClass(item.homeNb === d.selectedHomeNb ? "active-line" : "default-line")}" data-v-56d75df0><ul data-v-56d75df0><li data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(unref(formaNb)(item.homeNb))}</div><div data-v-56d75df0>${ssrInterpolate(item.info)}</div></li><li data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(formatName(item.name))}</div><div data-v-56d75df0>${ssrInterpolate(unref(formaNb)(item.hp))}</div></li><li data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(item.addressNb)}</div><div data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(item.address)}</div>`);
+          _push(`<li data-v-56d75df0><div class="${ssrRenderClass(item.homeNb === d.selectedHomeNb ? "active-line" : "default-line")}" data-v-56d75df0><ul data-v-56d75df0><li data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(unref(formatNb)(item.homeNb))}</div><div data-v-56d75df0>${ssrInterpolate(item.info)}</div></li><li data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(formatName(item.name))}</div><div data-v-56d75df0>${ssrInterpolate(unref(formatNb)(item.hp))}</div></li><li data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(item.addressNb)}</div><div data-v-56d75df0><div data-v-56d75df0>${ssrInterpolate(item.address)}</div>`);
           if (item.address1) {
             _push(`<div data-v-56d75df0>${ssrInterpolate(item.address1)}</div>`);
           } else {

@@ -1,0 +1,1 @@
+import{_ as r}from"./DfEfJCPp.js";import{_}from"./Cys3tQAc.js";import{r as c,c as m,a as t,F as a,o as p}from"./CsdGuURO.js";import"./DlAUqK2U.js";import"./D7mwqoo5.js";import"./Dd94qP0z.js";const F={__name:"index",setup(s){const e=c({text:"error"});return(i,l)=>{const o=r,n=_;return p(),m(a,null,[t(o,{text:e.text},null,8,["text"]),t(n)],64)}}};export{F as default};

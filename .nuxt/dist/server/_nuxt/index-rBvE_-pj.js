@@ -3,7 +3,7 @@ import { reactive, computed, unref, useSSRContext } from "vue";
 import { useRouter } from "vue-router";
 import "hookable";
 import { ssrRenderComponent, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrInterpolate } from "vue/server-renderer";
-import { f as formaNb } from "./index-DsWc4Nk_.js";
+import { f as formatNb } from "./index-DsWc4Nk_.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-1tPrXgE0.js";
 import "./app-JHcOLCEC.js";
 import "destr";
@@ -81,7 +81,7 @@ const _sfc_main = {
       if (d.data) {
         _push(`<div class="dataList" data-v-2c30416e><ul data-v-2c30416e><!--[-->`);
         ssrRenderList(d.list, (item) => {
-          _push(`<li data-v-2c30416e><div class="active-line" data-v-2c30416e><ul data-v-2c30416e><li data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(unref(formaNb)(item.homeNb))}</div><div data-v-2c30416e>${ssrInterpolate(item.info)}</div></li><li data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(formatName(item.name))}</div><div data-v-2c30416e>${ssrInterpolate(unref(formaNb)(item.hp))}</div></li><li data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(item.addressNb)}</div><div data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(item.address)}</div>`);
+          _push(`<li data-v-2c30416e><div class="active-line" data-v-2c30416e><ul data-v-2c30416e><li data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(unref(formatNb)(item.homeNb))}</div><div data-v-2c30416e>${ssrInterpolate(item.info)}</div></li><li data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(formatName(item.name))}</div><div data-v-2c30416e>${ssrInterpolate(unref(formatNb)(item.hp))}</div></li><li data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(item.addressNb)}</div><div data-v-2c30416e><div data-v-2c30416e>${ssrInterpolate(item.address)}</div>`);
           if (item.address1) {
             _push(`<div data-v-2c30416e>${ssrInterpolate(item.address1)}</div>`);
           } else {

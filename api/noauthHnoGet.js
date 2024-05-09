@@ -1,21 +1,15 @@
 import { call } from "@/api";
 
-const ahnoMyGet = ({
+const noauthHnoGet = ({
   hnoNo,
-  scrtky,
-  tokenIssuId,
-  encData,
-  sign
+  scrtky
 }) => {
   return call({
     id: "2.5 홈넘버 조회",
-    endpoint: "/noauth/hno/get",
+    endpoint: "/safehno/v1/noauth/hno/get",
     data: {
       hnoNo,
-      scrtky,
-      tokenIssuId,
-      encData,
-      sign
+      scrtky
     },
     onResponse({ code, data }) {
       // if (code === 2000) {
@@ -27,4 +21,4 @@ const ahnoMyGet = ({
   });
 };
 
-export default ahnoMyGet;
+export default noauthHnoGet;
