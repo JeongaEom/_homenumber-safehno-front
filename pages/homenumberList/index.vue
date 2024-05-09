@@ -1,5 +1,5 @@
 <script setup>
-  import { reactive, onMounted } from "vue";
+  import { reactive } from "vue";
   import { useRouter } from 'vue-router';
   import { useHnoMyGetStore } from '@/stores'
   import { hnoMyGet } from "@/api";
@@ -24,6 +24,7 @@
   }
 
   const hnbIssuance = () => {
+    // alert('준비중입니다.');
     router.push('/issuance');
   }
 
@@ -35,6 +36,7 @@
       d.isActive = false
     }
 
+<<<<<<< HEAD
     // const index = d.selectedHomeNb.indexOf(item);
     // if (index > -1) {
     //   d.selectedHomeNb.splice(index, 1);
@@ -46,19 +48,32 @@
     // console.log('d.selectedHomeNb_선택: ', d.selectedHomeNb);
     // console.log('myGet.infoProvAuthNo_선택: ', myGetStore.infoProvAuthNo);
     // console.log('myGet.termsGrpCd_선택: ', myGetStore.termsGrpCd);
+=======
+    console.log('d.selectedHomeNb_선택: ', d.selectedHomeNb);
+    console.log('myGet.infoProvAuthNo_선택: ', myGetStore.infoProvAuthNo);
+    console.log('myGet.termsGrpCd_선택: ', myGetStore.termsGrpCd);
+>>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
   }
 
-  const modifiClick = () => { // 수정
+  const modifiClick = (item) => { // 수정
     router.push('/modification');
+    // router.push({
+    //   path: `/modification/${item}`,
+    //   query: { returnUrl: router.currentRoute.value.fullPath }
+    // });
+    // console.log('item_선택: ', item);
+    // alert('준비중입니다.');
   }
 
   const nextClick = () => {
     if(d.isActive) {
       router.push('/personalInformation');
+      console.log('item_선택n: ', item);
     }
   }
 
   const fetchHnoMyGet = async () => {
+<<<<<<< HEAD
     const hnoMyGetResult = await hnoMyGet();
     console.log('hnoMyGetResult: ', hnoMyGetResult);
 
@@ -70,6 +85,12 @@
   onMounted(() => {
     fetchHnoMyGet();
   });
+=======
+    await hnoMyGet();
+    console.log('myGet.hnos: ', myGetStore.hnos);
+  };
+  fetchHnoMyGet();
+>>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
 </script>
 
 <template>
@@ -89,17 +110,30 @@
         <ul>
           <li v-for="item in myGetStore.hnos">
             <div
+<<<<<<< HEAD
               :class="item.virtlHnoNo === d.selectedHomeNb ? 'active-line':'default-line'"
               @click="selectClick(item.virtlHnoNo)"
             >
               <ul>
                 <li>
                   <div>{{ formatNb(item.hnoNo) }}</div>
+=======
+            :class="item.virtlHnoNo === d.selectedHomeNb ? 'active-line':'default-line'"
+            @click="selectClick(item.virtlHnoNo)"
+            >
+              <ul>
+                <li>
+                  <div>{{ formaNb(item.hnoNo) }}</div>
+>>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
                   <div>{{ item.addrNcm }}</div>
                 </li>
                 <li>
                   <div>{{ item.nm }}</div>
+<<<<<<< HEAD
                   <div>{{ formatNb(item.moblphonNo) }}</div>
+=======
+                  <div>{{ formaNb(item.moblphonNo) }}</div>
+>>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
                 </li>
                 <li>
                   <div>{{ item.postNo }}</div>
@@ -111,6 +145,7 @@
               </ul>
               <ul>
                 <li>
+<<<<<<< HEAD
                   <div :class="item.virtlHnoNo === d.selectedHomeNb ?  'red-active':'default'">
                     선택
                     <span>
@@ -120,11 +155,18 @@
                       > -->
                       <img src="@/assets/images/checkIconOff.png" v-if="item.virtlHnoNo" alt="미선택">
                       <img src="@/assets/images/checkIconOn.png" v-if="item.virtlHnoNo" alt="선택">
+=======
+                  <div :class="item.virtlHnoNo === d.selectedHomeNb ? 'red-active':'default'">
+                    선택
+                    <span>
+                      <img src="@/assets/images/checkIconOff.png" v-if="item.virtlHnoNo !== d.selectedHomeNb" alt="미선택">
+                      <img src="@/assets/images/checkIconOn.png"  v-if="item.virtlHnoNo === d.selectedHomeNb" alt="선택">
+>>>>>>> 643c93d73f73d5f621ec552b88a87df5b0be7146
                     </span>
                   </div>
                 </li>
                 <li>
-                <button @click="modifiClick">수정</button>
+                <button @click="modifiClick(item.virtlHnoNo)">수정</button>
                 </li>
               </ul>
             </div>
