@@ -9,9 +9,12 @@
   });
 
   const d = reactive({
-    tokenIssuId: "",
-    encData: "",
-    sign: "",
+    // tokenIssuId: "",
+    // encData: "",
+    // sign: "",
+    tokenIssuId: "240411132224EX7G",
+    encData: "j1l7oOjyXvGJmukvCRhQw6pVGACNQ8CpjRycl+oglPdzOk4NqK3ol94cpZuVlvlNUtOh/YNr+6Xtc5Q8WHv3qquTRTgNlaMy9b3CR6O4AxbAGvVkRNtzo9C26wmMez3BIwrT/2S7TDR+bppobVFcnw==",
+    sign: "mL3BWUrR7dflijDl/3HUuihL40cICf6FbO8CZCWf45U="
   });
 
   onMounted(
@@ -37,8 +40,6 @@
       console.log('tokenIssuId:', d.tokenIssuId);
       console.log('encData:', d.encData);
       console.log('sign:', d.sign);
-
-      console.log('응답_유효성 검사:', response);
     }
   );
 </script>

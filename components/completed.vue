@@ -49,18 +49,22 @@
     :class="{
       issuance: endDataStore.endData === '1',
       modification: endDataStore.endData === '2',
-      signup: endDataStore.endData === '3'
+      signup: endDataStore.endData === '3',
+      error: endDataStore.endData === '4'
     }"
   >
     <div>
       <img src="@/assets/images/data-end.png" alt="홈넘버 데이터 없음">
-      <div v-if="endDataStore.endData !== '3'">
+      <div v-if="endDataStore.endData === '1' || endDataStore.endData === '2'">
         홈넘버 {{ d.data }}이<br/>
         성공적으로 이루어졌습니다.
       </div>
       <div v-else-if="endDataStore.endData === '3'">
         회원 가입이 완료되었습니다. <br/>
         서비스 이용을 위해 홈넘버를 발급해 주세요.
+      </div>
+      <div v-else-if="endDataStore.endData === '4'">
+        에러...
       </div>
     </div>
   </div>

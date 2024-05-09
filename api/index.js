@@ -131,7 +131,7 @@ export const call = async (settings) => {
 
     // 작업 중---------------------------------------
     // 유효성 검사
-    if (code === 3001) {
+    if (code === 3000) {
       // if((await tknEncValid()) && endpoint !== "/session/valid") {
       if(await tknEncValid()) {
         return call(settings);

@@ -1,1 +1,0 @@
-import{d as o}from"./CsdGuURO.js";o("hnoMyGet",{state:()=>({infoProvAuthNo:"",termsGrpCd:"",hnos:[{hnoNo:"",virtlHnoNo:"",nm:"",moblphonNo:"",postNo:"",bassAddr:"",detailAddr:"",addrNcm:""}]}),actions:{}});const a=o("endData",{state:()=>({endData:""}),actions:{}});export{a as u};

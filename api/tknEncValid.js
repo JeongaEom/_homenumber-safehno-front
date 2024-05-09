@@ -15,6 +15,8 @@ const tknEncValid = (tokenIssuId, encData, sign) => {
       console.log('유효성_code: ', code);
       if (code === 2000) {
         return router.push('/login');
+      } if (code === 3001) {
+
       }
     },
     onError(error) {

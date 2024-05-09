@@ -1,1 +1,1 @@
-export { default } from "file:///C:/Workspace/GitLab/homenumber-safehno-front/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
+export { default } from "file:///E:/workspace/GitLab/homenumber-safehno-front/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

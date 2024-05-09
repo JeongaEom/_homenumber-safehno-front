@@ -1,16 +1,16 @@
 interface AppState {
   isRouting: boolean;
-  isVerifing: boolean;
-  isLoggedIn: boolean | null;
+  // isVerifing: boolean;
+  // isLoggedIn: boolean | null;
   apiQueue: any[];
 }
 
 export const useAppStore = defineStore("app", {
   state:(): AppState => ({
     isRouting: false,
-    isVerifing: false,
-    isLoggedIn: null,
-    apiQueue: []
+    // isVerifing: false,
+    // isLoggedIn: null,
+    apiQueue: [],
   }),
   actions: {
   },
