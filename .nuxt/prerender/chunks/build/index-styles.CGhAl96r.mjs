@@ -1,6 +1,0 @@
-const index_vue_vue_type_style_index_0_scoped_a92778a0_lang = "button[data-v-a92778a0],input[data-v-a92778a0]{height:50px}a[data-v-a92778a0]{font-weight:700;margin-top:6px}a[data-v-a92778a0]:hover{text-decoration:underline}.tab-btns[data-v-a92778a0]{align-items:center;display:flex}.tab-btns button[data-v-a92778a0]:first-child{border-radius:4px 0 0 4px;-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;-ms-border-radius:4px 0 0 4px;-o-border-radius:4px 0 0 4px}.tab-btns button[data-v-a92778a0]:nth-child(2){border-radius:0 4px 4px 0;-webkit-border-radius:0 4px 4px 0;-moz-border-radius:0 4px 4px 0;-ms-border-radius:0 4px 4px 0;-o-border-radius:0 4px 4px 0}.content[data-v-a92778a0]{margin:2.5rem 0 4rem}.bottom[data-v-a92778a0]{color:#4d5562}.bottom a[data-v-a92778a0]{display:block}@media (min-width:769px){.content .inner[data-v-a92778a0]{padding:0 3rem}}@media (max-width:768px){.content .inner[data-v-a92778a0]{padding:0 1rem}a[data-v-a92778a0]{display:block}}@media (max-width:480px){.bottom p br[data-v-a92778a0]{display:none}}";
-
-const indexStyles_CGhAl96r = [index_vue_vue_type_style_index_0_scoped_a92778a0_lang];
-
-export { indexStyles_CGhAl96r as default };
-//# sourceMappingURL=index-styles.CGhAl96r.mjs.map

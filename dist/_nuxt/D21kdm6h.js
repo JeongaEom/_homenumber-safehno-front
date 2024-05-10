@@ -1,0 +1,1 @@
+import{c as r}from"./CtSGkPZT.js";const d=(t,n,a)=>r({id:"2.16 암호화 토큰 유효성 검사",endpoint:"/safehno/v1/tkn/enc/valid",headers:"PUBLIC",withCredentials:!0,data:{tokenIssuId:t,encData:n,sign:a},onResponse({data:s,code:e,message:o}){return console.log("유효성_code: ",e),e===2e3}});export{d as t};

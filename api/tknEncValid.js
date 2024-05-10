@@ -1,7 +1,7 @@
 import { call } from "@/api";
 
 const tknEncValid = (tokenIssuId, encData, sign) => {
-  const router = useRouter();
+  // const router = useRouter();
   // const app = useAppStore();
   // if (app.isVerifing) {
   //   return app.verifingPromise;
