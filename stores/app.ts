@@ -1,15 +1,17 @@
 interface AppState {
+  isVerifing: boolean,
+  verifingPromise: boolean | null,
+  verifingResolve: boolean | null,
   isRouting: boolean;
-  // isVerifing: boolean;
-  // isLoggedIn: boolean | null;
   apiQueue: any[];
 }
 
 export const useAppStore = defineStore("app", {
   state:(): AppState => ({
+    isVerifing: false,
+    verifingPromise: null,
+    verifingResolve: null,
     isRouting: false,
-    // isVerifing: false,
-    // isLoggedIn: null,
     apiQueue: [],
   }),
   actions: {
@@ -18,4 +20,4 @@ export const useAppStore = defineStore("app", {
 
 if(import.meta.hot) {  //HMR
   import.meta.hot.accept(acceptHMRUpdate(useAppStore, import.meta.hot))
-}
+};

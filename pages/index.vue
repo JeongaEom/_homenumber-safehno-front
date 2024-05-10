@@ -9,39 +9,37 @@
   });
 
   const d = reactive({
-    // tokenIssuId: "",
-    // encData: "",
-    // sign: "",
-    tokenIssuId: "240411132224EX7G",
-    encData: "j1l7oOjyXvGJmukvCRhQw6pVGACNQ8CpjRycl+oglPdzOk4NqK3ol94cpZuVlvlNUtOh/YNr+6Xtc5Q8WHv3qquTRTgNlaMy9b3CR6O4AxbAGvVkRNtzo9C26wmMez3BIwrT/2S7TDR+bppobVFcnw==",
-    sign: "mL3BWUrR7dflijDl/3HUuihL40cICf6FbO8CZCWf45U="
+    tokenIssuId: "",
+    encData: "",
+    sign: ""
   });
 
-  onMounted(
-    async () => {
-      const params = new URLSearchParams(window.location.search);
-      const dataParam = params.get('data');
+  const parseDataFromURL = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenIssuId = params.get('tokenIssuId');
+    const encData = params.get('encData');
+    const sign = params.get('sign');
 
-      if (dataParam) {
-        // URL 쿼리 파라미터로부터 데이터를 파싱
-        const data = JSON.parse(decodeURIComponent(dataParam));
-        console.log('수신된 데이터:', data);
-        d.tokenIssuId = data.tokenIssuId;
-        d.encData = data.encData
-        d.sign = data.sign
+    d.tokenIssuId = tokenIssuId;
+    d.encData = encData;
+    d.sign = sign;
 
-        console.log('d.tokenIssuId:', d.tokenIssuId);
-        console.log('d.encData:', d.encData);
-        console.log('d.sign:', d.sign);
-      }
+    await response();
+  };
 
-      const response = await tknEncValid(d.tokenIssuId, d.encData, d.sign);
-
-      console.log('tokenIssuId:', d.tokenIssuId);
-      console.log('encData:', d.encData);
-      console.log('sign:', d.sign);
+  const response = async () => {
+    try {
+      await tknEncValid(d.tokenIssuId, d.encData, d.sign);
+    } catch (error) {
+      console.error("API 호출 중 오류 발생:", error);
     }
-  );
+  };
+
+  console.log('response: ', response);
+
+  onMounted(async() => {
+    await parseDataFromURL();
+  });
 </script>
 
 <template>

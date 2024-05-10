@@ -9,7 +9,6 @@ export { default as noauthHnoGet } from "./noauthHnoGet";
 export { default as termsAgree } from "./termsAgree";
 
 
-
 const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 const API_DEBUG = true;
 
@@ -17,34 +16,64 @@ export const commonHeaders = {
   "Content-Type": "application/json;charset=UTF-8",
   appId: "SAFEHNO",
   apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92",
+  Authorization: null,
 };
 
-export const getPresetHeaders = (headers = {}) => {
-  // Authorization 없음 (서버에서 쿠키로 처리)
-  if (typeof headers === 'string') {
-    // headers가 문자열인 경우
-    return {
+// export const getPresetHeaders = (headers = {}) => {
+//   // Authorization 없음 (서버에서 쿠키로 처리)
+//   if (typeof headers === 'string') {
+//     // headers가 문자열인 경우
+//     return {
+//       "Content-Type": commonHeaders["Content-Type"],
+//       appId: commonHeaders["appId"],
+//       apikey: commonHeaders["apikey"],
+//     };
+//   }
+
+//   if (typeof headers === 'function') {
+//     // headers가 함수인 경우
+//     return headers();
+//   }
+
+//   if (typeof headers === 'object' && !Array.isArray(headers)) {
+//     // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
+//     return {
+//       ...commonHeaders,
+//       ...headers,
+//     };
+//   }
+
+//   // headers가 없는 경우
+//   return commonHeaders;
+// };
+
+export const getPresetHeaders = (headers) => {
+  if (typeof headers === "string") {
+    const base = {
       "Content-Type": commonHeaders["Content-Type"],
       appId: commonHeaders["appId"],
-      apikey: commonHeaders[" apikey"],
+      apikey: commonHeaders["apikey"],
     };
-  }
-
-  if (typeof headers === 'function') {
-    // headers가 함수인 경우
+    switch (headers) {
+      case "DEFAULT":
+        return {
+          ...base,
+          Authorization: commonHeaders["Authorization"],
+        };
+      case "DEFAULT_FORM":
+        return {
+          ...base,
+          "Content-Type": "multipart/form-data",
+          Authorization: commonHeaders["Authorization"],
+        };
+      case "PUBLIC":
+        return base;
+    }
+  } else if (typeof headers === "function") {
     return headers();
+  } else {
+    return headers;
   }
-
-  if (typeof headers === 'object' && !Array.isArray(headers)) {
-    // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
-    return {
-      ...commonHeaders,
-      ...headers,
-    };
-  }
-
-  // headers가 없는 경우
-  return commonHeaders;
 };
 
 const defaultErrorProc = (error) => {
@@ -132,8 +161,7 @@ export const call = async (settings) => {
     // 작업 중---------------------------------------
     // 유효성 검사
     if (code === 3000) {
-      // if((await tknEncValid()) && endpoint !== "/session/valid") {
-      if(await tknEncValid()) {
+      if(endpoint !== "/session/valid") {
         return call(settings);
       } else {
         return false;

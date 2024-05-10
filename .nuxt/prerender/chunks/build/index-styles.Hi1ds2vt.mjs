@@ -1,0 +1,6 @@
+const index_vue_vue_type_style_index_0_scoped_eb1e6d19_lang = ".contents[data-v-eb1e6d19]{min-height:514px}.contents.no-data[data-v-eb1e6d19]{min-height:477px}@media (min-width:769px){.contents .inner[data-v-eb1e6d19]{padding:2rem 2rem 0}.bottom p[data-v-eb1e6d19]{text-align:center}}@media (max-width:768px){section>.contents[data-v-eb1e6d19]{padding:0}.bottom br[data-v-eb1e6d19]{display:none}}";
+
+const indexStyles_Hi1ds2vt = [index_vue_vue_type_style_index_0_scoped_eb1e6d19_lang];
+
+export { indexStyles_Hi1ds2vt as default };
+//# sourceMappingURL=index-styles.Hi1ds2vt.mjs.map

@@ -1,67 +1,51 @@
 <script setup>
   import { reactive } from 'vue';
-  import { useRouter } from 'vue-router';
-
-  const router = useRouter();
 
   definePageMeta({
     name: "test",
   });
 
   const d = reactive({
-    text: "홈넘버 새창 테스트(업체)",
+    text: "홈넘버표준창 테스트",
+    tokenIssuId: "240411132224EX7G",
+    encData: "j1l7oOjyXvGJmukvCRhQwzENMDVS%2B26pKyKUOhhNLC%2FH%2B%2BswQjmG24qgIeyvLYolANUb2FNrfrbC0Hrvy9yCEVXW4XhoNuu%2FPrXChszEKIeDtJz6q%2BOdFD0wHYhF1qftVaV2HyWBb7s8EDYETsTwJrUBOplIxtiJKI275KVynxi24zUp2%2Br7LQXd4PLhk9PVwegFCvlks9ejwVeklteOKg%3D%3D",
+    sign: "XHMACEwxMeve3fbicto6uBjT%2FA%2FMoyQ0nZ%2BPqIuNFHw%3D"
   })
+  const eventClick = () => {
+    const width = 480;
+    const height = 820;
+    const left = (window.screen.width / 2) - (width / 2);
+    const top = (window.screen.height / 2) - (height / 2);
+    const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
 
-  const fetchMockData = async () => {
-    // 비동기 처리를 모방하기 위해 Promise와 setTimeout을 사용합니다.
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          tokenIssuId: "240411132224EX7G",
-          encData: "j1l7oOjyXvGJmukvCRhQw6pVGACNQ8CpjRycl+oglPdzOk4NqK3ol94cpZuVlvlNUtOh/YNr+6Xtc5Q8WHv3qquTRTgNlaMy9b3CR6O4AxbAGvVkRNtzo9C26wmMez3BIwrT/2S7TDR+bppobVFcnw==",
-          sign: "mL3BWUrR7dflijDl/3HUuihL40cICf6FbO8CZCWf45U="
-        });
-      }, 1000); // 1초 후에 데이터 반환
-    });
+    const tokenIssuId = d.tokenIssuId;
+    const encData = d.encData;
+    const sign = d.sign;
+
+    // 데이터를 URL 쿼리 파라미터로 추가
+    const url = `http://localhost:3002?tokenIssuId=${tokenIssuId}&encData=${encData}&sign=${sign}`;
+
+    // const link = `${process.env.NODE_ENV === 'production' ? process.env.PROD_URL : process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.LOCAL_URL}`;
+    // const url = link + `?tokenIssuId=${tokenIssuId}&encData=${encData}&sign=${sign}`;
+
+    window.open(url, '_blank', windowFeatures);
+
+    // console.log('link:', link);
+    console.log('url:', url);
+    console.log('tokenIssuId1:', tokenIssuId);
+    console.log('encData1:', encData);
+    console.log('sign1:', sign);
   };
-
-  const eventClick = async () => {
-    try {
-      const Data = await fetchMockData();
-
-      const width = 480;
-      const height = 820;
-      const left = (window.screen.width / 2) - (width / 2);
-      const top = (window.screen.height / 2) - (height / 2);
-      const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-
-      // 데이터를 URL 쿼리 파라미터로 추가
-      const url = `http://localhost:3002?data=${encodeURIComponent(JSON.stringify(Data))}`;
-      window.open(url, '_blank', windowFeatures);
-
-      console.log('데이터 전송 성공:', Data);
-    } catch (error) {
-      console.error('데이터 전송 실패:', error);
-    }
-  }
-
-  defineExpose({ eventClick });
-
 </script>
 
 <template>
   <TitleTop :text="d.text" />
   <section>
     <div class="contents">
-      <button
-        @click="eventClick"
-      >
-        테스트
-      </button>
+      <button @click="eventClick">홈넘버표준창 팝업</button>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-
 </style>

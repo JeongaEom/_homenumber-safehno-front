@@ -1,7 +1,7 @@
 <script setup>
   import { reactive } from "vue";
   import { useRouter } from 'vue-router';
-  import { authSignin } from "@/api";
+  import { authSignin, tknEncValid } from "@/api";
 
   const router = useRouter();
 

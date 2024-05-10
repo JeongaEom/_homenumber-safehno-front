@@ -11,6 +11,7 @@ const termsAgree = (
   return call({
     id: "2.6 홈넘버 정보 제공 동의",
     endpoint: "/safehno/web/provhno/terms/agree",
+    headers: "PUBLIC",
     data: {
       hnoNo,
       subCd,

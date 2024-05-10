@@ -6,7 +6,7 @@ const hnoMyGet = () => {
   return call({
     id: "2.4 회원 홈넘버 조회",
     endpoint: "/safehno/v1/hno/my/get",
-    withCredentials: true,
+    headers: "DEFAULT",
     onResponse({ code, data }) {
       myGetStore.infoProvAuthNo = data.infoProvAuthNo,
       myGetStore.termsGrpCd = data.termsGrpCd,

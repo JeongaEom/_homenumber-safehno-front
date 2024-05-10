@@ -2,7 +2,7 @@
   import { reactive, onMounted } from "vue";
   import { useRouter } from 'vue-router';
   import { useHnoMyGetStore } from '@/stores'
-  import { hnoMyGet } from "@/api";
+  // import { hnoMyGet } from "@/api";
   import { formatNb } from '@/utils';
 
   const router = useRouter();
