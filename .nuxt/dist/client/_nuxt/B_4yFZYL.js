@@ -1,1 +1,0 @@
-import{u as o}from"./D1UJ3SxY.js";const n=r=>r.length<7?r:`${r.substring(0,3)}-${r.substring(3,7)}-${r.substring(7)}`,u=(r,e)=>{const s=o();s.isRouting?s.error===null?s.error=[r,e]:s.error[0]<r&&(s.error=[r,e]):e()};export{n as f,u};

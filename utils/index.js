@@ -8,12 +8,11 @@ export const formatNb = (Nb) => {
   return `${Nb.substring(0, 3)}-${Nb.substring(3, 7)}-${Nb.substring(7)}`;
 }
 
-// export const uLogin = (acsTkn) => {
-//   const app = useAppStore();
-//   Cookies.set('stdpAcsTkn', acsTkn);
-//   app.isLoggedIn = true;
-//   // navigateTo("/homenumberList", { replace: true }); // 필요에 따라 주석 해제 및 경로 조정
-// };
+export const uLogin = (acsTkn) => {
+  const app = useAppStore();
+  commonHeaders["Authorization"] = acsTkn;
+  app.isLoggedIn = true;
+};
 
 // export const uLogout = async () => {
 //   const app = useAppStore();

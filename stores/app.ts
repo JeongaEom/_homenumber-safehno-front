@@ -4,6 +4,9 @@ interface AppState {
   verifingResolve: boolean | null,
   isRouting: boolean;
   apiQueue: any[];
+  tokenIssuId: string;
+  encData: string;
+  sign: string;
 }
 
 export const useAppStore = defineStore("app", {
@@ -13,11 +16,14 @@ export const useAppStore = defineStore("app", {
     verifingResolve: null,
     isRouting: false,
     apiQueue: [],
+    tokenIssuId: "",
+    encData: "",
+    sign: ""
   }),
   actions: {
   },
 });
 
-if(import.meta.hot) {  //HMR
+if(import.meta.hot) { //HMR
   import.meta.hot.accept(acceptHMRUpdate(useAppStore, import.meta.hot))
 };

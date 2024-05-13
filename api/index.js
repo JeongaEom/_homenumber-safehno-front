@@ -4,76 +4,64 @@ import { useAppStore } from "@/stores/app";
 // import { API_DEBUG, API_HOST } from "./appSettings";
 export { default as tknEncValid } from "./tknEncValid";
 export { default as authSignin } from "./authSignin";
-// export { default as hnoMyGet } from "./hnoMyGet";
+export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";
 export { default as termsAgree } from "./termsAgree";
 
+// const API_HOST = "https://dev-hno-api.homenumber.co.kr";
+const API_HOST = process.env.NODE_ENV === 'development' ? "/api": "https://dev-hno-api.homenumber.co.kr";
 
-const API_HOST = "https://dev-hno-api.homenumber.co.kr";
+// const { public: { apiHost } } = useRuntimeConfig();
+// const API_HOST = apiHost;
 const API_DEBUG = true;
+
+console.log('API 호스트:', API_HOST);
 
 export const commonHeaders = {
   "Content-Type": "application/json;charset=UTF-8",
   appId: "SAFEHNO",
   apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92",
-  Authorization: null,
 };
 
-// export const getPresetHeaders = (headers = {}) => {
-//   // Authorization 없음 (서버에서 쿠키로 처리)
-//   if (typeof headers === 'string') {
-//     // headers가 문자열인 경우
-//     return {
-//       "Content-Type": commonHeaders["Content-Type"],
-//       appId: commonHeaders["appId"],
-//       apikey: commonHeaders["apikey"],
-//     };
-//   }
-
-//   if (typeof headers === 'function') {
-//     // headers가 함수인 경우
-//     return headers();
-//   }
-
-//   if (typeof headers === 'object' && !Array.isArray(headers)) {
-//     // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
-//     return {
-//       ...commonHeaders,
-//       ...headers,
-//     };
-//   }
-
-//   // headers가 없는 경우
-//   return commonHeaders;
-// };
-
-export const getPresetHeaders = (headers) => {
-  if (typeof headers === "string") {
+export const getPresetHeaders = (headers = {}) => {
+  // Authorization 없음 (서버에서 쿠키로 처리)
+  if (typeof headers === 'string') {
+    // headers가 문자열인 경우
     const base = {
       "Content-Type": commonHeaders["Content-Type"],
       appId: commonHeaders["appId"],
       apikey: commonHeaders["apikey"],
-    };
+    }
     switch (headers) {
       case "DEFAULT":
         return {
           ...base,
-          Authorization: commonHeaders["Authorization"],
         };
       case "DEFAULT_FORM":
         return {
           ...base,
-          "Content-Type": "multipart/form-data",
-          Authorization: commonHeaders["Authorization"],
+          "Content-Type": "application/x-www-form-urlencoded",
         };
       case "PUBLIC":
         return base;
     }
-  } else if (typeof headers === "function") {
-    return headers();
-  } else {
-    return headers;
   }
+
+  if (typeof headers === 'function') {
+    // headers가 함수인 경우
+    return headers();
+  }
+
+  if (typeof headers === 'object' && !Array.isArray(headers)) {
+    // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
+    return {
+      ...commonHeaders,
+      ...headers,
+    };
+  }
+
+  // headers가 없는 경우
+  return commonHeaders;
 };
 
 const defaultErrorProc = (error) => {

@@ -1,8 +1,8 @@
 <script setup>
-  import { reactive, onMounted } from "vue";
+  import { reactive } from "vue";
   import { useRouter } from 'vue-router';
   import { useHnoMyGetStore } from '@/stores'
-  // import { hnoMyGet } from "@/api";
+  import { hnoMyGet } from "@/api";
   import { formatNb } from '@/utils';
 
   const router = useRouter();
@@ -10,13 +10,13 @@
 
   definePageMeta({
     name: "homenumberList",
-    // middleware: 'auth',
   });
 
   const d = reactive({
     text: "홈넘버",
-    selectedHomeNb: "",
+    selectedhnoNo: [],
     isActive: false,
+    sMyHnoYn: "Y" // (로그인) 마이 홈넘버 조회
   });
 
   const homenumberInquiry = () => {
@@ -27,38 +27,7 @@
     router.push('/issuance');
   }
 
-  const selectClick = (item) => {
-    d.selectedHomeNb = item;
-    if(d.selectedHomeNb === item) {
-      d.isActive = true;
-    } else if(d.selectedHomeNb !== item) {
-      d.isActive = false
-    }
-
-    // const index = d.selectedHomeNb.indexOf(item);
-    // if (index > -1) {
-    //   d.selectedHomeNb.splice(index, 1);
-    // } else {
-    //   d.selectedHomeNb.push(item);
-    // }
-    // d.isActive = d.selectedHomeNb.length > 0;
-
-    // console.log('d.selectedHomeNb_선택: ', d.selectedHomeNb);
-    // console.log('myGet.infoProvAuthNo_선택: ', myGetStore.infoProvAuthNo);
-    // console.log('myGet.termsGrpCd_선택: ', myGetStore.termsGrpCd);
-  }
-
-  const modifiClick = () => { // 수정
-    router.push('/modification');
-  }
-
-  const nextClick = () => {
-    if(d.isActive) {
-      router.push('/personalInformation');
-    }
-  }
-
-  const fetchHnoMyGet = async () => {
+  const fetchHnoMyGet = async() => {
     const hnoMyGetResult = await hnoMyGet();
     console.log('hnoMyGetResult: ', hnoMyGetResult);
 
@@ -70,6 +39,53 @@
   onMounted(() => {
     fetchHnoMyGet();
   });
+
+  const selectClick = (item) => {
+    // 선택된 항목의 인덱스를 찾아 추가하거나 제거하고, isActive 상태를 업데이트
+    const index = d.selectedhnoNo.indexOf(item.hnoNo);
+    if(index > -1) {
+      d.selectedhnoNo.splice(index, 1); // 이미 선택된 항목이면 제거
+    } else {
+      d.selectedhnoNo.push(item.hnoNo); // 선택되지 않은 항목이면 추가
+    }
+
+    d.isActive = d.selectedhnoNo.length > 0; // isActive 상태 업데이트
+
+    // 선택된 항목들의 정보를 문자열로 모아 콘솔에 출력
+    let selectedItemsInfo = d.selectedhnoNo.length > 0 ? '선택된 항목:\n' : '선택된 항목이 없습니다.';
+    d.selectedhnoNo.forEach(hnoNo => {
+      const item = myGetStore.hnos.find(listItem => listItem.hnoNo === hnoNo);
+      if (item) {
+        selectedItemsInfo += `홈넘버: ${item.hnoNo}, 이름: ${item.nm}, 주소: ${item.bassAddr}, 상세주소: ${item.detailAddr}\n`;
+      }
+    });
+
+    console.log('data: ', selectedItemsInfo);
+  };
+
+  const modifiClick = (item) => { // 수정
+      router.push({ path: '/modification', query: { hnoNo: item.hnoNo }});
+  };
+
+  const nextClick = async() => {
+    // const hnoMyGetResult = await hnoMyGet();
+    // console.log('hnoMyGetResult: ', hnoMyGetResult);
+
+    console.log('myGet.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
+    console.log('myGet.termsGrpCd: ', myGetStore.termsGrpCd);
+    console.log('myGet.hnos: ', myGetStore.hnos);
+
+
+    // if(hnoMyGetResult) {
+      router.push('/personalInformation');
+
+      myGetStore.sMyHnoYn = d.sMyHnoYn;
+      console.log('d.sMyHnoYn: ', d.sMyHnoYn);
+
+      console.log('myGetStore.sMyHnoYn: ', myGetStore.sMyHnoYn);
+      console.log('myGetStore.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
+    // }
+  }
 </script>
 
 <template>
@@ -89,8 +105,8 @@
         <ul>
           <li v-for="item in myGetStore.hnos">
             <div
-              :class="item.virtlHnoNo === d.selectedHomeNb ? 'active-line':'default-line'"
-              @click="selectClick(item.virtlHnoNo)"
+            :class="d.selectedhnoNo.includes(item.hnoNo) ? 'active-line':'default-line'"
+            @click="selectClick(item)"
             >
               <ul>
                 <li>
@@ -111,20 +127,16 @@
               </ul>
               <ul>
                 <li>
-                  <div :class="item.virtlHnoNo === d.selectedHomeNb ?  'red-active':'default'">
+                  <div :class="d.selectedhnoNo.includes(item.hnoNo) ? 'red-active':'default'">
                     선택
                     <span>
-                      <!-- <img
-                        :src="item.virtlHnoNo === d.selectedHomeNb ? '@/assets/images/checkIconOn.png':'@/assets/images/checkIconOff.png'"
-                        :alt="item.virtlHnoNo === d.selectedHomeNb ? '선택':'미선택'"
-                      > -->
-                      <img src="@/assets/images/checkIconOff.png" v-if="item.virtlHnoNo" alt="미선택">
-                      <img src="@/assets/images/checkIconOn.png" v-if="item.virtlHnoNo" alt="선택">
+                      <img src="@/assets/images/checkIconOff.png" v-if="!d.selectedhnoNo.includes(item.hnoNo)" alt="미선택">
+                      <img src="@/assets/images/checkIconOn.png"  v-if="d.selectedhnoNo.includes(item.hnoNo)" alt="선택">
                     </span>
                   </div>
                 </li>
                 <li>
-                <button @click="modifiClick">수정</button>
+                <button @click="modifiClick(item)">수정</button>
                 </li>
               </ul>
             </div>

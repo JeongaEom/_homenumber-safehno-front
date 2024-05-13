@@ -1,5 +1,4 @@
 import { call } from "@/api";
-import { useHnoMyGetStore } from '@/stores'
 
 const hnoMyGet = () => {
   const myGetStore = useHnoMyGetStore();
@@ -7,12 +6,15 @@ const hnoMyGet = () => {
     id: "2.4 회원 홈넘버 조회",
     endpoint: "/safehno/v1/hno/my/get",
     headers: "DEFAULT",
+    data: {},
     onResponse({ code, data }) {
+      console.log('조회_code: ', code);
+      console.log('data: ', data);
       myGetStore.infoProvAuthNo = data.infoProvAuthNo,
       myGetStore.termsGrpCd = data.termsGrpCd,
       myGetStore.hnos = data.hnos.map(hno => ({
         hnoNo: hno.hnoNo,
-        virtlHnoNo: hno.virtlHnoNo,
+        subCd: hno.subCd,
         nm: hno.nm,
         moblphonNo: hno.moblphonNo,
         postNo: hno.postNo,

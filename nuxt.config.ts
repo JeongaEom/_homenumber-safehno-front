@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       envMode: "DEV", // can be overridden by NUXT_PUBLIC_ENV_MODE environment variable
+      apiHost: process.env.NODE_ENV === 'development' ? '/api' : 'https://dev-hno-api.homenumber.co.kr',
     },
   },
   css: [
@@ -27,5 +28,16 @@ export default defineNuxtConfig({
         },
       },
     },
+    server: {
+      proxy: {
+        "/api": {
+          target: "https://dev-hno-api.homenumber.co.kr",
+          changeOrigin: true, // 도메인 간 요청 가능
+          rewrite: (path) => path.replace(/^\/api/, '') // 실제 요청에서 '/api' 제거
+        },
+      },
+    },
   },
+  ssr: false,
+  spaLoadingTemplate: false,
 });

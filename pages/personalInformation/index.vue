@@ -4,19 +4,13 @@
 
   definePageMeta({
     name: "personalInformation",
-    // middleware: [
-    //   function (to, from) {
-    //     // 로직 inline 정의
-    //  },
-    //   'app',
-    // ],
   });
 
   const d = reactive({
     text: "개인정보 제3자 제공 동의",
     isActive: false,
-    hnoNo: "",
-    subCd: "",
+    hnoNo: "10034205960",//임시 피니아로 처리 해야함
+    subCd: "1694563697271829",//임시 피니아로 처리 해야함
     // infoProvAuthNo: myGetStore.infoProvAuthNo, // 정보 제공 승인 번호
     infoProvAuthNo: "1111", // 정보 제공 승인 번호
     termsVer: "1",
@@ -37,22 +31,22 @@
             </div>
           </div>
         `,
+        termsList: [],
         termsAgreEssntlYn: "Y"
       },
     ],
+    termsList: [],
     modelValue: false
   });
 
-  const handleCheckboxChange = () => {
+  const handleCheckboxChange = async () => {
     if(d.modelValue) {
       d.isActive = true;
     } else {
       d.isActive = false;
     }
-  }
 
-  const endClick = async () => {
-    const termsAgree = await termsAgree(
+    const terms = await termsAgree(
       d.hnoNo,
       d.subCd,
       d.infoProvAuthNo,
@@ -60,7 +54,11 @@
       d.termsVer,
       d.isMyHnoYn
     );
-    console.log('termsAgree: ', termsAgree);
+    console.log('termsAgree: ', terms);
+  }
+
+  const endClick = async () => {
+
     // window.close();
   }
 </script>
@@ -70,15 +68,15 @@
   <section>
     <div class="contents">
       <div v-for="item in d.dataList">
-        <div v-if="d.termsAgreEssntlYn = 'Y'">
+        <!-- <div v-if="d.termsAgreEssntlYn = 'Y'"> -->
           <input
             type="checkbox"
-            :id="`checkbox-${item.termsCd}`"
+            id="01"
             class="custom-checkbox"
             v-model="d.modelValue"
             @change="handleCheckboxChange"
           />
-          <label :for="`checkbox-${item.termsCd}`">
+          <label for="01">
             <span
               :class="item.type === '필수' ? 'essential':'select'"
             >
@@ -89,7 +87,7 @@
           <div class="textDatas">
             <div class="inner" v-html="item.data"></div>
           </div>
-        </div>
+        <!-- </div> -->
         <div>
           <ul>
             <li>

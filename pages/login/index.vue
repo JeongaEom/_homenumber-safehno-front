@@ -1,7 +1,7 @@
 <script setup>
   import { reactive } from "vue";
   import { useRouter } from 'vue-router';
-  import { authSignin, tknEncValid } from "@/api";
+  import { authSignin } from "@/api";
 
   const router = useRouter();
 
@@ -12,6 +12,9 @@
   });
 
   const d = reactive({
+    tokenIssuId: "",
+    encData: "",
+    sign: "",
     isOpen: false, // popup 열기 여부
     idType: "",
     texts: "",
@@ -46,15 +49,14 @@
     //   d.texts = "입력하신 정보와 일치하는 회원이 존재하지 않습니다.";
     // }
     // e.preventDefault();
+
     const loginResult = await authSignin(d.id, d.pwd);
-    // document.cookie = `auth=${loginResult}`;
 
     console.log('d.id: ', d.id);
     console.log('d.pwd: ', d.pwd);
 
     if (loginResult) {
-      // router.push('/homenumberList');
-      router.push('/signup');
+      router.push('/homenumberList');
     } else {
       alert("로그인에 실패했습니다.");
     }

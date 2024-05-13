@@ -1,19 +1,16 @@
 <script setup>
   import { reactive, computed } from "vue";
   import { useRouter } from 'vue-router';
+  import { noauthHnoGet } from '@/api';
+  import { useAppStore } from '@/stores'
   import { formatNb } from '@/utils';
 
   const router = useRouter();
+  const app = useAppStore();
 
   definePageMeta({
     name: "homenumberInquiry",
-    // middleware: [
-    //   function (to, from) {
-    //     // 로직 inline 정의
-    //  },
-    //   'app',
-    // ],
-});
+  });
 
   const d = reactive({
     link: true,
@@ -21,8 +18,8 @@
     text: "홈넘버로 조회",
     login: true, // (임시) 로그인 여부
     data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
-    id: "",
-    pw: "",
+    hnoNo: "",
+    scrtky: "",
     list: [ // (임시)
       {
         homeNb: '10010001004',
@@ -42,26 +39,38 @@
         address: '서울특별시 서초구 강남대로 241'
       }
     ],
-});
+  });
 
 //   const linkAddress = computed(() => {
 //     return d.login ? "/homenumberList" : "/"; // (임시) 로그인 여부
 // });
 
-  const eventClick = () => {
-    d.data = true; // (임시) 조회
-  }
+  const eventClick = async() => {
+    const noauth = await noauthHnoGet(d.hnoNo, d.scrtky, app.tokenIssuId, app.encData, app.sign);
+
+    if(noauth) {
+      d.data = true;
+    }
+
+    console.log('d.hnoNo: ', d.hnoNo);
+    console.log('d.scrtky: ', d.scrtky);
+    console.log('noauth: ', noauth);
+
+    console.log('tokenIssuId: ', app.tokenIssuId);
+    console.log('encData: ', app.encData);
+    console.log('sign: ', app.sign);
+  };
 
   const formatName = (name) => {
     if(name.length < 2) { // 이름이 2글자 미만인 경우 그대로 반환
       return name;
     }
     return name.substring(0, 1) + '*' + name.substring(2);
-  }
+  };
 
   const nextClick = () => {
     router.push('/personalInformation');
-  }
+  };
 </script>
 
 <template>
@@ -76,15 +85,15 @@
     >
       <div v-if="!d.data">
         <input
-          v-model="d.id"
+          v-model="d.hnoNo"
           class="mb-btm-6"
           type="text"
           placeholder="홈넘버(숫자만)"
         >
         <input
-          v-model="d.pw"
+          v-model="d.scrtky"
           class="mb-btm-20"
-          type="text"
+          type="password"
           placeholder="보안키"
         >
         <button

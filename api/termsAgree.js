@@ -11,7 +11,8 @@ const termsAgree = (
   return call({
     id: "2.6 홈넘버 정보 제공 동의",
     endpoint: "/safehno/web/provhno/terms/agree",
-    headers: "PUBLIC",
+    headers: "DEFAULT_FORM",
+    withCredentials: true,
     data: {
       hnoNo,
       subCd,
@@ -21,11 +22,11 @@ const termsAgree = (
       isMyHnoYn
     },
     onResponse({ code, data }) {
-      // if (code === 2000) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
+      if (code === 2000) {
+        return true;
+      } else {
+        return false;
+      }
     },
   });
 };

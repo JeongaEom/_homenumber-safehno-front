@@ -2,8 +2,8 @@
 
 export default defineNuxtRouteMiddleware((to, from) => {
 //   window.dispatchEvent(new CustomEvent("before.route-start"));
-//   const app = useAppStore();
-//   app.isRouting = true;
+  const app = useAppStore();
+  app.isRouting = true;
 //   const needAuth = to.meta.noAuth ? false : true;
 //   // Verify
 //   if(app.isVerified === null && needAuth) {
