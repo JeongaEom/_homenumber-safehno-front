@@ -15,7 +15,7 @@ const authSignin = (id, pwd, tokenIssuId, encData, sign) => {
     },
     onResponse({ code, message }) {
       console.log('로그인_code: ', code);
-      alert(message);
+      // alert(message);
       if (code === 2000) {
         return true;
       } else {
