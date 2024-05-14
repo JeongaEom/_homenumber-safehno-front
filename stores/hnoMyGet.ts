@@ -11,15 +11,16 @@ interface Hno {
 
 interface HnoMyGet {
   infoProvAuthNo: string;
-  termsGrpCd: string;
+  virtlHnoNo: string;
   hnos: Hno[]; // hnos 배열을 Hno 인터페이스 타입으로 정의
+  selectedItemsInfo: string;
   sMyHnoYn: string;
 }
 
 export const useHnoMyGetStore = defineStore('hnoMyGet', {
   state: (): HnoMyGet => ({
     infoProvAuthNo: "",
-    termsGrpCd: "",
+    virtlHnoNo: "",
     hnos: [
       {
         hnoNo: "",
@@ -32,6 +33,7 @@ export const useHnoMyGetStore = defineStore('hnoMyGet', {
         addrNcm: ""
       }
     ],
+    selectedItemsInfo: "",
     sMyHnoYn: "",
   }),
   actions: {

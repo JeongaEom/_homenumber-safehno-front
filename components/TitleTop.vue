@@ -1,7 +1,9 @@
 <script setup>
   import { useRouter } from 'vue-router';
+  import { useAppStore } from '@/stores';
 
   const router = useRouter();
+  const app = useAppStore();
 
   const p = defineProps({
     link: { type: Boolean, default: false }, // 이전페이지 사용 여부
@@ -10,7 +12,14 @@
   });
 
   const eventClick = () => {
-    router.push(p.linkAddress);
+    router.push({
+      path: p.linkAddress,
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign
+      }
+    });
   };
 </script>
 

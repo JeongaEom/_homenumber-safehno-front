@@ -10,30 +10,19 @@
     tokenIssuId: "240411132224EX7G",
     encData: "j1l7oOjyXvGJmukvCRhQwzENMDVS%2B26pKyKUOhhNLC%2FH%2B%2BswQjmG24qgIeyvLYolANUb2FNrfrbC0Hrvy9yCEVXW4XhoNuu%2FPrXChszEKIeDtJz6q%2BOdFD0wHYhF1qftVaV2HyWBb7s8EDYETsTwJrUBOplIxtiJKI275KVynxi24zUp2%2Br7LQXd4PLhk9PVwegFCvlks9ejwVeklteOKg%3D%3D",
     sign: "XHMACEwxMeve3fbicto6uBjT%2FA%2FMoyQ0nZ%2BPqIuNFHw%3D"
-  })
+  });
+
   const eventClick = () => {
     const width = 480;
     const height = 820;
     const left = (window.screen.width / 2) - (width / 2);
     const top = (window.screen.height / 2) - (height / 2);
     const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-
-    // 데이터를 URL 쿼리 파라미터로 추가
-    // const link = () => {
-    //   if () {
-
-    //   }
-    // }
-    // const link = `http://localhost:3002`;
-    // const link = `http://dev-safehno-front.s3-website.ap-northeast-2.amazonaws.com/`;
-    // const link = `${process.env.NODE_ENV === 'production' ? process.env.PROD_URL : process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.LOCAL_URL}`;
-
-    const link = process.env.NODE_ENV === 'development' ? `http://localhost:3002`:`http://dev-safehno-front.s3-website.ap-northeast-2.amazonaws.com/`;
+    const link = process.env.NODE_ENV === 'development' ? `http://localhost:3002`:`https://dev-safehno.homenumber.co.kr/`;
     const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
     window.open(url, '_blank', windowFeatures);
 
-    // console.log('link:', link);
     console.log('url:', url);
     console.log('tokenIssuId1:', d.tokenIssuId);
     console.log('encData1:', d.encData);

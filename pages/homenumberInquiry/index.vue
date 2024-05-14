@@ -14,7 +14,7 @@
 
   const d = reactive({
     link: true,
-    linkAddress: "/login",
+    linkAddress: "/",
     text: "홈넘버로 조회",
     login: true, // (임시) 로그인 여부
     data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트

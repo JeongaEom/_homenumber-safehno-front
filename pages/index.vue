@@ -1,7 +1,7 @@
 <script setup>
   import { reactive } from 'vue';
   import { useRouter } from 'vue-router';
-  import { useAppStore } from '@/stores'
+  import { useAppStore } from '@/stores';
   import { authSignin } from '@/api';
 
   const router = useRouter();
@@ -31,36 +31,49 @@
   app.encData = encData;
   app.sign = sign;
 
-  const homenumberInquiry = () => {
-    // console.log('tokenIssuId: ', app.tokenIssuId);
-    // console.log('encData: ', app.encData);
-    // console.log('sign: ', app.sign);
-    router.push('/homenumberInquiry');
-  }
+  const homenumberInquiry = () => { // 홈넘버로 조회
+    router.push({
+      path: '/homenumberInquiry',
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign
+      }
+    });
+  };
 
   const loginClick = async () => {
 
     if (!d.id || !d.pwd) {
       d.isOpen = true; // popup 열기 여부
-    }
+    };
 
     if (d.id === "") {
       d.idType = "01"
       d.texts = "아이디를 입력해주세요.";
-    }
+    };
 
     if (d.pwd === "") {
       d.idType = "02"
       d.texts = "패스워드(비밀번호)를 입력해주세요.";
-    }
+    };
 
     // 임시
     // if (!d.id && !d.pwd) {
     //   d.idType = "03"
     //   d.texts = "입력하신 정보와 일치하는 회원이 존재하지 않습니다.";
-    // }
+    // };
 
     const loginResult = await authSignin(d.id, d.pwd, app.tokenIssuId, app.encData, app.sign);
+
+    router.push({
+      path: '/homenumberList',
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign
+      }
+    });
 
     console.log('d.id: ', d.id);
     console.log('d.pwd: ', d.pwd);
@@ -69,16 +82,11 @@
     console.log('tokenIssuId: ', app.tokenIssuId);
     console.log('encData: ', app.encData);
     console.log('sign: ', app.sign);
-  }
+  };
 
   const signupClick = () => {
     router.push('/signup');
-  }
-
-  // 서버사이드 또는 클라이언트사이드 코드
-  // const preferredLanguage = useCookie('_enc');
-  // console.log(preferredLanguage.value); // 쿠키의 값을 출력
-
+  };
 </script>
 
 <template>
@@ -92,12 +100,14 @@
         v-model="d.id"
         class="mb-btm-6"
         type="text"
+        @keyup.enter="loginClick"
         placeholder="아이디"
       >
       <input
         v-model="d.pwd"
         class="mb-btm-20"
         type="password"
+        @keyup.enter="loginClick"
         placeholder="패스워드"
       >
       <button

@@ -22,7 +22,10 @@ const termsAgree = (
       isMyHnoYn
     },
     onResponse({ code, data }) {
+      console.log('로그인_code: ', code);
+      console.log('로그인_data: ', data);
       if (code === 2000) {
+        window.close();
         return true;
       } else {
         return false;

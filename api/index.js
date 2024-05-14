@@ -160,8 +160,8 @@ export const call = async (settings) => {
       uAddError(9999, () => {
         setTimeout(() => {
           alert(message);
-          const modal = useModalStore();
-          console.log(modal.items);
+          // const modal = useModalStore();
+          // console.log(modal.items);
         });
       });
       router.push("/login");

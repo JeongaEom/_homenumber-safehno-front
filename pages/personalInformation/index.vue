@@ -1,6 +1,9 @@
 <script setup>
   import { reactive } from "vue";
+  import { useHnoMyGetStore } from '@/stores'
   import { termsAgree } from "@/api";
+
+  const myGetStore = useHnoMyGetStore();
 
   definePageMeta({
     name: "personalInformation",
@@ -9,12 +12,9 @@
   const d = reactive({
     text: "개인정보 제3자 제공 동의",
     isActive: false,
-    hnoNo: "10034205960",//임시 피니아로 처리 해야함
-    subCd: "1694563697271829",//임시 피니아로 처리 해야함
-    // infoProvAuthNo: myGetStore.infoProvAuthNo, // 정보 제공 승인 번호
-    infoProvAuthNo: "1111", // 정보 제공 승인 번호
+    termsCd: "1020007",
     termsVer: "1",
-    isMyHnoYn: "Y",
+    isMyHnoYn: "Y", // Y 회원 홈넘버, N 비회원 홈넘버
     dataList: [
       {
         termsCd: "1020007",
@@ -39,28 +39,32 @@
     modelValue: false
   });
 
-  const handleCheckboxChange = async () => {
+  const handleCheckboxChange = () => {
     if(d.modelValue) {
       d.isActive = true;
     } else {
       d.isActive = false;
     }
+  }
 
+  const endClick = async () => {
     const terms = await termsAgree(
-      d.hnoNo,
-      d.subCd,
-      d.infoProvAuthNo,
+      myGetStore.hnoNo,
+      myGetStore.virtlHnoNo,
+      myGetStore.infoProvAuthNo,
       d.termsCd,
       d.termsVer,
       d.isMyHnoYn
     );
-    console.log('termsAgree: ', terms);
   }
 
-  const endClick = async () => {
-
-    // window.close();
-  }
+  console.log('termsAgree: ', terms);
+    console.log('myGetStore.hnoNo: ', myGetStore.hnoNo);
+    console.log('myGetStore.virtlHnoNo: ', myGetStore.virtlHnoNo);
+    console.log('myGetStore.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
+    console.log('d.termsCd: ', d.termsCd);
+    console.log('d.termsVer: ', d.termsVer);
+    console.log('d.isMyHnoYn: ', d.isMyHnoYn);
 </script>
 
 <template>

@@ -1,11 +1,12 @@
 <script setup>
   import { reactive } from "vue";
   import { useRouter } from 'vue-router';
-  import { useHnoMyGetStore } from '@/stores'
+  import { useAppStore, useHnoMyGetStore } from '@/stores'
   import { hnoMyGet } from "@/api";
   import { formatNb } from '@/utils';
 
   const router = useRouter();
+  const app = useAppStore();
   const myGetStore = useHnoMyGetStore();
 
   definePageMeta({
@@ -20,12 +21,26 @@
   });
 
   const homenumberInquiry = () => {
-    router.push('/homenumberInquiry');
-  }
+    router.push({
+      path: '/homenumberInquiry',
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign
+      }
+    });
+  };
 
   const hnbIssuance = () => {
-    router.push('/issuance');
-  }
+    router.push({
+      path: '/issuance',
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign
+      }
+    });
+  };
 
   const fetchHnoMyGet = async() => {
     const hnoMyGetResult = await hnoMyGet();
@@ -59,8 +74,8 @@
         selectedItemsInfo += `홈넘버: ${item.hnoNo}, 이름: ${item.nm}, 주소: ${item.bassAddr}, 상세주소: ${item.detailAddr}\n`;
       }
     });
-
-    console.log('data: ', selectedItemsInfo);
+    myGetStore.selectedItemsInfo = selectedItemsInfo
+    console.log('data: ', myGetStore.selectedItemsInfo);
   };
 
   const modifiClick = (item) => { // 수정
@@ -68,23 +83,25 @@
   };
 
   const nextClick = async() => {
-    // const hnoMyGetResult = await hnoMyGet();
-    // console.log('hnoMyGetResult: ', hnoMyGetResult);
+    // router.push({
+    //   path: '/personalInformation',
+    //   query: {
+    //     tokenIssuId: app.tokenIssuId,
+    //     encData: app.encData,
+    //     sign: app.sign
+    //   }
+    // });
+    router.push('/personalInformation');
+
+    myGetStore.sMyHnoYn = d.sMyHnoYn;
+    console.log('d.sMyHnoYn: ', d.sMyHnoYn);
 
     console.log('myGet.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
     console.log('myGet.termsGrpCd: ', myGetStore.termsGrpCd);
     console.log('myGet.hnos: ', myGetStore.hnos);
 
-
-    // if(hnoMyGetResult) {
-      router.push('/personalInformation');
-
-      myGetStore.sMyHnoYn = d.sMyHnoYn;
-      console.log('d.sMyHnoYn: ', d.sMyHnoYn);
-
-      console.log('myGetStore.sMyHnoYn: ', myGetStore.sMyHnoYn);
-      console.log('myGetStore.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
-    // }
+    console.log('myGetStore.sMyHnoYn: ', myGetStore.sMyHnoYn);
+    console.log('myGetStore.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
   }
 </script>
 
