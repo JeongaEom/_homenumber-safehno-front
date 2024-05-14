@@ -53,6 +53,7 @@
 
   onMounted(() => {
     fetchHnoMyGet();
+    console.log('33');
   });
 
   const selectClick = (item) => {
