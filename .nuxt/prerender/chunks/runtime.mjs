@@ -57,7 +57,11 @@ function _expandFromEnv(value) {
 
 const inlineAppConfig = {
   "nuxt": {
+<<<<<<< HEAD
     "buildId": "6897fd62-8519-4e08-abbf-17d837e0e581"
+=======
+    "buildId": "7848b68a-e207-48c3-bc03-5a2a0d3ea6ea"
+>>>>>>> 47f706b8358fa2f1a65ce41198030006a5ffc9a4
   }
 };
 
