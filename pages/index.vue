@@ -1,87 +1,82 @@
 <script setup>
-  import { reactive } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { useAppStore } from '@/stores';
-  import { authSignin } from '@/api';
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import { useAppStore } from "@/stores";
+import { authSignin } from "@/api";
 
-  const router = useRouter();
-  const app = useAppStore();
+const router = useRouter();
+const app = useAppStore();
 
-  // 페이지 메타 설정
-  definePageMeta({
-    layout: "login",
-    name: "main",
+// 페이지 메타 설정
+definePageMeta({
+  layout: "login",
+  name: "main",
+});
+
+const d = reactive({
+  isOpen: false, // popup 열기 여부
+  idType: "",
+  texts: "",
+  btntexts: "재시도",
+  // id: "",
+  // pwd: "",
+  id: "jaeom50",
+  pwd: "eja3249eja**",
+});
+
+const params = new URLSearchParams(window.location.search);
+const tokenIssuId = params.get("tokenIssuId");
+const encData = params.get("encData");
+const sign = params.get("sign");
+
+app.tokenIssuId = tokenIssuId;
+app.encData = encData;
+app.sign = sign;
+
+// onMounted(() => {
+//   setTimeout(() => {
+//     const app = useAppStore();
+//     app.error = {
+//       type: "page",
+//       message: "크리티컬 에러 처리",
+//     };
+//     router.replace("/error");
+//   }, 2000);
+// });
+
+const homenumberInquiry = () => {
+  // 홈넘버로 조회
+  router.replace({
+    path: "/homenumberInquiry",
+    query: {
+      tokenIssuId: app.tokenIssuId,
+      encData: app.encData,
+      sign: app.sign,
+    },
   });
+};
 
-  const d = reactive({
-    isOpen: false, // popup 열기 여부
-    idType: "",
-    texts: "",
-    btntexts: "재시도",
-    // id: "",
-    // pwd: "",
-    id: "jaeom50",
-    pwd: "eja3249eja**",
-  });
+const loginClick = async () => {
+  const loginResult = await authSignin(
+    d.id,
+    d.pwd,
+    app.tokenIssuId,
+    app.encData,
+    app.sign
+  );
 
-  const params = new URLSearchParams(window.location.search);
-  const tokenIssuId = params.get('tokenIssuId');
-  const encData = params.get('encData');
-  const sign = params.get('sign');
+  console.log("d.id: ", d.id);
+  console.log("d.pwd: ", d.pwd);
+  console.log("loginResult: ", loginResult);
 
-  app.tokenIssuId = tokenIssuId;
-  app.encData = encData;
-  app.sign = sign;
+  console.log("tokenIssuId: ", app.tokenIssuId);
+  console.log("encData: ", app.encData);
+  console.log("sign: ", app.sign);
+};
 
-  const homenumberInquiry = () => { // 홈넘버로 조회
-    router.replace({
-      path: '/homenumberInquiry',
-      query: {
-        tokenIssuId: app.tokenIssuId,
-        encData: app.encData,
-        sign: app.sign
-      }
-    });
-  };
-
-  const loginClick = async () => {
-
-    if (!d.id || !d.pwd) {
-      d.isOpen = true; // popup 열기 여부
-    };
-
-    if (d.id === "") {
-      d.idType = "01"
-      d.texts = "아이디를 입력해주세요.";
-    };
-
-    if (d.pwd === "") {
-      d.idType = "02"
-      d.texts = "패스워드(비밀번호)를 입력해주세요.";
-    };
-
-    // 임시
-    // if (!d.id && !d.pwd) {
-    //   d.idType = "03"
-    //   d.texts = "입력하신 정보와 일치하는 회원이 존재하지 않습니다.";
-    // };
-
-    const loginResult = await authSignin(d.id, d.pwd, app.tokenIssuId, app.encData, app.sign);
-
-    console.log('d.id: ', d.id);
-    console.log('d.pwd: ', d.pwd);
-    console.log('loginResult: ', loginResult);
-
-    console.log('tokenIssuId: ', app.tokenIssuId);
-    console.log('encData: ', app.encData);
-    console.log('sign: ', app.sign);
-  };
-
-  const signupClick = () => {
-    router.push('/error');
-    // router.push('/signup');
-    // alert('준비중입니다.');
-  };
+const signupClick = () => {
+  alert("준비중입니다.");
+};
 </script>
 
 <template>
@@ -91,134 +86,107 @@
   </div>
   <div class="content">
     <div class="inner">
-      <input
-        v-model="d.id"
-        class="mb-btm-6"
-        type="text"
-        @keyup.enter="loginClick"
-        placeholder="아이디"
-      >
+      <input v-model="d.id" class="mb-btm-6" type="text" placeholder="아이디" />
       <input
         v-model="d.pwd"
         class="mb-btm-20"
         type="password"
-        @keyup.enter="loginClick"
         placeholder="패스워드"
-      >
-      <button
-        class="mb-btm-20 red-active"
-        @click="loginClick"
-      >
-        로그인
-      </button>
+      />
+      <button class="mb-btm-20 red-active" @click="loginClick">로그인</button>
       <p class="mb-btm-20">
         아이디/비밀번호 찾기는
-        <br/>
+        <br />
         홈넘버 사이트에서 확인이 가능합니다.
-        <NuxtLink
-          to="https://www.homenumber.co.kr/"
-          target="_blank"
-        >
+        <NuxtLink to="https://www.homenumber.co.kr/" target="_blank">
           바로가기 >
         </NuxtLink>
       </p>
-      <button
-        class="bg-g line"
-        @click="signupClick"
-      >
-        홈넘버 회원가입
-      </button>
+      <button class="bg-g line" @click="signupClick">홈넘버 회원가입</button>
     </div>
   </div>
   <div class="bottom">
     <p>
       고객님의 배송지 개인정보(이름, 휴대폰번호, 주소) 대신 사용하는
-      <br/>
+      <br />
       11자리 보안번호로 개인정보를 안전하게 지켜드립니다.
     </p>
     <NuxtLink to="/serviceInfo">자세히 ></NuxtLink>
   </div>
-  <popup
-    :isVisible="d.isOpen"
-    :idType="d.idType"
-    :texts="d.texts"
-    :btntexts="d.btntexts"
-    @update:isVisible="d.isOpen = $event"
-  />
 </template>
 
 <style lang="scss" scoped>
-  input,
+input,
+button {
+  height: 50px;
+}
+
+a {
+  font-weight: bold;
+  margin-top: 6px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.tab-btns {
+  display: flex;
+  align-items: center;
   button {
-    height: 50px;
+    &:nth-child(1) {
+      border-radius: 4px 0 0 4px;
+      -webkit-border-radius: 4px 0 0 4px;
+      -moz-border-radius: 4px 0 0 4px;
+      -ms-border-radius: 4px 0 0 4px;
+      -o-border-radius: 4px 0 0 4px;
+    }
+    &:nth-child(2) {
+      border-radius: 0 4px 4px 0;
+      -webkit-border-radius: 0 4px 4px 0;
+      -moz-border-radius: 0 4px 4px 0;
+      -ms-border-radius: 0 4px 4px 0;
+      -o-border-radius: 0 4px 4px 0;
+    }
   }
+}
 
+.content {
+  margin: 2.5rem 0 4rem;
+}
+
+.bottom {
+  color: $c-g600;
   a {
-    font-weight: bold;
-    margin-top: 6px;
-    &:hover {
-      text-decoration: underline;
-    }
+    display: block;
   }
+}
 
-  .tab-btns {
-    display: flex;
-    align-items: center;
-    button {
-      &:nth-child(1) {
-        border-radius: 4px 0 0 4px;
-        -webkit-border-radius: 4px 0 0 4px;
-        -moz-border-radius: 4px 0 0 4px;
-        -ms-border-radius: 4px 0 0 4px;
-        -o-border-radius: 4px 0 0 4px;
-      }
-      &:nth-child(2) {
-        border-radius: 0 4px 4px 0;
-        -webkit-border-radius: 0 4px 4px 0;
-        -moz-border-radius: 0 4px 4px 0;
-        -ms-border-radius: 0 4px 4px 0;
-        -o-border-radius: 0 4px 4px 0;
-      }
-    }
-  }
-
+@media (min-width: 769px) {
   .content {
-    margin: 2.5rem 0 4rem;
+    .inner {
+      padding: 0 3rem;
+    }
   }
+}
 
+@media (max-width: 768px) {
+  .content {
+    .inner {
+      padding: 0 1rem;
+    }
+  }
+  a {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
   .bottom {
-    color: $c-g600;
-    a {
-      display: block;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .content {
-      .inner {
-        padding: 0 3rem;
+    p {
+      br {
+        display: none;
       }
     }
   }
-
-  @media (max-width: 768px) {
-    .content {
-      .inner {
-        padding: 0 1rem;
-      }
-    }
-    a {
-      display: block;
-    }
-  }
-
-  @media (max-width: 480px) {
-      .bottom {
-      p {
-        br {
-          display: none;
-        }
-      }
-    }
-  }
+}
 </style>

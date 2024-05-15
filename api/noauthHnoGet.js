@@ -5,16 +5,19 @@ const noauthHnoGet = (hnoNo, scrtky, tokenIssuId, encData, sign) => {
     id: "2.5 홈넘버 조회",
     endpoint: "/safehno/v1/noauth/hno/get",
     headers: "DEFAULT",
+    withCredentials: true,
     data: {
       hnoNo,
       scrtky,
       tokenIssuId,
       encData,
-      sign
+      sign,
     },
     onResponse({ code, data }) {
-      console.log('비회원 홈넘버조회_code: ', code);
-      console.log('비회원 홈넘버조회_data: ', data);
+      localStorage.setItem("hnoSearchType", "single");
+      const shno = useSingleHnoStore();
+      Object.assign(shno, data);
+      return true;
     },
   });
 };

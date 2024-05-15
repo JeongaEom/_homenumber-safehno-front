@@ -1,16 +1,16 @@
 <script setup>
-  useHead({
-    title: "HomNumber",
-  });
+useHead({
+  title: "HomNumber",
+});
 </script>
 
 <template>
   <div>
     <NuxtLayout>
-      <NuxtPage/>
+      <NuxtPage />
+      <Popup />
     </NuxtLayout>
   </div>
 </template>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

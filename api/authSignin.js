@@ -13,17 +13,18 @@ const authSignin = (id, pwd, tokenIssuId, encData, sign) => {
       pwd,
       tokenIssuId,
       encData,
-      sign
+      sign,
     },
     onResponse({ code }) {
-      console.log('로그인_code: ', code);
+      console.log("로그인_code: ", code);
+      localStorage.setItem("hnoSearchType", "multi");
       router.replace({
-        path: '/homenumberList',
+        path: "/homenumberList",
         query: {
           tokenIssuId: app.tokenIssuId,
           encData: app.encData,
-          sign: app.sign
-        }
+          sign: app.sign,
+        },
       });
       return true;
     },
