@@ -9,6 +9,7 @@
     link: { type: Boolean, default: false }, // 이전페이지 사용 여부
     linkAddress: { type: String, default: "" }, //이전으로 이동 시 링크
     text: { type: String, default: "" },
+    number: { type:Number, default: "" },
   });
 
   const eventClick = () => {
@@ -32,7 +33,10 @@
       >
         <img src="@/assets/images/arrow-left.png" alt="이전페이지로">
       </button>
-      <div>{{ p.text }}</div>
+      <div>
+        {{ p.text }}
+        <span v-if="p.number">{{ p.number }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +61,10 @@
         text-align: center;
         font-size: 24px;
         font-weight: bold;
+        span {
+          margin-left: 4px;
+          color: $c-b500;
+        }
       }
     }
   }

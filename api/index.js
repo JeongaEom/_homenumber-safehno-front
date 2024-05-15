@@ -7,6 +7,7 @@ export { default as authSignin } from "./authSignin";
 export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";
 export { default as termsAgree } from "./termsAgree";
+export { default as termsList } from "./termsList";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 const API_HOST = process.env.NODE_ENV === 'development' ? "/api": "https://dev-hno-api.homenumber.co.kr";
@@ -146,14 +147,9 @@ export const call = async (settings) => {
 
     const router = useRouter();
 
-    // 작업 중---------------------------------------
-    // 유효성 검사
-    if (code === 3000) {
-      if(endpoint !== "/session/valid") {
-        return call(settings);
-      } else {
-        return false;
-      }
+    if(code === 4019) {
+      // 4019: 로그인페이지로 이동
+      router.push("/");
     } else if (code === 4020 || code === 4022) {
       // 4020: 토큰이상, 재로그인
       // 4022: 승인대기

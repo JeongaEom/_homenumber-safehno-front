@@ -1,6 +1,8 @@
 import { call } from "@/api";
 
 const authSignin = (id, pwd, tokenIssuId, encData, sign) => {
+  const router = useRouter();
+  const app = useAppStore();
   return call({
     id: "2.3 표준창 로그인",
     endpoint: "/safehno/v1/auth/signin",
@@ -13,14 +15,17 @@ const authSignin = (id, pwd, tokenIssuId, encData, sign) => {
       encData,
       sign
     },
-    onResponse({ code, message }) {
+    onResponse({ code }) {
       console.log('로그인_code: ', code);
-      // alert(message);
-      if (code === 2000) {
-        return true;
-      } else {
-        return false;
-      }
+      router.replace({
+        path: '/homenumberList',
+        query: {
+          tokenIssuId: app.tokenIssuId,
+          encData: app.encData,
+          sign: app.sign
+        }
+      });
+      return true;
     },
   });
 };

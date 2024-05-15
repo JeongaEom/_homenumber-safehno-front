@@ -1,5 +1,5 @@
 <script setup>
-  import { reactive } from "vue";
+  import { reactive, onMounted } from "vue";
   import { useRouter } from 'vue-router';
   import { useAppStore, useHnoMyGetStore } from '@/stores'
   import { hnoMyGet } from "@/api";
@@ -15,13 +15,15 @@
 
   const d = reactive({
     text: "홈넘버",
+    noDataText1: "등록된 홈넘버가",
+    noDataText2: "존재하지 않습니다.",
     selectedhnoNo: [],
     isActive: false,
-    sMyHnoYn: "Y" // (로그인) 마이 홈넘버 조회
+    isMyHnoYn: "Y" // (로그인) 마이 홈넘버 조회
   });
 
   const homenumberInquiry = () => {
-    router.push({
+    router.replace({
       path: '/homenumberInquiry',
       query: {
         tokenIssuId: app.tokenIssuId,
@@ -31,94 +33,72 @@
     });
   };
 
-  const hnbIssuance = () => {
-    router.push({
-      path: '/issuance',
-      query: {
-        tokenIssuId: app.tokenIssuId,
-        encData: app.encData,
-        sign: app.sign
-      }
-    });
-  };
-
-  const fetchHnoMyGet = async() => {
-    const hnoMyGetResult = await hnoMyGet();
-    console.log('hnoMyGetResult: ', hnoMyGetResult);
-
-    console.log('myGet.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
-    console.log('myGet.termsGrpCd: ', myGetStore.termsGrpCd);
-    console.log('myGet.hnos: ', myGetStore.hnos);
-  };
-
-  onMounted(() => {
-    fetchHnoMyGet();
-    console.log('33');
-  });
-
-  const selectClick = (item) => {
-    // 선택된 항목의 인덱스를 찾아 추가하거나 제거하고, isActive 상태를 업데이트
-    const index = d.selectedhnoNo.indexOf(item.hnoNo);
-    if(index > -1) {
-      d.selectedhnoNo.splice(index, 1); // 이미 선택된 항목이면 제거
-    } else {
-      d.selectedhnoNo.push(item.hnoNo); // 선택되지 않은 항목이면 추가
-    }
-
-    d.isActive = d.selectedhnoNo.length > 0; // isActive 상태 업데이트
-
-    // 선택된 항목들의 정보를 문자열로 모아 콘솔에 출력
-    let selectedItemsInfo = d.selectedhnoNo.length > 0 ? '선택된 항목:\n' : '선택된 항목이 없습니다.';
-    d.selectedhnoNo.forEach(hnoNo => {
-      const item = myGetStore.hnos.find(listItem => listItem.hnoNo === hnoNo);
-      if (item) {
-        selectedItemsInfo += `홈넘버: ${item.hnoNo}, 이름: ${item.nm}, 주소: ${item.bassAddr}, 상세주소: ${item.detailAddr}\n`;
-      }
-    });
-    myGetStore.selectedItemsInfo = selectedItemsInfo
-    console.log('data: ', myGetStore.selectedItemsInfo);
-  };
-
-  const modifiClick = (item) => { // 수정
-      router.push({ path: '/modification', query: { hnoNo: item.hnoNo }});
-  };
-
-  const nextClick = async() => {
-    // router.push({
-    //   path: '/personalInformation',
+  const hnbIssuance = () => { //발급
+    // router.replace({
+    //   path: '/issuance',
     //   query: {
     //     tokenIssuId: app.tokenIssuId,
     //     encData: app.encData,
     //     sign: app.sign
     //   }
     // });
-    router.push('/personalInformation');
+    alert('준비중입니다.');
+  };
 
-    myGetStore.sMyHnoYn = d.sMyHnoYn;
-    console.log('d.sMyHnoYn: ', d.sMyHnoYn);
+  const fetchHnoMyGet = async() => {
+    const hnoMyGetResult = await hnoMyGet();
+    console.log('hnoMyGetResult: ', hnoMyGetResult);
+  };
 
-    console.log('myGet.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
-    console.log('myGet.termsGrpCd: ', myGetStore.termsGrpCd);
-    console.log('myGet.hnos: ', myGetStore.hnos);
+  onMounted(() => {
+    fetchHnoMyGet();
+  });
 
-    console.log('myGetStore.sMyHnoYn: ', myGetStore.sMyHnoYn);
-    console.log('myGetStore.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
+  const selectClick = (item) => {
+    // 모든 선택을 취소하고 현재 항목만 선택
+    d.selectedhnoNo = [item.hnoNo];
+
+    // isActive 상태 업데이트
+    d.isActive = true;
+
+
+    // 선택된 항목의 정보를 문자열로 모아 콘솔에 출력
+    const selectedItem = myGetStore.hnos.find(listItem => listItem.hnoNo === item.hnoNo);
+    let selectedItemsInfo = `홈넘버: ${selectedItem.hnoNo}, 이름: ${selectedItem.nm}, 주소: ${selectedItem.bassAddr}, 상세주소: ${selectedItem.detailAddr}\n`;
+    console.log('data: ', selectedItemsInfo);
+  };
+
+  const modifiClick = (item) => { // 수정
+    // router.replace({
+    //   path: '/modification',
+    //   query: { hnoNo: item.hnoNo }
+    // });
+    alert('준비중입니다.');
+  };
+
+  const nextClick = async() => {
+    const selectedItem = myGetStore.hnos.find(listItem => listItem.hnoNo === d.selectedhnoNo[0]);
+    console.log('selectedItem', selectedItem);
+    myGetStore.selectedItem = selectedItem;
+    myGetStore.isMyHnoYn = d.isMyHnoYn;
+    router.replace('/personalInformation');
+    return;
   }
 </script>
 
 <template>
-  <TitleTop :text="d.text" />
+  <TitleTop :text="d.text" :number="myGetStore.hnos.length" />
   <section>
-    <div class="top">
+    <div class="top title">
       <button class="bg-w line-active" @click="homenumberInquiry">홈넘버로 조회</button>
       <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
     </div>
     <div class="contents">
-      <div class="notData" v-if="myGetStore.hnos.length === 0">
-        <img src="@/assets/images/data-no.png" alt="홈넘버 데이터 없음">
-        <p>등록된 홈넘버가</p>
-        <p>존재하지 않습니다.</p>
-      </div>
+      <detallError
+        :noDataText1="d.noDataText1"
+        :noDataText2="d.noDataText2"
+        v-if="myGetStore.hnos.length === 0"
+      />
       <div class="dataList" v-else>
         <ul>
           <li v-for="item in myGetStore.hnos">
@@ -146,15 +126,15 @@
               <ul>
                 <li>
                   <div :class="d.selectedhnoNo.includes(item.hnoNo) ? 'red-active':'default'">
-                    선택
                     <span>
                       <img src="@/assets/images/checkIconOff.png" v-if="!d.selectedhnoNo.includes(item.hnoNo)" alt="미선택">
                       <img src="@/assets/images/checkIconOn.png"  v-if="d.selectedhnoNo.includes(item.hnoNo)" alt="선택">
                     </span>
+                    선택
                   </div>
                 </li>
                 <li>
-                <button @click="modifiClick(item)">수정</button>
+                <button @click.stop="modifiClick(item)">수정</button>
                 </li>
               </ul>
             </div>
@@ -173,36 +153,9 @@
 </template>
 
 <style lang="scss" scoped>
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid $c-g300;
-    button {
-      width: 49%;
-    }
-  }
-
   .contents {
     display: flex;
     flex-direction: column;
-    .notData {
-      width: 12rem;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      img {
-        width: 5rem;
-        margin-bottom: 30px;
-      }
-      p {
-        font-weight: bold;
-        font-size:24px;
-        text-align: center;
-      }
-    }
   }
   @media (min-width: 769px) {
     section {

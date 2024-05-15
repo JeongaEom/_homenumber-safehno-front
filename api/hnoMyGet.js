@@ -15,7 +15,7 @@ const hnoMyGet = () => {
       myGetStore.termsGrpCd = data.termsGrpCd,
       myGetStore.hnos = data.hnos.map(hno => ({
         hnoNo: hno.hnoNo,
-        virtlHnoNo: hno.virtlHnoNo,
+        subCd: hno.subCd,
         nm: hno.nm,
         moblphonNo: hno.moblphonNo,
         postNo: hno.postNo,
@@ -27,7 +27,7 @@ const hnoMyGet = () => {
       console.log('myGet.infoProvAuthNo!: ', myGetStore.infoProvAuthNo);
       console.log('myGet.termsGrpCd!: ', myGetStore.termsGrpCd);
       console.log('myGet.hnos!: ', myGetStore.hnos);
-
+      // console.log('myGet.hno: ', myGetStore.hnos.hnoNo);
       return true;
     },
   });

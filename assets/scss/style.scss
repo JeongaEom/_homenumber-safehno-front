@@ -197,7 +197,7 @@ section {
                       align-items: center;
                       justify-content: flex-end;
                       >span {
-                        margin-left: 6px;
+                        margin-right: 6px;
                         >img {
                           width: 24px;
                         }
@@ -476,6 +476,13 @@ button.red-active {
   align-items: center;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid $c-g700;
+}
+
+.title {
+  border-bottom: 2px solid $c-g300;
+  button {
+    width: 49%;
+  }
 }
 
 /* input 디자인 폼 */

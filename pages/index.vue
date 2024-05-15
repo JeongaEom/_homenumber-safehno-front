@@ -18,8 +18,10 @@
     idType: "",
     texts: "",
     btntexts: "재시도",
-    id: "",
-    pwd: "",
+    // id: "",
+    // pwd: "",
+    id: "jaeom50",
+    pwd: "eja3249eja**",
   });
 
   const params = new URLSearchParams(window.location.search);
@@ -32,7 +34,7 @@
   app.sign = sign;
 
   const homenumberInquiry = () => { // 홈넘버로 조회
-    router.push({
+    router.replace({
       path: '/homenumberInquiry',
       query: {
         tokenIssuId: app.tokenIssuId,
@@ -66,15 +68,6 @@
 
     const loginResult = await authSignin(d.id, d.pwd, app.tokenIssuId, app.encData, app.sign);
 
-    router.push({
-      path: '/homenumberList',
-      query: {
-        tokenIssuId: app.tokenIssuId,
-        encData: app.encData,
-        sign: app.sign
-      }
-    });
-
     console.log('d.id: ', d.id);
     console.log('d.pwd: ', d.pwd);
     console.log('loginResult: ', loginResult);
@@ -85,7 +78,9 @@
   };
 
   const signupClick = () => {
-    router.push('/signup');
+    router.push('/error');
+    // router.push('/signup');
+    // alert('준비중입니다.');
   };
 </script>
 

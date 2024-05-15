@@ -1,9 +1,10 @@
 <script setup>
-  import { reactive } from "vue";
-  import { useHnoMyGetStore } from '@/stores'
-  import { termsAgree } from "@/api";
+  import { reactive, onMounted } from "vue";
+  import { useHnoMyGetStore, useTermsStore } from '@/stores'
+  import { termsAgree, termsList } from "@/api";
 
   const myGetStore = useHnoMyGetStore();
+  const termsStore = useTermsStore();
 
   definePageMeta({
     name: "personalInformation",
@@ -12,9 +13,10 @@
   const d = reactive({
     text: "개인정보 제3자 제공 동의",
     isActive: false,
+    termsGrpCd: "1010005",
     termsCd: "1020007",
     termsVer: "1",
-    isMyHnoYn: "Y", // Y 회원 홈넘버, N 비회원 홈넘버
+    // isMyHnoYn: "Y", // Y 회원 홈넘버, N 비회원 홈넘버
     dataList: [
       {
         termsCd: "1020007",
@@ -31,8 +33,7 @@
             </div>
           </div>
         `,
-        termsList: [],
-        termsAgreEssntlYn: "Y"
+        // termsList: [],
       },
     ],
     termsList: [],
@@ -47,24 +48,35 @@
     }
   }
 
+  const listTerms = async () => {
+    const termsResult =  await termsList(d.termsGrpCd);
+
+    console.log('listTerms: ', termsResult);
+    console.log('myGetStore.isMyHnoYn: ', myGetStore.isMyHnoYn);
+
+    console.log('termsStore.termsGrpNm : ', termsStore);
+  };
+
+  onMounted(() => {
+    listTerms();
+  });
+
   const endClick = async () => {
-    const terms = await termsAgree(
-      myGetStore.hnoNo,
-      myGetStore.virtlHnoNo,
+    const termsD = await termsAgree(
+      myGetStore.selectedItem.hnoNo,
+      myGetStore.selectedItem.subCd,
       myGetStore.infoProvAuthNo,
       d.termsCd,
       d.termsVer,
-      d.isMyHnoYn
+      myGetStore.isMyHnoYn
     );
-  }
 
-  console.log('termsAgree: ', terms);
-    console.log('myGetStore.hnoNo: ', myGetStore.hnoNo);
-    console.log('myGetStore.virtlHnoNo: ', myGetStore.virtlHnoNo);
-    console.log('myGetStore.infoProvAuthNo: ', myGetStore.infoProvAuthNo);
-    console.log('d.termsCd: ', d.termsCd);
-    console.log('d.termsVer: ', d.termsVer);
-    console.log('d.isMyHnoYn: ', d.isMyHnoYn);
+
+    console.log('termsD: ', termsD);
+
+    console.log('myGetStore.selectedItem: ', myGetStore.selectedItem);
+
+  }
 </script>
 
 <template>
@@ -72,7 +84,6 @@
   <section>
     <div class="contents">
       <div v-for="item in d.dataList">
-        <!-- <div v-if="d.termsAgreEssntlYn = 'Y'"> -->
           <input
             type="checkbox"
             id="01"
@@ -91,7 +102,6 @@
           <div class="textDatas">
             <div class="inner" v-html="item.data"></div>
           </div>
-        <!-- </div> -->
         <div>
           <ul>
             <li>
@@ -131,7 +141,7 @@
   ul {
     >li {
       line-height: 20.7px;
-    margin-bottom: 16px;
+      margin-bottom: 16px;
       div {
         &:nth-child(1) {
           font-weight: bold;
