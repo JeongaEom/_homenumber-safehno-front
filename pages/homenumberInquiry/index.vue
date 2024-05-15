@@ -20,10 +20,10 @@
     noDataText2: "존재하지 않습니다.",
     login: true, // (임시) 로그인 여부
     data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
-    // hnoNo: "",
-    // scrtky: "",
-    hnoNo: "10042032300",
-    scrtky: "7220",
+    hnoNo: "",
+    scrtky: "",
+    // hnoNo: "10042032300",
+    // scrtky: "7220",
     list: [ // (임시)
       {
         homeNb: '10010001004',
