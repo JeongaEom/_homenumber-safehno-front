@@ -1,12 +1,18 @@
 export const API_DEBUG = true;
+export const FE_DOMAIN =
+  import.meta.env.MODE === "development"
+    ? "https://dev-safehno.homenumber.co.kr"
+    : import.meta.env.MODE === "production"
+      ? "https://dev-safehno.homenumber.co.kr"
+      : "http://localhost:3002";
 export const API_HOST =
   import.meta.env.MODE === "build"
-    ? "" :
-  import.meta.env.MODE === "dev"
-  //   ? "https://dev-metasafe-api.homenumbermeta.com/msafe/v1" :
-  // import.meta.env.MODE === "json"
-    ? "http://localhost:5000/safehno/v1/" :
-    "";
+    ? ""
+    : import.meta.env.MODE === "dev"
+      ? //   ? "https://dev-metasafe-api.homenumbermeta.com/msafe/v1" :
+        // import.meta.env.MODE === "json"
+        "http://localhost:5000/safehno/v1/"
+      : "";
 
 // export const FE_DOMAIN =
 //   import.meta.env.MODE === "build"

@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 
 definePageMeta({
-  name: "test",
+  name: "test"
 });
 
 const d = reactive({
@@ -10,7 +10,7 @@ const d = reactive({
   tokenIssuId: "240411132224EX7G",
   encData:
     "j1l7oOjyXvGJmukvCRhQwzENMDVS%2B26pKyKUOhhNLC%2FH%2B%2BswQjmG24qgIeyvLYolANUb2FNrfrbC0Hrvy9yCEVXW4XhoNuu%2FPrXChszEKIeDtJz6q%2BOdFD0wHYhF1qftVaV2HyWBb7s8EDYETsTwJrUBOplIxtiJKI275KVynxi24zUp2%2Br7LQXd4PLhk9PVwegFCvlks9ejwVeklteOKg%3D%3D",
-  sign: "XHMACEwxMeve3fbicto6uBjT%2FA%2FMoyQ0nZ%2BPqIuNFHw%3D",
+  sign: "XHMACEwxMeve3fbicto6uBjT%2FA%2FMoyQ0nZ%2BPqIuNFHw%3D"
 });
 
 const eventClick = () => {

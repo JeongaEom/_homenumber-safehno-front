@@ -46,7 +46,36 @@ const listTerms = async () => {
   console.log("termsStore : ", termsStore.data[0].termsCn);
 };
 
+const CB_MESSAGE = (e) => {
+  const { origin, data } = e;
+  if (data.msg === "SAFE_HNO_SUCCESS") {
+    console.log("SAFE_HNO_SUCCESS 👇");
+    console.log(data);
+    if (confirm("확인을 누르면 URL 이동")) {
+      location.href = data.retUrl;
+    }
+  }
+};
+
 onMounted(() => {
+  // @TEMP
+  // setTimeout(() => {
+  //   const width = 480;
+  //   const height = 820;
+  //   const left = window.screen.width / 2 - width / 2;
+  //   const top = window.screen.height / 2 - height / 2;
+  //   const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
+  //   const link =
+  //     process.env.NODE_ENV === "development"
+  //       ? `http://localhost:3002`
+  //       : `https://dev-safehno.homenumber.co.kr/`;
+  //   const url = `http://localhost:3002/safe-hno-success`;
+  //   window.open(url, "_blank", windowFeatures);
+  // }, 3000);
+
+  // POSTMESSAGE 대기
+  window.addEventListener("message", CB_MESSAGE);
+
   // 조회 타입이 회원(multi)인 경우에 새로고침 처리
   if (hnoSearchType === "multi" && !myGetStore.selectedItem.hnoNo) {
     router.replace("/homenumberList");
@@ -65,6 +94,11 @@ onMounted(() => {
     };
   }
   listTerms();
+});
+
+onBeforeUnmount(() => {
+  // POSTMESSAGE 대기 해제
+  window.removeEventListener("message", CB_MESSAGE);
 });
 
 const endClick = async () => {
