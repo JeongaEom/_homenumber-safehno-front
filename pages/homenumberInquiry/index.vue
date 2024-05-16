@@ -11,7 +11,7 @@ const app = useAppStore();
 const shno = useSingleHnoStore();
 
 definePageMeta({
-  name: "homenumberInquiry",
+  name: "homenumberInquiry"
 });
 
 const d = reactive({
@@ -30,6 +30,7 @@ const d = reactive({
   scrtky: "1234",
   list: [
     // (임시)
+
     {
       homeNb: "10010001004",
       info: "회사",
@@ -37,9 +38,9 @@ const d = reactive({
       hp: "01012345678",
       addressNb: "06735",
       address: "서울특별시 서초구 강남대로 241",
-      address1: "9층",
-    },
-  ],
+      address1: "9층"
+    }
+  ]
 });
 
 console.log("d.hnoNo1: ", d.hnoNo);
@@ -77,26 +78,14 @@ const eventClick = async () => {
   console.log("sign: ", app.sign);
 };
 
-// const formatName = (name) => {
-//   if(name.length < 2) { // 이름이 2글자 미만인 경우 그대로 반환
-//     return name;
-//   }
-//   return name.substring(0, 1) + '*' + name.substring(2);
-// };
-
 const homenumberlogin = () => {
-  // if () {
-
-  // } else {
-
-  // }
   router.replace({
     path: "/",
     query: {
       tokenIssuId: app.tokenIssuId,
       encData: app.encData,
-      sign: app.sign,
-    },
+      sign: app.sign
+    }
   });
 };
 
@@ -106,8 +95,8 @@ const hnbIssuance = () => {
     query: {
       tokenIssuId: app.tokenIssuId,
       encData: app.encData,
-      sign: app.sign,
-    },
+      sign: app.sign
+    }
   });
 };
 
@@ -119,10 +108,6 @@ const nextClick = () => {
 <template>
   <TitleTop :hasBackButton="d.backAction" text="홈넘버로 조회" />
   <section>
-    <!-- <div class="top title" v-if="d.data">
-      <button class="bg-w line-active" @click="homenumberlogin">회원</button>
-      <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
-    </div> -->
     <div :class="!d.data ? 'contents no-data' : 'contents'">
       <div v-if="!d.data">
         <input
@@ -180,9 +165,11 @@ const nextClick = () => {
 .contents {
   display: flex;
   flex-direction: column;
+  height: 514px;
 }
+
 .contents.no-data {
-  min-height: 477px;
+  height: 477px;
 }
 
 @media (min-width: 769px) {

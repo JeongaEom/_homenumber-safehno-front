@@ -9,7 +9,7 @@ const shno = useSingleHnoStore();
 const router = useRouter();
 
 definePageMeta({
-  name: "personalInformation",
+  name: "personalInformation"
 });
 
 // 조회 타입
@@ -22,7 +22,7 @@ const d = reactive({
   termsCd: "1020007",
   termsVer: "1",
   termsWithoutFirst: [],
-  modelValue: false,
+  modelValue: false
 });
 
 const handleCheckboxChange = () => {
@@ -61,7 +61,7 @@ onMounted(() => {
       hasClose: false,
       onConfirm: () => {
         router.replace("/homenumberInquiry");
-      },
+      }
     };
   }
   listTerms();
@@ -76,7 +76,7 @@ const endClick = async () => {
           myGetStore.infoProvAuthNo,
           d.termsCd,
           d.termsVer,
-          "Y",
+          "Y"
         ]
       : [
           shno.hnoNo,
@@ -84,7 +84,7 @@ const endClick = async () => {
           shno.infoProvAuthNo,
           d.termsCd,
           d.termsVer,
-          "N",
+          "N"
         ];
   await termsAgree(...params);
 };

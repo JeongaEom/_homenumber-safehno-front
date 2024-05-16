@@ -10,7 +10,7 @@ const app = useAppStore();
 // 페이지 메타 설정
 definePageMeta({
   layout: "login",
-  name: "main",
+  name: "main"
 });
 
 const d = reactive({
@@ -21,7 +21,7 @@ const d = reactive({
   // id: "",
   // pwd: "",
   id: "jaeom50",
-  pwd: "eja3249eja**",
+  pwd: "eja3249eja**"
 });
 
 const params = new URLSearchParams(window.location.search);
@@ -51,8 +51,8 @@ const homenumberInquiry = () => {
     query: {
       tokenIssuId: app.tokenIssuId,
       encData: app.encData,
-      sign: app.sign,
-    },
+      sign: app.sign
+    }
   });
 };
 
@@ -75,6 +75,7 @@ const loginClick = async () => {
 };
 
 const signupClick = () => {
+  // router.push('/signup');
   alert("준비중입니다.");
 };
 </script>

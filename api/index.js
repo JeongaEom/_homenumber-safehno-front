@@ -14,9 +14,6 @@ const API_HOST =
   process.env.NODE_ENV === "development"
     ? "/api"
     : "https://dev-hno-api.homenumber.co.kr";
-
-// const { public: { apiHost } } = useRuntimeConfig();
-// const API_HOST = apiHost;
 const API_DEBUG = true;
 
 console.log("API 호스트:", API_HOST);
@@ -24,27 +21,26 @@ console.log("API 호스트:", API_HOST);
 export const commonHeaders = {
   "Content-Type": "application/json;charset=UTF-8",
   appId: "SAFEHNO",
-  apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92",
+  apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92"
 };
 
 export const getPresetHeaders = (headers = {}) => {
-  // Authorization 없음 (서버에서 쿠키로 처리)
   if (typeof headers === "string") {
     // headers가 문자열인 경우
     const base = {
       "Content-Type": commonHeaders["Content-Type"],
       appId: commonHeaders["appId"],
-      apikey: commonHeaders["apikey"],
+      apikey: commonHeaders["apikey"]
     };
     switch (headers) {
       case "DEFAULT":
         return {
-          ...base,
+          ...base
         };
       case "DEFAULT_FORM":
         return {
           ...base,
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/x-www-form-urlencoded"
         };
       case "PUBLIC":
         return base;
@@ -60,7 +56,7 @@ export const getPresetHeaders = (headers = {}) => {
     // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
     return {
       ...commonHeaders,
-      ...headers,
+      ...headers
     };
   }
 
@@ -72,7 +68,7 @@ const defaultErrorProc = (error) => {
   const app = useAppStore();
   app.error = {
     type: "alert",
-    message: error.response?.data?.message,
+    message: error.response?.data?.message
   };
   return false;
 
@@ -106,7 +102,7 @@ export const call = async (settings) => {
     data = {},
     onResponse,
     onError,
-    onFinally,
+    onFinally
   } = settings;
 
   // 선행 조건 확인
@@ -136,7 +132,7 @@ export const call = async (settings) => {
     headers: getPresetHeaders(headers),
     data,
     // 쿠키 기반 인증 (axios)
-    withCredentials: withCredentials !== undefined ? withCredentials : false,
+    withCredentials: withCredentials !== undefined ? withCredentials : false
   })
     .then((res) => {
       const { data, config } = res;
@@ -148,7 +144,7 @@ export const call = async (settings) => {
       return onResponse({
         code: data.code,
         data: data.data,
-        message: data.message,
+        message: data.message
       });
     })
 

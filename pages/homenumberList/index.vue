@@ -10,7 +10,7 @@ const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
 
 definePageMeta({
-  name: "homenumberList",
+  name: "homenumberList"
 });
 
 const d = reactive({
@@ -18,7 +18,7 @@ const d = reactive({
   noDataText: "등록된 홈넘버가<br/>존재하지 않습니다.",
   selectedhnoNo: [],
   isActive: false,
-  isMyHnoYn: "Y", // (로그인) 마이 홈넘버 조회
+  isMyHnoYn: "Y" // (로그인) 마이 홈넘버 조회
 });
 
 const homenumberInquiry = () => {
@@ -27,8 +27,8 @@ const homenumberInquiry = () => {
     query: {
       tokenIssuId: app.tokenIssuId,
       encData: app.encData,
-      sign: app.sign,
-    },
+      sign: app.sign
+    }
   });
 };
 
@@ -92,11 +92,14 @@ const nextClick = async () => {
 
 <template>
   <TitleTop :text="d.text" :number="myGetStore.hnos.length" />
+  <button class="bg-w line-active top-btn" @click="hnbIssuance">
+    홈넘버 추가
+  </button>
   <section>
-    <div class="top title">
-      <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
-    </div>
-    <div class="contents">
+    <div
+      class="contents"
+      :class="myGetStore.hnos.length === 0 ? 'no-data' : ''"
+    >
       <detallError
         :noDataText="d.noDataText"
         v-if="myGetStore.hnos.length === 0"
@@ -177,7 +180,19 @@ const nextClick = async () => {
 .contents {
   display: flex;
   flex-direction: column;
+  height: 540px;
+  margin-top: 0;
 }
+.no-data {
+  height: 598px;
+}
+.top-btn {
+  position: absolute;
+  width: 120px;
+  right: 20px;
+  top: 86px;
+}
+
 @media (min-width: 769px) {
   section {
     > .contents {
