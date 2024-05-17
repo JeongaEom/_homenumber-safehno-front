@@ -11,22 +11,34 @@ const termsAgree = (
 ) => {
   return call({
     id: "2.6 홈넘버 정보 제공 동의",
-    method: "get",
-    endpoint:
-      "/safehno/web/provhno/terms/agree?" +
-      qs.stringify({
-        hnoNo,
-        subCd,
-        infoProvAuthNo,
-        termsCd,
-        termsVer,
-        isMyHnoYn
-      }),
-    headers: "DEFAULT_FORM",
+    endpoint: "/safehno/v1/provhno/terms/agree",
+    headers: "DEFAULT",
     withCredentials: true,
+    data: {
+      hnoNo,
+      subCd,
+      infoProvAuthNo,
+      termsCd,
+      termsVer,
+      isMyHnoYn
+    },
     onResponse({ code, data }) {
-      console.log("3자_code: ", code);
-      console.log("3자_data: ", data);
+      // const targetUrl =
+      //   import.meta.env.MODE === "development"
+      //     ? "https://dev-safehno.homenumber.co.kr"
+      //     : "http://localhost:3002";
+
+      window.opener.postMessage(
+        {
+          msg: "SAFE_HNO_SUCCESS",
+          tokenIssuId: data.tokenIssuId,
+          encData: data.encData,
+          sign: data.sign,
+          retUrl: data.retUrl
+        },
+        data.retUrl
+      );
+      window.close();
     }
   });
 };
