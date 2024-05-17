@@ -1,12 +1,11 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useAppStore, useHnoMyGetStore } from "@/stores";
+import { useHnoMyGetStore } from "@/stores";
 import { hnoMyGet } from "@/api";
 import { formatNb } from "@/utils";
 
 const router = useRouter();
-const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
 
 definePageMeta({
@@ -21,31 +20,14 @@ const d = reactive({
   isMyHnoYn: "Y" // (로그인) 마이 홈넘버 조회
 });
 
-const homenumberInquiry = () => {
-  router.replace({
-    path: "/homenumberInquiry",
-    query: {
-      tokenIssuId: app.tokenIssuId,
-      encData: app.encData,
-      sign: app.sign
-    }
-  });
-};
-
 const hnbIssuance = () => {
   //발급
-  // router.replace({
-  //   path: '/issuance',
-  //   query: {
-  //     tokenIssuId: app.tokenIssuId,
-  //     encData: app.encData,
-  //     sign: app.sign
-  //   }
-  // });
-  alert("준비중입니다.");
+  router.replace("/issuance");
+  // alert("준비중입니다.");
 };
 
 const fetchHnoMyGet = async () => {
+  // 리스트
   const hnoMyGetResult = await hnoMyGet();
   console.log("hnoMyGetResult: ", hnoMyGetResult);
 };
@@ -71,11 +53,8 @@ const selectClick = (item) => {
 
 const modifiClick = (item) => {
   // 수정
-  // router.replace({
-  //   path: '/modification',
-  //   query: { hnoNo: item.hnoNo }
-  // });
-  alert("준비중입니다.");
+  router.replace("/modification");
+  // alert("준비중입니다.");
 };
 
 const nextClick = async () => {
@@ -86,15 +65,14 @@ const nextClick = async () => {
   myGetStore.selectedItem = selectedItem;
   myGetStore.isMyHnoYn = d.isMyHnoYn;
   router.push("/personalInformation");
-  return;
 };
 </script>
 
 <template>
   <TitleTop :text="d.text" :number="myGetStore.hnos.length" />
-  <button class="bg-w line-active top-btn" @click="hnbIssuance">
-    홈넘버 추가
-  </button>
+  <div class="top-btn">
+    <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
+  </div>
   <section>
     <div
       class="contents"
@@ -188,9 +166,14 @@ const nextClick = async () => {
 }
 .top-btn {
   position: absolute;
-  width: 120px;
-  right: 20px;
-  top: 86px;
+  width: 480px;
+  height: 50px;
+  top: 91px;
+  button {
+    width: 120px;
+    position: absolute;
+    right: 18px;
+  }
 }
 
 @media (min-width: 769px) {

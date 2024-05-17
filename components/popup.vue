@@ -12,7 +12,13 @@ const closeClick = () => {
     <div class="inner">
       <div class="top-ct">
         <div>알림</div>
-        <div v-if="app.error?.hasClose !== false" @click="closeClick">X</div>
+        <div
+          class="close"
+          v-if="app.error?.hasClose !== false"
+          @click="closeClick"
+        >
+          <img src="@/assets/images/icon-close.png" alt="닫기" />
+        </div>
       </div>
       <div class="body-ct">
         {{ app.error?.message }}
@@ -26,13 +32,12 @@ const closeClick = () => {
 
 <style lang="scss" scoped>
 .popup {
-  position: fixed;
+  position: absolute;
   z-index: 1;
-  left: 0;
   top: 0;
   height: 100%;
   overflow: auto;
-  /*background-color: rgba(0, 0, 0, 0.4);*/
+  width: 430px;
   .inner {
     background-color: #fefefe;
     margin: 17rem auto;
@@ -60,11 +65,13 @@ const closeClick = () => {
     }
   }
 }
+.close {
+  width: 20px;
+  cursor: pointer;
+}
 
 @media (min-width: 481px) {
   .popup {
-    width: 480px;
-    left: 36.3%;
     .inner {
       width: 350px;
     }
@@ -73,7 +80,7 @@ const closeClick = () => {
 
 @media (max-width: 480px) {
   .popup {
-    width: 100%;
+    width: 88%;
     .inner {
       width: 80%;
     }

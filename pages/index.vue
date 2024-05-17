@@ -19,7 +19,7 @@ const d = reactive({
   texts: "",
   btntexts: "재시도",
   // id: "",
-  // pwd: "",
+  // pwd: ""
   id: "jaeom50",
   pwd: "eja3249eja**"
 });
@@ -46,14 +46,7 @@ app.sign = sign;
 
 const homenumberInquiry = () => {
   // 홈넘버로 조회
-  router.replace({
-    path: "/homenumberInquiry",
-    query: {
-      tokenIssuId: app.tokenIssuId,
-      encData: app.encData,
-      sign: app.sign
-    }
-  });
+  router.replace("/homenumberInquiry");
 };
 
 const loginClick = async () => {
@@ -64,14 +57,7 @@ const loginClick = async () => {
     app.encData,
     app.sign
   );
-
-  console.log("d.id: ", d.id);
-  console.log("d.pwd: ", d.pwd);
   console.log("loginResult: ", loginResult);
-
-  console.log("tokenIssuId: ", app.tokenIssuId);
-  console.log("encData: ", app.encData);
-  console.log("sign: ", app.sign);
 };
 
 const signupClick = () => {
