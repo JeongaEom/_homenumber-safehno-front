@@ -1,15 +1,12 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { useAppStore } from "@/stores";
 
 const router = useRouter();
-const app = useAppStore();
 
 const p = defineProps({
-  link: { type: Boolean, default: false }, // 이전페이지 사용 여부
   text: { type: String, default: "" },
   number: { type: Number, default: "" },
-  hasBackButton: { default: false },
+  hasBackButton: { default: false }
 });
 
 const eventClick = () => {

@@ -5,26 +5,18 @@ import { useEndDataStore } from "@/stores";
 const endDataStore = useEndDataStore();
 
 definePageMeta({
-  name: "issuance",
-  // middleware: [
-  //   function (to, from) {
-  //     // 로직 inline 정의
-  //  },
-  //   'app',
-  // ],
+  name: "issuance"
 });
 
 const d = reactive({
   text: "홈넘버 발급",
   isActive: false,
-  completed: false,
+  completed: false
 });
 
 const endClick = () => {
   endDataStore.endData = "1"; //발급
   d.completed = true;
-  // router.push('/completed');
-  // 필수입력 완료시
   d.isActive = true;
   console.log("endDataStore.endData : ", endDataStore.endData);
 };

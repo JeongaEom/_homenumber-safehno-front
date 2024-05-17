@@ -3,7 +3,6 @@ import { reactive, computed } from "vue";
 import { useRouter } from "vue-router";
 import { noauthHnoGet } from "@/api";
 import { useAppStore } from "@/stores";
-// import { formatNb } from '@/utils';
 
 const route = useRoute();
 const router = useRouter();
@@ -24,31 +23,11 @@ const d = reactive({
   },
   login: true, // (임시) 로그인 여부
   data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
-  // hnoNo: "",
-  // scrtky: "",
-  hnoNo: "10034205960",
-  scrtky: "1234",
-  list: [
-    // (임시)
-
-    {
-      homeNb: "10010001004",
-      info: "회사",
-      name: "홍**동",
-      hp: "01012345678",
-      addressNb: "06735",
-      address: "서울특별시 서초구 강남대로 241",
-      address1: "9층"
-    }
-  ]
+  hnoNo: "",
+  scrtky: ""
+  // hnoNo: "10034205960",
+  // scrtky: "1234"
 });
-
-console.log("d.hnoNo1: ", d.hnoNo);
-console.log("d.scrtky1: ", d.scrtky);
-
-console.log("tokenIssuId1: ", app.tokenIssuId);
-console.log("encData1: ", app.encData);
-console.log("sign1: ", app.sign);
 
 onMounted(() => {
   if (shno.hnoNo) {
@@ -68,36 +47,6 @@ const eventClick = async () => {
   if (noauth) {
     d.data = true;
   }
-
-  console.log("d.hnoNo: ", d.hnoNo);
-  console.log("d.scrtky: ", d.scrtky);
-  console.log("noauth: ", noauth);
-
-  console.log("tokenIssuId: ", app.tokenIssuId);
-  console.log("encData: ", app.encData);
-  console.log("sign: ", app.sign);
-};
-
-const homenumberlogin = () => {
-  router.replace({
-    path: "/",
-    query: {
-      tokenIssuId: app.tokenIssuId,
-      encData: app.encData,
-      sign: app.sign
-    }
-  });
-};
-
-const hnbIssuance = () => {
-  router.replace({
-    path: "/issuance",
-    query: {
-      tokenIssuId: app.tokenIssuId,
-      encData: app.encData,
-      sign: app.sign
-    }
-  });
 };
 
 const nextClick = () => {
@@ -165,7 +114,8 @@ const nextClick = () => {
 .contents {
   display: flex;
   flex-direction: column;
-  height: 514px;
+  height: 540px;
+  margin-top: 0;
 }
 
 .contents.no-data {
