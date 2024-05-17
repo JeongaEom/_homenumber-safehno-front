@@ -165,14 +165,10 @@ const nextClick = async () => {
   height: 598px;
 }
 .top-btn {
-  position: absolute;
-  width: 480px;
-  height: 50px;
-  top: 91px;
+  position: relative;
   button {
     width: 120px;
     position: absolute;
-    right: 18px;
   }
 }
 
@@ -182,6 +178,12 @@ const nextClick = async () => {
       height: 438px;
     }
   }
+  .top-btn {
+    top: -61px;
+    button {
+      right: 24px;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -189,6 +191,12 @@ const nextClick = async () => {
     > .contents {
       padding: 0;
       min-height: 443px;
+    }
+  }
+  .top-btn {
+    top: -75px;
+    button {
+      right: 14px;
     }
   }
 }
