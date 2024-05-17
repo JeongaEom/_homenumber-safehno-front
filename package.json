@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "cross-env NUXT_PORT=3002 nuxt dev",
     "build": "nuxt build",
-    "generate-dev": "cross-env NUXT_ENV=development nuxt generate",
-    "generate-live": "cross-env NUXT_ENV=production nuxt generate",
+    "generate-dev": "cross-env NUXT_PUBLIC_ENV_MODE=development nuxt generate",
+    "generate-live": "cross-env NUXT_PUBLIC_ENV_MODE=production nuxt generate",
     "deploy-dev": "aws s3 --profile homnumbermeta-dev sync C:/Workspace/GitLab/homenumber-safehno-front/.output/public s3://dev-safehno-front",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
