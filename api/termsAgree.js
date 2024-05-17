@@ -23,11 +23,6 @@ const termsAgree = (
       isMyHnoYn
     },
     onResponse({ code, data }) {
-      // const targetUrl =
-      //   import.meta.env.MODE === "development"
-      //     ? "https://dev-safehno.homenumber.co.kr"
-      //     : "http://localhost:3002";
-
       window.opener.postMessage(
         {
           msg: "SAFE_HNO_SUCCESS",

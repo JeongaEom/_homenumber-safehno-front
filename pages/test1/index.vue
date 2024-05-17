@@ -9,8 +9,13 @@ const d = reactive({
   text: "홈넘버표준창 테스트",
   tokenIssuId: "240411132224EX7G",
   encData:
-    "j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0%2FIUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B%2FQBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ%2Fpf8dZqYQ%2Fl7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa",
-  sign: "BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI%3D",
+    uEnvMode() === "development"
+      ? "j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0%2FIUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B%2FQBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ%2Fpf8dZqYQ%2Fl7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa"
+      : "YwrxijOMIHDD03RTfWJMGuZ0i6VuovO2wxep2sMp1xdc%2F0ES5mD%2FIQfn8yM8L%2Fyt2M09xTfXiMVy1%2BzhNEPWW%2BRhQShkVq618wl5IeTl4xtvs42s3iB%2FmO4iyn8JXtcB2c0ePA5Mk7Qs3KODwUxZYo%2FJpKtMqcZTdbtC3IAwN4Y%3D",
+  sign:
+    uEnvMode() === "development"
+      ? "BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI%3D"
+      : "YcVRDalSiNwTemzHLVPiBN%2B7DLcNlNbZuM5K4J4VGwE%3D",
   result: null
 });
 
@@ -42,6 +47,7 @@ const CB_MESSAGE = (e) => {
 onMounted(() => {
   // POSTMESSAGE 대기
   window.addEventListener("message", CB_MESSAGE);
+  console.log("uEnvMode - ", uEnvMode());
 });
 
 onBeforeUnmount(() => {
@@ -107,6 +113,7 @@ section > .contents {
   .result-item {
     margin-top: 15px;
     font-size: 18px;
+    word-wrap: break-word;
   }
 }
 </style>
