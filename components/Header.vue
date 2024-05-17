@@ -40,8 +40,8 @@ header {
     right: 24px;
     top: 24px;
     cursor: pointer;
-    filter: invert(25%) sepia(28%) saturate(389%) hue-rotate(180deg)
-      brightness(87%) contrast(92%);
+    filter: invert(98%) sepia(2%) saturate(373%) hue-rotate(181deg)
+      brightness(98%) contrast(89%);
   }
 }
 </style>
