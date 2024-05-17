@@ -36,7 +36,7 @@ const eventClick = () => {
 };
 
 const CB_MESSAGE = (e) => {
-  const { origin, data } = e;
+  const { data } = e;
   if (data.msg === "SAFE_HNO_SUCCESS") {
     console.log("SAFE_HNO_SUCCESS 👇");
     console.log(data);

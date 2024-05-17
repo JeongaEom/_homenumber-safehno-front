@@ -8,6 +8,8 @@ export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";
 export { default as termsAgree } from "./termsAgree";
 export { default as termsList } from "./termsList";
+export { default as hnoIssDo } from "./hnoIssDo";
+export { default as hnoDupchk } from "./hnoDupchk";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 const API_HOST =
@@ -187,7 +189,7 @@ export const call = async (settings) => {
 
       // 에러 처리를 정의해 놓은 경우
       if (onError) {
-        let errorResult = undefined;
+        let errorResult;
         if (typeof onError === "function") {
           errorResult = onError(code);
         } else {
@@ -204,7 +206,7 @@ export const call = async (settings) => {
     .finally(() => {
       // 로딩 중
       app.apiQueue = app.apiQueue.filter((item) => item !== api);
-      onFinally && onFinally();
+      onFinally?.();
     });
   app.apiQueue.push(api);
   return api;

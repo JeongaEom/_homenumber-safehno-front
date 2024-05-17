@@ -28,8 +28,7 @@ const hnbIssuance = () => {
 
 const fetchHnoMyGet = async () => {
   // 리스트
-  const hnoMyGetResult = await hnoMyGet();
-  console.log("hnoMyGetResult: ", hnoMyGetResult);
+  await hnoMyGet();
 };
 
 onMounted(() => {
@@ -53,7 +52,10 @@ const selectClick = (item) => {
 
 const modifiClick = (item) => {
   // 수정
-  router.replace("/modification");
+  router.replace({
+    path: "/modification",
+    query: { hnoNo: item.hnoNo }
+  });
   // alert("준비중입니다.");
 };
 
@@ -168,7 +170,7 @@ const nextClick = async () => {
 .top-btn {
   position: relative;
   button {
-    width: 120px;
+    width: 100px;
     position: absolute;
   }
 }

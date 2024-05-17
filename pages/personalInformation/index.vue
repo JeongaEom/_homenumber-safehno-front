@@ -34,16 +34,11 @@ const handleCheckboxChange = () => {
 };
 
 const listTerms = async () => {
-  const termsResult = await termsList(d.termsGrpCd);
+  await termsList(d.termsGrpCd);
 
   // 첫번째 배열 값제외하고 리스트 받아오기
   d.termsWithoutFirst = termsStore.data.slice(1);
   termsStore.termsAgreEssntlYn = "Y";
-
-  console.log("listTerms: ", termsResult);
-  console.log("myGetStore.isMyHnoYn: ", myGetStore.isMyHnoYn);
-
-  console.log("termsStore : ", termsStore.data[0].termsCn);
 };
 
 onMounted(() => {

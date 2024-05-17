@@ -1,12 +1,10 @@
 <script setup>
-import { reactive, computed } from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { noauthHnoGet } from "@/api";
-import { useAppStore } from "@/stores";
 
 const route = useRoute();
 const router = useRouter();
-const app = useAppStore();
 const shno = useSingleHnoStore();
 
 definePageMeta({
@@ -21,12 +19,11 @@ const d = reactive({
       router.replace("/");
     }
   },
-  login: true, // (임시) 로그인 여부
   data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
-  hnoNo: "",
-  scrtky: ""
-  // hnoNo: "10034205960",
-  // scrtky: "1234"
+  // hnoNo: "",
+  // scrtky: ""
+  hnoNo: "10034205960",
+  scrtky: "1234"
 });
 
 onMounted(() => {

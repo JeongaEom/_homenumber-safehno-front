@@ -1,6 +1,6 @@
 import { call } from "@/api";
 
-const authSignin = (
+const authSignin = ({
   hnoNo,
   nm,
   moblphonNo,
@@ -9,7 +9,7 @@ const authSignin = (
   detailAddr,
   scrtky,
   addrNcm
-) => {
+}) => {
   return call({
     id: "2.8 표준창 홈넘버 발급",
     endpoint: "/safehno/v1/hno/iss/do",
