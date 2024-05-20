@@ -3,11 +3,12 @@
 import { reactive } from "vue";
 // import { smsCertiReq, smsCertiConfirm, hnoGet, hnoUpdate } from "@/api";
 import { smsCertiReq, smsCertiConfirm, hnoGet } from "@/api";
-import { useAppStore, useEndDataStore } from "@/stores";
+import { useAppStore, useHnoMyGetStore, useEndDataStore } from "@/stores";
 import { formatNb } from "@/utils";
 
-const endDataStore = useEndDataStore();
 const app = useAppStore();
+const myGetStore = useHnoMyGetStore();
+const endDataStore = useEndDataStore();
 
 definePageMeta({
   name: "modification"
@@ -17,6 +18,7 @@ const d = reactive({
   text: "홈넘버 수정",
   isPhone: false, // 휴대폰 인증 확인
   isActive: false,
+  selectedhnoNo: [],
   moblphonNo1: "", // 휴대폰 인증번호 요청
   crtfcNo: "",
   homeNb: "10010001005",
@@ -32,6 +34,9 @@ function limitInputNumber(event, maxLength, field) {
     d[field] = value;
   }
 }
+
+// console.log("myGetStore.hnosDeteil: ", myGetStore.hnosDeteil);
+// console.log("myGetStore.hnosDeteil0: ", myGetStore.hnosDeteil[0]);
 
 const phoneAuth = async () => {
   const phoneReq = await smsCertiReq(d.moblphonNo1);
@@ -124,7 +129,7 @@ const nextClick = () => {
                 <input
                   type="text"
                   placeholder=""
-                  @input="limitInputNumber($event, 25, 'crtfcNo')"
+                  @input="limitInputNumber($event, 6, 'crtfcNo')"
                   v-model="d.crtfcNo"
                 />
                 <button class="bg-w line" @click="phoneAuthCheck">
