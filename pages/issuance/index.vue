@@ -12,9 +12,6 @@ definePageMeta({
 
 const d = reactive({
   text: "홈넘버 발급",
-  // hnoNo1: "123",
-  // hnoNo2: "1222",
-  // hnoNo3: "1222",
   hnoNo1: "",
   hnoNo2: "",
   hnoNo3: "",
@@ -48,16 +45,6 @@ const combinedHnoNo = computed(() => `${d.hnoNo1}${d.hnoNo2}${d.hnoNo3}`);
 
 const dupchk = async () => {
   await hnoDupchk(combinedHnoNo.value);
-  // if (hnoDupchk) {
-  //   const app = useAppStore();
-  //   app.error = {
-  //     type: "alert",
-  //     message: "발급 가능한 홈넘버입니다.",
-  //     hasClose: false
-  //   };
-  // }
-  // const resultData = JSON.stringify(data, null, 2);
-  // console.log(resultData);
 };
 
 onMounted(() => {
@@ -121,23 +108,7 @@ const endClick = async () => {
     d.completed = true;
     d.isActive = true;
   }
-
-  // consol.log("hnoIssDo: ", hnoIssDo);
   console.log("endDataStore.endData : ", endDataStore.endData);
-
-  console.log("d.hnoNo1_: ", d.hnoNo1);
-  console.log("d.hnoNo2_: ", d.hnoNo2);
-  console.log("d.hnoNo3_: ", d.hnoNo3);
-
-  console.log("combinedHnoNo.value: ", combinedHnoNo.value);
-  console.log("d.nm: ", d.nm);
-  console.log("d.moblphonNo: ", d.moblphonNo);
-  console.log("d.postNo: ", d.postNo);
-  console.log("d.bassAddr: ", d.bassAddr);
-  console.log("d.detailAddr: ", d.detailAddr);
-  console.log("d.scrtky: ", d.scrtky);
-  console.log("d.scrtkyConfirm: ", d.scrtkyConfirm);
-  console.log("d.addrNcm: ", d.addrNcm);
 };
 
 watch(
@@ -310,6 +281,12 @@ watch(
 </template>
 
 <style lang="scss" scoped>
+section {
+  > .contents {
+    min-height: 436px;
+  }
+}
+
 .top {
   .inputDatas {
     .inner {
