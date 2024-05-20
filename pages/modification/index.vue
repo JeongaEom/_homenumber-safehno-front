@@ -1,44 +1,64 @@
 <script setup>
+// import { reactive, watch } from "vue";
 import { reactive } from "vue";
-import { useEndDataStore } from "@/stores";
+// import { smsCertiReq, smsCertiConfirm, hnoGet, hnoUpdate } from "@/api";
+import { smsCertiReq, smsCertiConfirm, hnoGet } from "@/api";
+import { useAppStore, useEndDataStore } from "@/stores";
 import { formatNb } from "@/utils";
 
 const endDataStore = useEndDataStore();
+const app = useAppStore();
 
 definePageMeta({
-  name: "modification",
-  // middleware: [
-  //   function (to, from) {
-  //     // 로직 inline 정의
-  //  },
-  //   'app',
-  // ],
+  name: "modification"
 });
 
 const d = reactive({
   text: "홈넘버 수정",
-  isPhone: false,
+  isPhone: false, // 휴대폰 인증 확인
   isActive: false,
+  moblphonNo1: "", // 휴대폰 인증번호 요청
+  crtfcNo: "",
   homeNb: "10010001005",
   isNext: true, // true는 휴대폰 인증 | false는 수정
-  completed: false,
-  isReadOnly: true,
+  completed: false
 });
 
-const btn1EventClick = () => {
-  d.isPhone = true;
+function limitInputNumber(event, maxLength, field) {
+  const value = event.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+  if (value.length > maxLength) {
+    d[field] = value.slice(0, maxLength);
+  } else {
+    d[field] = value;
+  }
+}
+
+const phoneAuth = async () => {
+  const phoneReq = await smsCertiReq(d.moblphonNo1);
+
+  if (phoneReq) {
+    d.isPhone = true;
+  }
 };
 
-const btn2EventClick = () => {
+const phoneAuthCheck = async () => {
   // 필수입력 완료시
-  d.isActive = true;
+  const phoneConfirm = await smsCertiConfirm(
+    d.moblphonNo1,
+    app.crtfcTkn,
+    d.crtfcNo
+  );
+
+  if (phoneConfirm) {
+    d.isActive = true;
+  }
 };
 
 const nextClick = () => {
   if (d.isNext) {
     if (d.isActive) {
       d.isNext = false;
-      // d.isActive = false;
+      d.isActive = false;
     }
   } else if (!d.isNext) {
     // if(d.isActive) {
@@ -47,6 +67,26 @@ const nextClick = () => {
     // }
   }
 };
+
+// watch(
+//   // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
+//   () => [
+//     d.hnoNo1,
+//     d.hnoNo2,
+//     d.hnoNo3,
+//     d.nm,
+//     d.moblphonNo,
+//     d.postNo,
+//     d.bassAddr,
+//     d.detailAddr,
+//     d.addrNcm,
+//     d.scrtky,
+//     d.scrtkyConfirm
+//   ],
+//   (newValues) => {
+//     d.isActive = newValues.some((value) => value.trim() !== "");
+//   }
+// );
 </script>
 
 <template>
@@ -68,16 +108,26 @@ const nextClick = () => {
             <li class="input-text">휴대폰 번호 <span>*</span></li>
             <li>
               <div class="input-box">
-                <input type="text" placeholder="" :readonly="d.isReadOnly" />
-                <button class="bg-w line" @click="btn1EventClick">
+                <input
+                  type="text"
+                  placeholder=""
+                  @input="limitInputNumber($event, 11, 'moblphonNo1')"
+                  v-model="d.moblphonNo1"
+                />
+                <button class="bg-w line" @click="phoneAuth">
                   인증번호 전송
                 </button>
               </div>
             </li>
             <li class="input-box" v-if="d.isPhone">
               <div class="input-box">
-                <input type="text" placeholder="" />
-                <button class="bg-w line" @click="btn2EventClick">
+                <input
+                  type="text"
+                  placeholder=""
+                  @input="limitInputNumber($event, 25, 'crtfcNo')"
+                  v-model="d.crtfcNo"
+                />
+                <button class="bg-w line" @click="phoneAuthCheck">
                   인증번호 확인
                 </button>
               </div>

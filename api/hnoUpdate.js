@@ -1,7 +1,7 @@
 import { call } from "@/api";
 
-const hnoIssDo = ({
-  hnoNo,
+const hnoUpdate = ({
+  hnoIssuNo,
   nm,
   moblphonNo,
   postNo,
@@ -11,12 +11,12 @@ const hnoIssDo = ({
   addrNcm
 }) => {
   return call({
-    id: "2.8 표준창 홈넘버 발급",
-    endpoint: "/safehno/v1/hno/iss/do",
+    id: "2.13 홈넘버 정보 수정",
+    endpoint: "/safehno/v1/hno/update",
     headers: "DEFAULT",
     withCredentials: true,
     data: {
-      hnoNo,
+      hnoIssuNo,
       nm,
       moblphonNo,
       postNo,
@@ -25,11 +25,10 @@ const hnoIssDo = ({
       scrtky,
       addrNcm
     },
-    onResponse({ code }) {
-      console.log("발급_code: ", code);
+    onResponse({ code, data }) {
       return true;
     }
   });
 };
 
-export default hnoIssDo;
+export default hnoUpdate;

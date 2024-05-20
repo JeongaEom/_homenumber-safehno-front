@@ -2,7 +2,6 @@ import axios from "axios";
 import { useAppStore } from "@/stores/app";
 
 // import { API_DEBUG, API_HOST } from "./appSettings";
-export { default as tknEncValid } from "./tknEncValid";
 export { default as authSignin } from "./authSignin";
 export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";
@@ -10,6 +9,10 @@ export { default as termsAgree } from "./termsAgree";
 export { default as termsList } from "./termsList";
 export { default as hnoIssDo } from "./hnoIssDo";
 export { default as hnoDupchk } from "./hnoDupchk";
+export { default as smsCertiReq } from "./smsCertiReq";
+export { default as smsCertiConfirm } from "./smsCertiConfirm";
+export { default as hnoGet } from "./hnoGet";
+export { default as hnoUpdate } from "./hnoUpdate";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 const API_HOST =

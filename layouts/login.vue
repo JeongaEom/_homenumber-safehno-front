@@ -7,8 +7,12 @@ const closeClick = () => {
 <template>
   <div class="login">
     <header>
-      <div class="close" @click="closeClick">
-        <img src="@/assets/images/icon-close.png" alt="닫기" />
+      <div class="close">
+        <img
+          src="@/assets/images/icon-close.png"
+          alt="닫기"
+          @click="closeClick"
+        />
       </div>
       <div class="inners">
         <img

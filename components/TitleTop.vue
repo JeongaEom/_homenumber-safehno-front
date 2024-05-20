@@ -5,7 +5,7 @@ const router = useRouter();
 
 const p = defineProps({
   text: { type: String, default: "" },
-  number: { type: Number, default: "" },
+  number: { type: Number, default: 0 },
   hasBackButton: { default: false }
 });
 
@@ -26,7 +26,7 @@ const eventClick = () => {
       </button>
       <div>
         {{ p.text }}
-        <span v-if="p.number">{{ p.number }}</span>
+        <span v-if="p.number != ''">{{ p.number }}</span>
       </div>
     </div>
   </div>

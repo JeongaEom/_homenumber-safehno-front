@@ -4,6 +4,7 @@ export const useHnoMyGetStore = defineStore("hnoMyGet", {
       infoProvAuthNo: "",
       virtlHnoNo: "",
       hnos: [
+        // 2.5 홈넘버 조회
         {
           hnoNo: "",
           subCd: "",
@@ -16,7 +17,23 @@ export const useHnoMyGetStore = defineStore("hnoMyGet", {
         }
       ],
       selectedItem: "",
-      isMyHnoYn: ""
+      isMyHnoYn: "",
+      hnosDeteil: [
+        // 2.12 홈넘버 상세 조회
+        {
+          hnoIssuNo: "",
+          hnoNo: "",
+          nm: "",
+          moblphonNo: "",
+          postNo: "",
+          bassAddr: "",
+          detailAddr: "",
+          addrNcm: "",
+          issuDd: "",
+          issuTime: "",
+          goldnoYn: ""
+        }
+      ]
     };
   }
 });

@@ -1,6 +1,6 @@
 <script setup>
-import { reactive, onMounted } from "vue";
-// import { hnoIssDo, hnoDupchk } from "@/api";
+import { reactive, computed, onMounted, watch } from "vue";
+import { hnoIssDo, hnoDupchk } from "@/api";
 import { useAppStore, useEndDataStore } from "@/stores";
 
 const app = useAppStore();
@@ -12,69 +12,153 @@ definePageMeta({
 
 const d = reactive({
   text: "홈넘버 발급",
-  hnoNo1: "123",
-  hnoNo2: "4567",
-  hnoNo3: "1234",
-  nm: "엄정아",
-  moblphonNo: "01012341234",
-  postNo: "01234",
-  bassAddr: "테스트주소",
-  detailAddr: "테스트 상세",
-  scrtky: "1234",
-  scrtkyConfirm: "1234",
-  addrNcm: "기타",
+  // hnoNo1: "123",
+  // hnoNo2: "1222",
+  // hnoNo3: "1222",
+  hnoNo1: "",
+  hnoNo2: "",
+  hnoNo3: "",
+  nm: "",
+  moblphonNo: "",
+  postNo: "",
+  bassAddr: "",
+  detailAddr: "",
+  scrtky: "",
+  scrtkyConfirm: "",
+  addrNcm: "",
   isActive: false,
   completed: false
 });
 
-onMounted(() => {
-  app.addrds();
-});
+function limitInputText(event, field) {
+  const value = event.target.value.replace(/[^a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]/g, ""); // 영문자와 한글만 허용
+  d[field] = value;
+}
 
-const combined = reactive({
-  hnoNo: `${d.hnoNo1}${d.hnoNo2}${d.hnoNo3}`
-});
+function limitInputNumber(event, maxLength, field) {
+  const value = event.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+  if (value.length > maxLength) {
+    d[field] = value.slice(0, maxLength);
+  } else {
+    d[field] = value;
+  }
+}
+
+const combinedHnoNo = computed(() => `${d.hnoNo1}${d.hnoNo2}${d.hnoNo3}`);
 
 const dupchk = async () => {
-  // await hnoDupchk({
-  //   hnoNo: d.hnoNo
-  // });
-  // consol.log("hnoDupchk: ", hnoDupchk);
+  await hnoDupchk(combinedHnoNo.value);
+  // if (hnoDupchk) {
+  //   const app = useAppStore();
+  //   app.error = {
+  //     type: "alert",
+  //     message: "발급 가능한 홈넘버입니다.",
+  //     hasClose: false
+  //   };
+  // }
+  // const resultData = JSON.stringify(data, null, 2);
+  // console.log(resultData);
+};
+
+onMounted(() => {
+  app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
+});
+
+const handleClickAddressSearch = () => {
+  // daum 우편번호 찾기
+  // 팝업창 크기
+  const width = 500;
+  const height = 500;
+  // 팝업창 위치
+  const left = (document.documentElement.clientWidth - width) / 2;
+  const top = (document.documentElement.clientHeight - height) / 2;
+
+  new daum.Postcode({
+    width,
+    height,
+    oncomplete: function (data) {
+      d.postNo = data.zonecode;
+      d.bassAddr = data.roadAddress;
+    }
+  }).open({
+    popupTitle: "우편번호 검색",
+    left,
+    top
+  });
 };
 
 const endClick = async () => {
-  endDataStore.endData = "1"; //발급
-  // d.completed = true;
-  d.isActive = true;
+  if (d.scrtky !== d.scrtkyConfirm) {
+    const app = useAppStore();
+    app.error = {
+      type: "alert",
+      message: "보안키가 일치하지 않습니다.",
+      hasClose: false
+    };
+  }
 
-  // await hnoIssDo({
-  //   hnoNo: d.hnoNo,
-  //   nm: d.nm,
-  //   moblphonNo: d.moblphonNo,
-  //   postNo: d.postNo,
-  //   bassAddr: d.bassAddr,
-  //   detailAddr: d.detailAddr,
-  //   scrtky: d.scrtky,
-  //   addrNcm: d.addrNcm
-  // });
+  if (!dupchk) {
+    const app = useAppStore();
+    app.error = {
+      type: "alert",
+      message: "홈넘버 중복확인이 필요합니다.",
+      hasClose: false
+    };
+  }
+  await hnoIssDo({
+    hnoNo: combinedHnoNo.value,
+    nm: d.nm,
+    moblphonNo: d.moblphonNo,
+    postNo: d.postNo,
+    bassAddr: d.bassAddr,
+    detailAddr: d.detailAddr,
+    scrtky: d.scrtky,
+    addrNcm: d.addrNcm
+  });
+
+  if (hnoIssDo) {
+    endDataStore.endData = "1"; //발급
+    d.completed = true;
+    d.isActive = true;
+  }
 
   // consol.log("hnoIssDo: ", hnoIssDo);
   console.log("endDataStore.endData : ", endDataStore.endData);
 
-  // consol.log("d.hnoNo: ", d.hnoNo);
-  consol.log("d.hnoNo1: ", d.hnoNo1);
-  consol.log("d.hnoNo2: ", d.hnoNo2);
-  consol.log("d.hnoNo3: ", d.hnoNo3);
+  console.log("d.hnoNo1_: ", d.hnoNo1);
+  console.log("d.hnoNo2_: ", d.hnoNo2);
+  console.log("d.hnoNo3_: ", d.hnoNo3);
 
-  console.log(combined.hnoNo);
-  consol.log("d.nm: ", d.nm);
-  consol.log("d.moblphonNo: ", d.moblphonNo);
-  consol.log("d.postNo: ", d.postNo);
-  consol.log("d.bassAddr: ", d.bassAddr);
-  consol.log("d.detailAddr: ", d.detailAddr);
-  consol.log("d.scrtky: ", d.scrtky);
-  consol.log("d.addrNcm: ", d.addrNcm);
+  console.log("combinedHnoNo.value: ", combinedHnoNo.value);
+  console.log("d.nm: ", d.nm);
+  console.log("d.moblphonNo: ", d.moblphonNo);
+  console.log("d.postNo: ", d.postNo);
+  console.log("d.bassAddr: ", d.bassAddr);
+  console.log("d.detailAddr: ", d.detailAddr);
+  console.log("d.scrtky: ", d.scrtky);
+  console.log("d.scrtkyConfirm: ", d.scrtkyConfirm);
+  console.log("d.addrNcm: ", d.addrNcm);
 };
+
+watch(
+  // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
+  () => [
+    d.hnoNo1,
+    d.hnoNo2,
+    d.hnoNo3,
+    d.nm,
+    d.moblphonNo,
+    d.postNo,
+    d.bassAddr,
+    d.detailAddr,
+    d.addrNcm,
+    d.scrtky,
+    d.scrtkyConfirm
+  ],
+  (newValues) => {
+    d.isActive = newValues.some((value) => value.trim() !== "");
+  }
+);
 </script>
 
 <template>
@@ -86,23 +170,25 @@ const endClick = async () => {
           <div class="input-text">홈넘버 <span>*</span></div>
           <div>
             <input
-              type="number"
+              type="text"
               placeholder="NNN"
-              maxlength="3"
+              @input="limitInputNumber($event, 3, 'hnoNo1')"
               v-model="d.hnoNo1"
-            />&nbsp;-&nbsp;
+            />
+            <div>-</div>
             <input
-              type="number"
+              type="text"
               placeholder="NNNN"
-              maxlength="4"
+              @input="limitInputNumber($event, 4, 'hnoNo2')"
               v-model="d.hnoNo2"
-            />&nbsp;-&nbsp;
+            />
+            <div>-</div>
             <input
-              type="number"
+              type="text"
               placeholder="NNNN"
-              maxlength="4"
+              @input="limitInputNumber($event, 4, 'hnoNo3')"
               v-model="d.hnoNo3"
-            />&nbsp;
+            />
           </div>
           <button class="bg-w line" @click="dupchk">중복확인</button>
         </div>
@@ -115,16 +201,22 @@ const endClick = async () => {
             <li>
               <div class="input-text">이름 <span>*</span></div>
               <div>
-                <input type="text" v-model="d.nm" placeholder="이름 입력" />
+                <input
+                  type="text"
+                  v-model="d.nm"
+                  placeholder="이름 입력"
+                  @input="limitInputText($event, 'nm')"
+                />
               </div>
             </li>
             <li>
               <div class="input-text">휴대폰 번호 <span>*</span></div>
               <div>
                 <input
-                  type="number"
+                  type="text"
                   v-model="d.moblphonNo"
                   placeholder="번호 입력 (배송지 연락처)"
+                  @input="limitInputNumber($event, 11, 'moblphonNo')"
                 />
               </div>
             </li>
@@ -142,7 +234,12 @@ const endClick = async () => {
                       />
                     </div>
                     <div>
-                      <button class="bg-w line">우편번호 찾기</button>
+                      <button
+                        class="bg-w line"
+                        @click="handleClickAddressSearch()"
+                      >
+                        우편번호 찾기
+                      </button>
                     </div>
                   </li>
                   <li>
@@ -178,10 +275,11 @@ const endClick = async () => {
               <div class="input-text">보안키 <span>*</span></div>
               <div>
                 <input
-                  type="number"
+                  type="password"
                   maxLength="4"
                   v-model="d.scrtky"
                   placeholder="숫자 4자리"
+                  @input="limitInputNumber($event, 4, 'scrtky')"
                 />
               </div>
             </li>
@@ -189,10 +287,11 @@ const endClick = async () => {
               <div class="input-text">보안키 확인 <span>*</span></div>
               <div>
                 <input
-                  type="number"
+                  type="password"
                   maxLength="4"
                   v-model="d.scrtkyConfirm"
                   placeholder="숫자 4자리"
+                  @input="limitInputNumber($event, 4, 'scrtkyConfirm')"
                 />
               </div>
             </li>
@@ -237,6 +336,10 @@ const endClick = async () => {
           }
           &:nth-child(2) {
             width: 60%;
+            div {
+              margin: 0 4px;
+              width: 10px;
+            }
           }
         }
         button {

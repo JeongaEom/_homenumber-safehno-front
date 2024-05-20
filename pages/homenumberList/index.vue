@@ -71,7 +71,7 @@ const nextClick = async () => {
 </script>
 
 <template>
-  <TitleTop :text="d.text" :number="myGetStore.hnos.length" />
+  <TitleTop :text="d.text" :number="myGetStore.hnos.length || 0" />
   <div class="top-btn">
     <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
   </div>

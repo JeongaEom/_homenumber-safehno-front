@@ -23,7 +23,6 @@ const eventClick = () => {
   const width = 480;
   const height = 820;
   const left = window.screen.width / 2 - width / 2;
-  // const left = 50;
   const top = window.screen.height / 2 - height / 2;
   const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
   const link =
