@@ -1,14 +1,18 @@
 <script setup>
-// import { reactive, watch } from "vue";
-import { reactive } from "vue";
-// import { smsCertiReq, smsCertiConfirm, hnoGet, hnoUpdate } from "@/api";
-import { smsCertiReq, smsCertiConfirm, hnoGet } from "@/api";
-import { useAppStore, useHnoMyGetStore, useEndDataStore } from "@/stores";
+import { reactive, onMounted, watch } from "vue";
+import {
+  hnoMyGet,
+  smsCertiReq,
+  smsCertiConfirm,
+  hnoGet,
+  hnoUpdate
+} from "@/api";
+import { useAppStore, useHnoMyGetStore, useHnoGetStore } from "@/stores";
 import { formatNb } from "@/utils";
 
 const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
-const endDataStore = useEndDataStore();
+const get = useHnoGetStore();
 
 definePageMeta({
   name: "modification"
@@ -17,81 +21,170 @@ definePageMeta({
 const d = reactive({
   text: "홈넘버 수정",
   isPhone: false, // 휴대폰 인증 확인
-  isActive: false,
-  selectedhnoNo: [],
-  moblphonNo1: "", // 휴대폰 인증번호 요청
+  isActive: false, // 확인 활성화 여부
   crtfcNo: "",
-  homeNb: "10010001005",
+  cdCommand: "stop",
+  time: "",
   isNext: true, // true는 휴대폰 인증 | false는 수정
+  scrtky: "",
+  addrNcm: get.addrNcm,
+  topText: "홈넘버 수정이<br />성공적으로 이루어졌습니다.",
+  btntext: "내 홈넘버 보기",
+  height: "507",
   completed: false
 });
 
+function limitInputText(event, field) {
+  const value = event.target.value.replace(/[^a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]/g, ""); // 영문자와 한글만 허용
+  d[field] = value;
+}
+
 function limitInputNumber(event, maxLength, field) {
-  const value = event.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+  const value = event.target.value.replace(/\D/g, ""); // 숫자만 허용
   if (value.length > maxLength) {
+    if (get) {
+      get[field] = value.slice(0, maxLength);
+    } else {
+    }
     d[field] = value.slice(0, maxLength);
   } else {
-    d[field] = value;
+    if (get) {
+      get[field] = value;
+    } else {
+      d[field] = value;
+    }
   }
 }
 
-// console.log("myGetStore.hnosDeteil: ", myGetStore.hnosDeteil);
-// console.log("myGetStore.hnosDeteil0: ", myGetStore.hnosDeteil[0]);
+const fetchHnoMyGet = async () => {
+  // 회원 휴대폰 번호 가져오기 위한 API myGetStore.moblphonNo
+  await hnoMyGet();
+};
 
 const phoneAuth = async () => {
-  const phoneReq = await smsCertiReq(d.moblphonNo1);
+  const phoneReq = await smsCertiReq(myGetStore.moblphonNo);
 
   if (phoneReq) {
     d.isPhone = true;
+    d.cdCommand = null;
+    setTimeout(() => {
+      d.cdCommand = "start";
+    });
   }
 };
 
 const phoneAuthCheck = async () => {
   // 필수입력 완료시
   const phoneConfirm = await smsCertiConfirm(
-    d.moblphonNo1,
+    myGetStore.moblphonNo,
     app.crtfcTkn,
     d.crtfcNo
   );
 
   if (phoneConfirm) {
     d.isActive = true;
+    d.cdCommand = "stop";
+    d.time = "인증완료";
   }
+};
+
+const handleTimerEnd = () => {
+  const app = useAppStore();
+  app.error = {
+    type: "alert",
+    message: "인증시간이 만료됐습니다..",
+    hasClose: false
+  };
+  d.authState = 0;
+  d.crtfcTkn = "";
+  d.crtfcNo = "";
+};
+
+const hnogetList = async () => {
+  const params = new URLSearchParams(window.location.search);
+  const hnoIssuNo = params.get("hnoIssuNo");
+
+  const success = await hnoGet(hnoIssuNo);
+  if (success) {
+    console.log(get.hnoIssuNo);
+  }
+};
+
+const handleClickAddressSearch = () => {
+  // daum 우편번호 찾기
+  // 팝업창 크기
+  const width = 500;
+  const height = 500;
+  // 팝업창 위치
+  const left = window.screen.width / 2 - width / 2;
+  const top = window.screen.height / 2 - height / 2;
+
+  new daum.Postcode({
+    width,
+    height,
+    oncomplete: function (data) {
+      d.postNo = data.zonecode;
+      d.bassAddr = data.roadAddress;
+    }
+  }).open({
+    popupTitle: "우편번호 검색",
+    left,
+    top
+  });
+};
+
+const modifiUpdate = async () => {
+  await hnoUpdate({
+    hnoIssuNo: get.hnoIssuNo,
+    nm: get.nm,
+    moblphonNo: get.moblphonNo,
+    postNo: get.postNo,
+    bassAddr: get.bassAddr,
+    detailAddr: get.detailAddr,
+    scrtky: d.scrtky,
+    addrNcm: get.addrNcm
+  });
 };
 
 const nextClick = () => {
   if (d.isNext) {
+    // [휴대폰 인증] 완료 후 '확인'
     if (d.isActive) {
-      d.isNext = false;
-      d.isActive = false;
+      d.isNext = false; // [수정] 활성화
+      d.isActive = false; // '확인' 버튼 비활성화
     }
   } else if (!d.isNext) {
-    // if(d.isActive) {
-    endDataStore.endData = "2"; // 수정
-    d.completed = true;
-    // }
+    // [수정] 완료 후 '확인'
+    if (d.isActive) {
+      modifiUpdate();
+      if (d.scrtky) {
+        d.completed = true; // 완료페이지 활성화
+      }
+    }
   }
 };
 
-// watch(
-//   // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
-//   () => [
-//     d.hnoNo1,
-//     d.hnoNo2,
-//     d.hnoNo3,
-//     d.nm,
-//     d.moblphonNo,
-//     d.postNo,
-//     d.bassAddr,
-//     d.detailAddr,
-//     d.addrNcm,
-//     d.scrtky,
-//     d.scrtkyConfirm
-//   ],
-//   (newValues) => {
-//     d.isActive = newValues.some((value) => value.trim() !== "");
-//   }
-// );
+watch(
+  // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
+  () => [
+    get.nm,
+    get.moblphonNo,
+    get.postNo,
+    get.bassAddr,
+    get.detailAddr,
+    get.scrtky,
+    get.addrNcm
+  ],
+  (newValues) => {
+    d.isActive = newValues.some((value) => value.trim() !== "");
+  }
+);
+
+onMounted(async () => {
+  await fetchHnoMyGet();
+  await hnogetList();
+  app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
+});
 </script>
 
 <template>
@@ -99,9 +192,9 @@ const nextClick = () => {
   <section v-if="!d.completed">
     <div class="top" v-if="!d.isNext">
       <div class="input-text">홈넘버 <span>*</span></div>
-      <div>{{ formatNb(d.homeNb) }}</div>
+      <div>{{ formatNb(get.hnoNo) }}</div>
     </div>
-    <div class="contents">
+    <div class="contents" :class="d.isNext ? 'hp' : 'modifi'">
       <div class="phone" v-if="d.isNext">
         <div>
           외부로부터 회원님의 정보를 더 안전하게 보호하기 위한 방법입니다.&nbsp;
@@ -113,25 +206,29 @@ const nextClick = () => {
             <li class="input-text">휴대폰 번호 <span>*</span></li>
             <li>
               <div class="input-box">
-                <input
-                  type="text"
-                  placeholder=""
-                  @input="limitInputNumber($event, 11, 'moblphonNo1')"
-                  v-model="d.moblphonNo1"
-                />
+                <input type="text" v-model="myGetStore.moblphonNo" />
                 <button class="bg-w line" @click="phoneAuth">
                   인증번호 전송
                 </button>
               </div>
             </li>
             <li class="input-box" v-if="d.isPhone">
-              <div class="input-box">
+              <div class="input-box time">
                 <input
                   type="text"
                   placeholder=""
                   @input="limitInputNumber($event, 6, 'crtfcNo')"
                   v-model="d.crtfcNo"
                 />
+                <Countdown
+                  :command="d.cdCommand"
+                  :seconds="180"
+                  :onEnd="handleTimerEnd"
+                >
+                  <div ref="timer" counter>
+                    {{ d.time }}
+                  </div>
+                </Countdown>
                 <button class="bg-w line" @click="phoneAuthCheck">
                   인증번호 확인
                 </button>
@@ -151,13 +248,23 @@ const nextClick = () => {
               <li>
                 <div class="input-text">이름 <span>*</span></div>
                 <div>
-                  <input type="text" placeholder="" />
+                  <input
+                    type="text"
+                    v-model="get.nm"
+                    placeholder="이름 입력"
+                    @input="limitInputText($event, 'nm')"
+                  />
                 </div>
               </li>
               <li>
                 <div class="input-text">휴대폰 번호 <span>*</span></div>
                 <div>
-                  <input type="text" placeholder="" />
+                  <input
+                    type="text"
+                    v-model="get.moblphonNo"
+                    placeholder="번호 입력 (배송지 연락처)"
+                    @input="limitInputNumber($event, 11, 'moblphonNo')"
+                  />
                 </div>
               </li>
               <li class="addInp">
@@ -166,17 +273,38 @@ const nextClick = () => {
                   <ul>
                     <li>
                       <div>
-                        <input type="text" placeholder="" disabled />
+                        <input
+                          type="text"
+                          class="disabled"
+                          v-model="get.postNo"
+                          placeholder="우편번호"
+                          disabled
+                        />
                       </div>
                       <div>
-                        <button class="bg-w line">우편번호 찾기</button>
+                        <button
+                          class="bg-w line"
+                          @click="handleClickAddressSearch()"
+                        >
+                          우편번호 찾기
+                        </button>
                       </div>
                     </li>
                     <li>
-                      <input type="text" placeholder="" disabled />
+                      <input
+                        type="text"
+                        class="disabled"
+                        v-model="get.bassAddr"
+                        placeholder="기본주소"
+                        disabled
+                      />
                     </li>
                     <li>
-                      <input type="text" placeholder="" />
+                      <input
+                        type="text"
+                        v-model="get.detailAddr"
+                        placeholder="상세 주소 입력"
+                      />
                     </li>
                   </ul>
                 </div>
@@ -184,13 +312,24 @@ const nextClick = () => {
               <li>
                 <div class="input-text">주소 별칭</div>
                 <div>
-                  <input type="text" placeholder="" />
+                  <input
+                    type="text"
+                    maxLength="10"
+                    v-model="get.addrNcm"
+                    placeholder="최대 10자"
+                  />
                 </div>
               </li>
               <li>
                 <div class="input-text">보안키 <span>*</span></div>
                 <div>
-                  <input type="text" placeholder="" />
+                  <input
+                    type="password"
+                    maxLength="4"
+                    v-model="d.scrtky"
+                    placeholder="숫자 4자리"
+                    @input="limitInputNumber($event, 4, 'scrtky')"
+                  />
                 </div>
               </li>
             </ul>
@@ -208,7 +347,7 @@ const nextClick = () => {
   </section>
 
   <section v-if="d.completed">
-    <completed />
+    <completed :topText="d.topText" :btntext="d.btntext" :height="d.height" />
   </section>
 </template>
 
@@ -227,8 +366,12 @@ const nextClick = () => {
   }
 }
 
-.contents {
-  min-height: 514px;
+.hp {
+  min-height: 507px;
+}
+
+.modifi {
+  min-height: 463px;
 }
 
 .phone {
@@ -250,7 +393,8 @@ const nextClick = () => {
           }
           div.input-box {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
           }
           button {
             width: 200px;
@@ -267,5 +411,35 @@ const nextClick = () => {
   margin-top: 20px;
   line-height: 1.3rem;
   color: $c-b500;
+}
+
+.time {
+  > input {
+    position: relative;
+  }
+  > div {
+    position: absolute;
+    margin-top: 0 !important;
+    > div {
+      font-size: 16px !important;
+      font-weight: bold;
+      color: $c-b500;
+    }
+  }
+}
+@media (min-width: 440px) {
+  .time {
+    > div {
+      margin-left: 36px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .time {
+    > div {
+      margin-left: -29px;
+    }
+  }
 }
 </style>

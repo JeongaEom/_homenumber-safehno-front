@@ -3,8 +3,8 @@ import { useAppStore } from "@/stores/app";
 import { commonHeaders } from "@/api";
 
 export const formatNb = (Nb) => {
-  if (Nb.length < 7) {
-    // 문자열 길이가 7 미만인 경우 그대로 반환
+  if (!Nb || Nb.length < 7) {
+    // Nb가 undefined이거나 문자열 길이가 7 미만인 경우 그대로 반환
     return Nb;
   }
   return `${Nb.substring(0, 3)}-${Nb.substring(3, 7)}-${Nb.substring(7)}`;

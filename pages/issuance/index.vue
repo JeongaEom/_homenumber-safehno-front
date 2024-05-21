@@ -1,10 +1,9 @@
 <script setup>
 import { reactive, computed, onMounted, watch } from "vue";
 import { hnoIssDo, hnoDupchk } from "@/api";
-import { useAppStore, useEndDataStore } from "@/stores";
+import { useAppStore } from "@/stores";
 
 const app = useAppStore();
-const endDataStore = useEndDataStore();
 
 definePageMeta({
   name: "issuance"
@@ -12,7 +11,7 @@ definePageMeta({
 
 const d = reactive({
   text: "홈넘버 발급",
-  hnoNo1: "",
+  hnoNo1: "100",
   hnoNo2: "",
   hnoNo3: "",
   nm: "",
@@ -24,6 +23,9 @@ const d = reactive({
   scrtkyConfirm: "",
   addrNcm: "",
   isActive: false,
+  topText: "홈넘버 발급이<br />성공적으로 이루어졌습니다.",
+  btntext: "발급",
+  height: "507",
   completed: false
 });
 
@@ -33,7 +35,7 @@ function limitInputText(event, field) {
 }
 
 function limitInputNumber(event, maxLength, field) {
-  const value = event.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+  const value = event.target.value.replace(/\D/g, ""); // 숫자만 허용
   if (value.length > maxLength) {
     d[field] = value.slice(0, maxLength);
   } else {
@@ -57,8 +59,10 @@ const handleClickAddressSearch = () => {
   const width = 500;
   const height = 500;
   // 팝업창 위치
-  const left = (document.documentElement.clientWidth - width) / 2;
-  const top = (document.documentElement.clientHeight - height) / 2;
+  // const left = (document.documentElement.clientWidth - width) / 2;
+  // const top = (document.documentElement.clientHeight - height) / 2;
+  const left = window.screen.width / 2 - width / 2;
+  const top = window.screen.height / 2 - height / 2;
 
   new daum.Postcode({
     width,
@@ -104,11 +108,9 @@ const endClick = async () => {
   });
 
   if (hnoIssDo) {
-    endDataStore.endData = "1"; //발급
     d.completed = true;
-    d.isActive = true;
+    d.isActive = true; // 완료페이지 활성화
   }
-  console.log("endDataStore.endData : ", endDataStore.endData);
 };
 
 watch(
@@ -140,12 +142,7 @@ watch(
         <div class="inner">
           <div class="input-text">홈넘버 <span>*</span></div>
           <div>
-            <input
-              type="text"
-              placeholder="NNN"
-              @input="limitInputNumber($event, 3, 'hnoNo1')"
-              v-model="d.hnoNo1"
-            />
+            <input type="text" class="disabled" v-model="d.hnoNo1" disabled />
             <div>-</div>
             <input
               type="text"
@@ -199,6 +196,7 @@ watch(
                     <div>
                       <input
                         type="number"
+                        class="disabled"
                         v-model="d.postNo"
                         placeholder="우편번호"
                         disabled
@@ -216,6 +214,7 @@ watch(
                   <li>
                     <input
                       type="text"
+                      class="disabled"
                       v-model="d.bassAddr"
                       placeholder="기본주소"
                       disabled
@@ -270,13 +269,17 @@ watch(
         </div>
       </div>
     </div>
-    <button :class="d.isActive ? 'red-active' : 'default'" @click="endClick">
+    <button
+      :class="d.isActive ? 'red-active' : 'default'"
+      :disabled="!d.isActive"
+      @click="endClick"
+    >
       확인
     </button>
   </section>
 
   <section v-if="d.completed">
-    <completed />
+    <completed :topText="d.topText" :btntext="d.btntext" :height="d.height" />
   </section>
 </template>
 

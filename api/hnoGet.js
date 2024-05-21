@@ -1,7 +1,7 @@
 import { call } from "@/api";
 
-const hnoGe = (hnoIssuNo) => {
-  const myGetStore = useHnoMyGetStore();
+const hnoGet = (hnoIssuNo) => {
+  const get = useHnoGetStore();
   return call({
     id: "2.12 홈넘버 상세 조회",
     endpoint: "/safehno/v1/hno/get",
@@ -13,23 +13,22 @@ const hnoGe = (hnoIssuNo) => {
     onResponse({ code, data }) {
       console.log("상세조회_code: ", code);
       console.log("상세조회_data: ", data);
-      myGetStore.hnosDeteil = data.hnosDeteil.map((hnosDeteil) => ({
-        hnoIssuNo: hnosDeteil.hnoIssuNo,
-        hnoNo: hnosDeteil.hnoNo,
-        nm: hnosDeteil.nm,
-        moblphonNo: hnosDeteil.moblphonNo,
-        postNo: hnosDeteil.postNo,
-        bassAddr: hnosDeteil.bassAddr,
-        detailAddr: hnosDeteil.detailAddr,
-        addrNcm: hnosDeteil.addrNcm,
-        issuDd: hnosDeteil.issuDd,
-        issuTime: hnosDeteil.issuTime,
-        goldnoYn: hnosDeteil.goldnoYn
-      }));
-      console.log("myGetStore.hnosDeteil!: ", myGetStore.hnosDeteil);
+      get.$patch({
+        hnoIssuNo: data.hnoIssuNo,
+        hnoNo: data.hnoNo,
+        nm: data.nm,
+        moblphonNo: data.moblphonNo,
+        postNo: data.postNo,
+        bassAddr: data.bassAddr,
+        detailAddr: data.detailAddr,
+        addrNcm: data.addrNcm,
+        issuDd: data.issuDd,
+        issuTime: data.issuTime,
+        goldnoYn: data.goldnoYn
+      });
       return true;
     }
   });
 };
 
-export default hnoGe;
+export default hnoGet;

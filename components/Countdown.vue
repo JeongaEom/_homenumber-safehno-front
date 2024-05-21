@@ -1,7 +1,4 @@
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from "vue";
-import { timer, getCountDownText } from "@/utils";
-
 const p = defineProps({
   // start, restart, stop
   command: { type: String, default: null },
@@ -15,10 +12,10 @@ const self = ref();
 let timerId = null;
 const startTimer = (savedStartSeconds) => {
   timerId && clearInterval(timerId);
-  timerId = timer(
+  timerId = uTimer(
     (current) => {
       self.value.querySelector("[counter]").innerText =
-        getCountDownText(current);
+        uGetCountDownText(current);
       const progress = (savedStartSeconds - current) / savedStartSeconds;
       p.onUpdate && p.onUpdate(progress);
     },

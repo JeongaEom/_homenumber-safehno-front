@@ -81,7 +81,7 @@ const closeClick = () => {
 
 @media (max-width: 480px) {
   .popup {
-    width: 88%;
+    width: 100%;
     .inner {
       width: 80%;
     }

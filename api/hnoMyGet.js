@@ -12,7 +12,9 @@ const hnoMyGet = () => {
       console.log("data: ", data);
       myGetStore.infoProvAuthNo = data.infoProvAuthNo;
       myGetStore.termsGrpCd = data.termsGrpCd;
+      myGetStore.moblphonNo = data.moblphonNo;
       myGetStore.hnos = data.hnos.map((hno) => ({
+        hnoIssuNo: hno.hnoIssuNo,
         hnoNo: hno.hnoNo,
         subCd: hno.subCd,
         nm: hno.nm,

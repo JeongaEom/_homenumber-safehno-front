@@ -1,59 +1,31 @@
 <script setup>
-import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useEndDataStore } from "@/stores";
 
 const router = useRouter();
-const endDataStore = useEndDataStore();
 
-const d = reactive({
-  data: "",
-  btntext: ""
+const p = defineProps({
+  topText: { type: String, default: "" },
+  btntext: { type: String, default: "" },
+  height: { type: Number, default: 0 }
 });
-
-console.log("endDataStore.endData : ", endDataStore.endData);
 
 const endnextClick = () => {
   // 로그인 시 홈넘버 조회로 이동
   router.push("/homenumberList");
 };
-
-onMounted(() => {
-  if (endDataStore.endData === "1") {
-    d.data = "발급";
-    d.btntext = "홈넘버 조회로 이동";
-  } else if (endDataStore.endData === "2") {
-    d.data = "수정";
-    d.btntext = "내 홈넘버 보기";
-  } else if (endDataStore.endData === "3") {
-    d.btntext = "내 홈넘버 보기";
-  }
-});
 </script>
 
 <template>
-  <div
-    class="contents"
-    :class="{
-      issuance: endDataStore.endData === '1',
-      modification: endDataStore.endData === '2',
-      signup: endDataStore.endData === '3'
-    }"
-  >
+  <div class="contents" :style="{ height: p.height + 'px' }">
     <div>
       <img src="@/assets/images/data-end.png" alt="홈넘버 데이터 없음" />
-      <div v-if="endDataStore.endData === '1' || endDataStore.endData === '2'">
-        홈넘버 {{ d.data }}이<br />
-        성공적으로 이루어졌습니다.
-      </div>
-      <div v-else-if="endDataStore.endData === '3'">
-        회원 가입이 완료되었습니다. <br />
-        서비스 이용을 위해 홈넘버를 발급해 주세요.
+      <div>
+        <p v-html="p.topText" />
       </div>
     </div>
   </div>
   <button class="bg-w line-active" @click="endnextClick()">
-    {{ d.btntext }}
+    {{ p.btntext }}
   </button>
 </template>
 
@@ -74,18 +46,6 @@ onMounted(() => {
       font-weight: bold;
       line-height: 3rem;
     }
-  }
-}
-
-@media (min-width: 400px) {
-  .issuance {
-    min-height: 507px;
-  }
-  .modification {
-    min-height: 514px;
-  }
-  .signup {
-    min-height: 476px;
   }
 }
 </style>

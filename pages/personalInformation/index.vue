@@ -166,4 +166,10 @@ ul {
 .textDatas {
   margin-bottom: 30px;
 }
+
+@media (min-width: 427px) {
+  section > .contents {
+    height: 507px;
+  }
+}
 </style>

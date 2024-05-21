@@ -54,9 +54,8 @@ const modifiClick = (item) => {
   // 수정
   router.replace({
     path: "/modification",
-    query: { hnoNo: item.hnoNo }
+    query: { hnoIssuNo: item.hnoIssuNo }
   });
-  // alert("준비중입니다.");
 };
 
 const nextClick = async () => {

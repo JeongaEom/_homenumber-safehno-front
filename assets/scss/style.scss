@@ -18,6 +18,7 @@ html {
 }
 body {
   margin: auto;
+  overflow: hidden;
 }
 
 @media (min-width: 769px) {
@@ -77,6 +78,10 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   appearance: none;
   -moz-appearance: textfield;
+}
+
+.disabled {
+  background-color: $c-g200;
 }
 
 button {
