@@ -341,7 +341,11 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-    <button :class="d.isActive ? 'red-active' : 'default'" @click="nextClick">
+    <button
+      :class="d.isActive ? 'red-active' : 'default'"
+      :disabled="!d.isActive"
+      @click="nextClick"
+    >
       확인
     </button>
   </section>

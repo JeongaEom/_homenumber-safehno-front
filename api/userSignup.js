@@ -1,6 +1,8 @@
 import { call } from "@/api";
 
-const userSignup = ({ mberId, pwd, email, encData }) => {
+const userSignup = (mberId, pwd, email, encData) => {
+  const app = useAppStore();
+  const auth = useAuthStore();
   const termsAgre = auth.signupTems.map((term) => {
     return {
       termsCd: term.termsCd,
@@ -14,13 +16,14 @@ const userSignup = ({ mberId, pwd, email, encData }) => {
     headers: "DEFAULT",
     withCredentials: true,
     data: {
-      hmberId,
+      mberId,
       pwd,
       email,
       encData,
       termsAgre
     },
     onResponse({ code, data }) {
+      app.isLoggedIn = true;
       return true;
     }
   });

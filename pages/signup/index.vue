@@ -1,9 +1,10 @@
 <script setup>
 import { reactive, onMounted, watch, computed } from "vue";
-import { termsList } from "@/api";
-import { useTermsStore } from "@/stores";
+import { termsList, userSignup, mberIdcheck, certiPhoneReadyGet } from "@/api";
+import { useTermsStore, useAuthStore } from "@/stores";
 
 const termsStore = useTermsStore();
+const auth = useAuthStore();
 
 definePageMeta({
   name: "signup"
@@ -12,15 +13,26 @@ definePageMeta({
 const d = reactive({
   text: "01",
   termsGrpCd: "1010001",
-  termsListData: [],
   selectAll: false,
-  isActive: "",
+  selectedItems: [],
+  isActive: false,
+  mberId: "",
+  pwd: "",
+  pwdConfirm: "",
+  email: "",
+  validId: false,
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
   btntext: "내 홈넘버 보기",
   height: "468",
   completed: false
 });
+watch(
+  () => d.mberId,
+  () => {
+    d.validId = false;
+  }
+);
 
 const titleText = computed(() =>
   d.text === "01" ? "이용약관 동의" : "회원정보 입력"
@@ -31,8 +43,8 @@ const btnText = computed(() => (d.text === "01" ? "다음" : "확인"));
 const listTerms = async () => {
   await termsList(d.termsGrpCd);
   termsStore.termsGrpNm = "Y";
-  d.termsListData = termsStore.data;
-  console.log("d.termsListData: ", d.termsListData);
+  auth.signupTems = termsStore.data;
+  console.log("auth.signupTems: ", auth.signupTems);
   console.log("termsStore.termsGrpNm : ", termsStore.termsGrpNm);
 };
 
@@ -41,49 +53,104 @@ onMounted(() => {
 });
 
 // 01 이용약관 동의 (체크박스)
-// const allRequiredChecked = computed(() => {
-//   // return d.dataList
-//   // .filter((item) => item.type === "필수")
-//   // .every((item) => item.checked);
-// });
-
-// watch(allRequiredChecked, (newVal) => {
-//   d.isActive = newVal;
-// });
-
 const toggleSelectAll = () => {
   d.selectAll = !d.selectAll;
-  d.termsListData.forEach((item) => {
-    if (d.selectAll) {
-      item.termsCd = "Y";
-    } else {
-      item.termsCd = "N";
-    }
-  });
+  d.selectedItems = d.selectAll
+    ? auth.signupTems.map((item) => item.termsCd)
+    : [];
+
+  if (d.selectAll) {
+    d.isActive = true;
+  } else {
+    d.isActive = false;
+  }
 };
 
 const toggleItem = (item) => {
-  item.termsCd = item.termsCd === "Y" ? "N" : "Y";
-  d.selectAll = d.termsListData.every((item) => item.termsCd === "Y");
+  if (d.selectedItems.includes(item.termsCd)) {
+    d.selectedItems = d.selectedItems.filter(
+      (termsCd) => termsCd !== item.termsCd
+    );
+  } else {
+    d.selectedItems.push(item.termsCd);
+  }
+  d.selectAll = d.selectedItems.length === auth.signupTems.length;
+
+  if (d.selectAll) {
+    d.isActive = true;
+  } else {
+    d.isActive = false;
+  }
 };
 
 // 02 회원정보 입력
-const doubleClick = () => {
-  // 중복확인
+const userInfo = async () => {
+  await userSignup(d.mberId, d.pwd, d.email, auth.encData);
 };
 
-const eventHpClick = () => {
+const doubleClick = async () => {
+  // 중복확인
+  d.validId = await mberIdcheck(d.mberId);
+  console.log("d.mberId: ", d.mberId);
+  console.log("d.validId: ", d.validId);
+};
+
+const eventHpClick = async () => {
   // 휴대폰 본인 인증
+  const certiPh = await certiPhoneReadyGet();
+  if (certiPh) {
+    // 팝업창 크기
+    const ww = 480;
+    const wh = 812;
+    // 팝업창 위치
+    const left = (document.documentElement.clientWidth - ww) / 2;
+    const top = (document.documentElement.clientHeight - wh) / 2;
+    window.open(
+      `${window.location.origin}/nid-request`,
+      "HOMENUMBER",
+      `width=${ww}, height=${wh}, top=${top}, left=${left}`
+    );
+  }
+  console.log("certiPh: ", certiPh);
 };
 
 const eventClick = (data) => {
   if (data === "01") {
-    d.text = "02"; // 회원정보 입력
+    if (d.isActive) {
+      d.text = "02"; // 회원정보 입력
+      // d.isActive = false;
+    }
   } else if (data === "02") {
-    d.text = "03";
-    d.completed = true;
+    // 비밀번호 확인 불일치
+    if (d.pw !== d.pwConfirm) {
+      // _alert.open({
+      //   message: "입력하신 비밀번호가 서로 다릅니다.",
+      // });
+      // return;
+    }
+    if (d.isActive) {
+      userInfo();
+      d.text = "03";
+      d.completed = true;
+    }
   }
 };
+
+// watch(
+//   // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
+//   () => [
+//     get.nm,
+//     get.moblphonNo,
+//     get.postNo,
+//     get.bassAddr,
+//     get.detailAddr,
+//     get.scrtky,
+//     get.addrNcm
+//   ],
+//   (newValues) => {
+//     d.isActive = newValues.some((value) => value.trim() !== "");
+//   }
+// );
 </script>
 
 <template>
@@ -99,13 +166,13 @@ const eventClick = (data) => {
             type="checkbox"
             id="checkbox-selectAll"
             class="custom-checkbox"
-            :checked="selectAll"
+            :checked="d.selectAll"
             @change="toggleSelectAll"
           />
           <label for="checkbox-selectAll"> 모두 확인, 동의합니다. </label>
           <div
             class="terms"
-            v-for="item in d.termsListData"
+            v-for="item in auth.signupTems"
             :key="item.termsCd"
           >
             <div class="t-title">{{ item.termsNm }}</div>
@@ -116,7 +183,7 @@ const eventClick = (data) => {
               type="checkbox"
               :id="`checkbox-${item.termsCd}`"
               class="custom-checkbox"
-              :checked="item.termsCd === 'Y'"
+              :checked="d.selectedItems.includes(item.termsCd)"
               @change="() => toggleItem(item)"
             />
             <label :for="`checkbox-${item.termsCd}`">
@@ -139,7 +206,11 @@ const eventClick = (data) => {
                     <ul>
                       <li>
                         <div>
-                          <input type="text" placeholder="아이디" />
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            v-model="d.mberId"
+                          />
                         </div>
                         <div>
                           <button class="bg-w line" @click="doubleClick">
@@ -153,19 +224,27 @@ const eventClick = (data) => {
                 <li>
                   <div class="input-text">비밀번호 <span>*</span></div>
                   <div>
-                    <input type="text" placeholder="비밀번호" />
+                    <input
+                      type="password"
+                      placeholder="비밀번호"
+                      v-model="d.pwd"
+                    />
                   </div>
                 </li>
                 <li>
                   <div class="input-text">비밀번호 확인 <span>*</span></div>
                   <div>
-                    <input type="text" placeholder="비밀번호 확인" />
+                    <input
+                      type="password"
+                      placeholder="비밀번호 확인"
+                      v-model="d.pwdConfirm"
+                    />
                   </div>
                 </li>
                 <li>
                   <div class="input-text">이메일 <span>*</span></div>
                   <div>
-                    <input type="text" placeholder="이메일" />
+                    <input type="text" placeholder="이메일" v-model="d.email" />
                   </div>
                 </li>
               </ul>
@@ -180,6 +259,7 @@ const eventClick = (data) => {
     <button
       :class="d.isActive ? 'red-active' : 'default'"
       v-if="!d.completed"
+      :disabled="!d.isActive"
       @click="eventClick(d.text)"
     >
       {{ btnText }}
