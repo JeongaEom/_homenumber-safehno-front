@@ -23,7 +23,6 @@ const d = reactive({
 const hnbIssuance = () => {
   //발급
   router.replace("/issuance");
-  // alert("준비중입니다.");
 };
 
 const fetchHnoMyGet = async () => {

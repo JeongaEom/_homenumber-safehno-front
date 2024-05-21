@@ -1,5 +1,9 @@
 <script setup>
-import { reactive, watch, computed } from "vue";
+import { reactive, onMounted, watch, computed } from "vue";
+import { termsList } from "@/api";
+import { useTermsStore } from "@/stores";
+
+const termsStore = useTermsStore();
 
 definePageMeta({
   name: "signup"
@@ -7,68 +11,61 @@ definePageMeta({
 
 const d = reactive({
   text: "01",
-  all: "0",
-  dataList: [
-    {
-      id: "1",
-      toptitle: "서비스 이용 약관",
-      type: "필수",
-      name: "개인정보 제3자 제공 동의",
-      data: `
-          <div id="checkText">
-            <p>회사는 원칙적으로 이용자 동의 없이 개인정보를 외부에 제공하지 않습니다.</p>
-            <br/>
-            <div class="box">
-              <p>이용자 동의 후 개인정보 제공이 발생하는 경우</p>
-              <br/>
-              <p> 1) 이용자가 서비스 이용을 위해 직접 자신의 개인정보를 제3자에게 제공하는 것에 대해 동의한 경우이며, 회사는 이용자에게 '개인정보를 제공받는 자,</p>
-            </div>
-          </div>
-        `,
-      checked: false
-    },
-    {
-      id: "2",
-      toptitle: "개인정보 수집 및 이용동의",
-      type: "선택",
-      name: "개인정보 제3자 제공 동의2",
-      data: `
-          <div id="checkText">
-            <p>회사는 원칙적으로 이용자 동의 없이 개인정보를 외부에 제공하지 않습니다.</p>
-            <br/>
-            <div class="box">
-              <p>이용자 동의 후 개인정보 제공이 발생하는 경우</p>
-              <br/>
-              <p> 1) 이용자가 서비스 이용을 위해 직접 자신의 개인정보를 제3자에게 제공하는 것에 대해 동의한 경우이며, 회사는 이용자에게 '개인정보를 제공받는 자,</p>
-            </div>
-          </div>
-        `,
-      checked: false
-    }
-  ],
+  termsGrpCd: "1010001",
+  termsListData: [],
+  selectAll: false,
   isActive: "",
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
   btntext: "내 홈넘버 보기",
-  height: "507",
+  height: "468",
   completed: false
 });
 
 const titleText = computed(() =>
   d.text === "01" ? "이용약관 동의" : "회원정보 입력"
 );
+
 const btnText = computed(() => (d.text === "01" ? "다음" : "확인"));
 
-// 01 이용약관 동의 (체크박스)
-const allRequiredChecked = computed(() => {
-  return d.dataList
-    .filter((item) => item.type === "필수")
-    .every((item) => item.checked);
+const listTerms = async () => {
+  await termsList(d.termsGrpCd);
+  termsStore.termsGrpNm = "Y";
+  d.termsListData = termsStore.data;
+  console.log("d.termsListData: ", d.termsListData);
+  console.log("termsStore.termsGrpNm : ", termsStore.termsGrpNm);
+};
+
+onMounted(() => {
+  listTerms();
 });
 
-watch(allRequiredChecked, (newVal) => {
-  d.isActive = newVal;
-});
+// 01 이용약관 동의 (체크박스)
+// const allRequiredChecked = computed(() => {
+//   // return d.dataList
+//   // .filter((item) => item.type === "필수")
+//   // .every((item) => item.checked);
+// });
+
+// watch(allRequiredChecked, (newVal) => {
+//   d.isActive = newVal;
+// });
+
+const toggleSelectAll = () => {
+  d.selectAll = !d.selectAll;
+  d.termsListData.forEach((item) => {
+    if (d.selectAll) {
+      item.termsCd = "Y";
+    } else {
+      item.termsCd = "N";
+    }
+  });
+};
+
+const toggleItem = (item) => {
+  item.termsCd = item.termsCd === "Y" ? "N" : "Y";
+  d.selectAll = d.termsListData.every((item) => item.termsCd === "Y");
+};
 
 // 02 회원정보 입력
 const doubleClick = () => {
@@ -91,117 +88,128 @@ const eventClick = (data) => {
 
 <template>
   <TitleSignup :text="d.text" />
-  <div class="subs-title" v-if="d.text !== '03'">
-    <div>{{ titleText }}</div>
-  </div>
-  <section v-if="!d.completed">
-    <div class="contents">
-      <div v-if="d.text === '01'">
-        <div>
-          <input
-            type="checkbox"
-            :id="`checkbox-${d.all}`"
-            class="custom-checkbox"
-            v-model="d.all"
-            @change="toggleAll($event.target.checked)"
-          />
-          <label :for="`checkbox-${d.all}`"> 모두 확인, 동의합니다. </label>
-        </div>
-        <div class="terms" v-for="item in d.dataList">
-          <div class="t-title">{{ item.toptitle }}</div>
-          <div class="textDatas">
-            <div class="inner" v-html="item.data"></div>
-          </div>
-          <input
-            type="checkbox"
-            :id="`checkbox-${item.id}`"
-            class="custom-checkbox"
-            v-model="item.checked"
-          />
-          <label :for="`checkbox-${item.id}`">
-            <span :class="item.type === '필수' ? 'essential' : 'select'">
-              [{{ item.type }}]&nbsp;
-            </span>
-            {{ item.name }}
-          </label>
-        </div>
+  <section>
+    <div class="contents" v-if="!d.completed">
+      <div class="subs-title" v-if="d.text !== '03'">
+        <div>{{ titleText }}</div>
       </div>
-      <div v-if="d.text === '02'">
-        <div class="inputDatas">
-          <div class="inner">
-            <ul>
-              <li>
-                <div class="input-text">아이디</div>
-                <div>
-                  <ul>
-                    <li>
-                      <div>
-                        <input type="text" placeholder="아이디" />
-                      </div>
-                      <div>
-                        <button class="bg-w line" @click="doubleClick">
-                          중복확인
-                        </button>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <div class="input-text">비밀번호 <span>*</span></div>
-                <div>
-                  <input type="text" placeholder="비밀번호" />
-                </div>
-              </li>
-              <li>
-                <div class="input-text">비밀번호 확인 <span>*</span></div>
-                <div>
-                  <input type="text" placeholder="비밀번호 확인" />
-                </div>
-              </li>
-              <li>
-                <div class="input-text">이메일 <span>*</span></div>
-                <div>
-                  <input type="text" placeholder="이메일" />
-                </div>
-              </li>
-            </ul>
+      <div class="sub-ct">
+        <div v-if="d.text === '01'">
+          <input
+            type="checkbox"
+            id="checkbox-selectAll"
+            class="custom-checkbox"
+            :checked="selectAll"
+            @change="toggleSelectAll"
+          />
+          <label for="checkbox-selectAll"> 모두 확인, 동의합니다. </label>
+          <div
+            class="terms"
+            v-for="item in d.termsListData"
+            :key="item.termsCd"
+          >
+            <div class="t-title">{{ item.termsNm }}</div>
+            <div class="textDatas">
+              <div class="inner" v-html="item.termsCn"></div>
+            </div>
+            <input
+              type="checkbox"
+              :id="`checkbox-${item.termsCd}`"
+              class="custom-checkbox"
+              :checked="item.termsCd === 'Y'"
+              @change="() => toggleItem(item)"
+            />
+            <label :for="`checkbox-${item.termsCd}`">
+              <span
+                :class="item.termsAgreEssntlYn === 'Y' ? 'essential' : 'select'"
+              >
+                [{{ item.termsAgreEssntlYn === "Y" ? "필수" : "선택" }}]&nbsp;
+              </span>
+              동의 합니다.
+            </label>
           </div>
         </div>
-        <button class="bg-w line-hp" @click="eventHpClick">
-          휴대폰 본인 인증
-        </button>
+        <div v-if="d.text === '02'">
+          <div class="inputDatas">
+            <div class="inner">
+              <ul>
+                <li>
+                  <div class="input-text">아이디</div>
+                  <div>
+                    <ul>
+                      <li>
+                        <div>
+                          <input type="text" placeholder="아이디" />
+                        </div>
+                        <div>
+                          <button class="bg-w line" @click="doubleClick">
+                            중복확인
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="input-text">비밀번호 <span>*</span></div>
+                  <div>
+                    <input type="text" placeholder="비밀번호" />
+                  </div>
+                </li>
+                <li>
+                  <div class="input-text">비밀번호 확인 <span>*</span></div>
+                  <div>
+                    <input type="text" placeholder="비밀번호 확인" />
+                  </div>
+                </li>
+                <li>
+                  <div class="input-text">이메일 <span>*</span></div>
+                  <div>
+                    <input type="text" placeholder="이메일" />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <button class="bg-w line-hp" @click="eventHpClick">
+            휴대폰 본인 인증
+          </button>
+        </div>
       </div>
     </div>
     <button
       :class="d.isActive ? 'red-active' : 'default'"
+      v-if="!d.completed"
       @click="eventClick(d.text)"
     >
       {{ btnText }}
     </button>
-  </section>
-
-  <section v-if="d.completed">
-    <completed :topText="d.topText" :btntext="d.btntext" :height="d.height" />
+    <completed
+      :topText="d.topText"
+      :btntext="d.btntext"
+      :height="d.height"
+      v-if="d.completed"
+    />
   </section>
 </template>
 
 <style lang="scss" scoped>
 section {
   > .contents {
-    min-height: 418px;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    .sub-ct {
+      height: 438px;
+    }
   }
 }
 .subs-title {
-  border: 1px solid #171a22;
-  border-top: none;
-  border-bottom: none;
   div {
     font-size: 24px;
     font-weight: bold;
     height: 56px;
     background-color: $c-g100;
-    margin: 0 1.5rem;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
