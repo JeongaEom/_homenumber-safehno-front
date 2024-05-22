@@ -61,8 +61,8 @@ const loginClick = async () => {
 };
 
 const signupClick = () => {
-  router.push("/signup");
   // alert("준비중입니다.");
+  router.push("/signup");
 };
 </script>
 

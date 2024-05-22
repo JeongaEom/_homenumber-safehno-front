@@ -45,14 +45,12 @@ function limitInputNumber(event, maxLength, field) {
     if (get) {
       get[field] = value.slice(0, maxLength);
     } else {
+      d[field] = value.slice(0, maxLength);
     }
-    d[field] = value.slice(0, maxLength);
+  } else if (get) {
+    get[field] = value;
   } else {
-    if (get) {
-      get[field] = value;
-    } else {
-      d[field] = value;
-    }
+    d[field] = value;
   }
 }
 

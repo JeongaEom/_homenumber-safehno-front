@@ -1,8 +1,9 @@
 <script setup>
-import { reactive, onMounted, watch, computed } from "vue";
-import { termsList, userSignup, mberIdcheck, certiPhoneReadyGet } from "@/api";
-import { useTermsStore, useAuthStore } from "@/stores";
+import { reactive, onMounted, watch, computed, onBeforeUnmount } from "vue";
+import { termsList, userSignup, mberIdcheck } from "@/api";
+import { useAppStore, useTermsStore, useAuthStore } from "@/stores";
 
+const app = useAppStore();
 const termsStore = useTermsStore();
 const auth = useAuthStore();
 
@@ -15,11 +16,13 @@ const d = reactive({
   termsGrpCd: "1010001",
   selectAll: false,
   selectedItems: [],
-  isActive: false,
+  isActive1: false,
+  isActive2: false,
   mberId: "",
   pwd: "",
   pwdConfirm: "",
   email: "",
+  encData: "",
   validId: false,
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
@@ -27,6 +30,7 @@ const d = reactive({
   height: "468",
   completed: false
 });
+
 watch(
   () => d.mberId,
   () => {
@@ -37,8 +41,6 @@ watch(
 const titleText = computed(() =>
   d.text === "01" ? "이용약관 동의" : "회원정보 입력"
 );
-
-const btnText = computed(() => (d.text === "01" ? "다음" : "확인"));
 
 const listTerms = async () => {
   await termsList(d.termsGrpCd);
@@ -60,9 +62,9 @@ const toggleSelectAll = () => {
     : [];
 
   if (d.selectAll) {
-    d.isActive = true;
+    d.isActive1 = true;
   } else {
-    d.isActive = false;
+    d.isActive1 = false;
   }
 };
 
@@ -77,17 +79,13 @@ const toggleItem = (item) => {
   d.selectAll = d.selectedItems.length === auth.signupTems.length;
 
   if (d.selectAll) {
-    d.isActive = true;
+    d.isActive1 = true;
   } else {
-    d.isActive = false;
+    d.isActive1 = false;
   }
 };
 
 // 02 회원정보 입력
-const userInfo = async () => {
-  await userSignup(d.mberId, d.pwd, d.email, auth.encData);
-};
-
 const doubleClick = async () => {
   // 중복확인
   d.validId = await mberIdcheck(d.mberId);
@@ -97,60 +95,68 @@ const doubleClick = async () => {
 
 const eventHpClick = async () => {
   // 휴대폰 본인 인증
-  const certiPh = await certiPhoneReadyGet();
-  if (certiPh) {
-    // 팝업창 크기
-    const ww = 480;
-    const wh = 812;
-    // 팝업창 위치
-    const left = (document.documentElement.clientWidth - ww) / 2;
-    const top = (document.documentElement.clientHeight - wh) / 2;
-    window.open(
-      `${window.location.origin}/nid-request`,
-      "HOMENUMBER",
-      `width=${ww}, height=${wh}, top=${top}, left=${left}`
-    );
-  }
-  console.log("certiPh: ", certiPh);
+  // 팝업창 크기
+  const ww = 480;
+  const wh = 812;
+  // 팝업창 위치
+  const left = (document.documentElement.clientWidth - ww) / 2;
+  const top = (document.documentElement.clientHeight - wh) / 2;
+  window.open(
+    `${window.location.origin}/nid-request`,
+    // `${window.location.origin}/nid-success`,
+    "HOMENUMBER",
+    `width=${ww}, height=${wh}, top=${top}, left=${left}`
+  );
 };
 
-const eventClick = (data) => {
-  if (data === "01") {
-    if (d.isActive) {
-      d.text = "02"; // 회원정보 입력
-      // d.isActive = false;
-    }
-  } else if (data === "02") {
-    // 비밀번호 확인 불일치
-    if (d.pw !== d.pwConfirm) {
-      // _alert.open({
-      //   message: "입력하신 비밀번호가 서로 다릅니다.",
-      // });
-      // return;
-    }
-    if (d.isActive) {
-      userInfo();
+const eventClick1 = () => {
+  if (d.isActive1) {
+    d.text = "02"; // 회원정보 입력
+  }
+};
+
+const CB_MESSAGE = (e) => {
+  const { data } = e;
+  console.log(e);
+  if (data.msg === "AUTH_COMPLETE") {
+    d.encData = data.EncodeData;
+    console.log("EncodeData 👇");
+    console.log(data.EncodeData);
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("message", CB_MESSAGE);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("message", CB_MESSAGE);
+});
+
+const eventClick2 = async () => {
+  // 비밀번호 확인 불일치
+  if (d.pw !== d.pwConfirm) {
+    app.error = {
+      type: "alert",
+      message: "입력하신 비밀번호가 서로 다릅니다.",
+      hasClose: false
+    };
+  }
+  if (d.isActive2) {
+    await userSignup(d.mberId, d.pwd, d.email, d.encData);
+    if (userSignup) {
       d.text = "03";
       d.completed = true;
     }
   }
 };
 
-// watch(
-//   // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
-//   () => [
-//     get.nm,
-//     get.moblphonNo,
-//     get.postNo,
-//     get.bassAddr,
-//     get.detailAddr,
-//     get.scrtky,
-//     get.addrNcm
-//   ],
-//   (newValues) => {
-//     d.isActive = newValues.some((value) => value.trim() !== "");
-//   }
-// );
+watch(
+  () => [d.mberId, d.pwd, d.email, d.pwdConfirm],
+  (newValues) => {
+    d.isActive2 = newValues.some((value) => value.trim() !== "");
+  }
+);
 </script>
 
 <template>
@@ -257,12 +263,18 @@ const eventClick = (data) => {
       </div>
     </div>
     <button
-      :class="d.isActive ? 'red-active' : 'default'"
-      v-if="!d.completed"
-      :disabled="!d.isActive"
-      @click="eventClick(d.text)"
+      :class="d.isActive1 ? 'red-active' : 'default'"
+      v-if="d.text === '01'"
+      @click="eventClick1"
     >
-      {{ btnText }}
+      다음
+    </button>
+    <button
+      :class="d.isActive2 ? 'red-active' : 'default'"
+      v-if="d.text === '02'"
+      @click="eventClick2"
+    >
+      확인
     </button>
     <completed
       :topText="d.topText"

@@ -11,9 +11,10 @@ const certiPhoneReadyGet = (deviceTyCd) => {
       deviceTyCd: "1070001"
     },
     onResponse({ code, data }) {
-      auth.encData = data.encData;
-      auth.checkPlusUrl = data.checkPlusUrl;
+      auth.nid.encData = data.encData;
+      auth.nid.checkPlusUrl = data.checkPlusUrl;
       console.log("휴대폰 사전_data: ", data);
+      // console.log("auth.nid.checkPlusUrl: ", auth.nid.checkPlusUrl);
       return true;
     }
   });
