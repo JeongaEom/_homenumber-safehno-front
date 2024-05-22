@@ -10,8 +10,12 @@ const p = defineProps({
 });
 
 const endnextClick = () => {
-  // 로그인 시 홈넘버 조회로 이동
-  router.push("/homenumberList");
+  // 홈넘버 조회로 이동
+  if ((p.btntex = "로그인")) {
+    router.push("/");
+  } else {
+    router.push("/homenumberList");
+  }
 };
 </script>
 

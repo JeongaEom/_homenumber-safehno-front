@@ -26,7 +26,7 @@ const d = reactive({
   validId: false,
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
-  btntext: "내 홈넘버 보기",
+  btntext: "로그인",
   height: "468",
   completed: false
 });
@@ -142,13 +142,13 @@ const eventClick2 = async () => {
       hasClose: false
     };
   }
-  if (d.isActive2) {
-    await userSignup(d.mberId, d.pwd, d.email, d.encData);
-    if (userSignup) {
-      d.text = "03";
-      d.completed = true;
-    }
+  // if (d.isActive2) {
+  await userSignup(d.mberId, d.pwd, d.email, d.encData);
+  if (userSignup) {
+    d.text = "03";
+    d.completed = true;
   }
+  // }
 };
 
 watch(
