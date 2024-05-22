@@ -16,8 +16,7 @@ const d = reactive({
   termsGrpCd: "1010001",
   selectAll: false,
   selectedItems: [],
-  isActive1: false,
-  isActive2: false,
+  isActive: false,
   mberId: "",
   pwd: "",
   pwdConfirm: "",
@@ -42,6 +41,8 @@ const titleText = computed(() =>
   d.text === "01" ? "이용약관 동의" : "회원정보 입력"
 );
 
+const btnText = computed(() => (d.text === "01" ? "다음" : "확인"));
+
 const listTerms = async () => {
   await termsList(d.termsGrpCd);
   termsStore.termsGrpNm = "Y";
@@ -60,12 +61,6 @@ const toggleSelectAll = () => {
   d.selectedItems = d.selectAll
     ? auth.signupTems.map((item) => item.termsCd)
     : [];
-
-  if (d.selectAll) {
-    d.isActive1 = true;
-  } else {
-    d.isActive1 = false;
-  }
 };
 
 const toggleItem = (item) => {
@@ -77,13 +72,14 @@ const toggleItem = (item) => {
     d.selectedItems.push(item.termsCd);
   }
   d.selectAll = d.selectedItems.length === auth.signupTems.length;
-
-  if (d.selectAll) {
-    d.isActive1 = true;
-  } else {
-    d.isActive1 = false;
-  }
 };
+
+watch(
+  () => d.selectAll,
+  (newVal) => {
+    d.isActive = newVal;
+  }
+);
 
 // 02 회원정보 입력
 const doubleClick = async () => {
@@ -109,12 +105,6 @@ const eventHpClick = async () => {
   );
 };
 
-const eventClick1 = () => {
-  if (d.isActive1) {
-    d.text = "02"; // 회원정보 입력
-  }
-};
-
 const CB_MESSAGE = (e) => {
   const { data } = e;
   console.log(e);
@@ -133,28 +123,36 @@ onBeforeUnmount(() => {
   window.removeEventListener("message", CB_MESSAGE);
 });
 
-const eventClick2 = async () => {
-  // 비밀번호 확인 불일치
-  if (d.pw !== d.pwConfirm) {
-    app.error = {
-      type: "alert",
-      message: "입력하신 비밀번호가 서로 다릅니다.",
-      hasClose: false
-    };
+const eventClick = async (data) => {
+  if (data === "01") {
+    if (d.isActive) {
+      d.text = "02"; // 회원정보 입력
+      d.isActive = false;
+    }
+  } else if (data === "02") {
+    // 비밀번호 확인 불일치
+    if (d.pw !== d.pwConfirm) {
+      app.error = {
+        type: "alert",
+        message: "입력하신 비밀번호가 서로 다릅니다.",
+        hasClose: false
+      };
+    }
+
+    if (d.isActive) {
+      await userSignup(d.mberId, d.pwd, d.email, d.encData);
+      if (userSignup) {
+        d.text = "03";
+        d.completed = true;
+      }
+    }
   }
-  // if (d.isActive2) {
-  await userSignup(d.mberId, d.pwd, d.email, d.encData);
-  if (userSignup) {
-    d.text = "03";
-    d.completed = true;
-  }
-  // }
 };
 
 watch(
   () => [d.mberId, d.pwd, d.email, d.pwdConfirm],
   (newValues) => {
-    d.isActive2 = newValues.some((value) => value.trim() !== "");
+    d.isActive = newValues.some((value) => value.trim() !== "");
   }
 );
 </script>
@@ -263,18 +261,12 @@ watch(
       </div>
     </div>
     <button
-      :class="d.isActive1 ? 'red-active' : 'default'"
-      v-if="d.text === '01'"
-      @click="eventClick1"
+      :class="d.isActive ? 'red-active' : 'default'"
+      v-if="!d.completed"
+      :disabled="!d.isActive"
+      @click="eventClick(d.text)"
     >
-      다음
-    </button>
-    <button
-      :class="d.isActive2 ? 'red-active' : 'default'"
-      v-if="d.text === '02'"
-      @click="eventClick2"
-    >
-      확인
+      {{ btnText }}
     </button>
     <completed
       :topText="d.topText"
@@ -292,6 +284,8 @@ section {
     margin-bottom: 1.5rem;
     .sub-ct {
       height: 438px;
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -326,5 +320,10 @@ section {
 
 .inputDatas {
   margin-bottom: 20px;
+}
+
+button {
+  z-index: 1000;
+  position: relative;
 }
 </style>

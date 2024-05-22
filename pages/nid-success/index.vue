@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 definePageMeta({
+  layout: "default-none",
   name: "nid-success"
 });
 
