@@ -46,7 +46,14 @@ app.sign = sign;
 
 const homenumberInquiry = () => {
   // 홈넘버로 조회
-  router.replace("/homenumberInquiry");
+  router.replace({
+    path: "/homenumberInquiry",
+    query: {
+      tokenIssuId: tokenIssuId,
+      encData: encData,
+      sign: sign
+    }
+  });
 };
 
 const loginClick = async () => {

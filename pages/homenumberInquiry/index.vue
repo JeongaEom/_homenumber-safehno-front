@@ -111,12 +111,12 @@ const nextClick = () => {
 .contents {
   display: flex;
   flex-direction: column;
-  height: 540px;
+  height: 533px;
   margin-top: 0;
 }
 
 .contents.no-data {
-  height: 477px;
+  height: 495px;
 }
 
 @media (min-width: 769px) {

@@ -13,7 +13,7 @@ export { default as smsCertiReq } from "./smsCertiReq";
 export { default as smsCertiConfirm } from "./smsCertiConfirm";
 export { default as hnoGet } from "./hnoGet";
 export { default as hnoUpdate } from "./hnoUpdate";
-export { default as userSignup } from "./userSignup";
+export { default as mberSignup } from "./mberSignup";
 export { default as mberIdcheck } from "./mberIdcheck";
 export { default as certiPhoneReadyGet } from "./certiPhoneReadyGet";
 
@@ -181,7 +181,7 @@ export const call = async (settings) => {
             // console.log(modal.items);
           });
         });
-        router.push("/login");
+        router.push("/");
         return false;
       } else if (code === 3004) {
         // 3004: 중복 로그인

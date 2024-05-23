@@ -17,14 +17,11 @@ const certiPh = async () => {
 const callNiceID = () => {
   document.form_chk.action = auth.nid.checkPlusUrl;
   document.form_chk.submit();
-  console.log("auth.nid.checkPlusUrl!!1: ", auth.nid.checkPlusUrl);
 };
 
 onMounted(async () => {
   await certiPh();
   await callNiceID();
-  console.log("certiPh: ", certiPh);
-  console.log("callNiceID 함수: ", callNiceID);
 });
 </script>
 

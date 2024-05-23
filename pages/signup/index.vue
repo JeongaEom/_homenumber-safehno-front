@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch, computed, onBeforeUnmount } from "vue";
-import { termsList, userSignup, mberIdcheck } from "@/api";
+import { termsList, mberSignup, mberIdcheck } from "@/api";
 import { useAppStore, useTermsStore, useAuthStore } from "@/stores";
 
 const app = useAppStore();
@@ -89,6 +89,17 @@ const doubleClick = async () => {
   console.log("d.validId: ", d.validId);
 };
 
+const validateEmail = () => {
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  if (!regex.test(d.email)) {
+    app.error = {
+      type: "alert",
+      message: "이메일 형식이 유효하지 않습니다.",
+      hasClose: false
+    };
+  }
+};
+
 const eventHpClick = async () => {
   // 휴대폰 본인 인증
   // 팝업창 크기
@@ -130,18 +141,48 @@ const eventClick = async (data) => {
       d.isActive = false;
     }
   } else if (data === "02") {
-    // 비밀번호 확인 불일치
-    if (d.pw !== d.pwConfirm) {
+    if ([d.mberId, d.pwd, d.pwdConfirm, d.email].some((item) => item === "")) {
+      app.error = {
+        type: "alert",
+        message: "모든 필수 정보를 작성해주세요.",
+        hasClose: false
+      };
+    } else if (!d.validId) {
+      app.error = {
+        type: "alert",
+        message: "ID 중복확인은 필수입니다.",
+        hasClose: false
+      };
+    } else if (d.pwd !== d.pwdConfirm) {
+      // 비밀번호 확인 불일치
       app.error = {
         type: "alert",
         message: "입력하신 비밀번호가 서로 다릅니다.",
         hasClose: false
       };
+    } else if (!d.encData) {
+      // 본인인증
+      app.error = {
+        type: "alert",
+        message: "휴대폰 본인인증을 완료해주세요.",
+        hasClose: false
+      };
     }
 
-    if (d.isActive) {
-      await userSignup(d.mberId, d.pwd, d.email, d.encData);
-      if (userSignup) {
+    if (d.email) {
+      validateEmail();
+    }
+
+    if (
+      d.mberId &&
+      d.pwd &&
+      d.pwdConfirm &&
+      d.email &&
+      d.validId &&
+      d.encData
+    ) {
+      await mberSignup(d.mberId, d.pwd, d.email, d.encData);
+      if (mberSignup) {
         d.text = "03";
         d.completed = true;
       }
@@ -248,7 +289,12 @@ watch(
                 <li>
                   <div class="input-text">이메일 <span>*</span></div>
                   <div>
-                    <input type="text" placeholder="이메일" v-model="d.email" />
+                    <input
+                      type="text"
+                      placeholder="이메일"
+                      v-model="d.email"
+                      @blur="validateEmail"
+                    />
                   </div>
                 </li>
               </ul>

@@ -1,6 +1,6 @@
 import { call } from "@/api";
 
-const userSignup = (mberId, pwd, email, encData) => {
+const mberSignup = (mberId, pwd, email, encData) => {
   const app = useAppStore();
   const auth = useAuthStore();
   const termsAgre = auth.signupTems.map((term) => {
@@ -12,7 +12,7 @@ const userSignup = (mberId, pwd, email, encData) => {
   });
   return call({
     id: "2.10 표준 창 회원가입",
-    endpoint: "/safehno/v1/user/signup",
+    endpoint: "/safehno/v1/mber/signup",
     headers: "DEFAULT",
     withCredentials: true,
     data: {
@@ -29,4 +29,4 @@ const userSignup = (mberId, pwd, email, encData) => {
   });
 };
 
-export default userSignup;
+export default mberSignup;

@@ -1,5 +1,4 @@
 import { call } from "@/api";
-import qs from "qs";
 
 const termsAgree = (
   hnoNo,
