@@ -159,7 +159,6 @@ const nextClick = async () => {
   display: flex;
   flex-direction: column;
   height: 540px;
-  margin-top: 0;
   margin-bottom: 2.36rem;
 }
 .no-data {

@@ -11,8 +11,6 @@ const hnoDupchk = (hnoNo) => {
       hnoNo
     },
     onResponse({ code, message }) {
-      console.log("중복검증_code: ", code);
-      console.log("test?: ", message);
       app.error = {
         type: "alert",
         message: message,

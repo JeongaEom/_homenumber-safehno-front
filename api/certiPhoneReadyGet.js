@@ -13,8 +13,6 @@ const certiPhoneReadyGet = (deviceTyCd) => {
     onResponse({ code, data }) {
       auth.nid.encData = data.encData;
       auth.nid.checkPlusUrl = data.checkPlusUrl;
-      console.log("휴대폰 사전_data: ", data);
-      // console.log("auth.nid.checkPlusUrl: ", auth.nid.checkPlusUrl);
       return true;
     }
   });

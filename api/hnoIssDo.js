@@ -26,7 +26,6 @@ const hnoIssDo = ({
       addrNcm
     },
     onResponse({ code }) {
-      console.log("발급_code: ", code);
       return true;
     }
   });

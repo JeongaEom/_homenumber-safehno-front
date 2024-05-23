@@ -8,8 +8,6 @@ const hnoMyGet = () => {
     headers: "DEFAULT",
     withCredentials: true,
     onResponse({ code, data }) {
-      console.log("조회_code: ", code);
-      console.log("data: ", data);
       myGetStore.infoProvAuthNo = data.infoProvAuthNo;
       myGetStore.termsGrpCd = data.termsGrpCd;
       myGetStore.moblphonNo = data.moblphonNo;

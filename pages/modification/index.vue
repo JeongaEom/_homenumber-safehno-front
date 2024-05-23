@@ -30,7 +30,7 @@ const d = reactive({
   addrNcm: get.addrNcm,
   topText: "홈넘버 수정이<br />성공적으로 이루어졌습니다.",
   btntext: "내 홈넘버 보기",
-  height: "507",
+  height: "545",
   completed: false
 });
 
@@ -369,11 +369,12 @@ onMounted(async () => {
 }
 
 .hp {
-  min-height: 507px;
+  min-height: 545px;
 }
 
 .modifi {
-  min-height: 463px;
+  min-height: 461px;
+  margin-top: 20px;
 }
 
 .phone {

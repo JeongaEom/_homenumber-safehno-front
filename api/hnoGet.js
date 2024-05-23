@@ -11,8 +11,6 @@ const hnoGet = (hnoIssuNo) => {
       hnoIssuNo
     },
     onResponse({ code, data }) {
-      console.log("상세조회_code: ", code);
-      console.log("상세조회_data: ", data);
       get.$patch({
         hnoIssuNo: data.hnoIssuNo,
         hnoNo: data.hnoNo,

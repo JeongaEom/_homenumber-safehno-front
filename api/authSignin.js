@@ -16,7 +16,6 @@ const authSignin = (id, pwd, tokenIssuId, encData, sign) => {
       sign
     },
     onResponse({ code }) {
-      console.log("로그인_code: ", code);
       localStorage.setItem("hnoSearchType", "multi");
       router.replace("/homenumberList");
       return true;

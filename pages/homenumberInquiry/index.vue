@@ -112,7 +112,6 @@ const nextClick = () => {
   display: flex;
   flex-direction: column;
   height: 533px;
-  margin-top: 0;
 }
 
 .contents.no-data {

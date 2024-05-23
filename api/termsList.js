@@ -8,11 +8,11 @@ const termsList = (termsGrpCd) => {
     headers: "DEFAULT",
     data: { termsGrpCd },
     onResponse({ code, data }) {
-      console.log("약관_code: ", code);
-      console.log("약관_data: ", data);
       termsStore.data = data.terms.map((terms) => ({
+        termsGrpCd: terms.termsGrpCd,
         termsGrpNm: terms.termsGrpNm,
         termsCd: terms.termsCd,
+        termsVer: terms.termsVer,
         termsNm: terms.termsNm,
         termsCn: terms.termsCn,
         termsAgreEssntlYn: terms.termsAgreEssntlYn

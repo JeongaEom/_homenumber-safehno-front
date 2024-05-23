@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useAppStore } from "@/stores/app";
 
-// import { API_DEBUG, API_HOST } from "./appSettings";
 export { default as authSignin } from "./authSignin";
 export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";

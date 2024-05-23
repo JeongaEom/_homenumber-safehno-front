@@ -26,7 +26,7 @@ const d = reactive({
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
   btntext: "로그인",
-  height: "468",
+  height: "507",
   completed: false
 });
 
@@ -47,8 +47,6 @@ const listTerms = async () => {
   await termsList(d.termsGrpCd);
   termsStore.termsGrpNm = "Y";
   auth.signupTems = termsStore.data;
-  console.log("auth.signupTems: ", auth.signupTems);
-  console.log("termsStore.termsGrpNm : ", termsStore.termsGrpNm);
 };
 
 onMounted(() => {
@@ -85,7 +83,6 @@ watch(
 const doubleClick = async () => {
   // 중복확인
   d.validId = await mberIdcheck(d.mberId);
-  console.log("d.mberId: ", d.mberId);
   console.log("d.validId: ", d.validId);
 };
 
@@ -110,7 +107,6 @@ const eventHpClick = async () => {
   const top = (document.documentElement.clientHeight - wh) / 2;
   window.open(
     `${window.location.origin}/nid-request`,
-    // `${window.location.origin}/nid-success`,
     "HOMENUMBER",
     `width=${ww}, height=${wh}, top=${top}, left=${left}`
   );
@@ -127,10 +123,12 @@ const CB_MESSAGE = (e) => {
 };
 
 onMounted(() => {
+  // POSTMESSAGE 대기
   window.addEventListener("message", CB_MESSAGE);
 });
 
 onBeforeUnmount(() => {
+  // POSTMESSAGE 대기 해제
   window.removeEventListener("message", CB_MESSAGE);
 });
 
@@ -173,19 +171,13 @@ const eventClick = async (data) => {
       validateEmail();
     }
 
-    if (
-      d.mberId &&
-      d.pwd &&
-      d.pwdConfirm &&
-      d.email &&
-      d.validId &&
-      d.encData
-    ) {
-      await mberSignup(d.mberId, d.pwd, d.email, d.encData);
-      if (mberSignup) {
-        d.text = "03";
-        d.completed = true;
-      }
+    const result = await mberSignup(d.mberId, d.pwd, d.email, d.encData);
+    if (result) {
+      d.text = "03";
+      d.completed = true;
+    } else {
+      d.text = "02";
+      d.completed = false;
     }
   }
 };

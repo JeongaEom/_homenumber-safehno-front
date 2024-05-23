@@ -167,9 +167,9 @@ ul {
   margin-bottom: 30px;
 }
 
-@media (min-width: 427px) {
+@media (min-width: 420px) {
   section > .contents {
-    height: 507px;
+    height: 545px;
   }
 }
 </style>

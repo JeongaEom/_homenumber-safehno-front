@@ -25,7 +25,7 @@ const d = reactive({
   isActive: false,
   topText: "홈넘버 발급이<br />성공적으로 이루어졌습니다.",
   btntext: "발급",
-  height: "507",
+  height: "545",
   completed: false
 });
 
@@ -59,8 +59,6 @@ const handleClickAddressSearch = () => {
   const width = 500;
   const height = 500;
   // 팝업창 위치
-  // const left = (document.documentElement.clientWidth - width) / 2;
-  // const top = (document.documentElement.clientHeight - height) / 2;
   const left = window.screen.width / 2 - width / 2;
   const top = window.screen.height / 2 - height / 2;
 
@@ -79,8 +77,26 @@ const handleClickAddressSearch = () => {
 };
 
 const endClick = async () => {
-  if (d.scrtky !== d.scrtkyConfirm) {
-    const app = useAppStore();
+  if (
+    [
+      d.hnoNo1,
+      d.hnoNo2,
+      d.hnoNo3,
+      d.nm,
+      d.moblphonNo,
+      d.postNo,
+      d.bassAddr,
+      d.detailAddr,
+      d.scrtky,
+      d.scrtkyConfirm
+    ].some((item) => item === "")
+  ) {
+    app.error = {
+      type: "alert",
+      message: "모든 필수 정보를 작성해주세요.",
+      hasClose: false
+    };
+  } else if (d.scrtky !== d.scrtkyConfirm) {
     app.error = {
       type: "alert",
       message: "보안키가 일치하지 않습니다.",
@@ -88,28 +104,24 @@ const endClick = async () => {
     };
   }
 
-  if (!dupchk) {
-    const app = useAppStore();
-    app.error = {
-      type: "alert",
-      message: "홈넘버 중복확인이 필요합니다.",
-      hasClose: false
-    };
-  }
-  await hnoIssDo({
-    hnoNo: combinedHnoNo.value,
-    nm: d.nm,
-    moblphonNo: d.moblphonNo,
-    postNo: d.postNo,
-    bassAddr: d.bassAddr,
-    detailAddr: d.detailAddr,
-    scrtky: d.scrtky,
-    addrNcm: d.addrNcm
-  });
-
-  if (hnoIssDo) {
-    d.completed = true;
-    d.isActive = true; // 완료페이지 활성화
+  if (d.scrtkyConfirm && d.scrtky === d.scrtkyConfirm) {
+    const result = await hnoIssDo({
+      hnoNo: combinedHnoNo.value,
+      nm: d.nm,
+      moblphonNo: d.moblphonNo,
+      postNo: d.postNo,
+      bassAddr: d.bassAddr,
+      detailAddr: d.detailAddr,
+      scrtky: d.scrtky,
+      addrNcm: d.addrNcm
+    });
+    if (result) {
+      d.completed = true;
+      d.isActive = true; // 완료페이지 활성화
+    } else {
+      d.completed = false;
+      d.isActive = false;
+    }
   }
 };
 
@@ -286,7 +298,8 @@ watch(
 <style lang="scss" scoped>
 section {
   > .contents {
-    min-height: 436px;
+    min-height: 444px;
+    margin-top: 30px;
   }
 }
 

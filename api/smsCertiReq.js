@@ -11,7 +11,6 @@ const smsCertiReq = (moblphonNo) => {
       moblphonNo
     },
     onResponse({ code, data }) {
-      console.log("휴대폰 인증_code: ", code);
       app.crtfcTkn = data.crtfcTkn;
       return true;
     }
