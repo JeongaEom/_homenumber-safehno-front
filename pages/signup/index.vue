@@ -12,7 +12,7 @@ definePageMeta({
 });
 
 const d = reactive({
-  text: "01",
+  text: "01", // 01 이용약관 동의 || 02 회원정보 입력 || 03 가입완료
   termsGrpCd: "1010001",
   selectAll: false,
   selectedItems: [],
@@ -27,7 +27,8 @@ const d = reactive({
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
   btntext: "로그인",
   height: "507",
-  completed: false
+  completed: false,
+  regex: ""
 });
 
 watch(
@@ -82,19 +83,26 @@ watch(
 // 02 회원정보 입력
 const doubleClick = async () => {
   // 중복확인
-  d.validId = await mberIdcheck(d.mberId);
-  console.log("d.validId: ", d.validId);
+  if (d.mberId.length < 5 || d.mberId.length > 16) {
+    app.error = {
+      type: "alert",
+      message: "아이디는 영문(소문자), 숫자로 5~16자 이내로 입력해 주세요.",
+      hasClose: false
+    };
+  } else {
+    d.validId = await mberIdcheck(d.mberId);
+  }
 };
 
 const validateEmail = () => {
-  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  if (!regex.test(d.email)) {
-    app.error = {
-      type: "alert",
-      message: "이메일 형식이 유효하지 않습니다.",
-      hasClose: false
-    };
-  }
+  d.regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  // if (!regex.test(d.email)) {
+  //   app.error = {
+  //     type: "alert",
+  //     message: "이메일 형식이 아닙니다.",
+  //     hasClose: false
+  //   };
+  // }
 };
 
 const eventHpClick = async () => {
@@ -135,7 +143,7 @@ onBeforeUnmount(() => {
 const eventClick = async (data) => {
   if (data === "01") {
     if (d.isActive) {
-      d.text = "02"; // 회원정보 입력
+      d.text = "02"; // 회원정보 입력으로 이동
       d.isActive = false;
     }
   } else if (data === "02") {
@@ -145,10 +153,10 @@ const eventClick = async (data) => {
         message: "모든 필수 정보를 작성해주세요.",
         hasClose: false
       };
-    } else if (!d.validId) {
+    } else if (d.mberId.length < 5 || d.mberId.length > 16) {
       app.error = {
         type: "alert",
-        message: "ID 중복확인은 필수입니다.",
+        message: "아이디는 영문(소문자), 숫자로 5~16자 이내로 입력해 주세요.",
         hasClose: false
       };
     } else if (d.pwd !== d.pwdConfirm) {
@@ -158,6 +166,19 @@ const eventClick = async (data) => {
         message: "입력하신 비밀번호가 서로 다릅니다.",
         hasClose: false
       };
+    } else if (!d.regex.test(d.email)) {
+      app.error = {
+        type: "alert",
+        message: "이메일 형식이 아닙니다.",
+        hasClose: false
+      };
+    } else if (!d.validId) {
+      // 중복확인
+      app.error = {
+        type: "alert",
+        message: "ID 중복확인은 필수입니다.",
+        hasClose: false
+      };
     } else if (!d.encData) {
       // 본인인증
       app.error = {
@@ -165,6 +186,7 @@ const eventClick = async (data) => {
         message: "휴대폰 본인인증을 완료해주세요.",
         hasClose: false
       };
+      app.codeActive = true;
     }
 
     if (d.email) {
@@ -173,10 +195,10 @@ const eventClick = async (data) => {
 
     const result = await mberSignup(d.mberId, d.pwd, d.email, d.encData);
     if (result) {
-      d.text = "03";
+      d.text = "03"; // 가입완료 페이지 이동
       d.completed = true;
     } else {
-      d.text = "02";
+      d.text = "02"; // 회원정보 입력 페이지 유지
       d.completed = false;
     }
   }

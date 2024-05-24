@@ -167,7 +167,17 @@ export const call = async (settings) => {
 
       const router = useRouter();
 
-      if (code === 4019) {
+      // 접근 불가 권한
+      if (code === 4000) {
+        return false;
+      } else if (code === 4013) {
+        const app = useAppStore();
+        app.error = {
+          type: "alert",
+          message: error.response?.data?.message
+        };
+        return false;
+      } else if (code === 4019) {
         // 4019: 로그인페이지로 이동
         router.replace("/");
       } else if (code === 4020 || code === 4022) {
@@ -175,7 +185,11 @@ export const call = async (settings) => {
         // 4022: 승인대기
         uAddError(9999, () => {
           setTimeout(() => {
-            alert(message);
+            const app = useAppStore();
+            app.error = {
+              type: "alert",
+              message: error.response?.data?.message
+            };
             // const modal = useModalStore();
             // console.log(modal.items);
           });

@@ -1,8 +1,10 @@
 <script setup>
 import { reactive, computed, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import { hnoIssDo, hnoDupchk } from "@/api";
 import { useAppStore } from "@/stores";
 
+const router = useRouter();
 const app = useAppStore();
 
 definePageMeta({
@@ -10,10 +12,13 @@ definePageMeta({
 });
 
 const d = reactive({
-  text: "홈넘버 발급",
+  backAction() {
+    router.replace("/homenumberList");
+  },
   hnoNo1: "100",
   hnoNo2: "",
   hnoNo3: "",
+  dupchkResult: "",
   nm: "",
   moblphonNo: "",
   postNo: "",
@@ -46,7 +51,21 @@ function limitInputNumber(event, maxLength, field) {
 const combinedHnoNo = computed(() => `${d.hnoNo1}${d.hnoNo2}${d.hnoNo3}`);
 
 const dupchk = async () => {
-  await hnoDupchk(combinedHnoNo.value);
+  // 중복확인
+
+  if (
+    (d.hnoNo2.length !== 4 && d.hnoNo3.length !== 4) ||
+    d.hnoNo2.length !== 4 ||
+    d.hnoNo3.length !== 4
+  ) {
+    app.error = {
+      type: "alert",
+      message: "홈넘버 번호가 유효하지 않습니다. (중간 4자리, 뒤 4자리)",
+      hasClose: false
+    };
+  } else {
+    d.dupchkResult = await hnoDupchk(combinedHnoNo.value);
+  }
 };
 
 onMounted(() => {
@@ -91,9 +110,22 @@ const endClick = async () => {
       d.scrtkyConfirm
     ].some((item) => item === "")
   ) {
+    // *표시된 필수 정보 입력 여부 확인
     app.error = {
       type: "alert",
       message: "모든 필수 정보를 작성해주세요.",
+      hasClose: false
+    };
+  } else if (d.hnoNo2.length !== 4 && d.hnoNo3.length !== 4) {
+    app.error = {
+      type: "alert",
+      message: "홈넘버 번호가 유효하지 않습니다. (중간 4자리, 뒤 4자리)",
+      hasClose: false
+    };
+  } else if (d.moblphonNo.length < 11) {
+    app.error = {
+      type: "alert",
+      message: "휴대폰 번호가 유효하지 않습니다.",
       hasClose: false
     };
   } else if (d.scrtky !== d.scrtkyConfirm) {
@@ -102,9 +134,18 @@ const endClick = async () => {
       message: "보안키가 일치하지 않습니다.",
       hasClose: false
     };
+  } else if (!d.dupchkResult) {
+    app.error = {
+      type: "alert",
+      message: "홈넘버 중복확인을 해주세요.",
+      hasClose: false
+    };
   }
-
   if (d.scrtkyConfirm && d.scrtky === d.scrtkyConfirm) {
+    /*
+      보안키 확인 입력 및 보안키와 보안키 확인이 일치해야
+      '발급 api | hnoIssDo' 동작 그외에는 서버에서 입력여부를 잡아줌
+    */
     const result = await hnoIssDo({
       hnoNo: combinedHnoNo.value,
       nm: d.nm,
@@ -141,13 +182,22 @@ watch(
     d.scrtkyConfirm
   ],
   (newValues) => {
-    d.isActive = newValues.some((value) => value.trim() !== "");
+    /*
+      d.hnoNo1, d.hnoNo2, d.hnoNo3 세 개의 변수만 숫자로 구성되어 있는지 확인하고
+      모두 숫자로 구성되어 있다면 d.isActive를 true로 설정
+      그외에는 input 입력시 바로 반응
+    */
+    const isNumberOnly = newValues
+      .slice(0, 3)
+      .every((value) => /^\d+$/.test(value));
+    d.isActive =
+      isNumberOnly || newValues.slice(3).some((value) => value.trim() !== "");
   }
 );
 </script>
 
 <template>
-  <TitleTop :text="d.text" />
+  <TitleTop :hasBackButton="d.backAction" text="홈넘버 발급" />
   <section v-if="!d.completed">
     <div class="top">
       <div class="inputDatas">

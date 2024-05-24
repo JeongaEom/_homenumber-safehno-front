@@ -2,11 +2,11 @@
 import { reactive } from "vue";
 
 definePageMeta({
-  name: "serviceInfo",
+  name: "serviceInfo"
 });
 
 const d = reactive({
-  text: "서비스 안내",
+  text: "서비스 안내"
 });
 </script>
 
@@ -103,7 +103,8 @@ const d = reactive({
 }
 section {
   > .contents {
-    height: auto;
+    height: 503px;
+    padding-top: 27px;
   }
 }
 

@@ -6,7 +6,7 @@ const router = useRouter();
 const p = defineProps({
   topText: { type: String, default: "" },
   btntext: { type: String, default: "" },
-  height: { type: Number, default: 0 }
+  height: { type: [Number, String], default: 0 }
 });
 
 const endnextClick = () => {

@@ -13,11 +13,12 @@ definePageMeta({
 });
 
 const d = reactive({
-  text: "홈넘버",
-  noDataText: "등록된 홈넘버가<br/>존재하지 않습니다.",
   selectedhnoNo: [],
   isActive: false,
-  isMyHnoYn: "Y" // (로그인) 마이 홈넘버 조회
+  isMyHnoYn: "Y", // (로그인) 마이 홈넘버 조회
+  topText: "등록된 홈넘버가<br />존재하지 않습니다.",
+  btntext: "내 홈넘버 보기",
+  height: "545"
 });
 
 const hnbIssuance = () => {
@@ -69,7 +70,11 @@ const nextClick = async () => {
 </script>
 
 <template>
-  <TitleTop :text="d.text" :number="myGetStore.hnos.length || 0" />
+  <TitleTop
+    :hasBackButton="d.backAction"
+    text="홈넘버"
+    :number="myGetStore.hnos.length || 0"
+  />
   <div class="top-btn">
     <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
   </div>
@@ -78,8 +83,10 @@ const nextClick = async () => {
       class="contents"
       :class="myGetStore.hnos.length === 0 ? 'no-data' : ''"
     >
-      <detallError
-        :noDataText="d.noDataText"
+      <completed
+        :topText="d.topText"
+        :btntext="d.btntext"
+        :height="d.height"
         v-if="myGetStore.hnos.length === 0"
       />
       <div class="dataList" v-else>

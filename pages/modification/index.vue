@@ -80,14 +80,20 @@ const phoneAuthCheck = async () => {
   );
 
   if (phoneConfirm) {
-    d.isActive = true;
     d.cdCommand = "stop";
     d.time = "인증완료";
   }
 };
 
+watch(
+  // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
+  () => [app.crtfcTkn, d.crtfcNo],
+  (newValues) => {
+    d.isActive = newValues.some((value) => value.trim() !== "");
+  }
+);
+
 const handleTimerEnd = () => {
-  const app = useAppStore();
   app.error = {
     type: "alert",
     message: "인증시간이 만료됐습니다..",
@@ -131,20 +137,7 @@ const handleClickAddressSearch = () => {
   });
 };
 
-const modifiUpdate = async () => {
-  await hnoUpdate({
-    hnoIssuNo: get.hnoIssuNo,
-    nm: get.nm,
-    moblphonNo: get.moblphonNo,
-    postNo: get.postNo,
-    bassAddr: get.bassAddr,
-    detailAddr: get.detailAddr,
-    scrtky: d.scrtky,
-    addrNcm: get.addrNcm
-  });
-};
-
-const nextClick = () => {
+const nextClick = async () => {
   if (d.isNext) {
     // [휴대폰 인증] 완료 후 '확인'
     if (d.isActive) {
@@ -154,10 +147,26 @@ const nextClick = () => {
   } else if (!d.isNext) {
     // [수정] 완료 후 '확인'
     if (d.isActive) {
-      modifiUpdate();
-      if (d.scrtky) {
+      await hnoUpdate({
+        hnoIssuNo: get.hnoIssuNo,
+        nm: get.nm,
+        moblphonNo: get.moblphonNo,
+        postNo: get.postNo,
+        bassAddr: get.bassAddr,
+        detailAddr: get.detailAddr,
+        scrtky: d.scrtky,
+        addrNcm: get.addrNcm
+      });
+      if (app.updateCode === 2000) {
         d.completed = true; // 완료페이지 활성화
+      } else {
+        app.updateCode = "";
+        d.completed = false;
       }
+
+      console.log("app.updateCode: ", app.updateCode);
+      console.log("d.scrtky: ", d.scrtky);
+      console.log("d.completed: ", d.completed);
     }
   }
 };
@@ -181,6 +190,7 @@ watch(
 onMounted(async () => {
   await fetchHnoMyGet();
   await hnogetList();
+  d.isActive = false;
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
 </script>
@@ -204,7 +214,12 @@ onMounted(async () => {
             <li class="input-text">휴대폰 번호 <span>*</span></li>
             <li>
               <div class="input-box">
-                <input type="text" v-model="myGetStore.moblphonNo" />
+                <input
+                  type="text"
+                  class="disabled"
+                  v-model="myGetStore.moblphonNo"
+                  disabled
+                />
                 <button class="bg-w line" @click="phoneAuth">
                   인증번호 전송
                 </button>
