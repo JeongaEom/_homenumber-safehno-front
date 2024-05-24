@@ -8,7 +8,12 @@ const closeClick = () => {
 };
 
 const clickEvent = () => {
-  router.replace("/homenumberList");
+  // if (router.pathname === "/signup") {
+  //   router.replace("/");
+  // } else {
+  //   router.replace("/homenumberList");
+  // }
+  // router.replace("/homenumberList");
 };
 </script>
 

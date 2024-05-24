@@ -127,14 +127,43 @@ const handleClickAddressSearch = () => {
     width,
     height,
     oncomplete: function (data) {
-      d.postNo = data.zonecode;
-      d.bassAddr = data.roadAddress;
+      get.postNo = data.zonecode;
+      get.bassAddr = data.roadAddress;
     }
   }).open({
     popupTitle: "우편번호 검색",
     left,
     top
   });
+};
+
+const verification = () => {
+  if (
+    [
+      get.nm,
+      get.moblphonNo,
+      get.postNo,
+      get.bassAddr,
+      get.detailAddr,
+      d.scrtky
+    ].some((item) => item === "")
+  ) {
+    // *표시된 필수 정보 입력 여부 확인
+    app.error = {
+      type: "alert",
+      message: "모든 필수 정보를 작성해주세요.",
+      hasClose: false
+    };
+    return false;
+  } else if (get.moblphonNo.length < 11) {
+    app.error = {
+      type: "alert",
+      message: "휴대폰 번호가 유효하지 않습니다.",
+      hasClose: false
+    };
+    return false;
+  }
+  return true;
 };
 
 const nextClick = async () => {
@@ -147,26 +176,34 @@ const nextClick = async () => {
   } else if (!d.isNext) {
     // [수정] 완료 후 '확인'
     if (d.isActive) {
-      await hnoUpdate({
-        hnoIssuNo: get.hnoIssuNo,
-        nm: get.nm,
-        moblphonNo: get.moblphonNo,
-        postNo: get.postNo,
-        bassAddr: get.bassAddr,
-        detailAddr: get.detailAddr,
-        scrtky: d.scrtky,
-        addrNcm: get.addrNcm
-      });
-      if (app.updateCode === 2000) {
-        d.completed = true; // 완료페이지 활성화
-      } else {
-        app.updateCode = "";
-        d.completed = false;
-      }
+      const isValid = verification();
+      if (isValid) {
+        const result = await hnoUpdate({
+          hnoIssuNo: get.hnoIssuNo,
+          nm: get.nm,
+          moblphonNo: get.moblphonNo,
+          postNo: get.postNo,
+          bassAddr: get.bassAddr,
+          detailAddr: get.detailAddr,
+          scrtky: d.scrtky,
+          addrNcm: get.addrNcm
+        });
+        if (result) {
+          d.completed = true; // 완료페이지 활성화
+        } else {
+          d.completed = false;
+        }
+        // if (app.updateCode === 2000) {
+        //   d.completed = true; // 완료페이지 활성화
+        // } else {
+        //   app.updateCode = "";
+        //   d.completed = false;
+        // }
 
-      console.log("app.updateCode: ", app.updateCode);
-      console.log("d.scrtky: ", d.scrtky);
-      console.log("d.completed: ", d.completed);
+        // console.log("app.updateCode: ", app.updateCode);
+        // console.log("d.scrtky: ", d.scrtky);
+        // console.log("d.completed: ", d.completed);
+      }
     }
   }
 };
@@ -179,7 +216,7 @@ watch(
     get.postNo,
     get.bassAddr,
     get.detailAddr,
-    get.scrtky,
+    d.scrtky,
     get.addrNcm
   ],
   (newValues) => {

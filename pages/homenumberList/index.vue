@@ -18,7 +18,8 @@ const d = reactive({
   isMyHnoYn: "Y", // (로그인) 마이 홈넘버 조회
   topText: "등록된 홈넘버가<br />존재하지 않습니다.",
   btntext: "내 홈넘버 보기",
-  height: "545"
+  height: "545",
+  btn: "none"
 });
 
 const hnbIssuance = () => {
@@ -87,6 +88,7 @@ const nextClick = async () => {
         :topText="d.topText"
         :btntext="d.btntext"
         :height="d.height"
+        :btn="d.btn"
         v-if="myGetStore.hnos.length === 0"
       />
       <div class="dataList" v-else>
@@ -169,7 +171,7 @@ const nextClick = async () => {
   margin-bottom: 2.36rem;
 }
 .no-data {
-  height: 598px;
+  height: 585px;
 }
 .top-btn {
   position: relative;

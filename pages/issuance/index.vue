@@ -95,7 +95,7 @@ const handleClickAddressSearch = () => {
   });
 };
 
-const endClick = async () => {
+const verification = () => {
   if (
     [
       d.hnoNo1,
@@ -116,36 +116,42 @@ const endClick = async () => {
       message: "모든 필수 정보를 작성해주세요.",
       hasClose: false
     };
+    return false;
   } else if (d.hnoNo2.length !== 4 && d.hnoNo3.length !== 4) {
     app.error = {
       type: "alert",
       message: "홈넘버 번호가 유효하지 않습니다. (중간 4자리, 뒤 4자리)",
       hasClose: false
     };
+    return false;
   } else if (d.moblphonNo.length < 11) {
     app.error = {
       type: "alert",
       message: "휴대폰 번호가 유효하지 않습니다.",
       hasClose: false
     };
+    return false;
   } else if (d.scrtky !== d.scrtkyConfirm) {
     app.error = {
       type: "alert",
       message: "보안키가 일치하지 않습니다.",
       hasClose: false
     };
+    return false;
   } else if (!d.dupchkResult) {
     app.error = {
       type: "alert",
       message: "홈넘버 중복확인을 해주세요.",
       hasClose: false
     };
+    return false;
   }
-  if (d.scrtkyConfirm && d.scrtky === d.scrtkyConfirm) {
-    /*
-      보안키 확인 입력 및 보안키와 보안키 확인이 일치해야
-      '발급 api | hnoIssDo' 동작 그외에는 서버에서 입력여부를 잡아줌
-    */
+  return true;
+};
+
+const endClick = async () => {
+  const isValid = verification();
+  if (isValid) {
     const result = await hnoIssDo({
       hnoNo: combinedHnoNo.value,
       nm: d.nm,

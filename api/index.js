@@ -168,9 +168,7 @@ export const call = async (settings) => {
       const router = useRouter();
 
       // 접근 불가 권한
-      if (code === 4000) {
-        return false;
-      } else if (code === 4013) {
+      if (code === 4013) {
         const app = useAppStore();
         app.error = {
           type: "alert",

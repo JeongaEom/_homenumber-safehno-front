@@ -23,6 +23,8 @@ const d = reactive({
   email: "",
   encData: "",
   validId: false,
+  validId1: false,
+  validId2: false,
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
   btntext: "로그인",
@@ -81,6 +83,11 @@ watch(
 );
 
 // 02 회원정보 입력
+function limitInputTextE(event, field) {
+  const value = event.target.value.replace(/[^a-zA-Z0-9]/g, ""); // 영문자와 숫자만 허용
+  d[field] = value;
+}
+
 const doubleClick = async () => {
   // 중복확인
   if (d.mberId.length < 5 || d.mberId.length > 16) {
@@ -96,13 +103,6 @@ const doubleClick = async () => {
 
 const validateEmail = () => {
   d.regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  // if (!regex.test(d.email)) {
-  //   app.error = {
-  //     type: "alert",
-  //     message: "이메일 형식이 아닙니다.",
-  //     hasClose: false
-  //   };
-  // }
 };
 
 const eventHpClick = async () => {
@@ -140,6 +140,57 @@ onBeforeUnmount(() => {
   window.removeEventListener("message", CB_MESSAGE);
 });
 
+const verification = () => {
+  if ([d.mberId, d.pwd, d.pwdConfirm, d.email].some((item) => item === "")) {
+    app.error = {
+      type: "alert",
+      message: "모든 필수 정보를 작성해주세요.",
+      hasClose: false
+    };
+    return false;
+  } else if (d.mberId.length < 5 || d.mberId.length > 16) {
+    app.error = {
+      type: "alert",
+      message: "아이디는 영문(소문자), 숫자로 5~16자 이내로 입력해 주세요.",
+      hasClose: false
+    };
+    return false;
+  } else if (d.pwd !== d.pwdConfirm) {
+    // 비밀번호 확인 불일치
+    app.error = {
+      type: "alert",
+      message: "입력하신 비밀번호가 서로 다릅니다.",
+      hasClose: false
+    };
+    return false;
+  } else if (!d.regex.test(d.email)) {
+    app.error = {
+      type: "alert",
+      message: "이메일 형식이 아닙니다.",
+      hasClose: false
+    };
+    return false;
+  } else if (!d.validId) {
+    // 중복확인
+    app.error = {
+      type: "alert",
+      message: "ID 중복확인은 필수입니다.",
+      hasClose: false
+    };
+    return false;
+  } else if (!d.encData) {
+    // 본인인증
+    app.error = {
+      type: "alert",
+      message: "휴대폰 본인인증을 완료해주세요.",
+      hasClose: false
+    };
+    return false;
+  }
+
+  return true;
+};
+
 const eventClick = async (data) => {
   if (data === "01") {
     if (d.isActive) {
@@ -147,59 +198,16 @@ const eventClick = async (data) => {
       d.isActive = false;
     }
   } else if (data === "02") {
-    if ([d.mberId, d.pwd, d.pwdConfirm, d.email].some((item) => item === "")) {
-      app.error = {
-        type: "alert",
-        message: "모든 필수 정보를 작성해주세요.",
-        hasClose: false
-      };
-    } else if (d.mberId.length < 5 || d.mberId.length > 16) {
-      app.error = {
-        type: "alert",
-        message: "아이디는 영문(소문자), 숫자로 5~16자 이내로 입력해 주세요.",
-        hasClose: false
-      };
-    } else if (d.pwd !== d.pwdConfirm) {
-      // 비밀번호 확인 불일치
-      app.error = {
-        type: "alert",
-        message: "입력하신 비밀번호가 서로 다릅니다.",
-        hasClose: false
-      };
-    } else if (!d.regex.test(d.email)) {
-      app.error = {
-        type: "alert",
-        message: "이메일 형식이 아닙니다.",
-        hasClose: false
-      };
-    } else if (!d.validId) {
-      // 중복확인
-      app.error = {
-        type: "alert",
-        message: "ID 중복확인은 필수입니다.",
-        hasClose: false
-      };
-    } else if (!d.encData) {
-      // 본인인증
-      app.error = {
-        type: "alert",
-        message: "휴대폰 본인인증을 완료해주세요.",
-        hasClose: false
-      };
-      app.codeActive = true;
-    }
-
-    if (d.email) {
-      validateEmail();
-    }
-
-    const result = await mberSignup(d.mberId, d.pwd, d.email, d.encData);
-    if (result) {
-      d.text = "03"; // 가입완료 페이지 이동
-      d.completed = true;
-    } else {
-      d.text = "02"; // 회원정보 입력 페이지 유지
-      d.completed = false;
+    const isValid = verification();
+    if (isValid) {
+      const result = await mberSignup(d.mberId, d.pwd, d.email, d.encData);
+      if (result) {
+        d.text = "03"; // 가입완료 페이지 이동
+        d.completed = true;
+      } else {
+        d.text = "02"; // 회원정보 입력 페이지 유지
+        d.completed = false;
+      }
     }
   }
 };
@@ -269,6 +277,7 @@ watch(
                             type="text"
                             placeholder="아이디"
                             v-model="d.mberId"
+                            @input="limitInputTextE($event, 'mberId')"
                           />
                         </div>
                         <div>

@@ -6,6 +6,7 @@ const router = useRouter();
 const p = defineProps({
   topText: { type: String, default: "" },
   btntext: { type: String, default: "" },
+  btn: { type: String, default: "block" },
   height: { type: [Number, String], default: 0 }
 });
 
@@ -27,7 +28,11 @@ const endnextClick = () => {
       </div>
     </div>
   </div>
-  <button class="bg-w line-active" @click="endnextClick()">
+  <button
+    class="bg-w line-active"
+    @click="endnextClick()"
+    :style="{ display: p.btn }"
+  >
     {{ p.btntext }}
   </button>
 </template>
