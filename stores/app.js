@@ -1,21 +1,12 @@
 export const useAppStore = defineStore("app", {
   state() {
     return {
-      isVerified: null,
-      isVerifing: false,
-      verifingPromise: null,
-      verifingResolve: null,
-      isRouting: false,
+      // isRouting: false,
       isMenuMinimized: localStorage.getItem("menu-minimized") === "1",
       isLoggedIn: null,
-      scrnId: null,
-      preScrnId: null,
-      navItems: [],
-      menus: [],
-      apiQueue: [],
+      // apiQueue: [],
       error: null,
-      crtfcTkn: null,
-      updateCode: null
+      crtfcTkn: null
     };
   },
   actions: {

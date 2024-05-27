@@ -108,8 +108,8 @@ export const call = async (settings) => {
     beforeRequest,
     data = {},
     onResponse,
-    onError,
-    onFinally
+    onError
+    // onFinally
   } = settings;
 
   // 선행 조건 확인
@@ -127,8 +127,6 @@ export const call = async (settings) => {
   Object.keys(data).forEach((key) => {
     if (data[key] === null) delete data[key];
   });
-
-  const app = useAppStore();
   // 호출
   // 타겟 URL 설정
   // endpoint로 호출하는 경우(미리 정의된 HOST를 붙인다)
@@ -188,8 +186,6 @@ export const call = async (settings) => {
               type: "alert",
               message: error.response?.data?.message
             };
-            // const modal = useModalStore();
-            // console.log(modal.items);
           });
         });
         router.push("/");
@@ -219,12 +215,12 @@ export const call = async (settings) => {
       }
       defaultErrorProc(error);
       return false;
-    })
-    .finally(() => {
-      // 로딩 중
-      app.apiQueue = app.apiQueue.filter((item) => item !== api);
-      onFinally?.();
     });
-  app.apiQueue.push(api);
+  //   .finally(() => {
+  //     // 로딩 중
+  //     app.apiQueue = app.apiQueue.filter((item) => item !== api);
+  //     onFinally?.();
+  //   });
+  // app.apiQueue.push(api);
   return api;
 };

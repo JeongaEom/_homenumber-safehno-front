@@ -10,7 +10,6 @@ const hnoUpdate = ({
   scrtky,
   addrNcm
 }) => {
-  const app = useAppStore();
   return call({
     id: "2.13 홈넘버 정보 수정",
     endpoint: "/safehno/v1/hno/update",
@@ -27,8 +26,6 @@ const hnoUpdate = ({
       addrNcm
     },
     onResponse({ code, message }) {
-      // code로 인증키 확인
-      app.updateCode = code;
       console.log("message: ", message);
       return true;
     }

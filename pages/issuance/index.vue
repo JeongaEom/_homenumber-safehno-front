@@ -162,6 +162,7 @@ const endClick = async () => {
       scrtky: d.scrtky,
       addrNcm: d.addrNcm
     });
+
     if (result) {
       d.completed = true;
       d.isActive = true; // 완료페이지 활성화

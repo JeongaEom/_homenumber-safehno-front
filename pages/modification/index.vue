@@ -193,16 +193,6 @@ const nextClick = async () => {
         } else {
           d.completed = false;
         }
-        // if (app.updateCode === 2000) {
-        //   d.completed = true; // 완료페이지 활성화
-        // } else {
-        //   app.updateCode = "";
-        //   d.completed = false;
-        // }
-
-        // console.log("app.updateCode: ", app.updateCode);
-        // console.log("d.scrtky: ", d.scrtky);
-        // console.log("d.completed: ", d.completed);
       }
     }
   }

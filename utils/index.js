@@ -10,6 +10,8 @@ export const formatNb = (Nb) => {
   return `${Nb.substring(0, 3)}-${Nb.substring(3, 7)}-${Nb.substring(7)}`;
 };
 
+// ---------------------------------------------
+
 export const uExtractNumber = (str) => String(str).replace(/[^\d]+/g, "");
 
 export const uNumberWithComma = (number) =>
@@ -55,7 +57,7 @@ export const uRegexpr = (type, text) => {
       return /^[A-Za-z][A-Za-z0-9]*$/.test(text);
     // 영문, 숫자, 특수문자 중 2가지 이상 조합 && 2자리 이상
     case "PW_MAIN":
-      return /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?:[0-9]+))$)[A-Za-z\d~!@#$%^&*()_+=]{2,}$/.test(
+      return /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?:\d+))$)[A-Za-z\d~!@#$%^&*()_+=]{2,}$/.test(
         text
       );
     default:
@@ -102,7 +104,7 @@ export const uIndexingProc = (list, keyProperty, options = {}) => {
     const key = item[keyProperty];
     items[key] = item;
     keys.push(key);
-    onLoop && onLoop(item, key);
+    onLoop?.(item, key);
   });
   return [keys, items];
 };
@@ -153,7 +155,7 @@ export const uIndBoxOpenClick = ({ currentTarget }, cb) => {
 
 export const uModUrlQuery = (updateObj, force = false) => {
   console.log("📌📌📌📌", updateObj);
-  const app = useAppStore();
+  // const app = useAppStore();
   const modUrl = () => {
     const url = new URL(window.location.href);
     let searchParams = null;
@@ -172,11 +174,11 @@ export const uModUrlQuery = (updateObj, force = false) => {
     url.search = searchParams.toString();
     history.replaceState(history.state, "", url.toString());
   };
-  if (app.isRouting) {
-    window.addEventListener("after.route-changed", modUrl, { once: true });
-  } else {
-    modUrl();
-  }
+  // if (app.isRouting) {
+  //   window.addEventListener("after.route-changed", modUrl, { once: true });
+  // } else {
+  //   modUrl();
+  // }
 };
 
 // pure
@@ -324,26 +326,26 @@ export const uCommonResponse = (res, option = {}) => {
   }
 };
 
-export const uOpenPostCodeSearch = (cb) => {
-  // 팝업창 크기
-  const width = 500;
-  const height = 500;
-  // 팝업창 위치
-  const left = (document.documentElement.clientWidth - width) / 2;
-  const top = (document.documentElement.clientHeight - height) / 2;
+// export const uOpenPostCodeSearch = (cb) => {
+//   // 팝업창 크기
+//   const width = 500;
+//   const height = 500;
+//   // 팝업창 위치
+//   const left = (document.documentElement.clientWidth - width) / 2;
+//   const top = (document.documentElement.clientHeight - height) / 2;
 
-  new daum.Postcode({
-    width,
-    height,
-    oncomplete: function (data) {
-      cb(data.zonecode, data.roadAddress);
-    }
-  }).open({
-    popupTitle: "우편번호 검색",
-    left,
-    top
-  });
-};
+//   new daum.Postcode({
+//     width,
+//     height,
+//     oncomplete: function (data) {
+//       cb(data.zonecode, data.roadAddress);
+//     }
+//   }).open({
+//     popupTitle: "우편번호 검색",
+//     left,
+//     top
+//   });
+// };
 
 // https://developer.mozilla.org/ko/docs/Glossary/Base64
 export const uBase64Decode = (base64) => {

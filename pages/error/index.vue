@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 
 definePageMeta({
-  name: "error",
+  name: "error"
 });
 
 const app = useAppStore();
@@ -19,12 +19,8 @@ const d = reactive({
     const queryMsg = route.query.errMsg
       ? new TextDecoder().decode(uBase64Decode(route.query.errMsg))
       : false;
-    return queryMsg
-      ? queryMsg
-      : app.error?.message
-        ? app.error?.message
-        : "메시지가 정의되어 있지 않습니다.";
-  }),
+    return queryMsg || app.error?.message || "메시지가 정의되어 있지 않습니다.";
+  })
 });
 
 const buttonClick = () => {
