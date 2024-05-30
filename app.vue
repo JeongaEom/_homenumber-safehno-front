@@ -5,7 +5,7 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div class="full-height">
     <NuxtLayout>
       <NuxtPage />
       <Popup />
@@ -13,4 +13,9 @@ useHead({
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.full-height {
+  height: 100vh;
+  height: calc(100vh - env(safe-area-inset-bottom));
+}
+</style>
