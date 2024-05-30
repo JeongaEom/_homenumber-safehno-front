@@ -37,7 +37,6 @@ const closeClick = () => {
   top: 0;
   height: 100%;
   overflow: auto;
-  width: -webkit-fill-available;
   max-width: 480px;
   .inner {
     background-color: #fefefe;

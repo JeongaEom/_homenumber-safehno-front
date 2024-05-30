@@ -30,7 +30,7 @@ const d = reactive({
   isActive: false,
   topText: "홈넘버 발급이<br />성공적으로 이루어졌습니다.",
   btntext: "발급",
-  height: "545",
+  type: "contents-end",
   completed: false
 });
 
@@ -85,8 +85,11 @@ const handleClickAddressSearch = () => {
     width,
     height,
     oncomplete: function (data) {
-      d.postNo = data.zonecode;
-      d.bassAddr = data.roadAddress;
+      console.log(data);
+      d.postNo = data.zonecode; // 우편번호
+      let address = data.roadAddress; // 도로명 주소
+      let building = data.buildingName ? " " + data.buildingName : ""; // 건물명이 있으면 앞에 공백을 두고 추가, 없으면 빈 문자열
+      d.bassAddr = address + building;
     }
   }).open({
     popupTitle: "우편번호 검색",
@@ -205,7 +208,7 @@ watch(
 
 <template>
   <TitleTop :hasBackButton="d.backAction" text="홈넘버 발급" />
-  <section v-if="!d.completed">
+  <section class="sections" v-if="!d.completed">
     <div class="top">
       <div class="inputDatas">
         <div class="inner">
@@ -339,6 +342,7 @@ watch(
       </div>
     </div>
     <button
+      class="btn-checks"
       :class="d.isActive ? 'red-active' : 'default'"
       :disabled="!d.isActive"
       @click="endClick"
@@ -348,15 +352,15 @@ watch(
   </section>
 
   <section v-if="d.completed">
-    <completed :topText="d.topText" :btntext="d.btntext" :height="d.height" />
+    <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
   </section>
 </template>
 
 <style lang="scss" scoped>
 section {
   > .contents {
-    min-height: 444px;
     margin-top: 30px;
+    height: auto;
   }
 }
 
@@ -370,6 +374,19 @@ section {
         }
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    margin-top: 10px;
+  }
+
+  .btn-checks {
+    position: fixed;
+    bottom: 20px;
+    width: 92%;
+    z-index: 1000;
   }
 }
 
@@ -412,6 +429,67 @@ section {
         }
       }
     }
+  }
+}
+
+//모바일 사이즈별
+@media (width: 768px) and (height: 1024px) {
+  .btn-checks {
+    width: 58%;
+  }
+}
+
+@media (width: 712px) and (height: 1138px) {
+  .btn-checks {
+    width: 63%;
+  }
+}
+
+@media (width: 540px) and (height: 720px) {
+  .btn-checks {
+    width: 84%;
+  }
+}
+
+@media (max-height: 740px) {
+  section {
+    margin-bottom: 77px;
+    overflow: auto;
+  }
+  .sections {
+    height: 70vh;
+    height: 70dvh;
+  }
+}
+
+@media (max-height: 667px) {
+  .sections {
+    height: 66vh;
+    height: 66dvh;
+  }
+}
+
+@media (max-height: 568px) {
+  .sections {
+    height: 64vh;
+    height: 64dvh;
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  .sections {
+    height: 70vh;
+    height: 70dvh;
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  .sections {
+    height: 55vh;
+    height: 55dvh;
+    margin-top: 28px;
   }
 }
 </style>

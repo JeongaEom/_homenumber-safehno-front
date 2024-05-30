@@ -54,7 +54,7 @@ const nextClick = () => {
 <template>
   <TitleTop :hasBackButton="d.backAction" text="홈넘버로 조회" />
   <section>
-    <div :class="!d.data ? 'contents no-data' : 'contents'">
+    <div :class="!d.data ? 'contents check' : 'contents'">
       <div v-if="!d.data">
         <input
           v-model="d.hnoNo"
@@ -75,22 +75,33 @@ const nextClick = () => {
           <ul>
             <li>
               <div class="active-line">
-                <ul>
-                  <li>
-                    <div>{{ formatNb(shno.hnoNo) }}</div>
-                  </li>
-                  <li>
-                    <div>{{ shno.nm }}</div>
-                    <div>{{ formatNb(shno.moblphonNo) }}</div>
-                  </li>
-                  <li>
-                    <div>{{ shno.postNo }}</div>
-                    <div>
-                      <div>{{ shno.bassAddr }}</div>
-                      <div v-if="shno.detailAddr">{{ shno.detailAddr }}</div>
-                    </div>
-                  </li>
-                </ul>
+                <div></div>
+                <div>
+                  <div>
+                    <ul>
+                      <li>
+                        <div>{{ formatNb(shno.hnoNo) }}</div>
+                      </li>
+                      <li>
+                        <div>{{ shno.nm }}</div>
+                        <div>{{ formatNb(shno.moblphonNo) }}</div>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul>
+                    <li>
+                      <div>
+                        {{ shno.postNo }}
+                        <div>{{ shno.bassAddr }}</div>
+                      </div>
+                      <div>
+                        <div v-if="shno.detailAddr">
+                          {{ shno.detailAddr }}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </li>
           </ul>
@@ -108,25 +119,34 @@ const nextClick = () => {
 </template>
 
 <style lang="scss" scoped>
-.contents {
-  display: flex;
-  flex-direction: column;
-  height: 545px;
+section {
+  > .contents {
+    display: flex;
+    flex-direction: column;
+    height: 52vh;
+    height: 52dvh;
+    margin-top: 20px;
+    &.check {
+      height: 48vh;
+      height: 48dvh;
+    }
+  }
 }
 
-.contents.no-data {
-  height: 508px;
+.dataList {
+  > ul {
+    > li {
+      > div {
+        > div:nth-child(1) {
+          width: 0 !important;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 769px) {
   section {
-    > .contents {
-      padding: 0;
-      min-height: 443px;
-      .inner {
-        padding: 2rem 2rem 0;
-      }
-    }
     .bottom {
       p {
         text-align: center;
@@ -136,19 +156,92 @@ const nextClick = () => {
 }
 
 @media (max-width: 768px) {
-  section {
-    > .contents {
-      padding: 0;
-      min-height: 443px;
-    }
-  }
   .bottom {
     br {
       display: none;
     }
   }
 }
-.notData {
-  margin-top: 26%;
+
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  section {
+    > .contents {
+      height: 66vh;
+      height: 66dvh;
+      &.check {
+        height: 62vh;
+        height: 62dvh;
+      }
+    }
+  }
+}
+
+//모바일 사이즈별
+@media (max-height: 740px) {
+  section {
+    > .contents {
+      height: 62vh;
+      height: 62dvh;
+      &.check {
+        height: 55vh;
+        height: 55dvh;
+      }
+    }
+  }
+}
+
+@media (max-height: 667px) {
+  section {
+    > .contents {
+      height: 60vh;
+      height: 60dvh;
+      &.check {
+        height: 52vh;
+        height: 52dvh;
+      }
+    }
+  }
+}
+
+@media (max-height: 568px) {
+  section {
+    > .contents {
+      height: 56vh;
+      height: 56dvh;
+      &.check {
+        height: 40vh;
+        height: 40dvh;
+      }
+    }
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  section {
+    > .contents {
+      height: 66vh;
+      height: 66dvh;
+      &.check {
+        height: 58vh;
+        height: 58dvh;
+      }
+    }
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  section {
+    > .contents {
+      height: 50vh;
+      height: 50dvh;
+      &.check {
+        height: 36vh;
+        height: 36dvh;
+      }
+    }
+  }
 }
 </style>

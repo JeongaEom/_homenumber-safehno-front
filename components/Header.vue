@@ -27,39 +27,107 @@ const clickEvent = () => {
           @click="clickEvent"
         />
       </div>
-      <div class="close">
-        <img
-          src="@/assets/images/icon-close.png"
-          alt="닫기"
-          @click="closeClick"
-        />
-      </div>
+    </div>
+    <div class="close">
+      <img
+        src="@/assets/images/icon-close.png"
+        alt="닫기"
+        @click="closeClick"
+      />
     </div>
   </header>
 </template>
 
 <style lang="scss" scoped>
 header {
-  max-height: 5rem;
-  min-height: 80px;
+  width: 100%;
   background-color: $c-g900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   .inners {
-    width: 10rem;
-    padding: 0.8rem;
+    width: 90%;
+    padding: 1rem;
+    .logo {
+      width: 25%;
+      margin: auto;
+      img {
+        width: 10rem;
+      }
+    }
   }
 }
+
 .close {
-  width: 70px;
-  height: 80px;
+  width: 10%;
   img {
     width: 24px;
     height: 24px;
-    position: absolute;
-    right: 24px;
-    top: 24px;
     cursor: pointer;
     filter: invert(98%) sepia(2%) saturate(373%) hue-rotate(181deg)
       brightness(98%) contrast(89%);
+  }
+}
+
+@media (max-height: 740px) {
+  header {
+    .inners {
+      .logo {
+        img {
+          width: 7rem;
+        }
+      }
+    }
+  }
+
+  .close {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+@media (min-width: 360px) and (max-height: 900px) {
+  header {
+    .inners {
+      .logo {
+        img {
+          width: 7rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-height: 640px) {
+  header {
+    .inners {
+      .logo {
+        img {
+          width: 6.3rem;
+        }
+      }
+    }
+  }
+
+  .close {
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  header {
+    .inners {
+      .logo {
+        img {
+          width: 6rem;
+        }
+      }
+    }
   }
 }
 </style>

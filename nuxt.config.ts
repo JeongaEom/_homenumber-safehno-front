@@ -38,7 +38,8 @@ export default defineNuxtConfig({
           // 기본 컬러
           additionalData: '@import "@/assets/scss/_variables.scss";'
         }
-      }
+      },
+      devSourcemap: true // 모바일 100vh 스크롤 문제해결
     },
     server: {
       proxy: {

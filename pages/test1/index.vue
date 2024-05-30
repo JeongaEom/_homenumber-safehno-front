@@ -19,7 +19,7 @@ const d = reactive({
   result: null
 });
 
-const eventClick = () => {
+const eventClick1 = () => {
   const width = 480;
   const height = 820;
   const left = window.screen.width / 2 - width / 2;
@@ -32,6 +32,15 @@ const eventClick = () => {
   const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
   window.open(url, "_blank", windowFeatures);
+};
+
+const eventClick2 = () => {
+  const link =
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3002`
+      : `https://dev-safehno.homenumber.co.kr/`;
+  const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+  window.open(url);
 };
 
 const CB_MESSAGE = (e) => {
@@ -59,8 +68,12 @@ onBeforeUnmount(() => {
   <TitleTop :text="d.text" />
   <section>
     <div class="contents">
-      <button class="popup-call-btn" @click="eventClick">
+      <button class="popup-call-btn" @click="eventClick1">
         홈넘버표준창 팝업
+      </button>
+      <br />
+      <button class="popup-call-btn" @click="eventClick2">
+        홈넘버표준창 <br />(모바일 _f12 개발자모드)
       </button>
     </div>
     <div v-if="d.result" class="result-wrap">
@@ -80,7 +93,8 @@ body {
   height: auto;
 }
 section {
-  border: none;
+  height: 82vh;
+  height: 82dvh;
 }
 section > .contents {
   height: auto;
@@ -94,6 +108,7 @@ section > .contents {
   margin-left: auto;
   margin-right: auto;
 }
+
 .result-wrap {
   border: solid 1px black;
   margin-left: auto;
@@ -101,12 +116,14 @@ section > .contents {
   max-width: 700px;
   padding: 30px;
 }
+
 .result-title {
   margin-bottom: 30px;
   font-size: 25px;
   text-align: center;
   font-weight: bold;
 }
+
 .result {
   margin-top: 20px;
   .result-item {
@@ -114,5 +131,9 @@ section > .contents {
     font-size: 18px;
     word-wrap: break-word;
   }
+}
+
+.logo {
+  width: 10px;
 }
 </style>

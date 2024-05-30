@@ -18,7 +18,7 @@ const d = reactive({
   isMyHnoYn: "Y", // (로그인) 마이 홈넘버 조회
   topText: "등록된 홈넘버가<br />존재하지 않습니다.",
   btntext: "내 홈넘버 보기",
-  height: "545",
+  type: "contents-end",
   btn: "none"
 });
 
@@ -77,7 +77,9 @@ const nextClick = async () => {
     :number="myGetStore.hnos.length || 0"
   />
   <div class="top-btn">
-    <button class="bg-w line-active" @click="hnbIssuance">홈넘버 추가</button>
+    <button class="bg-w line-active" @click="hnbIssuance">
+      + 신규 홈넘버 추가
+    </button>
   </div>
   <section>
     <div
@@ -87,7 +89,7 @@ const nextClick = async () => {
       <completed
         :topText="d.topText"
         :btntext="d.btntext"
-        :height="d.height"
+        :type="d.type"
         :btn="d.btn"
         v-if="myGetStore.hnos.length === 0"
       />
@@ -102,51 +104,55 @@ const nextClick = async () => {
               "
               @click="selectClick(item)"
             >
-              <ul>
-                <li>
-                  <div>{{ formatNb(item.hnoNo) }}</div>
-                  <div>{{ item.addrNcm }}</div>
-                </li>
-                <li>
-                  <div>{{ item.nm }}</div>
-                  <div>{{ formatNb(item.moblphonNo) }}</div>
-                </li>
-                <li>
-                  <div>{{ item.postNo }}</div>
-                  <div>
-                    <div>{{ item.bassAddr }}</div>
-                    <div v-if="item.detailAddr">{{ item.detailAddr }}</div>
-                  </div>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <div
-                    :class="
-                      d.selectedhnoNo.includes(item.hnoNo)
-                        ? 'red-active'
-                        : 'default'
-                    "
-                  >
-                    <span>
-                      <img
-                        src="@/assets/images/checkIconOff.png"
-                        v-if="!d.selectedhnoNo.includes(item.hnoNo)"
-                        alt="미선택"
-                      />
-                      <img
-                        src="@/assets/images/checkIconOn.png"
-                        v-if="d.selectedhnoNo.includes(item.hnoNo)"
-                        alt="선택"
-                      />
-                    </span>
-                    선택
-                  </div>
-                </li>
-                <li>
-                  <button @click.stop="modifiClick(item)">수정</button>
-                </li>
-              </ul>
+              <div>
+                <span>
+                  <img
+                    src="@/assets/images/checkIconOff.png"
+                    v-if="!d.selectedhnoNo.includes(item.hnoNo)"
+                    alt="미선택"
+                  />
+                  <img
+                    src="@/assets/images/checkIconOn.png"
+                    v-if="d.selectedhnoNo.includes(item.hnoNo)"
+                    alt="선택"
+                  />
+                </span>
+                <p
+                  :class="
+                    d.selectedhnoNo.includes(item.hnoNo) ? 'active' : 'default'
+                  "
+                >
+                  선택
+                </p>
+              </div>
+              <div>
+                <div>
+                  <ul>
+                    <li>
+                      <div>{{ formatNb(item.hnoNo) }}</div>
+                      <div>{{ item.addrNcm }}</div>
+                    </li>
+                    <li>
+                      <div>{{ item.nm }}</div>
+                      <div>{{ formatNb(item.moblphonNo) }}</div>
+                    </li>
+                  </ul>
+                  <button class="modifi" @click.stop="modifiClick(item)">
+                    수정
+                  </button>
+                </div>
+                <ul>
+                  <li>
+                    <div>
+                      {{ item.postNo }}
+                      <div>{{ item.bassAddr }}</div>
+                    </div>
+                    <div v-if="item.detailAddr">
+                      {{ item.detailAddr }}
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </li>
         </ul>
@@ -164,48 +170,87 @@ const nextClick = async () => {
 </template>
 
 <style lang="scss" scoped>
-.contents {
-  display: flex;
-  flex-direction: column;
-  height: 540px;
-  margin-bottom: 2.36rem;
-}
-.no-data {
-  height: 585px;
-}
-.top-btn {
-  position: relative;
-  button {
-    width: 100px;
-    position: absolute;
+section {
+  > .contents {
+    display: flex;
+    flex-direction: column;
+    height: 49vh;
+    height: 49dvh;
   }
 }
 
-@media (min-width: 769px) {
-  section {
-    > .contents {
-      height: 438px;
-    }
-  }
-  .top-btn {
-    top: -61px;
-    button {
-      right: 24px;
-    }
-  }
+.no-data {
+  height: 585px;
+}
+
+.top-btn {
+  padding: 0 30px;
+  margin-top: 20px;
+}
+
+button.modifi {
+  background-color: $wt;
+  border: 1px solid $c-g300;
+  color: $fg;
 }
 
 @media (max-width: 768px) {
   section {
     > .contents {
-      padding: 0;
-      min-height: 443px;
+      height: 60vh;
+      height: 60dvh;
     }
   }
+}
+
+@media (max-height: 740px) {
+  section {
+    > .contents {
+      height: 58vh;
+      height: 58dvh;
+    }
+  }
+}
+
+@media (max-height: 667px) {
+  section {
+    > .contents {
+      height: 53vh;
+      height: 53dvh;
+    }
+  }
+}
+
+@media (max-height: 568px) {
   .top-btn {
-    top: -75px;
-    button {
-      right: 14px;
+    padding: 0 12px;
+  }
+
+  section {
+    padding: 1rem 0.8rem;
+    > .contents {
+      height: 50vh;
+      height: 50dvh;
+    }
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  section {
+    > .contents {
+      height: 62vh;
+      height: 62dvh;
+    }
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  section {
+    > .contents {
+      height: 40vh;
+      height: 40dvh;
     }
   }
 }

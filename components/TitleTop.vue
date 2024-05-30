@@ -59,4 +59,34 @@ const eventClick = () => {
     }
   }
 }
+
+@media (min-width: 769px) {
+  .title-top {
+    padding: 1.5rem 1.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-top {
+    height: 9vh;
+    height: 9dvh;
+    padding: 1.5rem 0 0;
+  }
+}
+
+@media (max-height: 740px) {
+  .title-top {
+    .inner {
+      height: 35px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .title-top {
+    .inner {
+      font-size: 20px;
+    }
+  }
+}
 </style>

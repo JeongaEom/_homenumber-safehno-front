@@ -30,7 +30,7 @@ const d = reactive({
   addrNcm: get.addrNcm,
   topText: "홈넘버 수정이<br />성공적으로 이루어졌습니다.",
   btntext: "내 홈넘버 보기",
-  height: "545",
+  type: "contents-end",
   completed: false
 });
 
@@ -127,8 +127,11 @@ const handleClickAddressSearch = () => {
     width,
     height,
     oncomplete: function (data) {
-      get.postNo = data.zonecode;
-      get.bassAddr = data.roadAddress;
+      console.log(data);
+      get.postNo = data.zonecode; // 우편번호
+      let address = data.roadAddress; // 도로명 주소
+      let building = data.buildingName ? " " + data.buildingName : ""; // 건물명이 있으면 앞에 공백을 두고 추가, 없으면 빈 문자열
+      get.bassAddr = address + building;
     }
   }).open({
     popupTitle: "우편번호 검색",
@@ -391,7 +394,7 @@ onMounted(async () => {
   </section>
 
   <section v-if="d.completed">
-    <completed :topText="d.topText" :btntext="d.btntext" :height="d.height" />
+    <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
   </section>
 </template>
 
@@ -411,12 +414,15 @@ onMounted(async () => {
 }
 
 .hp {
-  min-height: 545px;
+  margin-top: 20px;
+  height: 52vh;
+  height: 52dvh;
 }
 
 .modifi {
-  min-height: 461px;
   margin-top: 20px;
+  height: 49dvh;
+  height: 49dvh;
 }
 
 .phone {
@@ -461,10 +467,14 @@ onMounted(async () => {
 .time {
   > input {
     position: relative;
+    z-index: 0;
   }
   > div {
-    position: absolute;
+    width: 140px;
+    position: relative;
+    z-index: 1;
     margin-top: 0 !important;
+    margin-left: -82px;
     > div {
       font-size: 16px !important;
       font-weight: bold;
@@ -472,19 +482,118 @@ onMounted(async () => {
     }
   }
 }
-@media (min-width: 440px) {
+
+@media (max-width: 712px) {
+  .top {
+    margin-top: 2vh;
+  }
   .time {
     > div {
-      margin-left: 36px;
+      margin-left: -68px;
     }
   }
 }
 
-@media (max-width: 380px) {
-  .time {
-    > div {
-      margin-left: -29px;
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  .hp {
+    height: 64vh;
+    height: 64dvh;
+  }
+
+  .modifi {
+    height: 60dvh;
+    height: 60dvh;
+  }
+}
+
+//모바일 사이즈별
+@media (max-height: 768px) {
+  section {
+    height: 80vh;
+    height: 80dvh;
+    overflow: auto;
+  }
+
+  .hp {
+    height: 55vh;
+    height: 55dvh;
+  }
+
+  .modifi {
+    height: 49dvh;
+    height: 49dvh;
+  }
+}
+
+@media (max-height: 740px) {
+  .hp {
+    height: 62vh;
+    height: 62dvh;
+  }
+
+  .modifi {
+    height: 53dvh;
+    height: 53dvh;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-height: 667px) {
+  .hp {
+    height: 56vh;
+    height: 56dvh;
+    .phone {
+      div {
+        font-size: 14px;
+      }
     }
+  }
+
+  .modifi {
+    height: 52dvh;
+    height: 52dvh;
+  }
+}
+
+@media (max-height: 568px) {
+  .hp {
+    height: 56vh;
+    height: 56dvh;
+  }
+
+  .modifi {
+    height: 44dvh;
+    height: 44dvh;
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  .hp {
+    height: 65vh;
+    height: 65dvh;
+  }
+
+  .modifi {
+    height: 58dvh;
+    height: 58dvh;
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  .top {
+    margin-top: 6vh;
+  }
+  .hp {
+    height: 48vh;
+    height: 48dvh;
+  }
+
+  .modifi {
+    height: 34dvh;
+    height: 34dvh;
   }
 }
 </style>

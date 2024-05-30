@@ -88,7 +88,7 @@ const signupClick = () => {
         placeholder="패스워드"
       />
       <button class="mb-btm-20 red-active" @click="loginClick">로그인</button>
-      <p class="mb-btm-20">
+      <p class="mb-btm-20 homs">
         아이디/비밀번호 찾기는
         <br />
         홈넘버 사이트에서 확인이 가능합니다.
@@ -144,14 +144,55 @@ a {
   }
 }
 
-.content {
-  margin: 2.5rem 0 4rem;
-}
-
 .bottom {
   color: $c-g600;
   a {
     display: block;
+  }
+}
+
+@media (min-height: 741px) {
+  .content {
+    margin: 2.5rem 0 4rem;
+  }
+}
+
+@media (min-height: 681px) and (max-height: 740px) {
+  .content {
+    margin: 2rem 0;
+  }
+}
+
+@media (max-height: 680px) {
+  .content {
+    margin: 1rem 0;
+  }
+}
+
+@media (max-height: 658px) {
+  .tab-btns {
+    button {
+      height: 45px;
+    }
+  }
+
+  .content {
+    .inner {
+      input {
+        height: 45px;
+      }
+    }
+  }
+
+  .bottom {
+    padding: 0.8rem 0;
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  button {
+    height: 40px !important;
   }
 }
 
@@ -164,13 +205,13 @@ a {
 }
 
 @media (max-width: 768px) {
-  .content {
-    .inner {
-      padding: 0 1rem;
-    }
-  }
   a {
     display: block;
+  }
+
+  p.homs {
+    margin-bottom: 1vh;
+    margin-bottom: 1dvh;
   }
 }
 

@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-  title: "HomNumber",
+  title: "HomNumber"
 });
 </script>
 

@@ -2,42 +2,46 @@
  * Fonts
  * ---------------------------------- */
 @font-face {
-	font-family: Pretendard;
-	src: url(/fonts/pretendard/Pretendard-Regular.woff2) format('woff2');
+  font-family: Pretendard;
+  src: url(/fonts/pretendard/Pretendard-Regular.woff2) format("woff2");
   font-weight: 400;
 }
 
 @font-face {
-	font-family: Pretendard;
-	src: url(/fonts/pretendard/Pretendard-Medium.woff2) format('woff2');
+  font-family: Pretendard;
+  src: url(/fonts/pretendard/Pretendard-Medium.woff2) format("woff2");
   font-weight: 500;
 }
 
 @font-face {
-	font-family: Pretendard;
-	src: url(/fonts/pretendard/Pretendard-SemiBold.woff2) format('woff2');
+  font-family: Pretendard;
+  src: url(/fonts/pretendard/Pretendard-SemiBold.woff2) format("woff2");
   font-weight: 600;
 }
 
 @font-face {
-	font-family: Pretendard;
-	src: url(/fonts/pretendard/Pretendard-Bold.woff2) format('woff2');
+  font-family: Pretendard;
+  src: url(/fonts/pretendard/Pretendard-Bold.woff2) format("woff2");
   font-weight: 700;
 }
-
 
 /* ----------------------------------
  * Root
  * ---------------------------------- */
 
-
 html,
 body {
-  font-family: Pretendard, Apple SD Gothic Neo, nanumgothic, 나눔고딕, arial, sans-serif;
+  font-family:
+    Pretendard,
+    Apple SD Gothic Neo,
+    nanumgothic,
+    나눔고딕,
+    arial,
+    sans-serif;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 a {
@@ -48,57 +52,4 @@ a {
 img {
   width: 100%;
   height: auto;
-}
-
-/* c-modal */
-.c-modal {
-  --outerMargin: 50px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  &__inner {
-    background: #fff;
-    position: absolute;
-    width: calc(100vw - var(--outerMargin)*2);
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    max-height: calc(100vh - var(--outerMargin)*2);
-    border-radius: 8px;
-  }
-  &__mid {
-    padding-left: 40px;
-    padding-right: 40px;
-    max-height: calc(100vh - var(--outerMargin)*2 - var(--topHeight) - var(--botHeight));
-    overflow: auto;
-  }
-  &__bot {
-    padding: 20px 40px 36px 40px;
-    text-align: right;
-  }
-  &__title {
-    padding: 36px 90px 24px 40px;
-    font-size: 20px;
-    line-height: 1.4;
-    font-weight: 700;
-  }
-  &__close {
-    position: absolute;
-    right: 35px;
-    top: 30px;
-    padding: 7px;
-    font-size: 24px;
-    background-color: transparent;
-    color: $c-b500;
-  }
-  &__confirm-btn {
-    min-width: 124px;
-  }
-}
-
-:global(.c-modal__inner) {
-  max-width: 600px;
 }

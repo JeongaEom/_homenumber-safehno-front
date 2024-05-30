@@ -146,6 +146,14 @@ const endClick = async () => {
 </template>
 
 <style lang="scss" scoped>
+section {
+  > .contents {
+    margin-top: 20px;
+    height: 54vh;
+    height: 54dvh;
+  }
+}
+
 ul {
   > li {
     line-height: 20.7px;
@@ -167,9 +175,61 @@ ul {
   margin-bottom: 30px;
 }
 
-@media (min-width: 420px) {
-  section > .contents {
-    height: 545px;
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  section {
+    > .contents {
+      height: 66vh;
+      height: 66dvh;
+    }
+  }
+}
+
+//모바일 사이즈별
+@media (max-height: 740px) {
+  section {
+    > .contents {
+      height: 63vh;
+      height: 63dvh;
+    }
+  }
+}
+
+@media (max-height: 667px) {
+  section {
+    > .contents {
+      height: 60vh;
+      height: 60dvh;
+    }
+  }
+}
+
+@media (max-height: 568px) {
+  section {
+    > .contents {
+      height: 56vh;
+      height: 56dvh;
+    }
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  section {
+    > .contents {
+      height: 67vh;
+      height: 67dvh;
+    }
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  section {
+    > .contents {
+      height: 52vh;
+      height: 52dvh;
+    }
   }
 }
 </style>

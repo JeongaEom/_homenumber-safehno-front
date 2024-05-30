@@ -28,7 +28,7 @@ const d = reactive({
   topText:
     "회원 가입이 완료되었습니다. <br /> 서비스 이용을 위해 홈넘버를 발급해 주세요.",
   btntext: "로그인",
-  height: "507",
+  type: "signup",
   completed: false,
   regex: ""
 });
@@ -340,7 +340,7 @@ watch(
     <completed
       :topText="d.topText"
       :btntext="d.btntext"
-      :height="d.height"
+      :type="d.type"
       v-if="d.completed"
     />
   </section>
@@ -352,12 +352,13 @@ section {
     margin-top: 0;
     margin-bottom: 1.5rem;
     .sub-ct {
-      height: 438px;
+      height: 415px;
       position: relative;
       z-index: 1;
     }
   }
 }
+
 .subs-title {
   div {
     font-size: 24px;
@@ -394,5 +395,72 @@ section {
 button {
   z-index: 1000;
   position: relative;
+}
+
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  section {
+    > .contents {
+      height: 64vh;
+      height: 64dvh;
+    }
+  }
+}
+
+//모바일 사이즈별
+@media (max-height: 768px) {
+  section {
+    > .contents {
+      height: 50vh;
+      height: 50dvh;
+    }
+  }
+}
+
+@media (max-height: 740px) {
+  section {
+    > .contents {
+      height: 56vh;
+      height: 56dvh;
+    }
+  }
+}
+
+@media (max-height: 667px) {
+  section {
+    > .contents {
+      height: 52vh;
+      height: 52dvh;
+    }
+  }
+}
+
+@media (max-height: 568px) {
+  section {
+    > .contents {
+      height: 46vh;
+      height: 46dvh;
+    }
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  section {
+    > .contents {
+      height: 64vh;
+      height: 64dvh;
+    }
+  }
+}
+
+@media (max-height: 480px) {
+  // 높이가 낮은 모바일
+  section {
+    > .contents {
+      height: 34vh;
+      height: 34dvh;
+    }
+  }
 }
 </style>

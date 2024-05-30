@@ -31,11 +31,14 @@ const closeClick = () => {
 
 <style lang="scss" scoped>
 header {
+  width: 100%;
   .inners {
     width: 12rem;
     padding: 2.55rem 0;
+    margin: auto;
   }
 }
+
 .close {
   width: 100%;
   height: 50px;
@@ -52,11 +55,45 @@ header {
   }
 }
 
-@media (max-width: 768px) {
-  .login {
-    height: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+@media (max-height: 740px) {
+  header {
+    .inners {
+      width: 8rem;
+      padding: 1rem 0;
+    }
+  }
+}
+
+@media (min-width: 375px) and (max-height: 667px) {
+  header {
+    .inners {
+      width: 7rem;
+      padding: 0.6rem 0;
+    }
+  }
+}
+
+@media (max-height: 640px) {
+  header {
+    .inners {
+      width: 7rem;
+      padding: 0.6rem 0;
+    }
+  }
+}
+
+@media (max-height: 568px) {
+  section {
+    height: 80vh;
+    height: 80dvh;
+    overflow: auto;
+  }
+}
+
+@media (max-height: 480px) {
+  section {
+    height: 77vh;
+    height: 77dvh;
   }
 }
 </style>
