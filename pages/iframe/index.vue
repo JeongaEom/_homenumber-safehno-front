@@ -2,11 +2,11 @@
 import { reactive, onMounted, onBeforeUnmount } from "vue";
 
 definePageMeta({
-  name: "test"
+  layout: "default-none",
+  name: "iframe test"
 });
 
 const d = reactive({
-  text: "홈넘버표준창 테스트",
   tokenIssuId: "240411132224EX7G",
   encData:
     uEnvMode() === "development"
@@ -16,23 +16,8 @@ const d = reactive({
     uEnvMode() === "development"
       ? "BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI%3D"
       : "YcVRDalSiNwTemzHLVPiBN%2B7DLcNlNbZuM5K4J4VGwE%3D",
-  result: null
+  result: true
 });
-
-const eventClick = () => {
-  const width = 480;
-  const height = 820;
-  const left = window.screen.width / 2 - width / 2;
-  const top = window.screen.height / 2 - height / 2;
-  const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-  const link =
-    process.env.NODE_ENV === "development"
-      ? `http://localhost:3002`
-      : `https://dev-safehno.homenumber.co.kr/`;
-  const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
-
-  window.open(url, "_blank", windowFeatures);
-};
 
 const CB_MESSAGE = (e) => {
   const { data } = e;
@@ -56,37 +41,22 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <TitleTop :text="d.text" />
-  <section>
-    <div class="contents">
-      <button class="popup-call-btn" @click="eventClick">
-        홈넘버표준창 팝업
-      </button>
-    </div>
-    <div v-if="d.result" class="result-wrap">
-      <div class="result-title">Post Message 수신 성공</div>
-      <div class="result">
-        <div v-for="(val, key) in d.result" class="result-item">
-          {{ `${key}: ${val}` }}
-        </div>
+  <iframe
+    src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
+    width="478"
+    height="820"
+    frameborder="0"
+  />
+
+  <div v-if="d.result" class="result-wrap">
+    <div class="result-title">Post Message 수신 성공</div>
+    <div class="result">
+      <div v-for="(val, key) in d.result" class="result-item">
+        {{ `${key}: ${val}` }}
       </div>
     </div>
-  </section>
+  </div>
 </template>
-
-<style lang="scss">
-body {
-  width: auto;
-  height: auto;
-}
-section {
-  height: 82vh;
-  height: 82dvh;
-}
-section > .contents {
-  height: auto;
-}
-</style>
 
 <style lang="scss" scoped>
 .popup-call-btn {
@@ -102,6 +72,9 @@ section > .contents {
   margin-right: auto;
   max-width: 700px;
   padding: 30px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
 }
 
 .result-title {
