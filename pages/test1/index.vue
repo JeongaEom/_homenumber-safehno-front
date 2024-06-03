@@ -72,9 +72,9 @@ onBeforeUnmount(() => {
         홈넘버표준창 팝업
       </button>
       <br />
-      <button class="popup-call-btn" @click="eventClick2">
+      <!-- <button class="popup-call-btn" @click="eventClick2">
         홈넘버표준창 <br />(모바일 _f12 개발자모드)
-      </button>
+      </button> -->
     </div>
     <div v-if="d.result" class="result-wrap">
       <div class="result-title">Post Message 수신 성공</div>
@@ -131,9 +131,5 @@ section > .contents {
     font-size: 18px;
     word-wrap: break-word;
   }
-}
-
-.logo {
-  width: 10px;
 }
 </style>

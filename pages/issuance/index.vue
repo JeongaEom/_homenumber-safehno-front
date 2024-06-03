@@ -88,7 +88,7 @@ const handleClickAddressSearch = () => {
       console.log(data);
       d.postNo = data.zonecode; // 우편번호
       let address = data.roadAddress; // 도로명 주소
-      let building = data.buildingName ? " " + data.buildingName : ""; // 건물명이 있으면 앞에 공백을 두고 추가, 없으면 빈 문자열
+      let building = data.buildingName ? ` (${data.buildingName})` : ""; // 건물명이 있으면 앞에 공백을 두고 추가, 없으면 빈 문자열
       d.bassAddr = address + building;
     }
   }).open({

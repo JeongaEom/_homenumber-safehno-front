@@ -399,11 +399,6 @@ button.red-active {
               line-height: 1.1rem;
               > div {
                 display: flex;
-                &:nth-child(1) {
-                  > div {
-                    margin-left: 5px;
-                  }
-                }
               }
             }
           }
@@ -467,9 +462,6 @@ button.red-active {
                   > div {
                     &:nth-child(1) {
                       flex-direction: column;
-                    }
-                    > div {
-                      margin-left: 0;
                     }
                   }
                 }
