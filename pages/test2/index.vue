@@ -76,6 +76,20 @@ onBeforeUnmount(() => {
       <button class="popup-call-btn" @click="eventClick2">
         홈넘버표준창 모바일
       </button>
+      <br />
+      <iframe
+        src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
+        width="478"
+        height="820"
+        frameborder="0"
+      />
+      <br />
+      <iframe
+        src="http://localhost:3002/personalInformation/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
+        width="478"
+        height="820"
+        frameborder="0"
+      />
     </div>
     <div v-if="d.result" class="result-wrap">
       <div class="result-title">Post Message 수신 성공</div>
@@ -97,6 +111,7 @@ body {
 section {
   height: 82vh;
   height: 82dvh;
+  overflow: auto;
 }
 section > .contents {
   height: auto;

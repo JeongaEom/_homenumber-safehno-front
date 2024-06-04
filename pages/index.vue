@@ -152,7 +152,7 @@ a {
   .content {
     margin: 1rem 0;
     .inner {
-      padding: 0 10%;
+      padding: 0 4%;
     }
   }
 }
@@ -199,14 +199,6 @@ a {
   // 높이가 낮은 모바일
   button {
     height: 40px !important;
-  }
-}
-
-@media (min-width: 769px) {
-  .content {
-    .inner {
-      padding: 0 3rem;
-    }
   }
 }
 

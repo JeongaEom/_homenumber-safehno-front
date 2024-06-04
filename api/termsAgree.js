@@ -33,7 +33,7 @@ const termsAgree = (
         },
         data.retUrl
       );
-      // window.close();
+      window.close();
 
       termsStore.$patch({
         tokenIssuId: data.tokenIssuId,
