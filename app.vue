@@ -2,7 +2,11 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 useHead({
-  title: "HomNumber"
+  title: "HomNumber",
+  meta: [
+    // Ios 사파리 CORS문제 해결
+    { name: "referrer", content: "no-referrer" }
+  ]
 });
 
 //모바일 주소창(100vh) 반응 사이즈 조절_ 안드로이드, 아이폰(사파리)
