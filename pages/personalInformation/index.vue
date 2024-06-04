@@ -97,6 +97,20 @@ const endClick = async () => {
           "N"
         ];
   await termsAgree(...params);
+
+  // if (termsAgree) {
+  //   window.opener.postMessage(
+  //     {
+  //       msg: "SAFE_HNO_SUCCESS",
+  //       tokenIssuId: termsStore.tokenIssuId,
+  //       encData: termsStore.encData,
+  //       sign: termsStore.sign
+  //     },
+  //     "http://localhost:3002/iframe"
+  //   );
+  //   console.log("termsStore.tokenIssuId: ", termsStore.tokenIssuId);
+  //   // window.close();
+  // }
 };
 </script>
 

@@ -2,7 +2,7 @@
 import { reactive, onMounted, onBeforeUnmount } from "vue";
 
 definePageMeta({
-  name: "test1"
+  name: "test2"
 });
 
 const d = reactive({
@@ -19,7 +19,7 @@ const d = reactive({
   result: null
 });
 
-const eventClick = () => {
+const eventClick1 = () => {
   const width = 480;
   const height = 820;
   const left = window.screen.width / 2 - width / 2;
@@ -32,6 +32,16 @@ const eventClick = () => {
   const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
   window.open(url, "_blank", windowFeatures);
+};
+
+const eventClick2 = () => {
+  const link =
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3002`
+      : `https://dev-safehno.homenumber.co.kr/`;
+  const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+
+  window.open(url);
 };
 
 const CB_MESSAGE = (e) => {
@@ -59,8 +69,12 @@ onBeforeUnmount(() => {
   <TitleTop :text="d.text" />
   <section>
     <div class="contents">
-      <button class="popup-call-btn" @click="eventClick">
+      <button class="popup-call-btn" @click="eventClick1">
         홈넘버표준창 팝업
+      </button>
+      <br />
+      <button class="popup-call-btn" @click="eventClick2">
+        홈넘버표준창 모바일
       </button>
     </div>
     <div v-if="d.result" class="result-wrap">
@@ -69,6 +83,7 @@ onBeforeUnmount(() => {
         <div v-for="(val, key) in d.result" class="result-item">
           {{ `${key}: ${val}` }}
         </div>
+        <div id="output"></div>
       </div>
     </div>
   </section>
@@ -79,12 +94,10 @@ body {
   width: auto;
   height: auto;
 }
-
 section {
   height: 82vh;
   height: 82dvh;
 }
-
 section > .contents {
   height: auto;
 }

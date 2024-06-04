@@ -11,7 +11,10 @@ export const useTermsStore = defineStore("Terms", {
           termsCn: "",
           termsAgreEssntlYn: ""
         }
-      ]
+      ],
+      tokenIssuId: "",
+      encData: "",
+      sign: ""
     };
   },
   actions: {}

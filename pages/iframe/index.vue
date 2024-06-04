@@ -8,14 +8,6 @@ definePageMeta({
 
 const d = reactive({
   tokenIssuId: "240411132224EX7G",
-  encData:
-    uEnvMode() === "development"
-      ? "j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0%2FIUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B%2FQBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ%2Fpf8dZqYQ%2Fl7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa"
-      : "YwrxijOMIHDD03RTfWJMGuZ0i6VuovO2wxep2sMp1xdc%2F0ES5mD%2FIQfn8yM8L%2Fyt2M09xTfXiMVy1%2BzhNEPWW%2BRhQShkVq618wl5IeTl4xtvs42s3iB%2FmO4iyn8JXtcB2c0ePA5Mk7Qs3KODwUxZYo%2FJpKtMqcZTdbtC3IAwN4Y%3D",
-  sign:
-    uEnvMode() === "development"
-      ? "BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI%3D"
-      : "YcVRDalSiNwTemzHLVPiBN%2B7DLcNlNbZuM5K4J4VGwE%3D",
   result: true
 });
 
@@ -26,6 +18,7 @@ const CB_MESSAGE = (e) => {
     console.log(data);
     d.result = data;
   }
+  // console.log("d.result: ", d.result);
 };
 
 onMounted(() => {
@@ -46,6 +39,7 @@ onBeforeUnmount(() => {
     width="478"
     height="820"
     frameborder="0"
+    @load="handleLoad"
   />
 
   <div v-if="d.result" class="result-wrap">
