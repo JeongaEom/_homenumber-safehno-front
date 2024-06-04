@@ -76,7 +76,6 @@ const d = reactive({
   margin: 0;
   padding: 0;
   overflow: hidden;
-
   > li {
     float: inline-start;
     margin-bottom: 6px;
@@ -95,12 +94,14 @@ const d = reactive({
       font-size: 16px;
       margin-left: 20px;
       margin-bottom: 4px;
+      line-height: 20px;
     }
     p {
       float: left;
     }
   }
 }
+
 section {
   > .contents {
     height: 503px;
@@ -113,6 +114,63 @@ section {
   p {
     font-weight: bold;
     font-size: 18px;
+  }
+}
+
+//모바일 사이즈별
+@media (max-height: 768px) {
+  section {
+    overflow: auto;
+    height: 78vh;
+    height: 78dvh;
+    > .contents {
+      overflow: hidden;
+      height: 76vh;
+      height: 76dvh;
+      padding-top: 17px;
+    }
+  }
+}
+
+@media (max-height: 740px) {
+  section {
+    > .contents {
+      height: 74vh;
+      height: 74dvh;
+    }
+  }
+}
+
+@media (max-height: 667px) {
+  section {
+    height: 72vh;
+    height: 72vh;
+    > .contents {
+      height: 84vh;
+      height: 84dvh;
+    }
+  }
+}
+
+@media (max-height: 568px) {
+  section {
+    height: 76vh;
+    height: 76dvh;
+    margin-top: 12px;
+    > .contents {
+      height: 100vh;
+      height: 100dvh;
+    }
+  }
+}
+
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  section {
+    > .contents {
+      height: 64vh;
+      height: 64dvh;
+    }
   }
 }
 </style>

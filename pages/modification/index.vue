@@ -415,8 +415,9 @@ onMounted(async () => {
 
 .hp {
   margin-top: 20px;
-  height: 52vh;
-  height: 52dvh;
+  overflow: hidden;
+  height: 57vh;
+  height: 57dvh;
 }
 
 .modifi {
@@ -497,8 +498,8 @@ onMounted(async () => {
 //팝업창
 @media (min-height: 769px) and (max-width: 820px) {
   .hp {
-    height: 64vh;
-    height: 64dvh;
+    height: 58vh;
+    height: 58dvh;
   }
 
   .modifi {
@@ -510,14 +511,15 @@ onMounted(async () => {
 //모바일 사이즈별
 @media (max-height: 768px) {
   section {
-    height: 80vh;
-    height: 80dvh;
+    height: 76vh;
+    height: 76dvh;
+    margin-top: 5%;
     overflow: auto;
   }
 
   .hp {
-    height: 55vh;
-    height: 55dvh;
+    height: 94vh;
+    height: 94dvh;
   }
 
   .modifi {
@@ -527,10 +529,10 @@ onMounted(async () => {
 }
 
 @media (max-height: 740px) {
-  .hp {
+  /*.hp {
     height: 62vh;
     height: 62dvh;
-  }
+  }*/
 
   .modifi {
     height: 53dvh;
@@ -540,9 +542,14 @@ onMounted(async () => {
 }
 
 @media (max-height: 667px) {
+  section {
+    height: 74vh;
+    height: 74dvh;
+  }
+
   .hp {
-    height: 56vh;
-    height: 56dvh;
+    height: 102vh;
+    height: 102dvh;
     .phone {
       div {
         font-size: 14px;
@@ -557,10 +564,10 @@ onMounted(async () => {
 }
 
 @media (max-height: 568px) {
-  .hp {
+  /*.hp {
     height: 56vh;
     height: 56dvh;
-  }
+  }*/
 
   .modifi {
     height: 44dvh;
@@ -570,10 +577,16 @@ onMounted(async () => {
 
 @media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
   // 높이가 높은 모바일
-  .hp {
+  section {
+    height: 80vh;
+    height: 80dvh;
+    overflow-y: auto;
+  }
+
+  /*.hp {
     height: 65vh;
     height: 65dvh;
-  }
+  }*/
 
   .modifi {
     height: 58dvh;
@@ -586,9 +599,10 @@ onMounted(async () => {
   .top {
     margin-top: 6vh;
   }
+
   .hp {
-    height: 48vh;
-    height: 48dvh;
+    height: 74vh;
+    height: 74dvh;
   }
 
   .modifi {

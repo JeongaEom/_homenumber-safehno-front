@@ -380,14 +380,16 @@ section {
 @media (max-width: 768px) {
   section {
     margin-top: 10px;
+    overflow: auto;
+    height: 79vh;
   }
 
-  .btn-checks {
+  /*.btn-checks {
     position: fixed;
     bottom: 20px;
     width: 92%;
     z-index: 1000;
-  }
+  }*/
 }
 
 @media (min-width: 466px) {
@@ -433,7 +435,7 @@ section {
 }
 
 //모바일 사이즈별
-@media (width: 768px) and (height: 1024px) {
+/*@media (width: 768px) and (height: 1024px) {
   .btn-checks {
     width: 58%;
   }
@@ -460,35 +462,49 @@ section {
     height: 70vh;
     height: 70dvh;
   }
+}*/
+
+@media (max-height: 940px) {
+  .sections {
+    height: 79vh;
+    height: 79Sdvh;
+  }
 }
 
 @media (max-height: 667px) {
   .sections {
-    height: 66vh;
-    height: 66dvh;
+    height: 77vh;
+    height: 77dvh;
   }
 }
 
-@media (max-height: 568px) {
+@media (max-height: 667px) {
+  .sections {
+    height: 77vh;
+    height: 77dvh;
+  }
+}
+
+/*@media (max-height: 568px) {
   .sections {
     height: 64vh;
     height: 64dvh;
   }
-}
+}*/
 
-@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+/*@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
   // 높이가 높은 모바일
   .sections {
     height: 70vh;
     height: 70dvh;
   }
-}
+}*/
 
 @media (max-height: 480px) {
   // 높이가 낮은 모바일
   .sections {
-    height: 55vh;
-    height: 55dvh;
+    height: 70vh;
+    height: 70dvh;
     margin-top: 28px;
   }
 }

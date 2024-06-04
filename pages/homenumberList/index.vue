@@ -235,6 +235,16 @@ button.modifi {
   }
 }
 
+@media (max-height: 550px) {
+  section {
+    padding: 1rem 0.8rem;
+    > .contents {
+      height: 46vh;
+      height: 46dvh;
+    }
+  }
+}
+
 @media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
   // 높이가 높은 모바일
   section {

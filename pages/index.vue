@@ -91,10 +91,7 @@ const signupClick = () => {
       <p class="mb-btm-20 homs">
         아이디/비밀번호 찾기는
         <br />
-        홈넘버 사이트에서 확인이 가능합니다.
-        <NuxtLink to="https://www.homenumber.co.kr/" target="_blank">
-          바로가기 >
-        </NuxtLink>
+        홈넘버 사이트(homenumber.co.kr)에서 확인이 가능합니다.
       </p>
       <button class="bg-g line" @click="signupClick">홈넘버 회원가입</button>
     </div>
@@ -148,6 +145,15 @@ a {
   color: $c-g600;
   a {
     display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin: 1rem 0;
+    .inner {
+      padding: 0 10%;
+    }
   }
 }
 
@@ -222,6 +228,19 @@ a {
         display: none;
       }
     }
+  }
+}
+
+@media (max-width: 390px) {
+  input,
+  button {
+    height: 40px !important;
+  }
+
+  p,
+  a,
+  button {
+    font-size: 14px;
   }
 }
 </style>

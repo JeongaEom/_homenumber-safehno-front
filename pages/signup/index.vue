@@ -401,8 +401,8 @@ button {
 @media (min-height: 769px) and (max-width: 820px) {
   section {
     > .contents {
-      height: 64vh;
-      height: 64dvh;
+      height: 62vh;
+      height: 62dvh;
     }
   }
 }
@@ -410,36 +410,45 @@ button {
 //모바일 사이즈별
 @media (max-height: 768px) {
   section {
+    overflow: auto;
+    height: 73vh;
+    height: 73dvh;
     > .contents {
-      height: 50vh;
-      height: 50dvh;
+      height: 73vh;
+      height: 73dvh;
     }
   }
 }
 
 @media (max-height: 740px) {
   section {
+    height: 72vh;
+    height: 72dvh;
     > .contents {
-      height: 56vh;
-      height: 56dvh;
+      height: 78vh;
+      height: 78dvh;
     }
   }
 }
 
 @media (max-height: 667px) {
   section {
+    height: 69vh;
+    height: 69dvh;
     > .contents {
-      height: 52vh;
-      height: 52dvh;
+      height: 92vh;
+      height: 92dvh;
     }
   }
 }
 
 @media (max-height: 568px) {
   section {
+    height: 63vh;
+    height: 63dvh;
     > .contents {
-      height: 46vh;
-      height: 46dvh;
+      height: 106vh;
+      height: 106dvh;
     }
   }
 }
