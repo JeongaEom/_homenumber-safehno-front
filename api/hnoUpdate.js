@@ -11,10 +11,9 @@ const hnoUpdate = ({
   addrNcm
 }) => {
   return call({
-    id: "2.13 홈넘버 정보 수정",
-    endpoint: "/safehno/v1/hno/update",
-    headers: "DEFAULT",
-    withCredentials: true,
+    id: "2.13 홈넘버 정보 수정 [V2]",
+    endpoint: "/safehno/v2/hno/update",
+    headers: "DEFAULT_TOKEN",
     data: {
       hnoIssuNo,
       nm,

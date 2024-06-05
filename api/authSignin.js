@@ -1,20 +1,21 @@
 import { call } from "@/api";
 
-const authSignin = (id, pwd, tokenIssuId, encData, sign) => {
+const authSignin = (id, pwd, tokenIssuId) => {
   const router = useRouter();
+  const app = useAppStore();
   return call({
-    id: "2.3 표준창 로그인",
-    endpoint: "/safehno/v1/auth/signin",
+    id: "2.3 표준창 로그인 [V2]",
+    endpoint: "/safehno/v2/auth/signin",
     headers: "DEFAULT",
-    withCredentials: true,
     data: {
       id,
       pwd,
-      tokenIssuId,
-      encData,
-      sign
+      tokenIssuId
     },
-    onResponse({ code }) {
+    onResponse({ code, data }) {
+      app.satk = data.satk; // 인증토큰
+      console.log("_app.satk: ", app.satk);
+
       localStorage.setItem("hnoSearchType", "multi");
       router.replace("/homenumberList");
       return true;

@@ -1,7 +1,9 @@
 <script setup>
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const app = useAppStore();
 
 const p = defineProps({
   topText: { type: String, default: "" },
@@ -17,6 +19,10 @@ const endnextClick = () => {
     router.push("/homenumberList");
   }
 };
+
+onMounted(() => {
+  app.errorPopup();
+});
 </script>
 
 <template>

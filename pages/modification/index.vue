@@ -1,13 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch } from "vue";
-import {
-  hnoMyGet,
-  smsCertiReq,
-  smsCertiConfirm,
-  hnoGet,
-  hnoUpdate
-} from "@/api";
-import { useAppStore, useHnoMyGetStore, useHnoGetStore } from "@/stores";
+import { smsCertiReq, smsCertiConfirm, hnoGet, hnoUpdate } from "@/api";
 import { formatNb } from "@/utils";
 
 const app = useAppStore();
@@ -25,7 +18,7 @@ const d = reactive({
   crtfcNo: "",
   cdCommand: "stop",
   time: "",
-  isNext: false, // true는 휴대폰 인증 | false는 수정
+  isNext: true, // true는 휴대폰 인증 | false는 수정
   scrtky: "",
   addrNcm: get.addrNcm,
   topText: "홈넘버 수정이<br />성공적으로 이루어졌습니다.",
@@ -53,11 +46,6 @@ function limitInputNumber(event, maxLength, field) {
     d[field] = value;
   }
 }
-
-const fetchHnoMyGet = async () => {
-  // 회원 휴대폰 번호 가져오기 위한 API myGetStore.moblphonNo
-  await hnoMyGet();
-};
 
 const phoneAuth = async () => {
   const phoneReq = await smsCertiReq(myGetStore.moblphonNo);
@@ -218,8 +206,11 @@ watch(
 );
 
 onMounted(async () => {
-  await fetchHnoMyGet();
-  await hnogetList();
+  const isError = app.errorPopup();
+  if (!isError) {
+    await hnogetList();
+  }
+
   d.isActive = false;
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
@@ -498,7 +489,7 @@ onMounted(async () => {
 }
 
 //팝업창
-@media (max-width: 480px) and (max-width: 820px) {
+@media (max-width: 480px) and (max-height: 820px) {
   .contents {
     height: 58vh;
     height: 58dvh;

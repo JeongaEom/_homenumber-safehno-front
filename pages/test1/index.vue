@@ -64,19 +64,27 @@ onBeforeUnmount(() => {
       </button>
     </div>
     <br />
-    <iframe
-      src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
-      width="478"
-      height="820"
-      frameborder="0"
-    />
-    <div v-if="d.result" class="result-wrap">
-      <div class="result-title">Post Message 수신 성공</div>
-      <div class="result">
-        <div v-for="(val, key) in d.result" class="result-item">
-          {{ `${key}: ${val}` }}
-        </div>
-      </div>
+    <div class="iframe">
+      <ul>
+        <li>
+          <iframe
+            src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
+            width="478"
+            height="820"
+            frameborder="0"
+          />
+        </li>
+        <li>
+          <div v-if="d.result" class="result-wrap">
+            <div class="result-title">Post Message 수신 성공</div>
+            <div class="result">
+              <div v-for="(val, key) in d.result" class="result-item">
+                {{ `${key}: ${val}` }}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -127,6 +135,12 @@ section > .contents {
     margin-top: 15px;
     font-size: 18px;
     word-wrap: break-word;
+  }
+}
+
+.iframe {
+  ul {
+    display: flex;
   }
 }
 </style>

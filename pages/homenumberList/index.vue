@@ -1,11 +1,11 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useHnoMyGetStore } from "@/stores";
 import { hnoMyGet } from "@/api";
 import { formatNb } from "@/utils";
 
 const router = useRouter();
+const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
 
 definePageMeta({
@@ -29,11 +29,17 @@ const hnbIssuance = () => {
 
 const fetchHnoMyGet = async () => {
   // 리스트
-  await hnoMyGet();
+  await hnoMyGet(app.tokenIssuId, app.encData, app.sign);
+  console.log("app.tokenIssuId_마이 홈넘버: ", app.tokenIssuId);
+  console.log("app.encData: ", app.encData);
+  console.log("app.sign: ", app.sign);
 };
 
 onMounted(() => {
-  fetchHnoMyGet();
+  const isError = app.errorPopup();
+  if (!isError) {
+    fetchHnoMyGet();
+  }
 });
 
 const selectClick = (item) => {

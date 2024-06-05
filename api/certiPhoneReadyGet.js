@@ -6,7 +6,6 @@ const certiPhoneReadyGet = (deviceTyCd) => {
     id: "2.19 휴대폰 본인확인 사전조회",
     endpoint: "/safehno/v1/certi/phone/ready/get",
     headers: "DEFAULT",
-    withCredentials: true,
     data: {
       deviceTyCd: "1070001"
     },

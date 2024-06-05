@@ -3,10 +3,9 @@ import { call } from "@/api";
 const hnoGet = (hnoIssuNo) => {
   const get = useHnoGetStore();
   return call({
-    id: "2.12 홈넘버 상세 조회",
-    endpoint: "/safehno/v1/hno/get",
+    id: "2.12 홈넘버 상세 조회 [V2]",
+    endpoint: "/safehno/v2/hno/get",
     headers: "DEFAULT",
-    withCredentials: true,
     data: {
       hnoIssuNo
     },

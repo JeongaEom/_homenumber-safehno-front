@@ -32,6 +32,7 @@ export const commonHeaders = {
 };
 
 export const getPresetHeaders = (headers = {}) => {
+  const app = useAppStore();
   if (typeof headers === "string") {
     // headers가 문자열인 경우
     const base = {
@@ -43,6 +44,11 @@ export const getPresetHeaders = (headers = {}) => {
       case "DEFAULT":
         return {
           ...base
+        };
+      case "DEFAULT_TOKEN":
+        return {
+          ...base,
+          satk: app.satk // 인증토큰
         };
       case "DEFAULT_FORM":
         return {
@@ -104,7 +110,7 @@ export const call = async (settings) => {
     endpoint,
     method,
     headers,
-    withCredentials,
+    // withCredentials,
     beforeRequest,
     data = {},
     onResponse,
@@ -135,9 +141,9 @@ export const call = async (settings) => {
     method: method || "post",
     url: API_HOST + endpoint,
     headers: getPresetHeaders(headers),
-    data,
+    data
     // 쿠키 기반 인증 (axios)
-    withCredentials: withCredentials !== undefined ? withCredentials : false
+    // withCredentials: withCredentials !== undefined ? withCredentials : false
   })
     .then((res) => {
       const { data, config } = res;

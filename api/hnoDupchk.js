@@ -6,7 +6,6 @@ const hnoDupchk = (hnoNo) => {
     id: "2.9 표준창 홈넘버 중복 검증",
     endpoint: "/safehno/v1/hno/dup/check",
     headers: "DEFAULT",
-    withCredentials: true,
     data: {
       hnoNo
     },

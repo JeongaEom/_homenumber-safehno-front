@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch, computed, onBeforeUnmount } from "vue";
 import { termsList, mberSignup, mberIdcheck } from "@/api";
-import { useAppStore, useTermsStore, useAuthStore } from "@/stores";
 
 const app = useAppStore();
 const termsStore = useTermsStore();
@@ -53,6 +52,7 @@ const listTerms = async () => {
 };
 
 onMounted(() => {
+  app.errorPopup();
   listTerms();
 });
 

@@ -1,6 +1,9 @@
 import { call } from "@/api";
 
 const termsAgree = (
+  tokenIssuId,
+  encData,
+  sign,
   hnoNo,
   subCd,
   infoProvAuthNo,
@@ -9,12 +12,17 @@ const termsAgree = (
   isMyHnoYn
 ) => {
   const termsStore = useTermsStore();
+
+  // 조회 타입
+  const hnoSearchType = localStorage.getItem("hnoSearchType");
   return call({
-    id: "2.6 홈넘버 정보 제공 동의",
-    endpoint: "/safehno/v1/provhno/terms/agree",
-    headers: "DEFAULT",
-    withCredentials: true,
+    id: "2.6 홈넘버 정보 제공 동의 [V2]",
+    endpoint: "/safehno/v2/provhno/terms/agree",
+    headers: hnoSearchType === "multi" ? "DEFAULT_TOKEN" : "DEFAULT", // multi : 마이 홈넘버 조회,  single: 홈넘버 조회
     data: {
+      tokenIssuId,
+      encData,
+      sign,
       hnoNo,
       subCd,
       infoProvAuthNo,

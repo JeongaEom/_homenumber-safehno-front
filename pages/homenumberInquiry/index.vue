@@ -1,10 +1,11 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { noauthHnoGet } from "@/api";
 
 const route = useRoute();
 const router = useRouter();
+const app = useAppStore();
 const shno = useSingleHnoStore();
 
 definePageMeta({
@@ -27,6 +28,8 @@ const d = reactive({
 });
 
 onMounted(() => {
+  app.errorPopup();
+
   if (shno.hnoNo) {
     d.data = true;
   }

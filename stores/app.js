@@ -1,12 +1,16 @@
 export const useAppStore = defineStore("app", {
   state() {
     return {
+      tokenIssuId: "",
+      encData: "",
+      sign: "",
       // isRouting: false,
       isMenuMinimized: localStorage.getItem("menu-minimized") === "1",
       isLoggedIn: null,
       // apiQueue: [],
       error: null,
-      crtfcTkn: null
+      crtfcTkn: null,
+      satk: null // 인증토큰
     };
   },
   actions: {
@@ -22,6 +26,21 @@ export const useAppStore = defineStore("app", {
         "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
       script.async = true;
       document.head.appendChild(script);
+    },
+    errorPopup() {
+      //새로고침 시 암호화 값이 없을때
+      if (!this.tokenIssuId && !this.encData && !this.sign) {
+        this.error = {
+          type: "alert",
+          message: "폐이지를 새로 고침하여 상태가 초기화 되었습니다.",
+          hasClose: false,
+          onConfirm: () => {
+            window.close();
+          }
+        };
+        return true;
+      }
+      return false;
     }
   }
 });

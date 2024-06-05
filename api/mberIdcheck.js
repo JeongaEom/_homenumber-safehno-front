@@ -6,7 +6,6 @@ const mberIdcheck = (mberId) => {
     id: "2.11 사용자 아이디 중복 체크 ",
     endpoint: "/safehno/v1/mber/idcheck",
     headers: "DEFAULT",
-    withCredentials: true,
     data: {
       mberId
     },

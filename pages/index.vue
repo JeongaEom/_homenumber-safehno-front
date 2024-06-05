@@ -1,7 +1,6 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useAppStore } from "@/stores";
 import { authSignin } from "@/api";
 
 const router = useRouter();
@@ -57,20 +56,18 @@ const homenumberInquiry = () => {
 };
 
 const loginClick = async () => {
-  const loginResult = await authSignin(
-    d.id,
-    d.pwd,
-    app.tokenIssuId,
-    app.encData,
-    app.sign
-  );
+  const loginResult = await authSignin(d.id, d.pwd, app.tokenIssuId);
   console.log("loginResult: ", loginResult);
+  console.log("app.tokenIssuId_로그인: ", app.tokenIssuId);
 };
 
 const signupClick = () => {
-  // alert("준비중입니다.");
   router.push("/signup");
 };
+
+onMounted(() => {
+  app.errorPopup();
+});
 </script>
 
 <template>

@@ -2,7 +2,6 @@
 import { reactive, computed, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import { hnoIssDo, hnoDupchk } from "@/api";
-import { useAppStore } from "@/stores";
 
 const router = useRouter();
 const app = useAppStore();
@@ -69,6 +68,7 @@ const dupchk = async () => {
 };
 
 onMounted(() => {
+  app.errorPopup();
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
 

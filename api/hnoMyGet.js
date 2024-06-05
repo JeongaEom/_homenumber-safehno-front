@@ -1,12 +1,16 @@
 import { call } from "@/api";
 
-const hnoMyGet = () => {
+const hnoMyGet = (tokenIssuId, encData, sign) => {
   const myGetStore = useHnoMyGetStore();
   return call({
-    id: "2.4 회원 홈넘버 조회",
-    endpoint: "/safehno/v1/hno/my/get",
-    headers: "DEFAULT",
-    withCredentials: true,
+    id: "2.4 회원 홈넘버 조회 [V2]",
+    endpoint: "/safehno/v2/hno/my/get",
+    headers: "DEFAULT_TOKEN",
+    data: {
+      tokenIssuId,
+      encData,
+      sign
+    },
     onResponse({ code, data }) {
       myGetStore.infoProvAuthNo = data.infoProvAuthNo;
       myGetStore.termsGrpCd = data.termsGrpCd;

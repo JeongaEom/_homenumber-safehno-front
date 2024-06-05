@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted } from "vue";
 import { certiPhoneReadyGet } from "@/api";
-import { useAuthStore } from "@/stores";
 
 const auth = useAuthStore();
 

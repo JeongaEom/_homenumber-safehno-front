@@ -1,12 +1,12 @@
 <script setup>
 import { reactive, onMounted } from "vue";
-import { useHnoMyGetStore, useTermsStore } from "@/stores";
 import { termsAgree, termsList } from "@/api";
 
+const router = useRouter();
+const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
 const termsStore = useTermsStore();
 const shno = useSingleHnoStore();
-const router = useRouter();
 
 definePageMeta({
   name: "personalInformation"
@@ -57,6 +57,8 @@ onMounted(() => {
   //   window.open(url, "_blank", windowFeatures);
   // }, 3000);
 
+  app.errorPopup();
+
   // 조회 타입이 회원(multi)인 경우에 새로고침 처리
   if (hnoSearchType === "multi" && !myGetStore.selectedItem.hnoNo) {
     router.replace("/homenumberList");
@@ -81,6 +83,9 @@ const endClick = async () => {
   const params =
     hnoSearchType === "multi"
       ? [
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
           myGetStore.selectedItem.hnoNo,
           myGetStore.selectedItem.subCd,
           myGetStore.infoProvAuthNo,
@@ -89,6 +94,9 @@ const endClick = async () => {
           "Y"
         ]
       : [
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
           shno.hnoNo,
           shno.subCd,
           shno.infoProvAuthNo,
@@ -96,21 +104,10 @@ const endClick = async () => {
           d.termsVer,
           "N"
         ];
+
   await termsAgree(...params);
 
-  // if (termsAgree) {
-  //   window.opener.postMessage(
-  //     {
-  //       msg: "SAFE_HNO_SUCCESS",
-  //       tokenIssuId: termsStore.tokenIssuId,
-  //       encData: termsStore.encData,
-  //       sign: termsStore.sign
-  //     },
-  //     "http://localhost:3002/iframe"
-  //   );
-  //   console.log("termsStore.tokenIssuId: ", termsStore.tokenIssuId);
-  //   // window.close();
-  // }
+  console.log("app.tokenIssuId_제3자: ", app.tokenIssuId);
 };
 </script>
 

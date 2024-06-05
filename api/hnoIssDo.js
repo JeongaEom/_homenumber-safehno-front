@@ -11,10 +11,9 @@ const hnoIssDo = ({
   addrNcm
 }) => {
   return call({
-    id: "2.8 표준창 홈넘버 발급",
-    endpoint: "/safehno/v1/hno/iss/do",
-    headers: "DEFAULT",
-    withCredentials: true,
+    id: "2.8 표준창 홈넘버 발급 [V2]",
+    endpoint: "/safehno/v2/hno/iss/do",
+    headers: "DEFAULT_TOKEN",
     data: {
       hnoNo,
       nm,

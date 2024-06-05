@@ -14,7 +14,6 @@ const mberSignup = (mberId, pwd, email, encData) => {
     id: "2.10 표준 창 회원가입",
     endpoint: "/safehno/v1/mber/signup",
     headers: "DEFAULT",
-    withCredentials: true,
     data: {
       mberId,
       pwd,
