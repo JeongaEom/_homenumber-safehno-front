@@ -437,8 +437,8 @@ section {
 
 @media (max-height: 940px) {
   .sections {
-    height: 79vh;
-    height: 79dvh;
+    height: 78vh;
+    height: 78dvh;
   }
 }
 

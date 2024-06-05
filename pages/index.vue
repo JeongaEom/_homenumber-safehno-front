@@ -159,7 +159,7 @@ a {
 
 @media (min-height: 741px) {
   .content {
-    margin: 2.5rem 2.5rem 4rem;
+    margin: 1.5rem 2.5rem;
   }
 }
 

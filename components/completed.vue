@@ -81,6 +81,13 @@ const endnextClick = () => {
 }
 
 //모바일 사이즈별
+@media (max-height: 768px) {
+  .signup {
+    height: 58vh;
+    height: 58dvh;
+  }
+}
+
 @media (max-height: 740px) {
   .contents-end {
     height: 63vh;

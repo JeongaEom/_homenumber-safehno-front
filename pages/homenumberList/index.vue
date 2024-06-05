@@ -197,8 +197,8 @@ button.modifi {
 @media (max-width: 768px) {
   section {
     > .contents {
-      height: 60vh;
-      height: 60dvh;
+      height: 57vh;
+      height: 57dvh;
     }
   }
 }
@@ -206,8 +206,8 @@ button.modifi {
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 58vh;
-      height: 58dvh;
+      height: 54vh;
+      height: 54dvh;
     }
   }
 }
@@ -215,8 +215,8 @@ button.modifi {
 @media (max-height: 667px) {
   section {
     > .contents {
-      height: 53vh;
-      height: 53dvh;
+      height: 48vh;
+      height: 48dvh;
     }
   }
 }
@@ -229,8 +229,8 @@ button.modifi {
   section {
     padding: 1rem 0.8rem;
     > .contents {
-      height: 50vh;
-      height: 50dvh;
+      height: 46vh;
+      height: 46dvh;
     }
   }
 }
@@ -239,8 +239,8 @@ button.modifi {
   section {
     padding: 1rem 0.8rem;
     > .contents {
-      height: 46vh;
-      height: 46dvh;
+      height: 44vh;
+      height: 44dvh;
     }
   }
 }

@@ -178,6 +178,15 @@ section {
 }
 
 //모바일 사이즈별
+@media (max-height: 768px) {
+  section {
+    > .contents {
+      height: 63vh;
+      height: 63dvh;
+    }
+  }
+}
+
 @media (max-height: 740px) {
   section {
     > .contents {

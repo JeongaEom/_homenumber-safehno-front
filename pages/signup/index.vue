@@ -411,11 +411,12 @@ button {
 @media (max-height: 768px) {
   section {
     overflow: auto;
-    height: 73vh;
-    height: 73dvh;
+    height: 72vh;
+    height: 72dvh;
     > .contents {
-      height: 73vh;
-      height: 73dvh;
+      overflow: hidden;
+      height: 75vh;
+      height: 75dvh;
     }
   }
 }

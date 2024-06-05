@@ -524,8 +524,8 @@ onMounted(async () => {
 //모바일 사이즈별
 @media (max-height: 768px) {
   section {
-    height: 77vh;
-    height: 77dvh;
+    height: 76vh;
+    height: 76dvh;
     margin-top: 5%;
     overflow: auto;
   }
