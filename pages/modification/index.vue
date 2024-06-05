@@ -25,7 +25,7 @@ const d = reactive({
   crtfcNo: "",
   cdCommand: "stop",
   time: "",
-  isNext: true, // true는 휴대폰 인증 | false는 수정
+  isNext: false, // true는 휴대폰 인증 | false는 수정
   scrtky: "",
   addrNcm: get.addrNcm,
   topText: "홈넘버 수정이<br />성공적으로 이루어졌습니다.",
@@ -412,10 +412,12 @@ onMounted(async () => {
     }
   }
 }
+.contents {
+  overflow: hidden;
+}
 
 .hp {
   margin-top: 20px;
-  overflow: hidden;
   height: 57vh;
   height: 57dvh;
 }
@@ -496,60 +498,71 @@ onMounted(async () => {
 }
 
 //팝업창
-@media (min-height: 769px) and (max-width: 820px) {
+@media (max-width: 480px) and (max-width: 820px) {
+  .contents {
+    height: 58vh;
+    height: 58dvh;
+  }
+}
+
+@media (max-width: 479px) and (min-height: 769px) and (max-width: 819px) {
+  section {
+    overflow: auto;
+  }
+
   .hp {
     height: 58vh;
     height: 58dvh;
   }
 
   .modifi {
-    height: 60dvh;
-    height: 60dvh;
+    height: 81vh;
+    height: 81dvh;
   }
 }
 
 //모바일 사이즈별
 @media (max-height: 768px) {
   section {
-    height: 76vh;
-    height: 76dvh;
+    height: 77vh;
+    height: 77dvh;
     margin-top: 5%;
     overflow: auto;
   }
 
   .hp {
-    height: 94vh;
-    height: 94dvh;
+    height: 60vh;
+    height: 60dvh;
   }
 
   .modifi {
-    height: 49dvh;
-    height: 49dvh;
+    height: 88dvh;
+    height: 88dvh;
   }
 }
 
 @media (max-height: 740px) {
-  /*.hp {
-    height: 62vh;
-    height: 62dvh;
-  }*/
+  .hp {
+    height: 60vh;
+    height: 60dvh;
+  }
 
   .modifi {
-    height: 53dvh;
-    height: 53dvh;
+    height: 100dvh;
+    height: 100dvh;
     margin-bottom: 1.5rem;
   }
 }
 
 @media (max-height: 667px) {
   section {
-    height: 74vh;
-    height: 74dvh;
+    height: 75vh;
+    height: 75dvh;
   }
 
   .hp {
-    height: 102vh;
-    height: 102dvh;
+    height: 55vh;
+    height: 55dvh;
     .phone {
       div {
         font-size: 14px;
@@ -558,56 +571,81 @@ onMounted(async () => {
   }
 
   .modifi {
-    height: 52dvh;
-    height: 52dvh;
+    height: 107dvh;
+    height: 107dvh;
+  }
+}
+
+@media (max-height: 600px) {
+  .modifi {
+    height: 115dvh;
+    height: 115dvh;
   }
 }
 
 @media (max-height: 568px) {
-  /*.hp {
-    height: 56vh;
-    height: 56dvh;
-  }*/
+  section {
+    height: 73vh;
+    height: 73dvh;
+  }
+
+  .hp {
+    height: 53vh;
+    height: 53dvh;
+  }
 
   .modifi {
-    height: 44dvh;
-    height: 44dvh;
+    height: 130dvh;
+    height: 130dvh;
+  }
+}
+
+@media (max-height: 530px) {
+  .modifi {
+    height: 134dvh;
+    height: 134dvh;
   }
 }
 
 @media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
   // 높이가 높은 모바일
   section {
-    height: 80vh;
-    height: 80dvh;
+    height: 82vh;
+    height: 82dvh;
     overflow-y: auto;
   }
 
-  /*.hp {
+  .hp {
     height: 65vh;
     height: 65dvh;
-  }*/
+  }
 
   .modifi {
-    height: 58dvh;
-    height: 58dvh;
+    height: 80dvh;
+    height: 80dvh;
   }
 }
 
 @media (max-height: 480px) {
   // 높이가 낮은 모바일
+
+  section {
+    min-height: 71vh;
+    min-height: 71dvh;
+  }
+
   .top {
     margin-top: 6vh;
   }
 
   .hp {
-    height: 74vh;
-    height: 74dvh;
+    min-height: 74vh;
+    min-height: 74dvh;
   }
 
   .modifi {
-    height: 34dvh;
-    height: 34dvh;
+    min-height: 160vh;
+    min-height: 160dvh;
   }
 }
 </style>
