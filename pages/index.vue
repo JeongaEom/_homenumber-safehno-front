@@ -23,15 +23,6 @@ const d = reactive({
   pwd: "eja3249eja**"
 });
 
-const params = new URLSearchParams(window.location.search);
-const tokenIssuId = params.get("tokenIssuId");
-const encData = params.get("encData");
-const sign = params.get("sign");
-
-app.tokenIssuId = tokenIssuId;
-app.encData = encData;
-app.sign = sign;
-
 // onMounted(() => {
 //   setTimeout(() => {
 //     const app = useAppStore();
@@ -48,15 +39,16 @@ const homenumberInquiry = () => {
   router.replace({
     path: "/homenumberInquiry",
     query: {
-      tokenIssuId: tokenIssuId,
-      encData: encData,
-      sign: sign
+      tokenIssuId: app.tokenIssuId,
+      encData: app.encData,
+      sign: app.sign
     }
   });
 };
 
 const loginClick = async () => {
   const loginResult = await authSignin(d.id, d.pwd, app.tokenIssuId);
+
   console.log("loginResult: ", loginResult);
   console.log("app.tokenIssuId_로그인: ", app.tokenIssuId);
 };
@@ -66,7 +58,7 @@ const signupClick = () => {
 };
 
 onMounted(() => {
-  app.errorPopup();
+  app.requiredValue();
 });
 </script>
 

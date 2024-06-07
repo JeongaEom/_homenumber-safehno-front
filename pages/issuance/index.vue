@@ -28,7 +28,7 @@ const d = reactive({
   addrNcm: "",
   isActive: false,
   topText: "홈넘버 발급이<br />성공적으로 이루어졌습니다.",
-  btntext: "발급",
+  btntext: "내 홈넘버 보기",
   type: "contents-end",
   completed: false
 });
@@ -64,11 +64,17 @@ const dupchk = async () => {
     };
   } else {
     d.dupchkResult = await hnoDupchk(combinedHnoNo.value);
+    console.log("d.dupchkResult: ", d.dupchkResult);
+    console.log("combinedHnoNo.value: ", combinedHnoNo.value);
   }
 };
 
-onMounted(() => {
-  app.errorPopup();
+onMounted(async () => {
+  const isError = await app.requiredValue();
+  if (!isError) {
+    app.page = true;
+  }
+
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
 
@@ -207,153 +213,155 @@ watch(
 </script>
 
 <template>
-  <TitleTop :hasBackButton="d.backAction" text="홈넘버 발급" />
-  <section class="sections" v-if="!d.completed">
-    <div class="top">
-      <div class="inputDatas">
-        <div class="inner">
-          <div class="input-text">홈넘버 <span>*</span></div>
-          <div>
-            <input type="text" class="disabled" v-model="d.hnoNo1" disabled />
-            <div>-</div>
-            <input
-              type="text"
-              placeholder="NNNN"
-              @input="limitInputNumber($event, 4, 'hnoNo2')"
-              v-model="d.hnoNo2"
-            />
-            <div>-</div>
-            <input
-              type="text"
-              placeholder="NNNN"
-              @input="limitInputNumber($event, 4, 'hnoNo3')"
-              v-model="d.hnoNo3"
-            />
+  <div v-if="app.page">
+    <TitleTop :hasBackButton="d.backAction" text="홈넘버 발급" />
+    <section class="sections" v-if="!d.completed">
+      <div class="top">
+        <div class="inputDatas">
+          <div class="inner">
+            <div class="input-text">홈넘버 <span>*</span></div>
+            <div>
+              <input type="text" class="disabled" v-model="d.hnoNo1" disabled />
+              <div>-</div>
+              <input
+                type="text"
+                placeholder="NNNN"
+                @input="limitInputNumber($event, 4, 'hnoNo2')"
+                v-model="d.hnoNo2"
+              />
+              <div>-</div>
+              <input
+                type="text"
+                placeholder="NNNN"
+                @input="limitInputNumber($event, 4, 'hnoNo3')"
+                v-model="d.hnoNo3"
+              />
+            </div>
+            <button class="bg-w line" @click="dupchk">중복확인</button>
           </div>
-          <button class="bg-w line" @click="dupchk">중복확인</button>
         </div>
       </div>
-    </div>
-    <div class="contents">
-      <div class="inputDatas">
-        <div class="inner">
-          <ul>
-            <li>
-              <div class="input-text">이름 <span>*</span></div>
-              <div>
-                <input
-                  type="text"
-                  v-model="d.nm"
-                  placeholder="이름 입력"
-                  @input="limitInputText($event, 'nm')"
-                />
-              </div>
-            </li>
-            <li>
-              <div class="input-text">휴대폰 번호 <span>*</span></div>
-              <div>
-                <input
-                  type="text"
-                  v-model="d.moblphonNo"
-                  placeholder="번호 입력 (배송지 연락처)"
-                  @input="limitInputNumber($event, 11, 'moblphonNo')"
-                />
-              </div>
-            </li>
-            <li class="addInp">
-              <div class="input-text">배송지 주소 <span>*</span></div>
-              <div>
-                <ul>
-                  <li>
-                    <div>
+      <div class="contents">
+        <div class="inputDatas">
+          <div class="inner">
+            <ul>
+              <li>
+                <div class="input-text">이름 <span>*</span></div>
+                <div>
+                  <input
+                    type="text"
+                    v-model="d.nm"
+                    placeholder="이름 입력"
+                    @input="limitInputText($event, 'nm')"
+                  />
+                </div>
+              </li>
+              <li>
+                <div class="input-text">휴대폰 번호 <span>*</span></div>
+                <div>
+                  <input
+                    type="text"
+                    v-model="d.moblphonNo"
+                    placeholder="번호 입력 (배송지 연락처)"
+                    @input="limitInputNumber($event, 11, 'moblphonNo')"
+                  />
+                </div>
+              </li>
+              <li class="addInp">
+                <div class="input-text">배송지 주소 <span>*</span></div>
+                <div>
+                  <ul>
+                    <li>
+                      <div>
+                        <input
+                          type="number"
+                          class="disabled"
+                          v-model="d.postNo"
+                          placeholder="우편번호"
+                          disabled
+                        />
+                      </div>
+                      <div>
+                        <button
+                          class="bg-w line"
+                          @click="handleClickAddressSearch()"
+                        >
+                          우편번호 찾기
+                        </button>
+                      </div>
+                    </li>
+                    <li>
                       <input
-                        type="number"
+                        type="text"
                         class="disabled"
-                        v-model="d.postNo"
-                        placeholder="우편번호"
+                        v-model="d.bassAddr"
+                        placeholder="기본주소"
                         disabled
                       />
-                    </div>
-                    <div>
-                      <button
-                        class="bg-w line"
-                        @click="handleClickAddressSearch()"
-                      >
-                        우편번호 찾기
-                      </button>
-                    </div>
-                  </li>
-                  <li>
-                    <input
-                      type="text"
-                      class="disabled"
-                      v-model="d.bassAddr"
-                      placeholder="기본주소"
-                      disabled
-                    />
-                  </li>
-                  <li>
-                    <input
-                      type="text"
-                      v-model="d.detailAddr"
-                      placeholder="상세 주소 입력"
-                    />
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="input-text">주소 별칭</div>
-              <div>
-                <input
-                  type="text"
-                  maxLength="10"
-                  v-model="d.addrNcm"
-                  placeholder="최대 10자"
-                />
-              </div>
-            </li>
-            <li>
-              <div class="input-text">보안키 <span>*</span></div>
-              <div>
-                <input
-                  type="password"
-                  maxLength="4"
-                  v-model="d.scrtky"
-                  placeholder="숫자 4자리"
-                  @input="limitInputNumber($event, 4, 'scrtky')"
-                />
-              </div>
-            </li>
-            <li>
-              <div class="input-text">보안키 확인 <span>*</span></div>
-              <div>
-                <input
-                  type="password"
-                  maxLength="4"
-                  v-model="d.scrtkyConfirm"
-                  placeholder="숫자 4자리"
-                  @input="limitInputNumber($event, 4, 'scrtkyConfirm')"
-                />
-              </div>
-            </li>
-          </ul>
+                    </li>
+                    <li>
+                      <input
+                        type="text"
+                        v-model="d.detailAddr"
+                        placeholder="상세 주소 입력"
+                      />
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div class="input-text">주소 별칭</div>
+                <div>
+                  <input
+                    type="text"
+                    maxLength="10"
+                    v-model="d.addrNcm"
+                    placeholder="최대 10자"
+                  />
+                </div>
+              </li>
+              <li>
+                <div class="input-text">보안키 <span>*</span></div>
+                <div>
+                  <input
+                    type="password"
+                    maxLength="4"
+                    v-model="d.scrtky"
+                    placeholder="숫자 4자리"
+                    @input="limitInputNumber($event, 4, 'scrtky')"
+                  />
+                </div>
+              </li>
+              <li>
+                <div class="input-text">보안키 확인 <span>*</span></div>
+                <div>
+                  <input
+                    type="password"
+                    maxLength="4"
+                    v-model="d.scrtkyConfirm"
+                    placeholder="숫자 4자리"
+                    @input="limitInputNumber($event, 4, 'scrtkyConfirm')"
+                  />
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <button
-      class="btn-checks"
-      :class="d.isActive ? 'red-active' : 'default'"
-      :disabled="!d.isActive"
-      @click="endClick"
-    >
-      확인
-    </button>
-  </section>
+      <button
+        class="btn-checks"
+        :class="d.isActive ? 'red-active' : 'default'"
+        :disabled="!d.isActive"
+        @click="endClick"
+      >
+        확인
+      </button>
+    </section>
 
-  <section v-if="d.completed">
-    <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
-  </section>
+    <section v-if="d.completed">
+      <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>

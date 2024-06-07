@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted } from "vue";
-import { termsAgree, termsList } from "@/api";
+import { provhnoTermsAgree, termsList } from "@/api";
 
 const router = useRouter();
 const app = useAppStore();
@@ -41,7 +41,7 @@ const listTerms = async () => {
   termsStore.termsAgreEssntlYn = "Y";
 };
 
-onMounted(() => {
+onMounted(async () => {
   // @TEMP
   // setTimeout(() => {
   //   const width = 480;
@@ -57,25 +57,35 @@ onMounted(() => {
   //   window.open(url, "_blank", windowFeatures);
   // }, 3000);
 
-  app.errorPopup();
+  if (hnoSearchType === "multi") {
+    const isError = await app.requiredValue();
+    if (!isError) {
+      app.page = true;
+    }
+  } else if (hnoSearchType === "single") {
+    const isErrorNon = await app.requiredValueNon();
+    if (!isErrorNon) {
+      app.page = true;
+    }
+  }
 
   // 조회 타입이 회원(multi)인 경우에 새로고침 처리
-  if (hnoSearchType === "multi" && !myGetStore.selectedItem.hnoNo) {
-    router.replace("/homenumberList");
-    return;
-  }
+  // if (hnoSearchType === "multi" && !myGetStore.selectedItem.hnoNo) {
+  //   router.replace("/homenumberList");
+  //   return;
+  // }
   // 조회 타입이 홈넘버(single)인 경우에 새로고침 처리
-  else if (hnoSearchType === "single" && !shno.hnoNo) {
-    const app = useAppStore();
-    app.error = {
-      type: "alert",
-      message: "폐이지를 새로 고침하여 상태가 초기화 되었습니다.",
-      hasClose: false,
-      onConfirm: () => {
-        router.replace("/homenumberInquiry");
-      }
-    };
-  }
+  // else if (hnoSearchType === "single" && !shno.hnoNo) {
+  //   const app = useAppStore();
+  //   app.error = {
+  //     type: "alert",
+  //     message: "폐이지를 새로 고침하여 상태가 초기화 되었습니다.",
+  //     hasClose: false,
+  //     onConfirm: () => {
+  //       router.replace("/homenumberInquiry");
+  //     }
+  //   };
+  // }
   listTerms();
 });
 
@@ -105,55 +115,57 @@ const endClick = async () => {
           "N"
         ];
 
-  await termsAgree(...params);
-
-  console.log("app.tokenIssuId_제3자: ", app.tokenIssuId);
+  await provhnoTermsAgree(...params);
 };
 </script>
 
 <template>
-  <TitleTop :hasBackButton="true" :text="d.text" />
-  <section>
-    <div class="contents">
-      <div>
-        <input
-          type="checkbox"
-          id="01"
-          class="custom-checkbox"
-          v-model="d.modelValue"
-          @change="handleCheckboxChange"
-        />
-        <label for="01">
-          <span
-            :class="
-              termsStore.termsAgreEssntlYn === 'Y' ? 'essential' : 'select'
-            "
-          >
-            [{{ termsStore.termsAgreEssntlYn === "Y" ? "필수" : "선택" }}]&nbsp;
-          </span>
-          {{ termsStore.data[0].termsNm }}
-        </label>
-        <div class="textDatas">
-          <div class="inner" v-html="termsStore.data[0].termsCn"></div>
-        </div>
+  <div v-if="app.page">
+    <TitleTop :hasBackButton="true" :text="d.text" />
+    <section>
+      <div class="contents">
         <div>
-          <ul v-for="item in d.termsWithoutFirst">
-            <li>
-              <div>{{ item.termsNm }}</div>
-              <div>{{ item.termsCn }}</div>
-            </li>
-          </ul>
+          <input
+            type="checkbox"
+            id="01"
+            class="custom-checkbox"
+            v-model="d.modelValue"
+            @change="handleCheckboxChange"
+          />
+          <label for="01">
+            <span
+              :class="
+                termsStore.termsAgreEssntlYn === 'Y' ? 'essential' : 'select'
+              "
+            >
+              [{{
+                termsStore.termsAgreEssntlYn === "Y" ? "필수" : "선택"
+              }}]&nbsp;
+            </span>
+            {{ termsStore.data[0].termsNm }}
+          </label>
+          <div class="textDatas">
+            <div class="inner" v-html="termsStore.data[0].termsCn"></div>
+          </div>
+          <div>
+            <ul v-for="item in d.termsWithoutFirst">
+              <li>
+                <div>{{ item.termsNm }}</div>
+                <div>{{ item.termsCn }}</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <button
-      :class="d.isActive ? 'red-active' : 'default'"
-      :disabled="!d.isActive"
-      @click="endClick"
-    >
-      확인
-    </button>
-  </section>
+      <button
+        :class="d.isActive ? 'red-active' : 'default'"
+        :disabled="!d.isActive"
+        @click="endClick"
+      >
+        확인
+      </button>
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>

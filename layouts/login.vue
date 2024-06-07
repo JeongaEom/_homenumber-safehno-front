@@ -1,11 +1,49 @@
 <script setup>
+import { reactive, onMounted } from "vue";
+import { tknEncValid } from "@/api";
+
+const app = useAppStore();
+
+const d = reactive({
+  tknEncValid: null
+});
+
+const params = new URLSearchParams(window.location.search);
+const tokenIssuId = params.get("tokenIssuId");
+const encData = params.get("encData");
+const sign = params.get("sign");
+
+app.tokenIssuId = tokenIssuId;
+app.encData = encData;
+app.sign = sign;
+
+onMounted(async () => {
+  // 2.16 암호화 토큰 유효성 검사 후 로그인페이지(팝업창) 실행
+  const result = await tknEncValid(app.tokenIssuId, app.encData, app.sign);
+  console.log("app.tokenIssuId_메인: ", app.tokenIssuId);
+  if (result) {
+    d.tknEncValid = true;
+    localStorage.setItem("tokenIssuId", app.tokenIssuId);
+  } else {
+    d.tknEncValid = false;
+    app.error = {
+      type: "alert",
+      message: app.error.message,
+      hasClose: false,
+      onConfirm: () => {
+        window.close();
+      }
+    };
+  }
+});
+
 const closeClick = () => {
   window.close();
 };
 </script>
 
 <template>
-  <div class="login">
+  <div class="login" v-if="d.tknEncValid">
     <header>
       <div class="close">
         <img

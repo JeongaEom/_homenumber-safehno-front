@@ -35,10 +35,11 @@ const fetchHnoMyGet = async () => {
   console.log("app.sign: ", app.sign);
 };
 
-onMounted(() => {
-  const isError = app.errorPopup();
+onMounted(async () => {
+  const isError = await app.requiredValue();
   if (!isError) {
     fetchHnoMyGet();
+    app.page = true;
   }
 });
 
@@ -77,102 +78,106 @@ const nextClick = async () => {
 </script>
 
 <template>
-  <TitleTop
-    :hasBackButton="d.backAction"
-    text="홈넘버"
-    :number="myGetStore.hnos.length || 0"
-  />
-  <div class="top-btn">
-    <button class="bg-w line-active" @click="hnbIssuance">
-      + 신규 홈넘버 추가
-    </button>
-  </div>
-  <section>
-    <div
-      class="contents"
-      :class="myGetStore.hnos.length === 0 ? 'no-data' : ''"
-    >
-      <completed
-        :topText="d.topText"
-        :btntext="d.btntext"
-        :type="d.type"
-        :btn="d.btn"
-        v-if="myGetStore.hnos.length === 0"
-      />
-      <div class="dataList" v-else>
-        <ul>
-          <li v-for="item in myGetStore.hnos">
-            <div
-              :class="
-                d.selectedhnoNo.includes(item.hnoNo)
-                  ? 'active-line'
-                  : 'default-line'
-              "
-              @click="selectClick(item)"
-            >
-              <div>
-                <span>
-                  <img
-                    src="@/assets/images/checkIconOff.png"
-                    v-if="!d.selectedhnoNo.includes(item.hnoNo)"
-                    alt="미선택"
-                  />
-                  <img
-                    src="@/assets/images/checkIconOn.png"
-                    v-if="d.selectedhnoNo.includes(item.hnoNo)"
-                    alt="선택"
-                  />
-                </span>
-                <p
-                  :class="
-                    d.selectedhnoNo.includes(item.hnoNo) ? 'active' : 'default'
-                  "
-                >
-                  선택
-                </p>
-              </div>
-              <div>
+  <div v-if="app.page">
+    <TitleTop
+      :hasBackButton="d.backAction"
+      text="홈넘버"
+      :number="myGetStore.hnos.length || 0"
+    />
+    <div class="top-btn">
+      <button class="bg-w line-active" @click="hnbIssuance">
+        + 신규 홈넘버 추가
+      </button>
+    </div>
+    <section>
+      <div
+        class="contents"
+        :class="myGetStore.hnos.length === 0 ? 'no-data' : ''"
+      >
+        <completed
+          :topText="d.topText"
+          :btntext="d.btntext"
+          :type="d.type"
+          :btn="d.btn"
+          v-if="myGetStore.hnos.length === 0"
+        />
+        <div class="dataList" v-else>
+          <ul>
+            <li v-for="item in myGetStore.hnos">
+              <div
+                :class="
+                  d.selectedhnoNo.includes(item.hnoNo)
+                    ? 'active-line'
+                    : 'default-line'
+                "
+                @click="selectClick(item)"
+              >
                 <div>
+                  <span>
+                    <img
+                      src="@/assets/images/checkIconOff.png"
+                      v-if="!d.selectedhnoNo.includes(item.hnoNo)"
+                      alt="미선택"
+                    />
+                    <img
+                      src="@/assets/images/checkIconOn.png"
+                      v-if="d.selectedhnoNo.includes(item.hnoNo)"
+                      alt="선택"
+                    />
+                  </span>
+                  <p
+                    :class="
+                      d.selectedhnoNo.includes(item.hnoNo)
+                        ? 'active'
+                        : 'default'
+                    "
+                  >
+                    선택
+                  </p>
+                </div>
+                <div>
+                  <div>
+                    <ul>
+                      <li>
+                        <div>{{ formatNb(item.hnoNo) }}</div>
+                        <div>{{ item.addrNcm }}</div>
+                      </li>
+                      <li>
+                        <div>{{ item.nm }}</div>
+                        <div>{{ formatNb(item.moblphonNo) }}</div>
+                      </li>
+                    </ul>
+                    <button class="modifi" @click.stop="modifiClick(item)">
+                      수정
+                    </button>
+                  </div>
                   <ul>
                     <li>
-                      <div>{{ formatNb(item.hnoNo) }}</div>
-                      <div>{{ item.addrNcm }}</div>
-                    </li>
-                    <li>
-                      <div>{{ item.nm }}</div>
-                      <div>{{ formatNb(item.moblphonNo) }}</div>
+                      <div>
+                        {{ item.postNo }}
+                        <div>{{ item.bassAddr }}</div>
+                      </div>
+                      <div v-if="item.detailAddr">
+                        {{ item.detailAddr }}
+                      </div>
                     </li>
                   </ul>
-                  <button class="modifi" @click.stop="modifiClick(item)">
-                    수정
-                  </button>
                 </div>
-                <ul>
-                  <li>
-                    <div>
-                      {{ item.postNo }}
-                      <div>{{ item.bassAddr }}</div>
-                    </div>
-                    <div v-if="item.detailAddr">
-                      {{ item.detailAddr }}
-                    </div>
-                  </li>
-                </ul>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <button
-      :class="d.isActive ? 'red-active' : 'default'"
-      v-if="myGetStore.hnos.length > 0"
-      :disabled="!d.isActive"
-      @click="nextClick"
-    >
-      다음
-    </button>
-  </section>
+      <button
+        :class="d.isActive ? 'red-active' : 'default'"
+        v-if="myGetStore.hnos.length > 0"
+        :disabled="!d.isActive"
+        @click="nextClick"
+      >
+        다음
+      </button>
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>

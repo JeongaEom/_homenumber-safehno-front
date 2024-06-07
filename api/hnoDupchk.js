@@ -10,11 +10,13 @@ const hnoDupchk = (hnoNo) => {
       hnoNo
     },
     onResponse({ code, message }) {
-      app.error = {
-        type: "alert",
-        message: message,
-        hasClose: false
-      };
+      if (code === 2000) {
+        app.error = {
+          type: "alert",
+          message: message,
+          hasClose: false
+        };
+      }
       return true;
     }
   });

@@ -1,3 +1,6 @@
+import { useRouter } from "vue-router";
+import { reqInfoGet } from "@/api";
+
 export const useAppStore = defineStore("app", {
   state() {
     return {
@@ -10,7 +13,8 @@ export const useAppStore = defineStore("app", {
       // apiQueue: [],
       error: null,
       crtfcTkn: null,
-      satk: null // 인증토큰
+      satk: null, // 인증토큰
+      page: false
     };
   },
   actions: {
@@ -27,17 +31,103 @@ export const useAppStore = defineStore("app", {
       script.async = true;
       document.head.appendChild(script);
     },
-    errorPopup() {
-      //새로고침 시 암호화 값이 없을때
-      if (!this.tokenIssuId && !this.encData && !this.sign) {
-        this.error = {
-          type: "alert",
-          message: "폐이지를 새로 고침하여 상태가 초기화 되었습니다.",
-          hasClose: false,
-          onConfirm: () => {
-            window.close();
+    async requiredValue() {
+      // 필수값 존재 여부 검사 _ 헤더 인증이 필요한 것
+      const router = useRouter();
+      //새로고침 시 암호화 값이 하나라도 없거나, 전체가 없을때
+      if (!this.tokenIssuId || !this.encData || !this.sign) {
+        const token = localStorage.getItem("tokenIssuId");
+        console.log("token: ", token);
+        if (!token) {
+          // localStorage에 tokenIssuId가 없으면
+          this.error = {
+            type: "alert",
+            message: "다시 시도",
+            hasClose: false,
+            onConfirm: () => {
+              window.close();
+            }
+          };
+        } else {
+          // localStorage에 tokenIssuId가 있으면
+          const enc = await reqInfoGet(token);
+          console.log("reqInfoGet_표준창 요청 정보 조회: ", enc);
+          const auth = useAuthStore();
+          if (enc) {
+            this.tokenIssuId = auth.tokenIssuId;
+            this.encData = auth.encData;
+            this.sign = auth.sign;
+            if (!this.satk) {
+              // 헤더 인증 필요
+              router.replace({
+                path: "/",
+                query: {
+                  tokenIssuId: this.tokenIssuId,
+                  encData: this.encData,
+                  sign: this.sign
+                }
+              });
+            }
+          } else {
+            this.error = {
+              type: "alert",
+              message: this.error.message,
+              hasClose: false,
+              onConfirm: () => {
+                window.close();
+              }
+            };
           }
-        };
+        }
+        return true;
+      }
+      return false;
+    },
+    async requiredValueNon() {
+      // 필수값 존재 여부 검사_ 헤더 인증이 필요 없는것
+      const router = useRouter();
+      //새로고침 시 암호화 값이 하나라도 없거나, 전체가 없을때
+      if (!this.tokenIssuId || !this.encData || !this.sign) {
+        const token = localStorage.getItem("tokenIssuId");
+        console.log("token: ", token);
+        if (!token) {
+          // localStorage에 tokenIssuId가 없으면
+          this.error = {
+            type: "alert",
+            message: "다시 시도",
+            hasClose: false,
+            onConfirm: () => {
+              window.close();
+            }
+          };
+        } else {
+          // localStorage에 tokenIssuId가 있으면
+          const enc = await reqInfoGet(token);
+          console.log("reqInfoGet_표준창 요청 정보 조회: ", enc);
+          const auth = useAuthStore();
+          if (enc) {
+            this.tokenIssuId = auth.tokenIssuId;
+            this.encData = auth.encData;
+            this.sign = auth.sign;
+            router.replace({
+              path: "/",
+              query: {
+                tokenIssuId: this.tokenIssuId,
+                encData: this.encData,
+                sign: this.sign
+              }
+            });
+          } else {
+            this.error = {
+              type: "alert",
+              message: this.error.message,
+              hasClose: false,
+              onConfirm: () => {
+                window.close();
+              }
+            };
+          }
+        }
         return true;
       }
       return false;

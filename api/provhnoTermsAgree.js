@@ -1,6 +1,6 @@
 import { call } from "@/api";
 
-const termsAgree = (
+const provhnoTermsAgree = (
   tokenIssuId,
   encData,
   sign,
@@ -52,8 +52,9 @@ const termsAgree = (
       // console.log("data.tokenIssuId: ", data.tokenIssuId);
       // console.log("termsStore: ", termsStore);
       // console.log("termsStore.tokenIssuId: ", termsStore.tokenIssuId);
+      return true;
     }
   });
 };
 
-export default termsAgree;
+export default provhnoTermsAgree;

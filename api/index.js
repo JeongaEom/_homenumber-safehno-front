@@ -4,7 +4,7 @@ import { useAppStore } from "@/stores/app";
 export { default as authSignin } from "./authSignin";
 export { default as hnoMyGet } from "./hnoMyGet";
 export { default as noauthHnoGet } from "./noauthHnoGet";
-export { default as termsAgree } from "./termsAgree";
+export { default as provhnoTermsAgree } from "./provhnoTermsAgree";
 export { default as termsList } from "./termsList";
 export { default as hnoIssDo } from "./hnoIssDo";
 export { default as hnoDupchk } from "./hnoDupchk";
@@ -15,6 +15,8 @@ export { default as hnoUpdate } from "./hnoUpdate";
 export { default as mberSignup } from "./mberSignup";
 export { default as mberIdcheck } from "./mberIdcheck";
 export { default as certiPhoneReadyGet } from "./certiPhoneReadyGet";
+export { default as tknEncValid } from "./tknEncValid";
+export { default as reqInfoGet } from "./reqInfoGet";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 const API_HOST =
@@ -142,8 +144,6 @@ export const call = async (settings) => {
     url: API_HOST + endpoint,
     headers: getPresetHeaders(headers),
     data
-    // 쿠키 기반 인증 (axios)
-    // withCredentials: withCredentials !== undefined ? withCredentials : false
   })
     .then((res) => {
       const { data, config } = res;
@@ -181,7 +181,16 @@ export const call = async (settings) => {
         return false;
       } else if (code === 4019) {
         // 4019: 로그인페이지로 이동
-        router.replace("/");
+        const app = useAppStore();
+        // router.replace("/");
+        router.replace({
+          path: "/",
+          query: {
+            tokenIssuId: app.tokenIssuId,
+            encData: app.encData,
+            sign: app.sign
+          }
+        });
       } else if (code === 4020 || code === 4022) {
         // 4020: 토큰이상, 재로그인
         // 4022: 승인대기

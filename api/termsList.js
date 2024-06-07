@@ -17,6 +17,7 @@ const termsList = (termsGrpCd) => {
         termsCn: terms.termsCn,
         termsAgreEssntlYn: terms.termsAgreEssntlYn
       }));
+      return true;
     }
   });
 };

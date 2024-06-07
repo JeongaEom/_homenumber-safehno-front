@@ -52,7 +52,6 @@ const listTerms = async () => {
 };
 
 onMounted(() => {
-  app.errorPopup();
   listTerms();
 });
 

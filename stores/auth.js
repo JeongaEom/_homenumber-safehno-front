@@ -2,7 +2,10 @@ export const useAuthStore = defineStore("auth", {
   state() {
     return {
       nid: {},
-      signupTems: []
+      signupTems: [],
+      tokenIssuId: "",
+      encData: "",
+      sign: ""
     };
   },
   actions: {}

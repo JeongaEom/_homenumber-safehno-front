@@ -20,27 +20,39 @@ const endnextClick = () => {
   }
 };
 
-onMounted(() => {
-  app.errorPopup();
+onMounted(async () => {
+  if (hnoSearchType === "multi") {
+    const isError = await app.requiredValue();
+    if (!isError) {
+      app.page = true;
+    }
+  } else if (hnoSearchType === "single") {
+    const isErrorNon = await app.requiredValueNon();
+    if (!isErrorNon) {
+      app.page = true;
+    }
+  }
 });
 </script>
 
 <template>
-  <div class="contents" :class="p.type">
-    <div>
-      <img src="@/assets/images/data-end.png" alt="홈넘버 데이터 없음" />
+  <div v-if="app.page">
+    <div class="contents" :class="p.type">
       <div>
-        <p v-html="p.topText" />
+        <img src="@/assets/images/data-end.png" alt="홈넘버 데이터 없음" />
+        <div>
+          <p v-html="p.topText" />
+        </div>
       </div>
     </div>
+    <button
+      class="bg-w line-active"
+      @click="endnextClick()"
+      :style="{ display: p.btn }"
+    >
+      {{ p.btntext }}
+    </button>
   </div>
-  <button
-    class="bg-w line-active"
-    @click="endnextClick()"
-    :style="{ display: p.btn }"
-  >
-    {{ p.btntext }}
-  </button>
 </template>
 
 <style lang="scss" scoped>

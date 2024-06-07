@@ -206,9 +206,10 @@ watch(
 );
 
 onMounted(async () => {
-  const isError = app.errorPopup();
+  const isError = await app.requiredValue();
   if (!isError) {
-    await hnogetList();
+    hnogetList();
+    app.page = true;
   }
 
   d.isActive = false;
@@ -217,176 +218,178 @@ onMounted(async () => {
 </script>
 
 <template>
-  <TitleTop :text="d.text" />
-  <section v-if="!d.completed">
-    <div class="top" v-if="!d.isNext">
-      <div class="input-text">홈넘버 <span>*</span></div>
-      <div>{{ formatNb(get.hnoNo) }}</div>
-    </div>
-    <div class="contents" :class="d.isNext ? 'hp' : 'modifi'">
-      <div class="phone" v-if="d.isNext">
-        <div>
-          외부로부터 회원님의 정보를 더 안전하게 보호하기 위한 방법입니다.&nbsp;
-          본인 확인을 위해 회원가입 시 입력하신 휴대폰 번호로 인증하여 주시기
-          바랍니다.
-        </div>
-        <div>
-          <ul>
-            <li class="input-text">휴대폰 번호 <span>*</span></li>
-            <li>
-              <div class="input-box">
-                <input
-                  type="text"
-                  class="disabled"
-                  v-model="myGetStore.moblphonNo"
-                  disabled
-                />
-                <button class="bg-w line" @click="phoneAuth">
-                  인증번호 전송
-                </button>
-              </div>
-            </li>
-            <li class="input-box" v-if="d.isPhone">
-              <div class="input-box time">
-                <input
-                  type="text"
-                  placeholder=""
-                  @input="limitInputNumber($event, 6, 'crtfcNo')"
-                  v-model="d.crtfcNo"
-                />
-                <Countdown
-                  :command="d.cdCommand"
-                  :seconds="180"
-                  :onEnd="handleTimerEnd"
-                >
-                  <div ref="timer" counter>
-                    {{ d.time }}
-                  </div>
-                </Countdown>
-                <button class="bg-w line" @click="phoneAuthCheck">
-                  인증번호 확인
-                </button>
-              </div>
-              <div>
-                *3분 이내로 인증번호(6자리)를 입력해주세요.<br />
-                *인증번호 재전송은 1분내 1회만 가능합니다.
-              </div>
-            </li>
-          </ul>
-        </div>
+  <div v-if="app.page">
+    <TitleTop :text="d.text" />
+    <section v-if="!d.completed">
+      <div class="top" v-if="!d.isNext">
+        <div class="input-text">홈넘버 <span>*</span></div>
+        <div>{{ formatNb(get.hnoNo) }}</div>
       </div>
-      <div class="modifi" v-if="!d.isNext">
-        <div class="inputDatas">
-          <div class="inner">
+      <div class="contents" :class="d.isNext ? 'hp' : 'modifi'">
+        <div class="phone" v-if="d.isNext">
+          <div>
+            외부로부터 회원님의 정보를 더 안전하게 보호하기 위한
+            방법입니다.&nbsp; 본인 확인을 위해 회원가입 시 입력하신 휴대폰
+            번호로 인증하여 주시기 바랍니다.
+          </div>
+          <div>
             <ul>
+              <li class="input-text">휴대폰 번호 <span>*</span></li>
               <li>
-                <div class="input-text">이름 <span>*</span></div>
-                <div>
+                <div class="input-box">
                   <input
                     type="text"
-                    v-model="get.nm"
-                    placeholder="이름 입력"
-                    @input="limitInputText($event, 'nm')"
+                    class="disabled"
+                    v-model="myGetStore.moblphonNo"
+                    disabled
                   />
+                  <button class="bg-w line" @click="phoneAuth">
+                    인증번호 전송
+                  </button>
                 </div>
               </li>
-              <li>
-                <div class="input-text">휴대폰 번호 <span>*</span></div>
-                <div>
+              <li class="input-box" v-if="d.isPhone">
+                <div class="input-box time">
                   <input
                     type="text"
-                    v-model="get.moblphonNo"
-                    placeholder="번호 입력 (배송지 연락처)"
-                    @input="limitInputNumber($event, 11, 'moblphonNo')"
+                    placeholder=""
+                    @input="limitInputNumber($event, 6, 'crtfcNo')"
+                    v-model="d.crtfcNo"
                   />
+                  <Countdown
+                    :command="d.cdCommand"
+                    :seconds="180"
+                    :onEnd="handleTimerEnd"
+                  >
+                    <div ref="timer" counter>
+                      {{ d.time }}
+                    </div>
+                  </Countdown>
+                  <button class="bg-w line" @click="phoneAuthCheck">
+                    인증번호 확인
+                  </button>
                 </div>
-              </li>
-              <li class="addInp">
-                <div class="input-text">배송지 주소 <span>*</span></div>
                 <div>
-                  <ul>
-                    <li>
-                      <div>
-                        <input
-                          type="text"
-                          class="disabled"
-                          v-model="get.postNo"
-                          placeholder="우편번호"
-                          disabled
-                        />
-                      </div>
-                      <div>
-                        <button
-                          class="bg-w line"
-                          @click="handleClickAddressSearch()"
-                        >
-                          우편번호 찾기
-                        </button>
-                      </div>
-                    </li>
-                    <li>
-                      <input
-                        type="text"
-                        class="disabled"
-                        v-model="get.bassAddr"
-                        placeholder="기본주소"
-                        disabled
-                      />
-                    </li>
-                    <li>
-                      <input
-                        type="text"
-                        v-model="get.detailAddr"
-                        placeholder="상세 주소 입력"
-                      />
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <div class="input-text">주소 별칭</div>
-                <div>
-                  <input
-                    type="text"
-                    maxLength="10"
-                    v-model="get.addrNcm"
-                    placeholder="최대 10자"
-                  />
-                </div>
-              </li>
-              <li>
-                <div class="input-text">보안키 <span>*</span></div>
-                <div>
-                  <input
-                    type="password"
-                    maxLength="4"
-                    v-model="d.scrtky"
-                    placeholder="숫자 4자리"
-                    @input="limitInputNumber($event, 4, 'scrtky')"
-                  />
+                  *3분 이내로 인증번호(6자리)를 입력해주세요.<br />
+                  *인증번호 재전송은 1분내 1회만 가능합니다.
                 </div>
               </li>
             </ul>
-            <div class="red">
-              홈넘버 정보를 수정하더라도 이전에 주문한 보안 택배의 배송지 정보는
-              변경되지 않습니다.
+          </div>
+        </div>
+        <div class="modifi" v-if="!d.isNext">
+          <div class="inputDatas">
+            <div class="inner">
+              <ul>
+                <li>
+                  <div class="input-text">이름 <span>*</span></div>
+                  <div>
+                    <input
+                      type="text"
+                      v-model="get.nm"
+                      placeholder="이름 입력"
+                      @input="limitInputText($event, 'nm')"
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="input-text">휴대폰 번호 <span>*</span></div>
+                  <div>
+                    <input
+                      type="text"
+                      v-model="get.moblphonNo"
+                      placeholder="번호 입력 (배송지 연락처)"
+                      @input="limitInputNumber($event, 11, 'moblphonNo')"
+                    />
+                  </div>
+                </li>
+                <li class="addInp">
+                  <div class="input-text">배송지 주소 <span>*</span></div>
+                  <div>
+                    <ul>
+                      <li>
+                        <div>
+                          <input
+                            type="text"
+                            class="disabled"
+                            v-model="get.postNo"
+                            placeholder="우편번호"
+                            disabled
+                          />
+                        </div>
+                        <div>
+                          <button
+                            class="bg-w line"
+                            @click="handleClickAddressSearch()"
+                          >
+                            우편번호 찾기
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          class="disabled"
+                          v-model="get.bassAddr"
+                          placeholder="기본주소"
+                          disabled
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          v-model="get.detailAddr"
+                          placeholder="상세 주소 입력"
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="input-text">주소 별칭</div>
+                  <div>
+                    <input
+                      type="text"
+                      maxLength="10"
+                      v-model="get.addrNcm"
+                      placeholder="최대 10자"
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="input-text">보안키 <span>*</span></div>
+                  <div>
+                    <input
+                      type="password"
+                      maxLength="4"
+                      v-model="d.scrtky"
+                      placeholder="숫자 4자리"
+                      @input="limitInputNumber($event, 4, 'scrtky')"
+                    />
+                  </div>
+                </li>
+              </ul>
+              <div class="red">
+                홈넘버 정보를 수정하더라도 이전에 주문한 보안 택배의 배송지
+                정보는 변경되지 않습니다.
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <button
-      :class="d.isActive ? 'red-active' : 'default'"
-      :disabled="!d.isActive"
-      @click="nextClick"
-    >
-      확인
-    </button>
-  </section>
+      <button
+        :class="d.isActive ? 'red-active' : 'default'"
+        :disabled="!d.isActive"
+        @click="nextClick"
+      >
+        확인
+      </button>
+    </section>
 
-  <section v-if="d.completed">
-    <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
-  </section>
+    <section v-if="d.completed">
+      <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>

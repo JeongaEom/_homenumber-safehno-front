@@ -17,7 +17,14 @@ const d = reactive({
     if (d.data) {
       d.data = false;
     } else {
-      router.replace("/");
+      router.replace({
+        path: "/",
+        query: {
+          tokenIssuId: app.tokenIssuId,
+          encData: app.encData,
+          sign: app.sign
+        }
+      });
     }
   },
   data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
@@ -27,8 +34,11 @@ const d = reactive({
   scrtky: "1234"
 });
 
-onMounted(() => {
-  app.errorPopup();
+onMounted(async () => {
+  const isErrorNon = await app.requiredValueNon();
+  if (!isErrorNon) {
+    app.page = true;
+  }
 
   if (shno.hnoNo) {
     d.data = true;
@@ -55,70 +65,72 @@ const nextClick = () => {
 </script>
 
 <template>
-  <TitleTop :hasBackButton="d.backAction" text="홈넘버로 조회" />
-  <section>
-    <div :class="!d.data ? 'contents check' : 'contents'">
-      <div v-if="!d.data">
-        <input
-          v-model="d.hnoNo"
-          class="mb-btm-6"
-          type="text"
-          placeholder="홈넘버(숫자만)"
-        />
-        <input
-          v-model="d.scrtky"
-          class="mb-btm-20"
-          type="password"
-          placeholder="보안키"
-        />
-        <button class="mb-btm-20 red-active" @click="eventClick">조회</button>
-      </div>
-      <div v-if="d.data">
-        <div class="dataList">
-          <ul>
-            <li>
-              <div class="active-line">
-                <div></div>
-                <div>
+  <div v-if="app.page">
+    <TitleTop :hasBackButton="d.backAction" text="홈넘버로 조회" />
+    <section>
+      <div :class="!d.data ? 'contents check' : 'contents'">
+        <div v-if="!d.data">
+          <input
+            v-model="d.hnoNo"
+            class="mb-btm-6"
+            type="text"
+            placeholder="홈넘버(숫자만)"
+          />
+          <input
+            v-model="d.scrtky"
+            class="mb-btm-20"
+            type="password"
+            placeholder="보안키"
+          />
+          <button class="mb-btm-20 red-active" @click="eventClick">조회</button>
+        </div>
+        <div v-if="d.data">
+          <div class="dataList">
+            <ul>
+              <li>
+                <div class="active-line">
+                  <div></div>
                   <div>
+                    <div>
+                      <ul>
+                        <li>
+                          <div>{{ formatNb(shno.hnoNo) }}</div>
+                        </li>
+                        <li>
+                          <div>{{ shno.nm }}</div>
+                          <div>{{ formatNb(shno.moblphonNo) }}</div>
+                        </li>
+                      </ul>
+                    </div>
                     <ul>
                       <li>
-                        <div>{{ formatNb(shno.hnoNo) }}</div>
-                      </li>
-                      <li>
-                        <div>{{ shno.nm }}</div>
-                        <div>{{ formatNb(shno.moblphonNo) }}</div>
+                        <div>
+                          {{ shno.postNo }}
+                          <div>{{ shno.bassAddr }}</div>
+                        </div>
+                        <div>
+                          <div v-if="shno.detailAddr">
+                            {{ shno.detailAddr }}
+                          </div>
+                        </div>
                       </li>
                     </ul>
                   </div>
-                  <ul>
-                    <li>
-                      <div>
-                        {{ shno.postNo }}
-                        <div>{{ shno.bassAddr }}</div>
-                      </div>
-                      <div>
-                        <div v-if="shno.detailAddr">
-                          {{ shno.detailAddr }}
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="bottom" v-if="!d.data">
-      <p>
-        찾고자 하시는 본인 혹은 상대방의 홈넘버 및 보안키를 입력하세요.
-        <br />보안키를 모르신다면 상대방에게 문의하세요.
-      </p>
-    </div>
-    <button v-if="d.data" class="red-active" @click="nextClick">다음</button>
-  </section>
+      <div class="bottom" v-if="!d.data">
+        <p>
+          찾고자 하시는 본인 혹은 상대방의 홈넘버 및 보안키를 입력하세요.
+          <br />보안키를 모르신다면 상대방에게 문의하세요.
+        </p>
+      </div>
+      <button v-if="d.data" class="red-active" @click="nextClick">다음</button>
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>
