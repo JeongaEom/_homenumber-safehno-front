@@ -37,16 +37,29 @@ const provhnoTermsAgree = (
         sign: data.sign
       });
 
-      window.opener.postMessage(
+      window.parent.postMessage(
         {
           msg: "SAFE_HNO_SUCCESS",
           tokenIssuId: data.tokenIssuId,
           encData: data.encData,
           sign: data.sign,
-          retUrl: data.retUrl
+          // retUrl: data.retUrl
+          retUrl: "http://localhost:3002/test1"
         },
-        data.retUrl
+        // data.retUrl
+        "http://localhost:3002/test1"
       );
+
+      // window.opener.postMessage(
+      //   {
+      //     msg: "SAFE_HNO_SUCCESS",
+      //     tokenIssuId: data.tokenIssuId,
+      //     encData: data.encData,
+      //     sign: data.sign,
+      //     retUrl: data.retUrl
+      //   },
+      //   data.retUrl
+      // );
       // window.close();
 
       // console.log("data.tokenIssuId: ", data.tokenIssuId);

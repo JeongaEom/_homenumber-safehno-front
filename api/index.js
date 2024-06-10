@@ -163,6 +163,10 @@ export const call = async (settings) => {
       const code = error.response?.data?.code;
       const message = error.response?.data?.message;
 
+      console.log("error: ", error);
+      console.log("code: ", code);
+      console.log("message: ", message);
+
       API_DEBUG &&
         console.log(
           `🔴 API ${id}, ${code}, ${message}\n`,

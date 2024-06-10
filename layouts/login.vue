@@ -17,6 +17,26 @@ app.tokenIssuId = tokenIssuId;
 app.encData = encData;
 app.sign = sign;
 
+const closeClick = () => {
+  if (app.closeType === "1450001") {
+    // iframe 일땐 window.parent | popup 일땐 window.opener 사용
+    if (window.parent) {
+      window.parent.postMessage(
+        {
+          msg: "SAFE_HNO_CLOSE"
+        },
+        "http://localhost:3002/test1"
+      );
+      console.log("app.closeType???: ", app.closeType);
+    } else {
+      console.warn("window.parent가 존재하지 않습니다.");
+    }
+    console.log("app.closeType???: ", app.closeType);
+  } else if (app.closeType === "1450002") {
+    window.close();
+  }
+};
+
 onMounted(async () => {
   // 2.16 암호화 토큰 유효성 검사 후 로그인페이지(팝업창) 실행
   const result = await tknEncValid(app.tokenIssuId, app.encData, app.sign);
@@ -36,10 +56,6 @@ onMounted(async () => {
     };
   }
 });
-
-const closeClick = () => {
-  window.close();
-};
 </script>
 
 <template>

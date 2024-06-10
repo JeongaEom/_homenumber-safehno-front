@@ -1,10 +1,27 @@
 <script setup>
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 
-const router = useRouter();
+// const router = useRouter();
+const app = useAppStore();
 
 const closeClick = () => {
-  window.close();
+  if (app.closeType === "1450001") {
+    // iframe 일땐 window.parent | popup 일땐 window.opener 사용
+    if (window.parent) {
+      window.parent.postMessage(
+        {
+          msg: "SAFE_HNO_CLOSE"
+        },
+        "http://localhost:3002/test1"
+      );
+      console.log("app.closeType???: ", app.closeType);
+    } else {
+      console.warn("window.parent가 존재하지 않습니다.");
+    }
+    console.log("app.closeType???: ", app.closeType);
+  } else if (app.closeType === "1450002") {
+    window.close();
+  }
 };
 
 const clickEvent = () => {

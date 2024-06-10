@@ -40,6 +40,10 @@ const CB_MESSAGE = (e) => {
     console.log("SAFE_HNO_SUCCESS 👇");
     console.log(data);
     d.result = data;
+  } else if (data.msg === "SAFE_HNO_CLOSE") {
+    console.log("SAFE_HNO_CLOSE 👇");
+    console.log(data);
+    d.result = data;
   }
 };
 
