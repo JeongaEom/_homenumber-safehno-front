@@ -2,7 +2,7 @@
 import { reactive, onMounted } from "vue";
 import { provhnoTermsAgree, termsList } from "@/api";
 
-const router = useRouter();
+// const router = useRouter();
 const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
 const termsStore = useTermsStore();

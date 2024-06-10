@@ -14,24 +14,35 @@ const p = defineProps({
 
 const endnextClick = () => {
   if (p.btntext === "로그인") {
-    router.push("/");
+    router.replace({
+      path: "/",
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign
+      }
+    });
   } else {
-    router.push("/homenumberList");
+    router.replace("/homenumberList");
   }
 };
 
 onMounted(async () => {
-  if (hnoSearchType === "multi") {
+  const type = p.type;
+  if (type === "contents-end") {
+    // 수정, 발급
     const isError = await app.requiredValue();
     if (!isError) {
       app.page = true;
     }
-  } else if (hnoSearchType === "single") {
+  } else if (type === "signup") {
+    // 회원가입
     const isErrorNon = await app.requiredValueNon();
     if (!isErrorNon) {
       app.page = true;
     }
   }
+  return true;
 });
 </script>
 

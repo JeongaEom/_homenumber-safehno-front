@@ -203,7 +203,7 @@ export const call = async (settings) => {
             };
           });
         });
-        router.push("/");
+        router.replace("/");
         return false;
       } else if (code === 3004) {
         // 3004: 중복 로그인

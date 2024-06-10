@@ -51,7 +51,12 @@ const listTerms = async () => {
   auth.signupTems = termsStore.data;
 };
 
-onMounted(() => {
+onMounted(async () => {
+  const isErrorNon = await app.requiredValueNon();
+  if (!isErrorNon) {
+    app.page = true;
+  }
+
   listTerms();
 });
 
@@ -121,7 +126,7 @@ const eventHpClick = async () => {
 
 const CB_MESSAGE = (e) => {
   const { data } = e;
-  console.log(e);
+  // console.log(e);
   if (data.msg === "AUTH_COMPLETE") {
     d.encData = data.EncodeData;
     console.log("EncodeData 👇");
@@ -186,7 +191,6 @@ const verification = () => {
     };
     return false;
   }
-
   return true;
 };
 

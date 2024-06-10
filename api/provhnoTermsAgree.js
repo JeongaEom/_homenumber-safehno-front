@@ -31,6 +31,12 @@ const provhnoTermsAgree = (
       isMyHnoYn
     },
     onResponse({ code, data }) {
+      termsStore.$patch({
+        tokenIssuId: data.tokenIssuId,
+        encData: data.encData,
+        sign: data.sign
+      });
+
       window.opener.postMessage(
         {
           msg: "SAFE_HNO_SUCCESS",
@@ -41,13 +47,7 @@ const provhnoTermsAgree = (
         },
         data.retUrl
       );
-      window.close();
-
-      termsStore.$patch({
-        tokenIssuId: data.tokenIssuId,
-        encData: data.encData,
-        sign: data.sign
-      });
+      // window.close();
 
       // console.log("data.tokenIssuId: ", data.tokenIssuId);
       // console.log("termsStore: ", termsStore);
