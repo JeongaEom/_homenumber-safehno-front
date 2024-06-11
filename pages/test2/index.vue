@@ -12,14 +12,18 @@ const d = reactive({
   tokenIssuId: "240411132224EX7G",
   encData:
     uEnvMode() === "development"
-      ? "j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0%2FIUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B%2FQBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ%2Fpf8dZqYQ%2Fl7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa"
-      : "YwrxijOMIHDD03RTfWJMGuZ0i6VuovO2wxep2sMp1xdc%2F0ES5mD%2FIQfn8yM8L%2Fyt2M09xTfXiMVy1%2BzhNEPWW%2BRhQShkVq618wl5IeTl4xtvs42s3iB%2FmO4iyn8JXtcB2c0ePA5Mk7Qs3KODwUxZYo%2FJpKtMqcZTdbtC3IAwN4Y%3D",
+      ? "hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb"
+      : "RhZYBIpYHRDtx7yK1yW65mnOrdWORSeVGBKJQZVXn6k%2B5VneLPA4XiLwW0aCoFjUsO8JOtuzvotZc0eTD39va%2BAxE5LMfpR8SRpFVe%2FoP6855OO6%2BTsDNG5t7s1MG%2BBuueyYs04nQjxE%2Bu57KBNxPRV%2BfuEot4StqpVMnlZKqvU%3D", // 로컬
+  //"hwv20LKTVWwp7psOB9zU0yRo9kk1d%2FdypG8whQue0JZXvx5b8OxQomR2jExx8wxHljt5mf3acCkCAnOyHL9uhYA1sZKr8QBhB8iv5n9jYMBpM%2BojlamZRmroICrNm%2BlBgcCDOslzSEMmQeA7OwXXGRGQCjGx6TWjgjTWJjEG27xKTnvpBcOKgHHc752iyefJh0ZzLWQNLpV7vDPm0pL1yg%3D%3D", // 롯데
   sign:
     uEnvMode() === "development"
-      ? "BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI%3D"
-      : "YcVRDalSiNwTemzHLVPiBN%2B7DLcNlNbZuM5K4J4VGwE%3D",
+      ? "%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D"
+      : "mIuaVxqPxpMog88hCzdEISZ5HFpKEZIgwSw7LR6rWJQ%3D", // 로컬
+  //"cKDtfdGKK1tdup3l7sLjagphaQdGq4U1Fc1blcfVL6c%3D", // 롯데
   result: null
 });
+
+const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
 const eventClick1 = () => {
   const width = 480;
@@ -27,7 +31,6 @@ const eventClick1 = () => {
   const left = window.screen.width / 2 - width / 2;
   const top = window.screen.height / 2 - height / 2;
   const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-  const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
   window.open(url, "_blank", windowFeatures);
 };
@@ -52,6 +55,8 @@ const CB_MESSAGE = (e) => {
 };
 
 onMounted(() => {
+  console.log("encData: ", d.encData);
+  console.log("sign: ", d.sign);
   // POSTMESSAGE 대기
   window.addEventListener("message", CB_MESSAGE);
   console.log("uEnvMode - ", uEnvMode());
@@ -79,19 +84,7 @@ onBeforeUnmount(() => {
     <div class="iframe">
       <ul>
         <li>
-          <iframe
-            src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
-            width="480"
-            height="820"
-            frameborder="0"
-          />
-          <br />
-          <iframe
-            src="http://localhost:3002/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
-            width="480"
-            height="820"
-            frameborder="0"
-          />
+          <iframe :src="url" width="480" height="820" frameborder="0" />
         </li>
         <li>
           <div v-if="d.result" class="result-wrap">

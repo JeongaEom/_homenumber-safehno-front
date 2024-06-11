@@ -12,12 +12,12 @@ const d = reactive({
   tokenIssuId: "240411132224EX7G",
   encData:
     uEnvMode() === "development"
-      ? "j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0%2FIUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B%2FQBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ%2Fpf8dZqYQ%2Fl7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa"
-      : "YwrxijOMIHDD03RTfWJMGuZ0i6VuovO2wxep2sMp1xdc%2F0ES5mD%2FIQfn8yM8L%2Fyt2M09xTfXiMVy1%2BzhNEPWW%2BRhQShkVq618wl5IeTl4xtvs42s3iB%2FmO4iyn8JXtcB2c0ePA5Mk7Qs3KODwUxZYo%2FJpKtMqcZTdbtC3IAwN4Y%3D",
+      ? "hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb"
+      : "RhZYBIpYHRDtx7yK1yW65mnOrdWORSeVGBKJQZVXn6k%2B5VneLPA4XiLwW0aCoFjUsO8JOtuzvotZc0eTD39va%2BAxE5LMfpR8SRpFVe%2FoP6855OO6%2BTsDNG5t7s1MG%2BBuueyYs04nQjxE%2Bu57KBNxPRV%2BfuEot4StqpVMnlZKqvU%3D",
   sign:
     uEnvMode() === "development"
-      ? "BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI%3D"
-      : "YcVRDalSiNwTemzHLVPiBN%2B7DLcNlNbZuM5K4J4VGwE%3D",
+      ? "%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D"
+      : "mIuaVxqPxpMog88hCzdEISZ5HFpKEZIgwSw7LR6rWJQ%3D",
   result: null
 });
 
@@ -46,6 +46,8 @@ const CB_MESSAGE = (e) => {
 };
 
 onMounted(() => {
+  console.log("encData: ", d.encData);
+  console.log("sign: ", d.sign);
   // POSTMESSAGE 대기
   window.addEventListener("message", CB_MESSAGE);
   console.log("uEnvMode - ", uEnvMode());
@@ -70,7 +72,7 @@ onBeforeUnmount(() => {
       <ul>
         <li>
           <iframe
-            src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
+            src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb&sign=%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D"
             width="480"
             height="820"
             frameborder="0"

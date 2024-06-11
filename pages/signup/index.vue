@@ -426,11 +426,9 @@ button {
 
 @media (max-height: 740px) {
   section {
-    height: 72vh;
-    height: 72dvh;
     > .contents {
-      height: 78vh;
-      height: 78dvh;
+      height: 82vh;
+      height: 82dvh;
     }
   }
 }
@@ -440,8 +438,8 @@ button {
     height: 69vh;
     height: 69dvh;
     > .contents {
-      height: 92vh;
-      height: 92dvh;
+      height: 97vh;
+      height: 97dvh;
     }
   }
 }
@@ -470,9 +468,9 @@ button {
 @media (max-height: 480px) {
   // 높이가 낮은 모바일
   section {
+    min-height: 100px;
     > .contents {
-      height: 34vh;
-      height: 34dvh;
+      min-height: 600px;
     }
   }
 }

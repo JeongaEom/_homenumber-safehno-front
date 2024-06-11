@@ -10,8 +10,7 @@ export default defineNuxtConfig({
       envMode:
         process.env.NODE_ENV === "development"
           ? `http://localhost:3002`
-          : `https://dev-safehno.homenumber.co.kr/`,
-      apiHost: ""
+          : `https://dev-safehno.homenumber.co.kr/`
     }
   },
   hooks: {

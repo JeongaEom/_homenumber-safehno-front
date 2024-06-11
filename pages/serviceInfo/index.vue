@@ -129,15 +129,6 @@ section {
   }
 }
 
-@media (max-height: 740px) {
-  section {
-    > .contents {
-      //height: 74vh;
-      //height: 74dvh;
-    }
-  }
-}
-
 @media (max-height: 667px) {
   section {
     height: 72vh;

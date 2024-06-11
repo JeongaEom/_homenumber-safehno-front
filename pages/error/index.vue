@@ -19,11 +19,13 @@ const d = reactive({
     const queryMsg = route.query.errMsg
       ? new TextDecoder().decode(uBase64Decode(route.query.errMsg))
       : false;
-    return queryMsg
-      ? queryMsg
-      : app.error?.message
-        ? app.error?.message
-        : "메시지가 정의되어 있지 않습니다.";
+
+    /*
+      queryMsg가 존재하면 그것을 반환하고,
+      그렇지 않으면 app.error?.message를 반환하며,
+      둘 다 존재하지 않는 경우에는 "메시지가 정의되어 있지 않습니다."를 반환
+    */
+    return queryMsg || app.error?.message || "메시지가 정의되어 있지 않습니다.";
   })
 });
 

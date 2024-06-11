@@ -24,7 +24,7 @@ const eventClick = () => {
       <div class="btns" v-if="p.hasBackButton" @click="eventClick">
         <img src="@/assets/images/arrow-left.png" alt="이전페이지로" />
       </div>
-      <div>
+      <div :class="p.hasBackButton ? 'btn' : 'default'">
         {{ p.text }}
         <span v-if="p.number != ''">{{ p.number }}</span>
       </div>
@@ -77,12 +77,15 @@ const eventClick = () => {
       padding-bottom: 1.5rem;
       .btns {
         width: 8%;
-        padding-left: 2%;
         margin-right: 0;
+        cursor: pointer;
       }
-      div {
+      .btn {
         width: 90%;
         margin-right: 10%;
+      }
+      .default {
+        width: 100%;
       }
     }
   }

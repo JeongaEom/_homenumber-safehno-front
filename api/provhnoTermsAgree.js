@@ -37,34 +37,41 @@ const provhnoTermsAgree = (
         sign: data.sign
       });
 
-      window.parent.postMessage(
-        {
-          msg: "SAFE_HNO_SUCCESS",
-          tokenIssuId: data.tokenIssuId,
-          encData: data.encData,
-          sign: data.sign,
-          retUrl: app.link()
-        },
-        app.link()
-      );
+      if (app.closeType == "1450001") {
+        // iframe 일땐 window.parent | popup 일땐 window.opener 사용
+        if (window.parent) {
+          window.parent.postMessage(
+            {
+              msg: "SAFE_HNO_SUCCESS",
+              tokenIssuId: data.tokenIssuId,
+              encData: data.encData,
+              sign: data.sign,
+              retUrl: data.retUrl
+            },
+            data.retUrl
+          );
+        } else {
+          console.warn("window.parent가 존재하지 않습니다.");
+        }
+      } else if (app.closeType == "1450002") {
+        if (window.opener) {
+          window.opener.postMessage(
+            {
+              msg: "SAFE_HNO_SUCCESS",
+              tokenIssuId: data.tokenIssuId,
+              encData: data.encData,
+              sign: data.sign,
+              retUrl: data.retUrl
+            },
+            data.retUrl
+          );
+          window.close();
+        } else {
+          console.warn("window.opener가 존재하지 않습니다.");
+        }
+      }
 
-      // window.opener.postMessage(
-      //   {
-      //     msg: "SAFE_HNO_SUCCESS",
-      //     tokenIssuId: data.tokenIssuId,
-      //     encData: data.encData,
-      //     sign: data.sign,
-      //     retUrl: app.link()
-      //   },
-      //   app.link()
-      // );
-      // window.close();
-
-      console.log("app.postmessage_???: ", app.postmessage);
-
-      // console.log("data.tokenIssuId: ", data.tokenIssuId);
-      // console.log("termsStore: ", termsStore);
-      // console.log("termsStore.tokenIssuId: ", termsStore.tokenIssuId);
+      console.log("app.closeType: ", app.closeType);
       return true;
     }
   });

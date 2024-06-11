@@ -14,6 +14,7 @@ export const useAppStore = defineStore("app", {
       error: null,
       crtfcTkn: null, // 2.14 휴대폰 인증번호 요청
       closeType: null, // 닫기 버튼 아이프레임 iframe, 팝업 popup 여부 확인
+      retUrl: null,
       satk: null, // 인증토큰 (쿠키X)
       page: false // 2.20 표준창 요청 정보 조회 (쿠키X)
     };

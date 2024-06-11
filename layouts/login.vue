@@ -24,24 +24,25 @@ const closeClick = () => {
       window.parent.postMessage(
         {
           msg: "SAFE_HNO_CLOSE",
-          retUrl: app.link()
+          retUrl: app.retUrl
         },
-        app.link()
+        app.retUrl
       );
-      console.log("app.closeType???: ", app.closeType);
     } else {
       console.warn("window.parent가 존재하지 않습니다.");
     }
   } else if (app.closeType === "1450002") {
     window.close();
   }
-  console.log("app.postmessage_h???: ", app.postmessage);
+  console.log("app.closeType: ", app.closeType);
 };
 
 onMounted(async () => {
   // 2.16 암호화 토큰 유효성 검사 후 로그인페이지(팝업창) 실행
   const result = await tknEncValid(app.tokenIssuId, app.encData, app.sign);
   console.log("app.tokenIssuId_메인: ", app.tokenIssuId);
+  console.log("app.encData_메인: ", app.encData);
+  console.log("app.sign_메인: ", app.sign);
   if (result) {
     d.tknEncValid = true;
     localStorage.setItem("tokenIssuId", app.tokenIssuId);

@@ -11,7 +11,9 @@ const tknEncValid = (tokenIssuId, encData, sign) => {
       console.log("data: ", data);
       //1450001 아이프레임 iframe | 140002 팝업 popup
       app.closeType = data.stdpTypeCd;
+      app.retUrl = data.retUrl;
       console.log("app.closeType: ", app.closeType);
+      console.log("app.retUrl: ", app.retUrl);
       return true;
     }
   });

@@ -11,18 +11,17 @@ const closeClick = () => {
       window.parent.postMessage(
         {
           msg: "SAFE_HNO_CLOSE",
-          retUrl: app.link()
+          retUrl: app.retUrl
         },
-        app.link()
+        app.retUrl
       );
-      console.log("app.closeType???: ", app.closeType);
     } else {
       console.warn("window.parent가 존재하지 않습니다.");
     }
   } else if (app.closeType === "1450002") {
     window.close();
   }
-  console.log("app.postmessage_h: ", app.postmessage);
+  console.log("app.closeType: ", app.closeType);
 };
 
 const clickEvent = () => {

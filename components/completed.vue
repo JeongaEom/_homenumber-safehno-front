@@ -147,6 +147,7 @@ onMounted(async () => {
     height: 58vh;
     height: 58dvh;
   }
+
   .contents {
     div {
       img {
