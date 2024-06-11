@@ -89,23 +89,27 @@ onMounted(async () => {
 .contents-end {
   height: 55vh;
   height: 55dvh;
+  min-height: 52vh;
+  min-height: 52dvh;
 }
 
 .signup {
   height: 49vh;
   height: 49dvh;
+  min-height: 38vh;
+  min-height: 38dvh;
 }
 
 //팝업창
 @media (min-height: 769px) and (max-width: 820px) {
   .contents-end {
-    height: 68vh;
-    height: 68dvh;
+    height: 72vh;
+    height: 72dvh;
   }
 
   .signup {
-    height: 62vh;
-    height: 62dvh;
+    height: 65vh;
+    height: 65dvh;
   }
 }
 
@@ -124,8 +128,8 @@ onMounted(async () => {
   }
 
   .signup {
-    height: 54vh;
-    height: 54dvh;
+    height: 60vh;
+    height: 60dvh;
   }
 
   p {
@@ -140,8 +144,8 @@ onMounted(async () => {
   }
 
   .signup {
-    height: 52vh;
-    height: 52dvh;
+    height: 58vh;
+    height: 58dvh;
   }
   .contents {
     div {
@@ -152,6 +156,20 @@ onMounted(async () => {
   }
 }
 
+@media (max-height: 634px) {
+  .signup {
+    height: 56vh;
+    height: 56dvh;
+  }
+}
+
+@media (max-height: 599px) {
+  .signup {
+    height: 53vh;
+    height: 53dvh;
+  }
+}
+
 @media (max-height: 568px) {
   .contents-end {
     height: 56vh;
@@ -159,8 +177,15 @@ onMounted(async () => {
   }
 
   .signup {
-    height: 44vh;
-    height: 44dvh;
+    height: 50vh;
+    height: 50dvh;
+  }
+}
+
+@media (max-height: 540px) {
+  .signup {
+    height: 46vh;
+    height: 46dvh;
   }
 }
 
@@ -178,6 +203,13 @@ onMounted(async () => {
 }
 
 @media (max-height: 480px) {
+  section {
+    > div {
+      overflow: auto;
+      min-height: 240px;
+    }
+  }
+
   // 높이가 낮은 모바일
   .contents-end {
     height: 52vh;
@@ -185,8 +217,8 @@ onMounted(async () => {
   }
 
   .signup {
-    height: 34vh;
-    height: 34dvh;
+    height: 38vh;
+    height: 38dvh;
   }
 }
 </style>

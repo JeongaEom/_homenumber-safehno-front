@@ -21,9 +21,9 @@ const eventClick = () => {
 <template>
   <div class="title-top">
     <div class="inner">
-      <button v-if="p.hasBackButton" @click="eventClick">
+      <div class="btns" v-if="p.hasBackButton" @click="eventClick">
         <img src="@/assets/images/arrow-left.png" alt="이전페이지로" />
-      </button>
+      </div>
       <div>
         {{ p.text }}
         <span v-if="p.number != ''">{{ p.number }}</span>
@@ -41,11 +41,13 @@ const eventClick = () => {
     align-items: center;
     padding-bottom: 1.5rem;
     border-bottom: 2px solid $c-g700;
-    button {
+    .btns {
       width: 24px;
-      position: absolute;
-      border: none;
-      background: none;
+      margin-left: 16px;
+      img {
+        height: 22px;
+        width: 14px;
+      }
     }
     div {
       width: 100%;
@@ -70,7 +72,19 @@ const eventClick = () => {
   .title-top {
     height: 9vh;
     height: 9dvh;
-    padding: 1.5rem 0 0;
+    padding: 1.5rem 0;
+    .inner {
+      padding-bottom: 1.5rem;
+      .btns {
+        width: 8%;
+        padding-left: 2%;
+        margin-right: 0;
+      }
+      div {
+        width: 90%;
+        margin-right: 10%;
+      }
+    }
   }
 }
 

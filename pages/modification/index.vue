@@ -471,7 +471,7 @@ onMounted(async () => {
     position: relative;
     z-index: 1;
     margin-top: 0 !important;
-    margin-left: -82px;
+    margin-left: -90px;
     > div {
       font-size: 16px !important;
       font-weight: bold;
@@ -480,22 +480,29 @@ onMounted(async () => {
   }
 }
 
-@media (max-width: 712px) {
-  .top {
-    margin-top: 2vh;
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  .hp {
+    height: 66vh;
+    height: 66dvh;
   }
+
+  .modifi {
+    height: 58.5vh;
+    height: 58.5dvh;
+  }
+
   .time {
     > div {
-      margin-left: -68px;
+      width: 110px;
+      margin-left: -70px;
     }
   }
 }
 
-//팝업창
-@media (max-width: 480px) and (max-height: 820px) {
-  .contents {
-    height: 58vh;
-    height: 58dvh;
+@media (max-width: 712px) {
+  .top {
+    margin-top: 2vh;
   }
 }
 

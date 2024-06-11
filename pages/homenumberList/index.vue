@@ -79,11 +79,7 @@ const nextClick = async () => {
 
 <template>
   <div v-if="app.page">
-    <TitleTop
-      :hasBackButton="d.backAction"
-      text="홈넘버"
-      :number="myGetStore.hnos.length || 0"
-    />
+    <TitleTop text="홈넘버" :number="myGetStore.hnos.length || 0" />
     <div class="top-btn">
       <button class="bg-w line-active" @click="hnbIssuance">
         + 신규 홈넘버 추가
@@ -203,6 +199,16 @@ button.modifi {
   background-color: $wt;
   border: 1px solid $c-g300;
   color: $fg;
+}
+
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  section {
+    > .contents {
+      height: 60.3vh !important;
+      height: 60.3dvh !important;
+    }
+  }
 }
 
 @media (max-width: 768px) {

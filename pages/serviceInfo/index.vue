@@ -104,7 +104,6 @@ const d = reactive({
 
 section {
   > .contents {
-    height: 503px;
     padding-top: 27px;
   }
 }
@@ -125,8 +124,6 @@ section {
     height: 78dvh;
     > .contents {
       overflow: hidden;
-      height: 76vh;
-      height: 76dvh;
       padding-top: 17px;
     }
   }
@@ -135,8 +132,8 @@ section {
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 74vh;
-      height: 74dvh;
+      //height: 74vh;
+      //height: 74dvh;
     }
   }
 }
@@ -145,10 +142,6 @@ section {
   section {
     height: 72vh;
     height: 72vh;
-    > .contents {
-      height: 84vh;
-      height: 84dvh;
-    }
   }
 }
 
@@ -157,20 +150,6 @@ section {
     height: 76vh;
     height: 76dvh;
     margin-top: 12px;
-    > .contents {
-      height: 100vh;
-      height: 100dvh;
-    }
-  }
-}
-
-@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
-  // 높이가 높은 모바일
-  section {
-    > .contents {
-      height: 64vh;
-      height: 64dvh;
-    }
   }
 }
 </style>

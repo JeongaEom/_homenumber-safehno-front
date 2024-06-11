@@ -137,6 +137,13 @@ a {
   }
 }
 
+//팝업창
+@media (min-height: 769px) and (max-width: 820px) {
+  .content[data-v-02281a80] {
+    margin: 3rem 2.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .content {
     margin: 1rem 0;
