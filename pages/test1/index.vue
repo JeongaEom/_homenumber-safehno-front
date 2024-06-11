@@ -1,6 +1,8 @@
 <script setup>
 import { reactive, onMounted, onBeforeUnmount } from "vue";
 
+const app = useAppStore();
+
 definePageMeta({
   name: "test1"
 });
@@ -25,11 +27,7 @@ const eventClick = () => {
   const left = window.screen.width / 2 - width / 2;
   const top = window.screen.height / 2 - height / 2;
   const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-  const link =
-    process.env.NODE_ENV === "development"
-      ? `http://localhost:3002`
-      : `https://dev-safehno.homenumber.co.kr/`;
-  const url = `${link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+  const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
   window.open(url, "_blank", windowFeatures);
 };
@@ -73,7 +71,7 @@ onBeforeUnmount(() => {
         <li>
           <iframe
             src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=j1l7oOjyXvGJmukvCRhQwzDhrxj0zAFNK13thkW4W6O0/IUuI%2BwCz%2BpyHpU0IlS7eJDAlMrB4%2B/QBGEFsvWucXsnQhE9GBbwh7yURN2TthspXOrhlYJ2RCd4eRYZ/pf8dZqYQ/l7SjXKlBjQyjSYa36wet1%2BRI%2BUyeY5DP1BCcvExMKYdAtwpPiSLZDS4cPa&sign=BoaxcC1Ve29PWRUxP82WgwgFK8wgl4tHHMMusv%2BRSRI="
-            width="478"
+            width="480"
             height="820"
             frameborder="0"
           />

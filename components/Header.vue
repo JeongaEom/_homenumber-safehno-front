@@ -10,18 +10,19 @@ const closeClick = () => {
     if (window.parent) {
       window.parent.postMessage(
         {
-          msg: "SAFE_HNO_CLOSE"
+          msg: "SAFE_HNO_CLOSE",
+          retUrl: app.link()
         },
-        "http://localhost:3002/test1"
+        app.link()
       );
       console.log("app.closeType???: ", app.closeType);
     } else {
       console.warn("window.parent가 존재하지 않습니다.");
     }
-    console.log("app.closeType???: ", app.closeType);
   } else if (app.closeType === "1450002") {
     window.close();
   }
+  console.log("app.postmessage_h: ", app.postmessage);
 };
 
 const clickEvent = () => {
@@ -64,12 +65,13 @@ header {
   justify-content: space-between;
   .inners {
     width: 90%;
-    padding: 1rem;
+    padding: 3%;
+    padding-left: 9%;
     .logo {
-      width: 25%;
+      width: 100px;
       margin: auto;
       img {
-        width: 10rem;
+        width: 8rem;
       }
     }
   }
@@ -83,6 +85,18 @@ header {
     cursor: pointer;
     filter: invert(98%) sepia(2%) saturate(373%) hue-rotate(181deg)
       brightness(98%) contrast(89%);
+  }
+}
+
+@media (min-width: 968px) {
+  header {
+    .inners {
+      padding: 15px;
+      padding-left: 9%;
+      .logo {
+        width: 130px;
+      }
+    }
   }
 }
 

@@ -19,6 +19,11 @@ export const useAppStore = defineStore("app", {
     };
   },
   actions: {
+    link() {
+      return process.env.NODE_ENV === "development"
+        ? `http://localhost:3002`
+        : `https://dev-safehno.homenumber.co.kr/`;
+    },
     addDaumPostcodeScript() {
       // daum 우편번호 찾기 API
       const script = document.createElement("script");

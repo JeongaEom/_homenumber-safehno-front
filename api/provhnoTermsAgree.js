@@ -12,7 +12,7 @@ const provhnoTermsAgree = (
   isMyHnoYn
 ) => {
   const termsStore = useTermsStore();
-
+  const app = useAppStore();
   // 조회 타입
   const hnoSearchType = localStorage.getItem("hnoSearchType");
   return call({
@@ -43,11 +43,9 @@ const provhnoTermsAgree = (
           tokenIssuId: data.tokenIssuId,
           encData: data.encData,
           sign: data.sign,
-          // retUrl: data.retUrl
-          retUrl: "http://localhost:3002/test1"
+          retUrl: app.link()
         },
-        // data.retUrl
-        "http://localhost:3002/test1"
+        app.link()
       );
 
       // window.opener.postMessage(
@@ -56,11 +54,13 @@ const provhnoTermsAgree = (
       //     tokenIssuId: data.tokenIssuId,
       //     encData: data.encData,
       //     sign: data.sign,
-      //     retUrl: data.retUrl
+      //     retUrl: app.link()
       //   },
-      //   data.retUrl
+      //   app.link()
       // );
       // window.close();
+
+      console.log("app.postmessage_???: ", app.postmessage);
 
       // console.log("data.tokenIssuId: ", data.tokenIssuId);
       // console.log("termsStore: ", termsStore);

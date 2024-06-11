@@ -23,18 +23,19 @@ const closeClick = () => {
     if (window.parent) {
       window.parent.postMessage(
         {
-          msg: "SAFE_HNO_CLOSE"
+          msg: "SAFE_HNO_CLOSE",
+          retUrl: app.link()
         },
-        "http://localhost:3002/test1"
+        app.link()
       );
       console.log("app.closeType???: ", app.closeType);
     } else {
       console.warn("window.parent가 존재하지 않습니다.");
     }
-    console.log("app.closeType???: ", app.closeType);
   } else if (app.closeType === "1450002") {
     window.close();
   }
+  console.log("app.postmessage_h???: ", app.postmessage);
 };
 
 onMounted(async () => {
