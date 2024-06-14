@@ -27,7 +27,6 @@ if (process.env.NODE_ENV === "production") {
 } else if (process.env.NODE_ENV === "development") {
   API_HOST = "/api";
 } else {
-  const app = useAppStore();
   API_HOST = "https://dev-hno-api.homenumber.co.kr";
 }
 const API_DEBUG = true;

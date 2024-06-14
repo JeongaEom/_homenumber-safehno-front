@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import removeConsole from "vite-plugin-remove-console";
+const TerserPlugin = require("terser-webpack-plugin");
 
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // 클라이언트와 서버 모두에서 접근 가능
-      link:
+      envMode:
         process.env.NODE_ENV === "production"
           ? process.env.link_PROD
           : process.env.NODE_ENV === "development"
@@ -46,6 +46,9 @@ export default defineNuxtConfig({
     "@/assets/scss/style.scss" // 스타일 설정
   ],
   components: true,
+  build: {
+    transpile: [] // (운영)빌드시 콘솔로그제거
+  },
   vite: {
     // Vite 설정
     css: {
@@ -66,9 +69,9 @@ export default defineNuxtConfig({
         }
       }
     },
-    plugins: [process.env.NODE_ENV === "production" && removeConsole()].filter(
-      Boolean
-    )
+    esbuild: {
+      drop: process.env.NUXT_PUBLIC_ENV_MODE === "production" ? ["console"] : [] // (운영)빌드시 콘솔로그제거
+    }
   },
   ssr: false,
   spaLoadingTemplate: false

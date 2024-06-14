@@ -27,8 +27,8 @@ const d = reactive({
   result: null
 });
 
-const url = `${config.public.link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
-console.log("link: ", config.public.link);
+const url = `${config.public.envMode}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+console.log("link: ", config.public.envMode);
 
 const eventClick1 = () => {
   const width = 480;
