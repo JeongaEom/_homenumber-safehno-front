@@ -28,10 +28,10 @@ const d = reactive({
     }
   },
   data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
-  // hnoNo: "",
-  // scrtky: ""
-  hnoNo: "10034205960",
-  scrtky: "1234"
+  hnoNo: "",
+  scrtky: ""
+  // hnoNo: "10034205960",
+  // scrtky: "1234"
 });
 
 onMounted(async () => {

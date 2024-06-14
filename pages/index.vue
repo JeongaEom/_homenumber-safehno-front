@@ -17,10 +17,10 @@ const d = reactive({
   idType: "",
   texts: "",
   btntexts: "재시도",
-  // id: "",
-  // pwd: ""
-  id: "jaeom50",
-  pwd: "eja3249eja**"
+  id: "",
+  pwd: ""
+  // id: "jaeom50",
+  // pwd: "eja3249eja**"
 });
 
 // onMounted(() => {

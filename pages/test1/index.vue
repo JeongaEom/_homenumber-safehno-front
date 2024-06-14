@@ -1,7 +1,7 @@
 <script setup>
-import { reactive, onMounted, onBeforeUnmount } from "vue";
+import { reactive, onMounted, onBeforeUnmount, computed } from "vue";
 
-const app = useAppStore();
+const config = useRuntimeConfig();
 
 definePageMeta({
   name: "test1"
@@ -11,15 +11,22 @@ const d = reactive({
   text: "홈넘버표준창 테스트",
   tokenIssuId: "240411132224EX7G",
   encData:
-    uEnvMode() === "development"
-      ? "hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb"
-      : "RhZYBIpYHRDtx7yK1yW65mnOrdWORSeVGBKJQZVXn6k%2B5VneLPA4XiLwW0aCoFjUsO8JOtuzvotZc0eTD39va%2BAxE5LMfpR8SRpFVe%2FoP6855OO6%2BTsDNG5t7s1MG%2BBuueyYs04nQjxE%2Bu57KBNxPRV%2BfuEot4StqpVMnlZKqvU%3D",
+    uEnvMode() === "production"
+      ? "w2NvaZw5zRAe0xhMmM%2FHt70JJaQefd4rNAmEhStSniHGfI18shUItuwx5yFRdwYv5%2FgNTLkPQnNN1%2FmpC%2Fx0rr%2BmxiSAk9ir1yhT0rjQchoynmhfDOgTkshiHe1AzL6vZTWCMvJLHt1hn3dP7Met9PDUqY%2F5glbFdIARNJnZXFsmRJMCMna6AMcqCpEr4taM"
+      : uEnvMode() === "development"
+        ? "hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb" // 개발
+        : "RhZYBIpYHRDtx7yK1yW65mnOrdWORSeVGBKJQZVXn6k%2B5VneLPA4XiLwW0aCoFjUsO8JOtuzvotZc0eTD39va%2BAxE5LMfpR8SRpFVe%2FoP6855OO6%2BTsDNG5t7s1MG%2BBuueyYs04nQjxE%2Bu57KBNxPRV%2BfuEot4StqpVMnlZKqvU%3D", // 로컬
   sign:
-    uEnvMode() === "development"
-      ? "%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D"
-      : "mIuaVxqPxpMog88hCzdEISZ5HFpKEZIgwSw7LR6rWJQ%3D",
+    uEnvMode() === "production"
+      ? "cGZbP5PyFIt5XRiCLrgG0n2iMIksW6q1a5DhzIVLtQ8%3D"
+      : uEnvMode() === "development"
+        ? "%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D" // 개발
+        : "mIuaVxqPxpMog88hCzdEISZ5HFpKEZIgwSw7LR6rWJQ%3D", // 로컬
   result: null
 });
+
+const url = `${config.public.link}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+console.log("link: ", config.public.link);
 
 const eventClick = () => {
   const width = 480;
@@ -27,7 +34,6 @@ const eventClick = () => {
   const left = window.screen.width / 2 - width / 2;
   const top = window.screen.height / 2 - height / 2;
   const windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-  const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
 
   window.open(url, "_blank", windowFeatures);
 };
@@ -71,12 +77,13 @@ onBeforeUnmount(() => {
     <div class="iframe">
       <ul>
         <li>
-          <iframe
+          <!-- <iframe
             src="https://dev-safehno.homenumber.co.kr/?tokenIssuId=240411132224EX7G&encData=hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb&sign=%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D"
             width="480"
             height="820"
             frameborder="0"
-          />
+          /> -->
+          <iframe :src="url" width="480" height="820" frameborder="0" />
         </li>
         <li>
           <div v-if="d.result" class="result-wrap">

@@ -6,9 +6,9 @@
     "dev": "cross-env NUXT_PORT=3002 nuxt dev",
     "build": "nuxt build",
     "generate-dev": "cross-env NUXT_PUBLIC_ENV_MODE=development nuxt generate",
-    "generate-live": "cross-env NUXT_PUBLIC_ENV_MODE=production nuxt generate --silent > nul 2>&1",
+    "generate-live": "cross-env NUXT_PUBLIC_ENV_MODE=production NODE_ENV=production nuxt generate",
     "deploy-dev": "aws s3 --profile homnumbermeta-dev sync C:/Workspace/GitLab/homenumber-safehno-front/.output/public s3://dev-safehno-front",
-    "deploy-live": "aws s3 --profile homnumbermeta-dev sync C:/Workspace/GitLab/homenumber-safehno-front/.output/public s3://dev-safehno-front",
+    "deploy-live": "aws s3 --profile homnumbermeta sync C:/Workspace/GitLab/homenumber-safehno-front/.output/public s3://safehno.homenumber.co.kr",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/types": "^2.17.3",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/node": "^20.12.11",
@@ -42,6 +41,7 @@
     "open": "^10.1.0",
     "prettier": "^3.2.5",
     "sass": "^1.74.1",
-    "sass-loader": "^14.1.1"
+    "sass-loader": "^14.1.1",
+    "vite-plugin-remove-console": "^2.2.0"
   }
 }

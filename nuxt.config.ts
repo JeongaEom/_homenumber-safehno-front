@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import removeConsole from "vite-plugin-remove-console";
+
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
   imports: {
@@ -7,20 +9,35 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      envMode:
-        process.env.NODE_ENV === "development"
-          ? `http://localhost:3002`
-          : `https://dev-safehno.homenumber.co.kr/`
+      // 클라이언트와 서버 모두에서 접근 가능
+      link:
+        process.env.NODE_ENV === "production"
+          ? process.env.link_PROD
+          : process.env.NODE_ENV === "development"
+            ? process.env.link_LOCAL
+            : process.env.link_DEV
+    },
+    private: {
+      // 서버에서만 접근 가능
     }
   },
   hooks: {
     "nitro:config"(nitroConfig) {
       const isDevelopment = process.env.NODE_ENV === "development";
+      const isProduction = process.env.NODE_ENV === "production";
+
       nitroConfig.runtimeConfig = nitroConfig.runtimeConfig ?? {};
       nitroConfig.runtimeConfig.public = nitroConfig.runtimeConfig.public ?? {};
-      nitroConfig.runtimeConfig.public.apiHost = isDevelopment
-        ? "/api"
-        : "https://dev-hno-api.homenumber.co.kr";
+
+      if (isProduction) {
+        nitroConfig.runtimeConfig.public.apiHost =
+          "https://hno-api.homenumber.co.kr";
+      } else if (isDevelopment) {
+        nitroConfig.runtimeConfig.public.apiHost = "/api";
+      } else {
+        nitroConfig.runtimeConfig.public.apiHost =
+          "https://dev-hno-api.homenumber.co.kr";
+      }
     }
   },
   css: [
@@ -48,7 +65,10 @@ export default defineNuxtConfig({
           rewrite: (path) => path.replace(/^\/api/, "") // 실제 요청에서 '/api' 제거
         }
       }
-    }
+    },
+    plugins: [process.env.NODE_ENV === "production" && removeConsole()].filter(
+      Boolean
+    )
   },
   ssr: false,
   spaLoadingTemplate: false

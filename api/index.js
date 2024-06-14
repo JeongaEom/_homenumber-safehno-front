@@ -19,29 +19,44 @@ export { default as tknEncValid } from "./tknEncValid";
 export { default as reqInfoGet } from "./reqInfoGet";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
-const API_HOST =
-  process.env.NODE_ENV === "development"
-    ? "/api"
-    : "https://dev-hno-api.homenumber.co.kr";
+
+let API_HOST;
+
+if (process.env.NODE_ENV === "production") {
+  API_HOST = "https://hno-api.homenumber.co.kr";
+} else if (process.env.NODE_ENV === "development") {
+  API_HOST = "/api";
+} else {
+  const app = useAppStore();
+  API_HOST = "https://dev-hno-api.homenumber.co.kr";
+}
 const API_DEBUG = true;
-
 console.log("API 호스트:", API_HOST);
+console.log("Current NODE_ENV:", process.env.NODE_ENV);
 
-export const commonHeaders = {
-  "Content-Type": "application/json;charset=UTF-8",
-  appId: "SAFEHNO",
-  apikey: "609af5e1-0047-49a5-93eb-c3a1db30fb92"
+export const commonHeaders = () => {
+  return {
+    "Content-Type": "application/json;charset=UTF-8",
+    appId: "SAFEHNO",
+    apikey:
+      process.env.NODE_ENV === "production"
+        ? "7b5153d7-10ea-4555-8f09-7183970944b4"
+        : "609af5e1-0047-49a5-93eb-c3a1db30fb92"
+  };
 };
 
 export const getPresetHeaders = (headers = {}) => {
   const app = useAppStore();
+  const baseHeaders = commonHeaders(); // commonHeaders 함수 호출
+
   if (typeof headers === "string") {
     // headers가 문자열인 경우
     const base = {
-      "Content-Type": commonHeaders["Content-Type"],
-      appId: commonHeaders["appId"],
-      apikey: commonHeaders["apikey"]
+      "Content-Type": baseHeaders["Content-Type"],
+      appId: baseHeaders["appId"],
+      apikey: baseHeaders["apikey"]
     };
+
     switch (headers) {
       case "DEFAULT":
         return {
@@ -59,24 +74,16 @@ export const getPresetHeaders = (headers = {}) => {
         };
       case "PUBLIC":
         return base;
+      default:
+        return base; // 기본값
     }
-  }
-
-  if (typeof headers === "function") {
-    // headers가 함수인 경우
-    return headers();
-  }
-
-  if (typeof headers === "object" && !Array.isArray(headers)) {
-    // headers가 객체인 경우 | commonHeaders와 headers를 병합하여 반환
+  } else {
+    // headers가 객체인 경우
     return {
-      ...commonHeaders,
+      ...baseHeaders,
       ...headers
     };
   }
-
-  // headers가 없는 경우
-  return commonHeaders;
 };
 
 const defaultErrorProc = (error) => {
