@@ -20,25 +20,54 @@ export { default as reqInfoGet } from "./reqInfoGet";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 
-let API_HOST;
+// 운영
+// const API_HOST = "https://hno-api.homenumber.co.kr";
 
-if (process.env.NODE_ENV === "production") {
-  API_HOST = "https://hno-api.homenumber.co.kr";
-} else if (process.env.NODE_ENV === "development") {
-  API_HOST = "/api";
-} else {
-  API_HOST = "https://dev-hno-api.homenumber.co.kr";
-}
-const API_DEBUG = true;
+// 개발, 로컬
+const API_HOST = "https://dev-hno-api.homenumber.co.kr";
+
+// let API_HOST;
+// let app_env;
+
+// const initializeApp = () => {
+//   const app = useAppStore();
+//   // if (!app || !app.env) {
+//   //   throw new Error("app 또는 app.env가 유효하지 않습니다.");
+//   // }
+//   app_env = app.env;
+//   console.log("app.env_api01: ", app_env);
+//   // } catch (error) {
+//   //   console.error("useAppStore 초기화 오류: ", error);
+//   // }
+// };
+
+//   initializeApp();
+
+//   if (typeof app_env !== "string") {
+//     app_env = String(app_env);
+//   }
+
+// if (app_env === "production") {
+//   // 운영
+//   API_HOST = "https://hno-api.homenumber.co.kr";
+// } else {
+//   // 개발, 로컬
+//   API_HOST = "https://dev-hno-api.homenumber.co.kr";
+// }
 console.log("API 호스트:", API_HOST);
-console.log("Current NODE_ENV:", process.env.NODE_ENV);
+// console.log("NODE_ENV:", process.env.NODE_ENV);
+
+const API_DEBUG = true;
 
 export const commonHeaders = () => {
+  const app = useAppStore();
+  console.log("app.env_api2: ", app.env);
+
   return {
     "Content-Type": "application/json;charset=UTF-8",
     appId: "SAFEHNO",
     apikey:
-      process.env.NODE_ENV === "production"
+      app.env === "production"
         ? "7b5153d7-10ea-4555-8f09-7183970944b4"
         : "609af5e1-0047-49a5-93eb-c3a1db30fb92"
   };
@@ -145,6 +174,7 @@ export const call = async (settings) => {
   // 타겟 URL 설정
   // endpoint로 호출하는 경우(미리 정의된 HOST를 붙인다)
   // url로 호출하는 경우는 그대로 호출
+  console.log("API_HOST + endpoint: ", API_HOST + endpoint);
   const api = axios({
     method: method || "post",
     url: API_HOST + endpoint,

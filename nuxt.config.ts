@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-const TerserPlugin = require("terser-webpack-plugin");
-
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
   imports: {
@@ -10,34 +8,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // 클라이언트와 서버 모두에서 접근 가능
-      envMode:
-        process.env.NODE_ENV === "production"
-          ? process.env.link_PROD
-          : process.env.NODE_ENV === "development"
-            ? process.env.link_LOCAL
-            : process.env.link_DEV
+      envMode: process.env.NODE_ENV ?? "development",
+      nuxtEnv: process.env.NUXT_ENV
     },
     private: {
       // 서버에서만 접근 가능
-    }
-  },
-  hooks: {
-    "nitro:config"(nitroConfig) {
-      const isDevelopment = process.env.NODE_ENV === "development";
-      const isProduction = process.env.NODE_ENV === "production";
-
-      nitroConfig.runtimeConfig = nitroConfig.runtimeConfig ?? {};
-      nitroConfig.runtimeConfig.public = nitroConfig.runtimeConfig.public ?? {};
-
-      if (isProduction) {
-        nitroConfig.runtimeConfig.public.apiHost =
-          "https://hno-api.homenumber.co.kr";
-      } else if (isDevelopment) {
-        nitroConfig.runtimeConfig.public.apiHost = "/api";
-      } else {
-        nitroConfig.runtimeConfig.public.apiHost =
-          "https://dev-hno-api.homenumber.co.kr";
-      }
     }
   },
   css: [
@@ -46,9 +21,9 @@ export default defineNuxtConfig({
     "@/assets/scss/style.scss" // 스타일 설정
   ],
   components: true,
-  build: {
-    transpile: [] // (운영)빌드시 콘솔로그제거
-  },
+  // build: {
+  //   transpile: [] // (운영)빌드시 콘솔로그제거
+  // },
   vite: {
     // Vite 설정
     css: {
@@ -68,10 +43,10 @@ export default defineNuxtConfig({
           rewrite: (path) => path.replace(/^\/api/, "") // 실제 요청에서 '/api' 제거
         }
       }
-    },
-    esbuild: {
-      drop: process.env.NUXT_PUBLIC_ENV_MODE === "production" ? ["console"] : [] // (운영)빌드시 콘솔로그제거
     }
+    // esbuild: {
+    //   drop: process.env.NUXT_ENV === "production" ? ["console"] : [] // (운영)빌드시 콘솔로그제거
+    // }
   },
   ssr: false,
   spaLoadingTemplate: false

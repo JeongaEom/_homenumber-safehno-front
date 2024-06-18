@@ -1,8 +1,10 @@
 import { useRouter } from "vue-router";
 import { reqInfoGet } from "@/api";
+import { useRuntimeConfig } from "#app";
 
 export const useAppStore = defineStore("app", {
   state() {
+    const config = useRuntimeConfig();
     return {
       tokenIssuId: "",
       encData: "",
@@ -16,10 +18,27 @@ export const useAppStore = defineStore("app", {
       closeType: null, // 닫기 버튼 아이프레임 iframe, 팝업 popup 여부 확인
       retUrl: null,
       satk: null, // 인증토큰 (쿠키X)
-      page: false // 2.20 표준창 요청 정보 조회 (쿠키X)
+      page: false, // 2.20 표준창 요청 정보 조회 (쿠키X)
+      env: config.public.nuxtEnv
     };
   },
   actions: {
+    link() {
+      console.log("app.env_app: ", this.env);
+
+      let url;
+      if (this.env === "development") {
+        // 개발
+        url = "https://dev-safehno.homenumber.co.kr/";
+      } else if (this.env === "production") {
+        // 운영
+        url = "https://safehno.homenumber.co.kr";
+      } else {
+        // 로컬
+        url = "http://localhost:3002";
+      }
+      return url;
+    },
     addDaumPostcodeScript() {
       // daum 우편번호 찾기 API
       const script = document.createElement("script");

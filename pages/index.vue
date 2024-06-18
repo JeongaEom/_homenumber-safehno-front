@@ -5,6 +5,7 @@ import { authSignin } from "@/api";
 
 const router = useRouter();
 const app = useAppStore();
+const config = useRuntimeConfig();
 
 // 페이지 메타 설정
 definePageMeta({
@@ -12,16 +13,29 @@ definePageMeta({
   name: "main"
 });
 
+let id;
+let pwd;
+
+if (config.public.nuxtEnv === "production") {
+  // 운영 아이디, 비번
+  id = "";
+  pwd = "";
+} else {
+  // 로컬, 개발에만 아이디, 비번 고정
+  id = "jaeom50";
+  pwd = "eja3249eja**";
+}
+
 const d = reactive({
   isOpen: false, // popup 열기 여부
   idType: "",
   texts: "",
   btntexts: "재시도",
-  id: "",
-  pwd: ""
-  // id: "jaeom50",
-  // pwd: "eja3249eja**"
+  id: id,
+  pwd: pwd
 });
+
+console.log("d.id: ", d.id);
 
 // onMounted(() => {
 //   setTimeout(() => {
