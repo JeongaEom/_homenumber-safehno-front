@@ -5,7 +5,6 @@ import { authSignin } from "@/api";
 
 const router = useRouter();
 const app = useAppStore();
-const config = useRuntimeConfig();
 
 // 페이지 메타 설정
 definePageMeta({
@@ -16,7 +15,7 @@ definePageMeta({
 let id;
 let pwd;
 
-if (config.public.nuxtEnv === "production") {
+if (import.meta.env.MODE === "production") {
   // 운영 아이디, 비번
   id = "";
   pwd = "";
@@ -34,8 +33,6 @@ const d = reactive({
   id: id,
   pwd: pwd
 });
-
-console.log("d.id: ", d.id);
 
 // onMounted(() => {
 //   setTimeout(() => {

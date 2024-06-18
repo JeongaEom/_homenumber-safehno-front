@@ -42,14 +42,15 @@ const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sig
 console.log("link: ", app.link());
 console.log("url: ", url);
 
-if (config.public.nuxtEnv === "development") {
-  console.log("개발 환경입니다.");
-} else if (config.public.nuxtEnv === "production") {
-  console.log("운영 환경입니다.");
+if (import.meta.env.MODE === "development") {
+  console.log("test2_개발 환경입니다.");
+} else if (import.meta.env.MODE === "production") {
+  console.log("test2_운영 환경입니다.");
 } else {
-  console.log("로컬 환경입니다.");
+  console.log("test2_로컬 환경입니다.");
 }
-console.log("config.public.nuxtEnv: ", config.public.nuxtEnv);
+
+console.log("import.meta.env.MODE_test2: ", import.meta.env.MODE);
 
 const eventClick1 = () => {
   const width = 480;

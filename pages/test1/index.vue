@@ -8,21 +8,25 @@ definePageMeta({
   name: "test1"
 });
 
+let tokenIssuId;
 let encData;
 let sign;
 
-if (config.public.nuxtEnv === "development") {
+if (import.meta.env.MODE === "development") {
   // 개발
+  tokenIssuId = "240411132224EX7G";
   encData =
     "hwv20LKTVWwp7psOB9zU087dM95jyS%2FSCHPkBhzX9QqxNfXbqb2ooUXOlOWfbm%2B%2F1gbcWMepnImVRdprtXGSVuIbF2V94E7TKAgzKTU9nr0uSO%2F%2BL3SxXAeYuyjB2DdMVZNnQXK%2FqMM1P0LSOwom5MtJvewofJ6MpqweGwozhJzzvFYEEqsVnVf4rx5gO7jb";
   sign = "%2BpBFaJGorBNQNIjgNLKoI7KtF8Te1nWLQBhM4XJyFWY%3D";
-} else if (config.public.nuxtEnv === "production") {
+} else if (import.meta.env.MODE === "production") {
   // 운영
+  tokenIssuId = "240614113611GEE4";
   encData =
-    "w2NvaZw5zRAe0xhMmM%2FHt70JJaQefd4rNAmEhStSniHGfI18shUItuwx5yFRdwYv5%2FgNTLkPQnNN1%2FmpC%2Fx0rr%2BmxiSAk9ir1yhT0rjQchoynmhfDOgTkshiHe1AzL6vZTWCMvJLHt1hn3dP7Met9PDUqY%2F5glbFdIARNJnZXFsmRJMCMna6AMcqCpEr4taM";
-  sign = "cGZbP5PyFIt5XRiCLrgG0n2iMIksW6q1a5DhzIVLtQ8%3D";
+    "w2NvaZw5zRAe0xhMmM%2FHtyXG%2BH6%2BJPYrOsfSXNzdI4C72LK1u0oNGZ7TDo3H4WOAiFyOa6Q0lbKDJ3ZBvcQniC2H6jWvdg1DC0e3gUhv3VXZzLAM2VI2XZ0kQpwyWdY6wBbK192M5IA8oTTG84fFVRItetq7kFeOr5Es5YF5WaU%2BDnJi%2B1SvzJk%2F3Ha1IyAu";
+  sign = "cNSpWm%2BniURRUzp6EaRL%2BREUMUX7DTNZqJzt6Llmarg%3D";
 } else {
   // 로컬
+  tokenIssuId = "240411132224EX7G";
   encData =
     "RhZYBIpYHRDtx7yK1yW65mnOrdWORSeVGBKJQZVXn6k%2B5VneLPA4XiLwW0aCoFjUsO8JOtuzvotZc0eTD39va%2BAxE5LMfpR8SRpFVe%2FoP6855OO6%2BTsDNG5t7s1MG%2BBuueyYs04nQjxE%2Bu57KBNxPRV%2BfuEot4StqpVMnlZKqvU%3D";
   sign = "mIuaVxqPxpMog88hCzdEISZ5HFpKEZIgwSw7LR6rWJQ%3D";
@@ -30,7 +34,7 @@ if (config.public.nuxtEnv === "development") {
 
 const d = reactive({
   text: "홈넘버표준창 테스트",
-  tokenIssuId: "240411132224EX7G",
+  tokenIssuId: tokenIssuId,
   encData: encData,
   sign: sign,
   result: null
@@ -40,14 +44,15 @@ const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sig
 console.log("link: ", app.link());
 console.log("url: ", url);
 
-if (config.public.nuxtEnv === "development") {
-  console.log("개발 환경입니다.");
-} else if (config.public.nuxtEnv === "production") {
-  console.log("운영 환경입니다.");
+if (import.meta.env.MODE === "development") {
+  console.log("test1_개발 환경입니다.");
+} else if (import.meta.env.MODE === "production") {
+  console.log("test1_운영 환경입니다.");
 } else {
-  console.log("로컬 환경입니다.");
+  console.log("test1_로컬 환경입니다.");
 }
-console.log("config.public.nuxtEnv: ", config.public.nuxtEnv);
+console.log("import.meta.env.MODE_test1: ", import.meta.env.MODE);
+console.log("config.public.nuxtEnv_test1: ", config.public.nuxtEnv);
 
 const eventClick = () => {
   const width = 480;

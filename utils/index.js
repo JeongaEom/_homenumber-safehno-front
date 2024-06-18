@@ -357,3 +357,13 @@ export const uBase64Encode = (bytes) => {
   const binString = Array.from(bytes, (x) => String.fromCodePoint(x)).join("");
   return btoa(binString);
 };
+
+let nuxtEnv;
+
+export function setNuxtEnv(env) {
+  nuxtEnv = env;
+}
+
+export function getNuxtEnv() {
+  return nuxtEnv;
+}

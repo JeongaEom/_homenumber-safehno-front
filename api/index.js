@@ -20,54 +20,35 @@ export { default as reqInfoGet } from "./reqInfoGet";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 
-// 운영
-// const API_HOST = "https://hno-api.homenumber.co.kr";
+let API_HOST;
+if (import.meta.env.MODE === "production") {
+  API_HOST = "https://hno-api.homenumber.co.kr";
+} else if (import.meta.env.MODE === "development") {
+  API_HOST = "https://dev-hno-api.homenumber.co.kr";
+} else if (import.meta.env.MODE === "local") {
+  API_HOST = "/api";
+}
 
-// 개발, 로컬
-const API_HOST = "https://dev-hno-api.homenumber.co.kr";
-
-// let API_HOST;
-// let app_env;
-
-// const initializeApp = () => {
-//   const app = useAppStore();
-//   // if (!app || !app.env) {
-//   //   throw new Error("app 또는 app.env가 유효하지 않습니다.");
-//   // }
-//   app_env = app.env;
-//   console.log("app.env_api01: ", app_env);
-//   // } catch (error) {
-//   //   console.error("useAppStore 초기화 오류: ", error);
-//   // }
-// };
-
-//   initializeApp();
-
-//   if (typeof app_env !== "string") {
-//     app_env = String(app_env);
-//   }
-
-// if (app_env === "production") {
-//   // 운영
-//   API_HOST = "https://hno-api.homenumber.co.kr";
-// } else {
-//   // 개발, 로컬
-//   API_HOST = "https://dev-hno-api.homenumber.co.kr";
-// }
 console.log("API 호스트:", API_HOST);
-// console.log("NODE_ENV:", process.env.NODE_ENV);
+
+if (import.meta.env.MODE === "local") {
+  console.log("api_로컬 환경입니다.");
+} else if (import.meta.env.MODE === "development") {
+  console.log("api_개발 환경입니다.");
+} else if (import.meta.env.MODE === "production") {
+  console.log("api_운영 환경입니다.");
+}
+
+console.log("import.meta.env.MODE: ", import.meta.env.MODE);
 
 const API_DEBUG = true;
 
 export const commonHeaders = () => {
-  const app = useAppStore();
-  console.log("app.env_api2: ", app.env);
-
   return {
     "Content-Type": "application/json;charset=UTF-8",
     appId: "SAFEHNO",
     apikey:
-      app.env === "production"
+      import.meta.env.MODE === "production"
         ? "7b5153d7-10ea-4555-8f09-7183970944b4"
         : "609af5e1-0047-49a5-93eb-c3a1db30fb92"
   };
@@ -76,7 +57,6 @@ export const commonHeaders = () => {
 export const getPresetHeaders = (headers = {}) => {
   const app = useAppStore();
   const baseHeaders = commonHeaders(); // commonHeaders 함수 호출
-
   if (typeof headers === "string") {
     // headers가 문자열인 경우
     const base = {
@@ -174,7 +154,6 @@ export const call = async (settings) => {
   // 타겟 URL 설정
   // endpoint로 호출하는 경우(미리 정의된 HOST를 붙인다)
   // url로 호출하는 경우는 그대로 호출
-  console.log("API_HOST + endpoint: ", API_HOST + endpoint);
   const api = axios({
     method: method || "post",
     url: API_HOST + endpoint,

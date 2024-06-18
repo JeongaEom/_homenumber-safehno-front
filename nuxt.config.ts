@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { config } from "dotenv";
+config();
 
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
@@ -8,8 +10,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // 클라이언트와 서버 모두에서 접근 가능
-      envMode: process.env.NODE_ENV ?? "development",
-      nuxtEnv: process.env.NUXT_ENV
+      envMode: process.env.NODE_ENV,
+      NUXT_ENV: process.env.NUXT_ENV || "local",
+      apiHostPROD: process.env.API_HOST_PROD,
+      apiHostDEV: process.env.API_HOST_DEV
     },
     private: {
       // 서버에서만 접근 가능
@@ -21,9 +25,15 @@ export default defineNuxtConfig({
     "@/assets/scss/style.scss" // 스타일 설정
   ],
   components: true,
-  // build: {
-  //   transpile: [] // (운영)빌드시 콘솔로그제거
-  // },
+  build: {
+    transpile: [] // (운영)빌드시 콘솔로그제거
+  },
+  hooks: {
+    "build:before": () => {
+      //env 동일하게 맞춤
+      process.env.NODE_ENV = process.env.NUXT_ENV || "local";
+    }
+  },
   vite: {
     // Vite 설정
     css: {
@@ -43,10 +53,15 @@ export default defineNuxtConfig({
           rewrite: (path) => path.replace(/^\/api/, "") // 실제 요청에서 '/api' 제거
         }
       }
+    },
+    define: {
+      //env 동일하게 맞춤
+      "import.meta.env.MODE": JSON.stringify(process.env.NUXT_ENV),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NUXT_ENV)
+    },
+    esbuild: {
+      drop: process.env.NUXT_ENV === "production" ? ["console"] : [] // (운영)빌드시 콘솔로그제거
     }
-    // esbuild: {
-    //   drop: process.env.NUXT_ENV === "production" ? ["console"] : [] // (운영)빌드시 콘솔로그제거
-    // }
   },
   ssr: false,
   spaLoadingTemplate: false
