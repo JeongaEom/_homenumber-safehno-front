@@ -12,6 +12,19 @@ definePageMeta({
   name: "homenumberInquiry"
 });
 
+let hnoNo;
+let scrtky;
+
+if (import.meta.env.MODE === "production") {
+  // 운영 아이디, 비번
+  hnoNo = "";
+  pwd = "";
+} else {
+  // 로컬, 개발에만 아이디, 비번 고정
+  hnoNo = "10034205960";
+  pwd = "1234";
+}
+
 const d = reactive({
   backAction() {
     if (d.data) {
@@ -28,10 +41,8 @@ const d = reactive({
     }
   },
   data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
-  hnoNo: "",
-  scrtky: ""
-  // hnoNo: "10034205960",
-  // scrtky: "1234"
+  hnoNo: hnoNo,
+  scrtky: scrtky
 });
 
 onMounted(async () => {
