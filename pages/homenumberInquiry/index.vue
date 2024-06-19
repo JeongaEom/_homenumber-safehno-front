@@ -18,11 +18,11 @@ let scrtky;
 if (import.meta.env.MODE === "production") {
   // 운영 아이디, 비번
   hnoNo = "";
-  pwd = "";
+  scrtky = "";
 } else {
   // 로컬, 개발에만 아이디, 비번 고정
   hnoNo = "10034205960";
-  pwd = "1234";
+  scrtky = "1234";
 }
 
 const d = reactive({

@@ -7,10 +7,22 @@ definePageMeta({
   name: "nid-success"
 });
 
-const FE_DOMAIN =
-  process.env.NODE_ENV === "development"
-    ? `http://localhost:3002`
-    : `https://dev-safehno.homenumber.co.kr/`;
+// const FE_DOMAIN =
+//   process.env.NODE_ENV === "development"
+//     ? `http://localhost:3002`
+//     : `https://dev-safehno.homenumber.co.kr/`;
+
+let FE_DOMAIN;
+
+if (import.meta.env.MODE === "development") {
+  FE_DOMAIN = "https://dev-safehno.homenumber.co.kr/";
+} else if (import.meta.env.MODE === "production") {
+  FE_DOMAIN = "https://safehno.homenumber.co.kr";
+} else {
+  FE_DOMAIN = "http://localhost:3002";
+}
+
+console.log("FE_DOMAIN: ", FE_DOMAIN);
 
 onMounted(() => {
   const r = useRoute();

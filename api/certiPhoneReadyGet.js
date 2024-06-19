@@ -1,6 +1,6 @@
 import { call } from "@/api";
 
-const certiPhoneReadyGet = (deviceTyCd) => {
+const certiPhoneReadyGet = () => {
   const auth = useAuthStore();
   return call({
     id: "2.19 휴대폰 본인확인 사전조회",
@@ -12,6 +12,9 @@ const certiPhoneReadyGet = (deviceTyCd) => {
     onResponse({ code, data }) {
       auth.nid.encData = data.encData;
       auth.nid.checkPlusUrl = data.checkPlusUrl;
+
+      console.log("data.encData: ", data.encData);
+      console.log("data.checkPlusUrl: ", data.checkPlusUrl);
       return true;
     }
   });
