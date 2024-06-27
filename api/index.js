@@ -17,6 +17,8 @@ export { default as mberIdcheck } from "./mberIdcheck";
 export { default as certiPhoneReadyGet } from "./certiPhoneReadyGet";
 export { default as tknEncValid } from "./tknEncValid";
 export { default as reqInfoGet } from "./reqInfoGet";
+export { default as kakaoOauthReadyGet } from "./kakaoOauthReadyGet";
+export { default as kakaoLogin } from "./kakaoLogin";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 
@@ -95,11 +97,24 @@ export const getPresetHeaders = (headers = {}) => {
 };
 
 const defaultErrorProc = (error) => {
+  // 에러창 설정
   const app = useAppStore();
-  app.error = {
-    type: "alert",
-    message: error.response?.data?.message
-  };
+  const code = error.response?.data?.code;
+  if (code === 4021) {
+    // 페이지 표시 에러
+    app.error = {
+      type: "page", // pages > error > index.vue 페이지로 사용시
+      message: error.response?.data?.message
+    };
+    const router = useRouter();
+    router.replace("/error");
+  } else {
+    // 팝업창 에러
+    app.error = {
+      type: "alert", // components > popup.vue 사용시
+      message: error.response?.data?.message
+    };
+  }
   return false;
 
   // const app = useAppStore();
@@ -210,9 +225,8 @@ export const call = async (settings) => {
             sign: app.sign
           }
         });
-      } else if (code === 4020 || code === 4022) {
+      } else if (code === 4020) {
         // 4020: 토큰이상, 재로그인
-        // 4022: 승인대기
         uAddError(9999, () => {
           setTimeout(() => {
             const app = useAppStore();

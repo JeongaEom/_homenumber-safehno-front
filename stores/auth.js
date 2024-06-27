@@ -5,7 +5,8 @@ export const useAuthStore = defineStore("auth", {
       signupTems: [],
       tokenIssuId: "",
       encData: "",
-      sign: ""
+      sign: "",
+      kakaoOauthUrl: null
     };
   },
   actions: {}

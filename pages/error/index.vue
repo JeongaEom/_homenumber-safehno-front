@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 definePageMeta({
   name: "error"
@@ -7,6 +8,7 @@ definePageMeta({
 
 const app = useAppStore();
 const route = useRoute();
+const router = useRouter();
 
 const d = reactive({
   btntexts: computed(() => {
@@ -25,7 +27,9 @@ const d = reactive({
       그렇지 않으면 app.error?.message를 반환하며,
       둘 다 존재하지 않는 경우에는 "메시지가 정의되어 있지 않습니다."를 반환
     */
-    return queryMsg || app.error?.message || "메시지가 정의되어 있지 않습니다.";
+    const errorMessage = app && app.error ? app.error.message : null;
+
+    return queryMsg || errorMessage || "메시지가 정의되어 있지 않습니다.";
   })
 });
 
@@ -34,8 +38,15 @@ const buttonClick = () => {
     window.close();
     return;
   }
-  const router = useRouter();
-  router.replace("/");
+  // router.replace("/");
+  router.replace({
+    path: "/homenumberList",
+    query: {
+      tokenIssuId: app.tokenIssuId,
+      encData: app.encData,
+      sign: app.sign
+    }
+  });
 };
 </script>
 
@@ -53,8 +64,30 @@ const buttonClick = () => {
 </template>
 
 <style lang="scss" scoped>
-.notData {
-  margin-top: 40%;
-  min-height: 433px;
+@media (min-width: 769px) {
+  section {
+    .contents {
+      height: auto;
+      .notData {
+        margin-top: 40%;
+        min-height: 470px;
+      }
+      .bottom-ct {
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    margin: 20% 0 0;
+    .contents {
+      .notData {
+      }
+      .bottom-ct {
+        margin-top: 20%;
+      }
+    }
+  }
 }
 </style>

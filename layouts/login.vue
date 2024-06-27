@@ -111,6 +111,12 @@ header {
   }
 }
 
+@media (min-width: 769px) {
+  section {
+    padding-top: 0 !important;
+  }
+}
+
 @media (max-height: 740px) {
   header {
     .inners {

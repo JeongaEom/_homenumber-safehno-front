@@ -3,7 +3,7 @@ import { call } from "@/api";
 const tknEncValid = (tokenIssuId, encData, sign) => {
   const app = useAppStore();
   return call({
-    id: "2.16 암호화 토큰 유효성 검사",
+    id: "2.16 암호화 토큰 유효성 검사 [V2]",
     endpoint: "/safehno/v2/tkn/enc/valid",
     headers: "DEFAULT",
     data: { tokenIssuId, encData, sign },

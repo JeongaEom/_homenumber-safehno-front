@@ -94,6 +94,7 @@ onMounted(() => {
         홈넘버 사이트(homenumber.co.kr)에서 확인이 가능합니다.
       </p>
       <button class="bg-g line" @click="signupClick">홈넘버 회원가입</button>
+      <kakao />
     </div>
   </div>
   <div class="bottom">
@@ -151,7 +152,7 @@ a {
 //팝업창
 @media (min-height: 769px) and (max-width: 820px) {
   .content[data-v-02281a80] {
-    margin: 3rem 2.5rem;
+    margin: 2rem 2.5rem;
   }
 }
 
