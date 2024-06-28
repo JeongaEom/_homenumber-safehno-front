@@ -6,7 +6,11 @@ export const useAuthStore = defineStore("auth", {
       tokenIssuId: "",
       encData: "",
       sign: "",
-      kakaoOauthUrl: null
+      kakaoOauthUrl: null,
+      name: "",
+      birthData: "",
+      gender: "",
+      mobileNo: ""
     };
   },
   actions: {}

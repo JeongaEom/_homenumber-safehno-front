@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch, computed, onBeforeUnmount } from "vue";
+// import { termsList, mberSignup, mberIdcheck, certiPhoneEncDecode } from "@/api";
 import { termsList, mberSignup, mberIdcheck } from "@/api";
 
 const app = useAppStore();
@@ -21,6 +22,10 @@ const d = reactive({
   pwdConfirm: "",
   email: "",
   encData: "",
+  name: auth.name,
+  birth: auth.birthData,
+  gender: auth.gender === "0" ? "여성" : "남성",
+  mobile: auth.mobileNo,
   validId: false,
   validId1: false,
   validId2: false,
@@ -109,7 +114,7 @@ const validateEmail = () => {
   d.regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 };
 
-const eventHpClick = async () => {
+const eventHpClick = () => {
   // 휴대폰 본인 인증
   // 팝업창 크기
   const ww = 480;
@@ -143,6 +148,15 @@ onBeforeUnmount(() => {
   // POSTMESSAGE 대기 해제
   window.removeEventListener("message", CB_MESSAGE);
 });
+
+// const certiCode = async () => {
+//   if (d.encData) {
+//     await certiPhoneEncDecode(d.encData);
+//     console.log("d.encData_tttt: ", d.encData);
+//   }
+// }
+
+// certiCode();
 
 const verification = () => {
   if ([d.mberId, d.pwd, d.pwdConfirm, d.email].some((item) => item === "")) {
@@ -323,9 +337,35 @@ watch(
                     />
                   </div>
                 </li>
+                <!-- 휴대폰 본인 인증 완료후 나오는 데이터 -->
+                <!-- <li v-if="d.encData">
+                  <div class="input-text">이름 <span>*</span></div>
+                  <div class="input-bd-n">
+                    <input type="text" v-model="d.name" disabled />
+                  </div>
+                </li>
+                <li v-if="d.encData">
+                  <div class="input-text">생년월일 <span>*</span></div>
+                  <div class="input-bd-n">
+                    <input type="text" v-model="d.birth" disabled />
+                  </div>
+                </li>
+                <li v-if="d.encData">
+                  <div class="input-text">성별 <span>*</span></div>
+                  <div class="input-bd-n">
+                    <input type="text" v-model="d.gender" disabled />
+                  </div>
+                </li>
+                <li v-if="d.encData">
+                  <div class="input-text">휴대폰 번호 <span>*</span></div>
+                  <div class="input-bd-n">
+                    <input type="text" v-model="d.mobile" disabled />
+                  </div>
+                </li> -->
               </ul>
             </div>
           </div>
+          <!-- <button class="bg-w line-hp" v-if="!d.encData" @click="eventHpClick"> -->
           <button class="bg-w line-hp" @click="eventHpClick">
             휴대폰 본인 인증
           </button>
@@ -393,6 +433,13 @@ section {
 
 .inputDatas {
   margin-bottom: 20px;
+}
+
+.input-bd-n {
+  input {
+    border: none;
+    background: none;
+  }
 }
 
 button {

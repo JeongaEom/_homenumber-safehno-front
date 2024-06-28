@@ -215,6 +215,8 @@ onMounted(async () => {
   d.isActive = false;
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
+
+console.log("d.isActive???:", d.isActive);
 </script>
 
 <template>

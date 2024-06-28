@@ -16,8 +16,6 @@ const kakaoLogin = (kakaoAuthCd) => {
 
       localStorage.setItem("hnoSearchType", "multi");
       router.replace("/homenumberList");
-
-      // console.log("app.tokenIssuId11111: ", app.tokenIssuId);
       return true;
     }
   });

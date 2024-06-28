@@ -33,6 +33,9 @@ const fetchHnoMyGet = async () => {
   console.log("app.tokenIssuId_마이 홈넘버: ", app.tokenIssuId);
   console.log("app.encData: ", app.encData);
   console.log("app.sign: ", app.sign);
+
+  // 불러온 데이터를 최신순으로 정렬
+  myGetStore.hnos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 };
 
 onMounted(async () => {

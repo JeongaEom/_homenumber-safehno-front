@@ -19,6 +19,7 @@ export { default as tknEncValid } from "./tknEncValid";
 export { default as reqInfoGet } from "./reqInfoGet";
 export { default as kakaoOauthReadyGet } from "./kakaoOauthReadyGet";
 export { default as kakaoLogin } from "./kakaoLogin";
+export { default as certiPhoneEncDecode } from "./certiPhoneEncDecode";
 
 // const API_HOST = "https://dev-hno-api.homenumber.co.kr";
 
