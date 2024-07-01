@@ -46,6 +46,7 @@ const provhnoTermsAgree = (
               tokenIssuId: data.tokenIssuId,
               encData: data.encData,
               sign: data.sign,
+              satk: app.satk,
               retUrl: data.retUrl
             },
             data.retUrl
@@ -61,6 +62,7 @@ const provhnoTermsAgree = (
               tokenIssuId: data.tokenIssuId,
               encData: data.encData,
               sign: data.sign,
+              satk: app.satk,
               retUrl: data.retUrl
             },
             data.retUrl

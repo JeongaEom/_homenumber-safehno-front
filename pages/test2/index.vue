@@ -35,12 +35,15 @@ const d = reactive({
   tokenIssuId: "240411132224EX7G",
   encData: encData,
   sign: sign,
+  // satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDEgMTQ6MTQ6NTguNDYwIiwiaWF0IjoxNzE5ODEwMjk4LCJleHAiOjE3MTk4MTA4OTh9.kIuVrwlI23jKZ248elRJHJxUo97rFrmLAwoXcRcoPCE",
+  satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDEgMTg6NTE6MTEuNjUyIiwiaWF0IjoxNzE5ODI1NjcxLCJleHAiOjE3MTk4Mjc0NzF9.X_yK7LJdktXzJyLX_y9ECOIsJeBWgtUknm5G3tZTNb0",
   result: null
 });
 
-const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}&satk=${d.satk}`;
 console.log("link: ", app.link());
 console.log("url: ", url);
+console.log("satk: ", d.satk);
 
 if (import.meta.env.MODE === "development") {
   console.log("test2_개발 환경입니다.");
@@ -107,22 +110,19 @@ onBeforeUnmount(() => {
       </button>
     </div>
     <br />
-    <div class="iframe">
-      <ul>
-        <li>
-          <iframe :src="url" width="480" height="820" frameborder="0" />
-        </li>
-        <li>
-          <div v-if="d.result" class="result-wrap">
-            <div class="result-title">Post Message 수신 성공</div>
-            <div class="result">
-              <div v-for="(val, key) in d.result" class="result-item">
-                {{ `${key}: ${val}` }}
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div v-if="d.result" class="result-wrap">
+      <div class="result-title">Post Message 수신 성공</div>
+      <div class="result">
+        <div v-for="(val, key) in d.result" class="result-item">
+          {{ `${key}: ${val}` }}
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <!-- 반응형 처리 -->
+    <div class="iframe-container">
+      <iframe :src="url" frameborder="0" />
     </div>
   </section>
 </template>
@@ -174,9 +174,24 @@ section > .contents {
   }
 }
 
-.iframe {
-  ul {
-    display: flex;
+/* 반응형 처리 */
+.iframe-container {
+  width: 100%;
+  max-width: 480px;
+  height: 820px;
+  margin: 0 auto; /* 가운데 정렬을 위해 */
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* 작은 화면에서는 높이를 줄이기 */
+@media screen and (max-width: 480px) {
+  .iframe-container {
+    height: 100vh; /* 화면 전체 높이로 설정 */
   }
 }
 </style>

@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch, computed, onBeforeUnmount } from "vue";
-// import { termsList, mberSignup, mberIdcheck, certiPhoneEncDecode } from "@/api";
-import { termsList, mberSignup, mberIdcheck } from "@/api";
+import { termsList, mberSignup, mberIdcheck, certiPhoneEncDecode } from "@/api";
 
 const app = useAppStore();
 const termsStore = useTermsStore();
@@ -22,10 +21,10 @@ const d = reactive({
   pwdConfirm: "",
   email: "",
   encData: "",
-  name: auth.name,
-  birth: auth.birthData,
-  gender: auth.gender === "0" ? "여성" : "남성",
-  mobile: auth.mobileNo,
+  // name: auth.name,
+  // birth: auth.birthData,
+  // gender: auth.gender === "0" ? "여성" : "남성",
+  // mobile: auth.mobileNo,
   validId: false,
   validId1: false,
   validId2: false,
@@ -48,7 +47,7 @@ const titleText = computed(() =>
   d.text === "01" ? "이용약관 동의" : "회원정보 입력"
 );
 
-const btnText = computed(() => (d.text === "01" ? "다음" : "확인"));
+const btnText_name = computed(() => (d.text === "01" ? "다음" : "확인"));
 
 const listTerms = async () => {
   await termsList(d.termsGrpCd);
@@ -129,14 +128,26 @@ const eventHpClick = () => {
   );
 };
 
-const CB_MESSAGE = (e) => {
+// let messageProcessed = false;
+
+const CB_MESSAGE = async (e) => {
   const { data } = e;
   // console.log(e);
   if (data.msg === "AUTH_COMPLETE") {
     d.encData = data.EncodeData;
     console.log("EncodeData 👇");
     console.log(data.EncodeData);
+    await certiCode(); // EncodeData가 설정된 후 certiCode 호출
+
+    // 이벤트 리스너 제거
+    window.removeEventListener("message", CB_MESSAGE);
   }
+};
+
+const certiCode = async () => {
+  await certiPhoneEncDecode(d.encData);
+  console.log("d.encData_tttt: ", d.encData);
+  console.log("auth.mobileNo: ", auth.mobileNo);
 };
 
 onMounted(() => {
@@ -148,15 +159,6 @@ onBeforeUnmount(() => {
   // POSTMESSAGE 대기 해제
   window.removeEventListener("message", CB_MESSAGE);
 });
-
-// const certiCode = async () => {
-//   if (d.encData) {
-//     await certiPhoneEncDecode(d.encData);
-//     console.log("d.encData_tttt: ", d.encData);
-//   }
-// }
-
-// certiCode();
 
 const verification = () => {
   if ([d.mberId, d.pwd, d.pwdConfirm, d.email].some((item) => item === "")) {
@@ -338,35 +340,34 @@ watch(
                   </div>
                 </li>
                 <!-- 휴대폰 본인 인증 완료후 나오는 데이터 -->
-                <!-- <li v-if="d.encData">
+                <li v-if="d.encData">
                   <div class="input-text">이름 <span>*</span></div>
                   <div class="input-bd-n">
-                    <input type="text" v-model="d.name" disabled />
+                    <input type="text" v-model="auth.name" disabled />
                   </div>
                 </li>
                 <li v-if="d.encData">
                   <div class="input-text">생년월일 <span>*</span></div>
                   <div class="input-bd-n">
-                    <input type="text" v-model="d.birth" disabled />
+                    <input type="text" v-model="auth.birth" disabled />
                   </div>
                 </li>
                 <li v-if="d.encData">
                   <div class="input-text">성별 <span>*</span></div>
                   <div class="input-bd-n">
-                    <input type="text" v-model="d.gender" disabled />
+                    <input type="text" v-model="auth.gender" disabled />
                   </div>
                 </li>
                 <li v-if="d.encData">
                   <div class="input-text">휴대폰 번호 <span>*</span></div>
                   <div class="input-bd-n">
-                    <input type="text" v-model="d.mobile" disabled />
+                    <input type="text" v-model="auth.mobile" disabled />
                   </div>
-                </li> -->
+                </li>
               </ul>
             </div>
           </div>
-          <!-- <button class="bg-w line-hp" v-if="!d.encData" @click="eventHpClick"> -->
-          <button class="bg-w line-hp" @click="eventHpClick">
+          <button class="bg-w line-hp" v-if="!d.encData" @click="eventHpClick">
             휴대폰 본인 인증
           </button>
         </div>
@@ -378,7 +379,7 @@ watch(
       :disabled="!d.isActive"
       @click="eventClick(d.text)"
     >
-      {{ btnText }}
+      {{ btnText_name }}
     </button>
     <completed
       :topText="d.topText"

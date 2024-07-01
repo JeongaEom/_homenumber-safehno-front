@@ -1,7 +1,6 @@
 import { call } from "@/api";
 
 const authSignin = (id, pwd, tokenIssuId) => {
-  const router = useRouter();
   const app = useAppStore();
   return call({
     id: "2.3 표준창 로그인 [V2]",
@@ -17,7 +16,6 @@ const authSignin = (id, pwd, tokenIssuId) => {
       console.log("_app.satk: ", app.satk);
 
       localStorage.setItem("hnoSearchType", "multi");
-      router.replace("/homenumberList");
       return true;
     }
   });

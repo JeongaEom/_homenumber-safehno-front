@@ -37,10 +37,12 @@ const d = reactive({
   tokenIssuId: tokenIssuId,
   encData: encData,
   sign: sign,
+  satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDEgMTQ6MTQ6NTguNDYwIiwiaWF0IjoxNzE5ODEwMjk4LCJleHAiOjE3MTk4MTA4OTh9.kIuVrwlI23jKZ248elRJHJxUo97rFrmLAwoXcRcoPCE",
+  // satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDEgMTg6MTM6MDQuOTI3IiwiaWF0IjoxNzE5ODIzMzg0LCJleHAiOjE3MTk4MjUxODR9.zXhaXDhZiIAo7YOaJLUF2T1y9DhR2JnAjbx6UzywZOg",
   result: null
 });
 
-const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}`;
+const url = `${app.link()}?tokenIssuId=${d.tokenIssuId}&encData=${d.encData}&sign=${d.sign}&satk=${d.satk}`;
 console.log("link: ", app.link());
 console.log("url: ", url);
 
@@ -179,6 +181,9 @@ section > .contents {
 .iframe {
   ul {
     display: flex;
+    li {
+      width: 50%;
+    }
   }
 }
 </style>

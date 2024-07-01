@@ -11,7 +11,9 @@ const closeClick = () => {
       window.parent.postMessage(
         {
           msg: "SAFE_HNO_CLOSE",
-          retUrl: app.retUrl
+          retUrl: app.retUrl,
+          satk: app.satk,
+          message: "헤더 닫기 버튼"
         },
         app.retUrl
       );

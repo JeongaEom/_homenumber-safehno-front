@@ -109,6 +109,17 @@ const defaultErrorProc = (error) => {
     };
     const router = useRouter();
     router.replace("/error");
+  } else if (code === 4017) {
+    const router = useRouter();
+    router.replace({
+      path: "/login",
+      query: {
+        tokenIssuId: app.tokenIssuId,
+        encData: app.encData,
+        sign: app.sign,
+        satk: app.satk
+      }
+    });
   } else {
     // 팝업창 에러
     app.error = {
@@ -223,7 +234,8 @@ export const call = async (settings) => {
           query: {
             tokenIssuId: app.tokenIssuId,
             encData: app.encData,
-            sign: app.sign
+            sign: app.sign,
+            satk: app.satk
           }
         });
       } else if (code === 4020) {
