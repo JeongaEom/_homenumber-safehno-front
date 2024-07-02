@@ -67,6 +67,8 @@ const modifiClick = (item) => {
     path: "/modification",
     query: { hnoIssuNo: item.hnoIssuNo }
   });
+  d.isActive = false;
+  console.log("d.isActive_홈넘버 조회_수정버튼:", d.isActive);
 };
 
 const nextClick = async () => {
@@ -78,6 +80,8 @@ const nextClick = async () => {
   myGetStore.isMyHnoYn = d.isMyHnoYn;
   router.push("/personalInformation");
 };
+
+console.log("d.isActive_홈넘버 조회:", d.isActive);
 </script>
 
 <template>

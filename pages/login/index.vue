@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { authSignin } from "@/api";
 
@@ -33,6 +33,9 @@ const d = reactive({
   id: id,
   pwd: pwd
 });
+
+// 운영모드일때는 안보이게
+const isNotProduction = computed(() => import.meta.env.MODE !== "production");
 
 // onMounted(() => {
 //   setTimeout(() => {
@@ -98,7 +101,7 @@ onMounted(() => {
         홈넘버 사이트(homenumber.co.kr)에서 확인이 가능합니다.
       </p>
       <button class="bg-g line" @click="signupClick">홈넘버 회원가입</button>
-      <kakao />
+      <kakao v-if="isNotProduction" />
     </div>
   </div>
   <div class="bottom">

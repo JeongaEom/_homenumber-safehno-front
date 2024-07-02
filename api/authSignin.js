@@ -13,7 +13,7 @@ const authSignin = (id, pwd, tokenIssuId) => {
     },
     onResponse({ code, data }) {
       app.satk = data.satk; // 인증토큰
-      console.log("_app.satk: ", app.satk);
+      console.log("app.satk_로그인api: ", app.satk);
 
       localStorage.setItem("hnoSearchType", "multi");
       return true;

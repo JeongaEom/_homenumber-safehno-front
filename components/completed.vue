@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const app = useAppStore();
 
-defineProps({
+const p = defineProps({
   topText: { type: String, default: "" },
   btntext: { type: String, default: "" },
   btn: { type: String, default: "block" },

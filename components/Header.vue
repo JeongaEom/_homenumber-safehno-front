@@ -1,10 +1,17 @@
 <script setup>
 // import { useRouter } from "vue-router";
+import { closeTypeGet } from "@/api";
 
 // const router = useRouter();
 const app = useAppStore();
 
-const closeClick = () => {
+const closeClick = async () => {
+  if (!app.closeType) {
+    const result = await closeTypeGet();
+    console.log("result: ", result);
+  }
+
+  // app.closeType: 1450001 or 1450002
   if (app.closeType === "1450001") {
     // iframe 일땐 window.parent | popup 일땐 window.opener 사용
     if (window.parent) {

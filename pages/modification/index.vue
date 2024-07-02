@@ -14,7 +14,7 @@ definePageMeta({
 const d = reactive({
   text: "홈넘버 수정",
   isPhone: false, // 휴대폰 인증 확인
-  isActive: false, // 확인 활성화 여부
+  isActive1: false, // 확인 활성화 여부
   crtfcNo: "",
   cdCommand: "stop",
   time: "",
@@ -57,6 +57,7 @@ const phoneAuth = async () => {
       d.cdCommand = "start";
     });
   }
+  console.log("d.isActive1_수정_111:", d.isActive1);
 };
 
 const phoneAuthCheck = async () => {
@@ -70,16 +71,10 @@ const phoneAuthCheck = async () => {
   if (phoneConfirm) {
     d.cdCommand = "stop";
     d.time = "인증완료";
+    d.isActive1 = true;
   }
+  console.log("d.isActive1_수정_필수입력:", d.isActive1);
 };
-
-watch(
-  // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
-  () => [app.crtfcTkn, d.crtfcNo],
-  (newValues) => {
-    d.isActive = newValues.some((value) => value.trim() !== "");
-  }
-);
 
 const handleTimerEnd = () => {
   app.error = {
@@ -100,6 +95,7 @@ const hnogetList = async () => {
   if (success) {
     console.log(get.hnoIssuNo);
   }
+  d.isActive1 = false;
 };
 
 const handleClickAddressSearch = () => {
@@ -160,13 +156,13 @@ const verification = () => {
 const nextClick = async () => {
   if (d.isNext) {
     // [휴대폰 인증] 완료 후 '확인'
-    if (d.isActive) {
+    if (d.isActive1) {
       d.isNext = false; // [수정] 활성화
-      d.isActive = false; // '확인' 버튼 비활성화
+      d.isActive1 = false; // '확인' 버튼 비활성화
     }
   } else if (!d.isNext) {
     // [수정] 완료 후 '확인'
-    if (d.isActive) {
+    if (d.isActive1) {
       const isValid = verification();
       if (isValid) {
         const result = await hnoUpdate({
@@ -190,7 +186,7 @@ const nextClick = async () => {
 };
 
 watch(
-  // input 값 입력이 하나라도 되어 있으면 d.isActive = true; 하나도 입력이 없으면 d.isActive = false;
+  // input 값 입력이 하나라도 되어 있으면 d.isActive1 = true; 하나도 입력이 없으면 d.isActive1 = false;
   () => [
     get.nm,
     get.moblphonNo,
@@ -201,22 +197,22 @@ watch(
     get.addrNcm
   ],
   (newValues) => {
-    d.isActive = newValues.some((value) => value.trim() !== "");
+    d.isActive1 = newValues.some((value) => value.trim() !== "");
+    console.log("d.isActive1_수정_워치:", d.isActive1);
   }
 );
 
 onMounted(async () => {
+  d.isActive1 = false;
   const isError = await app.requiredValue();
   if (!isError) {
     hnogetList();
     app.page = true;
   }
-
-  d.isActive = false;
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
 
-console.log("d.isActive???:", d.isActive);
+console.log("d.isActive1_수정:", d.isActive1);
 </script>
 
 <template>
@@ -380,8 +376,8 @@ console.log("d.isActive???:", d.isActive);
         </div>
       </div>
       <button
-        :class="d.isActive ? 'red-active' : 'default'"
-        :disabled="!d.isActive"
+        :class="d.isActive1 ? 'red-active' : 'default'"
+        :disabled="!d.isActive1"
         @click="nextClick"
       >
         확인

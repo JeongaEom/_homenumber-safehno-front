@@ -23,10 +23,10 @@ app.encData = encData;
 app.sign = sign;
 app.satk = satk;
 
-console.log("app.tokenIssuId_메인: ", app.tokenIssuId);
-console.log("app.encData_메인: ", app.encData);
-console.log("app.sign_메인: ", app.sign);
-console.log("app.satk_메인: ", app.satk);
+console.log("app.tokenIssuId_: ", app.tokenIssuId);
+console.log("app.encData_: ", app.encData);
+console.log("app.sign_: ", app.sign);
+console.log("app.satk_: ", app.satk);
 
 const tkn = async () => {
   // 2.16 암호화 토큰 유효성 검사 후 로그인페이지(팝업창) 실행
@@ -73,15 +73,6 @@ const tkn = async () => {
     //   },
     //   app.retUrl
     // );
-  } else {
-    app.error = {
-      type: "alert",
-      message: app.error.message,
-      hasClose: false,
-      onConfirm: () => {
-        window.close();
-      }
-    };
   }
 };
 

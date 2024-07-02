@@ -21,10 +21,9 @@ const d = reactive({
   pwdConfirm: "",
   email: "",
   encData: "",
-  // name: auth.name,
-  // birth: auth.birthData,
-  // gender: auth.gender === "0" ? "여성" : "남성",
-  // mobile: auth.mobileNo,
+  gender: computed(() =>
+    auth.gender === "0" ? "여성" : auth.gender === "1" ? "남성" : "없음"
+  ),
   validId: false,
   validId1: false,
   validId2: false,
@@ -128,8 +127,6 @@ const eventHpClick = () => {
   );
 };
 
-// let messageProcessed = false;
-
 const CB_MESSAGE = async (e) => {
   const { data } = e;
   // console.log(e);
@@ -147,12 +144,13 @@ const CB_MESSAGE = async (e) => {
 const certiCode = async () => {
   await certiPhoneEncDecode(d.encData);
   console.log("d.encData_tttt: ", d.encData);
-  console.log("auth.mobileNo: ", auth.mobileNo);
+  console.log("gender: ", d.gender);
 };
 
 onMounted(() => {
   // POSTMESSAGE 대기
   window.addEventListener("message", CB_MESSAGE);
+  console.log("gender: ", d.gender);
 });
 
 onBeforeUnmount(() => {
@@ -342,26 +340,26 @@ watch(
                 <!-- 휴대폰 본인 인증 완료후 나오는 데이터 -->
                 <li v-if="d.encData">
                   <div class="input-text">이름 <span>*</span></div>
-                  <div class="input-bd-n">
+                  <div>
                     <input type="text" v-model="auth.name" disabled />
                   </div>
                 </li>
                 <li v-if="d.encData">
                   <div class="input-text">생년월일 <span>*</span></div>
-                  <div class="input-bd-n">
-                    <input type="text" v-model="auth.birth" disabled />
+                  <div>
+                    <input type="text" v-model="auth.birthDate" disabled />
                   </div>
                 </li>
                 <li v-if="d.encData">
                   <div class="input-text">성별 <span>*</span></div>
-                  <div class="input-bd-n">
-                    <input type="text" v-model="auth.gender" disabled />
+                  <div>
+                    <input type="text" v-model="d.gender" disabled />
                   </div>
                 </li>
                 <li v-if="d.encData">
                   <div class="input-text">휴대폰 번호 <span>*</span></div>
-                  <div class="input-bd-n">
-                    <input type="text" v-model="auth.mobile" disabled />
+                  <div>
+                    <input type="text" v-model="auth.mobileNo" disabled />
                   </div>
                 </li>
               </ul>
@@ -434,13 +432,6 @@ section {
 
 .inputDatas {
   margin-bottom: 20px;
-}
-
-.input-bd-n {
-  input {
-    border: none;
-    background: none;
-  }
 }
 
 button {

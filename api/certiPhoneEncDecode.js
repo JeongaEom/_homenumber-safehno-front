@@ -11,12 +11,14 @@ const certiPhoneEncDecode = (encData) => {
       console.log("data: ", data);
 
       auth.name = data.name;
-      auth.birthData = data.birthData;
-      auth.gender = data.gender === 0 ? "여성" : "남성";
+      auth.birthDate = data.birthDate;
+      auth.gender = data.gender;
       auth.mobileNo = data.mobileNo;
 
       console.log("auth.name: ", auth.name);
+      console.log("auth.birthDate: ", auth.birthDate);
       console.log("auth.gender: ", auth.gender);
+      console.log("auth.mobileNo: ", auth.mobileNo);
       return true;
     }
   });

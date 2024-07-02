@@ -36,7 +36,7 @@ const d = reactive({
   encData: encData,
   sign: sign,
   // satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDEgMTQ6MTQ6NTguNDYwIiwiaWF0IjoxNzE5ODEwMjk4LCJleHAiOjE3MTk4MTA4OTh9.kIuVrwlI23jKZ248elRJHJxUo97rFrmLAwoXcRcoPCE",
-  satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDEgMTg6NTE6MTEuNjUyIiwiaWF0IjoxNzE5ODI1NjcxLCJleHAiOjE3MTk4Mjc0NzF9.X_yK7LJdktXzJyLX_y9ECOIsJeBWgtUknm5G3tZTNb0",
+  satk: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGRwQ3VzdElkIjoiMTAwMDAwMDEiLCJtYmVyTm0iOiLquYDssKwiLCJhcHBpZCI6IlNBRkVITk8iLCJtYmVySWQiOiJ4cGVydDkxIiwibWJlckVtYWlsIjoieHBlcnQ5MUBnbWFpbC5jb20iLCJtYmVyTW9ibHBob25ObyI6IjAxMDQwOTM3MzAzIiwiZXhwRGF0ZSI6IjIwMjQtMDctMDIgMTE6MTQ6MTIuNzc5IiwiaWF0IjoxNzE5ODg0NjUyLCJleHAiOjE3MTk4ODY0NTJ9.nbE1W8YEPzrFELU79pLguIcLSHOXYkHhPWXh4PSotWQ",
   result: null
 });
 
@@ -109,20 +109,26 @@ onBeforeUnmount(() => {
         홈넘버표준창 모바일
       </button>
     </div>
-    <br />
-    <div v-if="d.result" class="result-wrap">
-      <div class="result-title">Post Message 수신 성공</div>
-      <div class="result">
-        <div v-for="(val, key) in d.result" class="result-item">
-          {{ `${key}: ${val}` }}
-        </div>
-      </div>
-    </div>
-    <br />
-    <br />
-    <!-- 반응형 처리 -->
-    <div class="iframe-container">
-      <iframe :src="url" frameborder="0" />
+
+    <div class="iframe">
+      <ul>
+        <li>
+          <!-- 반응형 처리 -->
+          <div class="iframe-container">
+            <iframe :src="url" frameborder="0" />
+          </div>
+        </li>
+        <li>
+          <div v-if="d.result" class="result-wrap">
+            <div class="result-title">Post Message 수신 성공</div>
+            <div class="result">
+              <div v-for="(val, key) in d.result" class="result-item">
+                {{ `${key}: ${val}` }}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -171,6 +177,15 @@ section > .contents {
     margin-top: 15px;
     font-size: 18px;
     word-wrap: break-word;
+  }
+}
+
+.iframe {
+  ul {
+    display: flex;
+    li {
+      width: 50%;
+    }
   }
 }
 
