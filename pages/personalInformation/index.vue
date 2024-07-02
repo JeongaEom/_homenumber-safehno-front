@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted } from "vue";
-import { provhnoTermsAgree, termsList } from "@/api";
+import { provhnoTermsAgree, termsList, closeTypeGet } from "@/api";
 
 // const router = useRouter();
 const app = useAppStore();
@@ -87,6 +87,11 @@ onMounted(async () => {
   //   };
   // }
   listTerms();
+
+  if (!app.closeType) {
+    const result = await closeTypeGet();
+    console.log("result: ", result);
+  }
 });
 
 const endClick = async () => {
