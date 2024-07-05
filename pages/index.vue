@@ -30,6 +30,7 @@ console.log("app.satk_: ", app.satk);
 
 const tkn = async () => {
   // 2.16 암호화 토큰 유효성 검사 후 로그인페이지(팝업창) 실행
+
   const result = await tknEncValid(
     app.tokenIssuId,
     app.encData,
@@ -42,37 +43,34 @@ const tkn = async () => {
   console.log("app.satk_메인: ", app.satk);
 
   if (result) {
-    localStorage.setItem("tokenIssuId", app.tokenIssuId);
+    localStorage.setItem("tokenIssuId_!!!", app.tokenIssuId);
+
+    const queryParams = {
+      tokenIssuId: app.tokenIssuId,
+      encData: app.encData,
+      sign: app.sign
+    };
+
     if (app.satk) {
-      // router.replace("/homenumberList");
       router.replace({
         path: "/homenumberList",
-        query: {
-          tokenIssuId: app.tokenIssuId,
-          encData: app.encData,
-          sign: app.sign
-        }
+        query: queryParams
       });
     } else {
-      router.replace({
-        path: "/login",
-        query: {
-          tokenIssuId: app.tokenIssuId,
-          encData: app.encData,
-          sign: app.sign
-        }
-      });
-    }
+      const currentPath = router.currentRoute.value.path;
 
-    // window.parent.postMessage(
-    //   {
-    //     msg: "SAFE_HNO_CLOSE",
-    //     retUrl: app.retUrl,
-    //     satk: app.satk,
-    //     message: "암호화 토큰 유효성 검사"
-    //   },
-    //   app.retUrl
-    // );
+      if (currentPath === "/kakaoauth") {
+        router.replace({
+          path: "/homenumberList",
+          query: queryParams
+        });
+      } else {
+        router.replace({
+          path: "/login",
+          query: queryParams
+        });
+      }
+    }
   }
 };
 

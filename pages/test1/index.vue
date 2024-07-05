@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted, onBeforeUnmount, computed } from "vue";
+import { reactive, onMounted, onBeforeUnmount } from "vue";
 
 const app = useAppStore();
 const config = useRuntimeConfig();

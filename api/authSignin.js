@@ -12,6 +12,8 @@ const authSignin = (id, pwd, tokenIssuId) => {
       tokenIssuId
     },
     onResponse({ code, data }) {
+      console.log("data: ", data);
+
       app.satk = data.satk; // 인증토큰
       console.log("app.satk_로그인api: ", app.satk);
 

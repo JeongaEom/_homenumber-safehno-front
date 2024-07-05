@@ -110,15 +110,14 @@ const defaultErrorProc = (error) => {
     };
     const router = useRouter();
     router.replace("/error");
-  } else if (code === 4017) {
+  } else if (code === 4017 || code === 4019) {
     const router = useRouter();
     router.replace({
       path: "/login",
       query: {
         tokenIssuId: app.tokenIssuId,
         encData: app.encData,
-        sign: app.sign,
-        satk: app.satk
+        sign: app.sign
       }
     });
   } else {
@@ -231,12 +230,11 @@ export const call = async (settings) => {
         const app = useAppStore();
         // router.replace("/");
         router.replace({
-          path: "/",
+          path: "/login",
           query: {
             tokenIssuId: app.tokenIssuId,
             encData: app.encData,
-            sign: app.sign,
-            satk: app.satk
+            sign: app.sign
           }
         });
       } else if (code === 4020) {

@@ -15,20 +15,6 @@ const kakaoClick = async () => {
     window.location.href = auth.kakaoOauthUrl;
     console.log("kakaoOauthUrl: ", auth.kakaoOauthUrl);
   }
-
-  // if (isSuccess) {
-  //   const app = useAppStore();
-  //   const params = new URLSearchParams({
-  //     tokenIssuId: app.tokenIssuId,
-  //     encData: app.encData,
-  //     sign: app.sign
-  //   }).toString();
-
-  //   const redirectUrl = `${auth.kakaoOauthUrl}?${params}`;
-
-  //   window.location.href = redirectUrl;
-  //   console.log("kakaoOauthUrl: ", redirectUrl);
-  // }
 };
 </script>
 

@@ -30,9 +30,9 @@ const hnbIssuance = () => {
 const fetchHnoMyGet = async () => {
   // 리스트
   await hnoMyGet(app.tokenIssuId, app.encData, app.sign);
-  console.log("app.tokenIssuId_마이 홈넘버: ", app.tokenIssuId);
-  console.log("app.encData: ", app.encData);
-  console.log("app.sign: ", app.sign);
+  console.log("app.tokenIssuId_마이 홈넘버 리스트: ", app.tokenIssuId);
+  console.log("app.encData_마이 홈넘버 리스트: ", app.encData);
+  console.log("app.sign_마이 홈넘버 리스트: ", app.sign);
 
   // 불러온 데이터를 최신순으로 정렬
   myGetStore.hnos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -44,6 +44,12 @@ onMounted(async () => {
     fetchHnoMyGet();
     app.page = true;
   }
+
+  // console.log("isError_홈넘버 회원조회: ", isError);
+
+  console.log("app.tokenIssuId_마이 홈넘버: ", app.tokenIssuId);
+  console.log("app.encData_마이 홈넘버: ", app.encData);
+  console.log("app.sign_마이 홈넘버: ", app.sign);
 });
 
 const selectClick = (item) => {

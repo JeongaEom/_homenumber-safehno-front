@@ -1,7 +1,6 @@
 import { call } from "@/api";
 
 const kakaoLogin = (kakaoAuthCd) => {
-  const router = useRouter();
   const app = useAppStore();
   return call({
     id: "2.24 카카오 로그인 [V2]",
@@ -15,7 +14,6 @@ const kakaoLogin = (kakaoAuthCd) => {
       console.log("_app.satk: ", app.satk);
 
       localStorage.setItem("hnoSearchType", "multi");
-      router.replace("/homenumberList");
       return true;
     }
   });

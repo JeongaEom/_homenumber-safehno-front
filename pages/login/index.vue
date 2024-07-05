@@ -66,9 +66,8 @@ const loginClick = async () => {
   if (loginResult) {
     router.replace("/homenumberList");
   }
-
-  console.log("loginResult: ", loginResult);
   console.log("app.tokenIssuId_로그인: ", app.tokenIssuId);
+  console.log("loginResult: ", loginResult);
 };
 
 const signupClick = () => {
