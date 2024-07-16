@@ -156,7 +156,17 @@ const endClick = async () => {
             <ul v-for="item in d.termsWithoutFirst">
               <li>
                 <div>{{ item.termsNm }}</div>
-                <div>{{ item.termsCn }}</div>
+                <div
+                  :class="{
+                    blueType: [
+                      '제공받는 자',
+                      '제공 목적',
+                      '보유 및 이용기간'
+                    ].includes(item.termsNm)
+                  }"
+                >
+                  {{ item.termsCn }}
+                </div>
               </li>
             </ul>
           </div>
@@ -187,13 +197,15 @@ ul {
     line-height: 20.7px;
     margin-bottom: 16px;
     div {
+      font-weight: bold;
       &:nth-child(1) {
-        font-weight: bold;
         font-size: 18px;
       }
       &:nth-child(2) {
-        font-weight: 300;
         color: $c-g600;
+        &.blueType {
+          color: #2242f7 !important;
+        }
       }
     }
   }

@@ -1,8 +1,8 @@
 <script setup>
-// import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { closeTypeGet } from "@/api";
 
-// const router = useRouter();
+const route = useRoute();
 const app = useAppStore();
 
 const closeClick = async () => {
@@ -18,9 +18,8 @@ const closeClick = async () => {
       window.parent.postMessage(
         {
           msg: "SAFE_HNO_CLOSE",
-          retUrl: app.retUrl,
           satk: app.satk,
-          message: "헤더 닫기 버튼"
+          closeMenuCd: route.path === "/personalInformation" ? "3" : "0"
         },
         app.retUrl
       );

@@ -16,9 +16,8 @@ const closeClick = async () => {
       window.parent.postMessage(
         {
           msg: "SAFE_HNO_CLOSE",
-          retUrl: app.retUrl,
           satk: app.satk,
-          message: "로그인 닫기 버튼"
+          closeMenuCd: "0"
         },
         app.retUrl
       );
