@@ -1,6 +1,6 @@
 import { call } from "@/api";
 
-const mberSignup = (mberId, pwd, email, encData) => {
+const mberSignup = (tokenIssuId, mberId, pwd, email, encData) => {
   const app = useAppStore();
   const auth = useAuthStore();
   const termsAgre = auth.signupTems.map((term) => {
@@ -15,6 +15,7 @@ const mberSignup = (mberId, pwd, email, encData) => {
     endpoint: "/safehno/v1/mber/signup",
     headers: "DEFAULT",
     data: {
+      tokenIssuId,
       mberId,
       pwd,
       email,

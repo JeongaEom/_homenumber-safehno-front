@@ -214,10 +214,17 @@ const eventClick = async (data) => {
       d.text = "02"; // 회원정보 입력으로 이동
       d.isActive = false;
     }
+    console.log("app.tokenIssuId_: ", app.tokenIssuId);
   } else if (data === "02") {
     const isValid = verification();
     if (isValid) {
-      const result = await mberSignup(d.mberId, d.pwd, d.email, d.encData);
+      const result = await mberSignup(
+        app.tokenIssuId,
+        d.mberId,
+        d.pwd,
+        d.email,
+        d.encData
+      );
       if (result) {
         d.text = "03"; // 가입완료 페이지 이동
         d.completed = true;
