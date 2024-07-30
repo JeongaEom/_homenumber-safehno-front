@@ -61,7 +61,7 @@ header {
   width: 100%;
   .inners {
     width: 12rem;
-    padding: 2.55rem 0;
+    padding: 2rem 0;
     margin: auto;
   }
 }

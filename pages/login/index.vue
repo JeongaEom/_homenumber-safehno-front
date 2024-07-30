@@ -110,6 +110,8 @@ onMounted(() => {
       11자리 보안번호로 개인정보를 안전하게 지켜드립니다.
     </p>
     <NuxtLink to="/serviceInfo">자세히 ></NuxtLink>
+    <br />
+    <div class="company">주식회사 홈넘버메타 | 사업자등록번호 666-88-02451</div>
   </div>
 </template>
 
@@ -155,10 +157,18 @@ a {
   }
 }
 
+.company {
+  font-weight: bold;
+  font-size: 17px;
+}
+
 //팝업창
 @media (min-height: 769px) and (max-width: 820px) {
   .content[data-v-02281a80] {
     margin: 2rem 2.5rem;
+  }
+  .company {
+    font-size: 15px !important;
   }
 }
 
@@ -168,6 +178,11 @@ a {
     .inner {
       padding: 0 4%;
     }
+  }
+  .company {
+    position: fixed;
+    bottom: 14px;
+    font-size: 14px;
   }
 }
 
