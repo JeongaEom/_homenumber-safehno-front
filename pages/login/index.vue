@@ -71,7 +71,7 @@ const loginClick = async () => {
 };
 
 const signupClick = () => {
-  router.push("/signup");
+  // router.push("/signup");
 
   if (window.parent) {
     window.parent.postMessage(
