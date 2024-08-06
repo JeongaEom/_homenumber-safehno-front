@@ -77,7 +77,7 @@ const signupClick = () => {
     window.parent.postMessage(
       {
         msg: "SAFE_HNO_SIGNUP",
-        url: "www.naver.com"
+        url: "https://www.naver.com"
       },
       app.retUrl
     );
