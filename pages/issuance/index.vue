@@ -78,31 +78,34 @@ onMounted(async () => {
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
 
+//우편번호 찾기 iframe 교체
+// function closeDaumPostcode() {
+//     // iframe을 넣은 element를 안보이게 한다.
+//     document.getElementById('layer').style.display = 'none';
+// }
+//우편번호 찾기 iframe 교체
 const handleClickAddressSearch = () => {
-  // daum 우편번호 찾기
-  // 팝업창 크기
-  const width = 500;
-  const height = 500;
-  // 팝업창 위치
-  const left = window.screen.width / 2 - width / 2;
-  const top = window.screen.height / 2 - height / 2;
-
-  new daum.Postcode({
-    width,
-    height,
-    oncomplete: function (data) {
+	var element_layer = document.getElementById('layer');
+	new daum.Postcode({
+ 		oncomplete: function (data) {
       console.log(data);
       d.postNo = data.zonecode; // 우편번호
       let address = data.roadAddress; // 도로명 주소
       let building = data.buildingName ? ` (${data.buildingName})` : ""; // 건물명이 있으면 앞에 공백을 두고 추가, 없으면 빈 문자열
       d.bassAddr = address + building;
-    }
-  }).open({
-    popupTitle: "우편번호 검색",
-    left,
-    top
-  });
+			element_layer.style.display = 'none';
+    },
+			width : '100%',
+			height : '100%',
+			maxSuggestItems : 1
+  }).embed(element_layer);
+
+	element_layer.style.display = 'block';
+	document.querySelector('[id^=__daum__layer]').style.position = 'absolute'
+	document.querySelector('[id^=__daum__layer]').style.top = '0'
+
 };
+
 
 const verification = () => {
   if (
@@ -357,8 +360,8 @@ watch(
         확인
       </button>
     </section>
-
-    <section v-if="d.completed">
+		<Postcode />
+		<section v-if="d.completed">
       <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
     </section>
   </div>
