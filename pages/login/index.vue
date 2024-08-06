@@ -72,6 +72,19 @@ const loginClick = async () => {
 
 const signupClick = () => {
   router.push("/signup");
+
+  if (window.parent) {
+    window.parent.postMessage(
+      {
+        msg: "SAFE_HNO_SIGNUP",
+        url: "www.naver.com"
+      },
+      app.retUrl
+    );
+    console.log("postMessage-SAFE_HNO_SIGNUP");
+  } else {
+    console.warn("window.parent가 존재하지 않습니다.");
+  }
 };
 
 onMounted(() => {

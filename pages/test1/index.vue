@@ -76,6 +76,10 @@ const CB_MESSAGE = (e) => {
     console.log("SAFE_HNO_CLOSE 👇");
     console.log(data);
     d.result = data;
+  } else if (data.msg === "SAFE_HNO_SIGNUP") {
+    console.log("SAFE_HNO_SIGNUP 👇");
+    console.log(data);
+    d.result = data;
   }
 };
 
