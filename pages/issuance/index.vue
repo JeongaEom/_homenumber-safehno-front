@@ -86,6 +86,7 @@ onMounted(async () => {
 //우편번호 찾기 iframe 교체
 const handleClickAddressSearch = () => {
 	var element_layer = document.getElementById('layer');
+
 	new daum.Postcode({
  		oncomplete: function (data) {
       console.log(data);
@@ -102,7 +103,8 @@ const handleClickAddressSearch = () => {
 
 	element_layer.style.display = 'block';
 	document.querySelector('[id^=__daum__layer]').style.position = 'absolute'
-	document.querySelector('[id^=__daum__layer]').style.top = '0'
+	document.querySelector('[id^=__daum__layer]').style.top = '60px'
+  document.querySelector('[id=closewrap]').style.display = 'block'
 
 };
 
