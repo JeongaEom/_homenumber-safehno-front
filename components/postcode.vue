@@ -26,6 +26,6 @@ function closeDaumPostcode() {
     top: 0;
     background: #fff;
     display:none;
-      .btnCloseLayer{width: 36px;position: absolute;right: 10px;top: 10px;}
+      .btnCloseLayer{width: 36px;position: absolute;right: 10px;top: 10px;cursor:pointer;}
     }
 </style>
