@@ -11,7 +11,7 @@ function closeDaumPostcode() {
 <template>
  <div id="layer" style="-webkit-overflow-scrolling:touch;">
     <div class="close-wrap" id="closewrap">
-      <img src="/_nuxt/assets/images/icon-close.png"  class="btnCloseLayer" id="btnCloseLayer" @click="closeDaumPostcode()" alt="닫기 버튼">
+      <img src="/_nuxt/assets/images/svg/post_close.svg"  class="btnCloseLayer" id="btnCloseLayer" @click="closeDaumPostcode()" alt="닫기 버튼">
     </div>
      
     </div>
@@ -26,6 +26,6 @@ function closeDaumPostcode() {
     top: 0;
     background: #fff;
     display:none;
-      .btnCloseLayer{width: 30px;position: absolute;right: 14px;top: 14px;}
+      .btnCloseLayer{width: 36px;position: absolute;right: 10px;top: 10px;}
     }
 </style>
