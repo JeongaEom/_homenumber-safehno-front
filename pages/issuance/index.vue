@@ -77,11 +77,12 @@ onMounted(async () => {
 
   app.addDaumPostcodeScript(); // daum 우편번호 찾기 API
 });
+
 //우편번호 찾기 iframe 교체
-function closeDaumPostcode() {
-    // iframe을 넣은 element를 안보이게 한다.
-    document.getElementById('layer').style.display = 'none';
-}
+// function closeDaumPostcode() {
+//     // iframe을 넣은 element를 안보이게 한다.
+//     document.getElementById('layer').style.display = 'none';
+// }
 //우편번호 찾기 iframe 교체
 const handleClickAddressSearch = () => {
 	var element_layer = document.getElementById('layer');
@@ -361,11 +362,7 @@ watch(
         확인
       </button>
     </section>
-		<div id="layer" style="-webkit-overflow-scrolling:touch;">
-      <div class="close-wrap" id="closewrap">
-        <img src="/_nuxt/assets/images/post_close.png"  class="btnCloseLayer" id="btnCloseLayer" @click="closeDaumPostcode()" alt="닫기 버튼">
-      </div>
-    </div>
+		<postcode />
 		<section v-if="d.completed">
       <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
     </section>
@@ -373,16 +370,6 @@ watch(
 </template>
 
 <style lang="scss" scoped>
- .close-wrap{
-    width:100%;
-    height:60px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background: #fff;
-    display:none;
-      .btnCloseLayer{width: 36px;position: absolute;right: 10px;top: 10px;cursor:pointer;}
-    }
 section {
   > .contents {
     margin-top: 30px;
