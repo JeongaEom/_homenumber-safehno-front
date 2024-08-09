@@ -362,7 +362,7 @@ watch(
         확인
       </button>
     </section>
-		<Postcode />
+		<postcode />
 		<section v-if="d.completed">
       <completed :topText="d.topText" :btntext="d.btntext" :type="d.type" />
     </section>
