@@ -27,12 +27,6 @@ const d = reactive({
   gender: computed(() =>
     auth.gender === "0" ? "여성" : auth.gender === "1" ? "남성" : "없음"
   ),
-  scrollBehavior() {
-  return {
-     el: '#mberId',
-     top: 0,
-    }
-  },
   validId: false,
   validId1: false,
   validId2: false,
@@ -143,7 +137,7 @@ const CB_MESSAGE = async (e) => {
   // console.log(e);
   if (data.msg === "AUTH_COMPLETE") {
     d.encData = data.EncodeData;
-    document.querySelector('#divContents').style.height = '86vh'
+    document.querySelector('#divContents').style.height = '100%'
     console.log("EncodeData 👇");
     console.log(data.EncodeData);
     await certiCode(); // EncodeData가 설정된 후 certiCode 호출
