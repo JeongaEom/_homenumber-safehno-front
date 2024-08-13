@@ -444,6 +444,7 @@ section {
 button {
   z-index: 1000;
   position: relative;
+
 }
 
 //팝업창
@@ -473,8 +474,8 @@ button {
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 82vh;
-      height: 82dvh;
+      height: 78vh;
+      // height: 82dvh;
     }
   }
 }
@@ -487,6 +488,7 @@ button {
       height: 97vh;
       height: 97dvh;
     }
+    > .contents + button.default{margin: 0 0 1rem 0;}
   }
 }
 
