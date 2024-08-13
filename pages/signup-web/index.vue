@@ -118,18 +118,10 @@ const validateEmail = () => {
 };
 
 const eventHpClick = () => {
-  // 휴대폰 본인 인증
-  // 팝업창 크기
-  const ww = 480;
-  const wh = 812;
-  // 팝업창 위치
-  const left = (document.documentElement.clientWidth - ww) / 2;
-  const top = (document.documentElement.clientHeight - wh) / 2;
-  window.open(
-    `${window.location.origin}/nid-request`,
-    "HOMENUMBER",
-    `width=${ww}, height=${wh}, top=${top}, left=${left}`
-  );
+	d.encData = true;
+	document.querySelector('#divContents').style.height = '100%'
+
+
 };
 
 const CB_MESSAGE = async (e) => {
@@ -218,7 +210,7 @@ const eventClick = async (data) => {
   if (data === "01") {
     if (d.isActive) {
       d.text = "02"; // 회원정보 입력으로 이동
-      document.querySelector('#divTab2').focus() //add 0813
+      document.getElementById("divContents").scrollTop=0
       d.isActive = false;
     }
     console.log("app.tokenIssuId_: ", app.tokenIssuId);
