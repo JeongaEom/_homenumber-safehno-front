@@ -2,9 +2,11 @@
 import { reactive, onMounted, watch, computed, onBeforeUnmount } from "vue";
 import { termsList, mberSignup, mberIdcheck, certiPhoneEncDecode } from "@/api";
 
+
 const app = useAppStore();
 const termsStore = useTermsStore();
 const auth = useAuthStore();
+
 
 definePageMeta({
   name: "signup-web"
@@ -25,6 +27,12 @@ const d = reactive({
   gender: computed(() =>
     auth.gender === "0" ? "여성" : auth.gender === "1" ? "남성" : "없음"
   ),
+  scrollBehavior() {
+  return {
+     el: '#mberId',
+     top: 0,
+    }
+  },
   validId: false,
   validId1: false,
   validId2: false,
@@ -215,6 +223,7 @@ const eventClick = async (data) => {
   if (data === "01") {
     if (d.isActive) {
       d.text = "02"; // 회원정보 입력으로 이동
+      document.querySelector('#divTab2').focus() //add 0813
       d.isActive = false;
     }
     console.log("app.tokenIssuId_: ", app.tokenIssuId);
@@ -291,7 +300,7 @@ watch(
           </div>
         </div>
         <div v-if="d.text === '02'">
-          <div class="inputDatas">
+          <div class="inputDatas" id="divTab2" tabindex="1"> <!--add 0813-->
             <div class="inner">
               <ul>
                 <li>
@@ -479,6 +488,7 @@ button {
       height: 78vh;
       // height: 82dvh;
     }
+    > .contents + button.default{margin: 0 0 1rem 0;}
   }
 }
 
@@ -492,7 +502,7 @@ button {
       height: 97vh;
       height: 97dvh;
     }
-    > .contents + button.default{margin: 0 0 1rem 0;}
+   
   }
 }
 
