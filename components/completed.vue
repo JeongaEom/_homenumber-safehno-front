@@ -41,6 +41,12 @@ onMounted(async () => {
     if (!isErrorNon) {
       app.page = true;
     }
+  } else if (type === "signup-web") {
+    // 회원가입-WEB
+    const isErrorNon = false; //await app.requiredValueNon();
+    if (!isErrorNon) {
+      app.page = true;
+    }
   }
   return true;
 });
@@ -56,7 +62,7 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-    <button
+    <button v-if="!app.isBrowser"
       class="bg-w line-active"
       @click="endnextClick()"
       :style="{ display: p.btn }"

@@ -16,6 +16,7 @@ export const useAppStore = defineStore("app", {
       closeType: null, // 닫기 버튼 아이프레임 iframe, 팝업 popup 여부 확인
       retUrl: null,
       satk: "", // 인증토큰 (쿠키X)
+      isBrowser: false, //브라우저 여부
       page: false // 2.20 표준창 요청 정보 조회 (쿠키X)
     };
   },
@@ -60,7 +61,7 @@ export const useAppStore = defineStore("app", {
           // localStorage에 tokenIssuId가 없으면
           this.error = {
             type: "alert",
-            message: "다시 시도",
+            message: "다시 시도(1)",
             hasClose: false,
             onConfirm: () => {
               window.close();
@@ -112,7 +113,7 @@ export const useAppStore = defineStore("app", {
           // localStorage에 tokenIssuId가 없으면
           this.error = {
             type: "alert",
-            message: "다시 시도",
+            message: "다시 시도(2)",
             hasClose: false,
             onConfirm: () => {
               window.close();
