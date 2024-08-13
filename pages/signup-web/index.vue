@@ -143,6 +143,7 @@ const CB_MESSAGE = async (e) => {
   // console.log(e);
   if (data.msg === "AUTH_COMPLETE") {
     d.encData = data.EncodeData;
+    document.querySelector('#divContents').style.height = '86vh'
     console.log("EncodeData 👇");
     console.log(data.EncodeData);
     await certiCode(); // EncodeData가 설정된 후 certiCode 호출
@@ -243,6 +244,7 @@ const eventClick = async (data) => {
       } else {
         d.text = "02"; // 회원정보 입력 페이지 유지
         d.completed = false;
+
       }
     }
   }
@@ -259,7 +261,7 @@ watch(
 <template>
   <TitleSignup :text="d.text" />
   <section>
-    <div class="contents" v-if="!d.completed">
+    <div class="contents" id="divContents" v-if="!d.completed">
       <div class="subs-title" v-if="d.text !== '03'">
         <div>{{ titleText }}</div>
       </div>
@@ -357,7 +359,7 @@ watch(
                   </div>
                 </li>
                 <!-- 휴대폰 본인 인증 완료후 나오는 데이터 -->
-                <li v-if="d.encData">
+                <li v-if="d.encData" >
                   <div class="input-text">이름 <span>*</span></div>
                   <div>
                     <input type="text" v-model="auth.name" disabled />
