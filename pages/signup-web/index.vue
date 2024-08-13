@@ -137,7 +137,7 @@ const CB_MESSAGE = async (e) => {
   // console.log(e);
   if (data.msg === "AUTH_COMPLETE") {
     d.encData = data.EncodeData;
-    document.querySelector('#divContents').style.height = '100%'
+    document.querySelector('#divContents').style.height = '100vh'
     console.log("EncodeData 👇");
     console.log(data.EncodeData);
     await certiCode(); // EncodeData가 설정된 후 certiCode 호출
