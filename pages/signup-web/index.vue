@@ -119,7 +119,7 @@ const validateEmail = () => {
 
 const eventHpClick = () => {
 	d.encData = true;
-	document.querySelector('#divContents').style.height = '100%'
+	//document.querySelector('#divContents').style.height = '100%'
 
 
 };
@@ -129,7 +129,7 @@ const CB_MESSAGE = async (e) => {
   // console.log(e);
   if (data.msg === "AUTH_COMPLETE") {
     d.encData = data.EncodeData;
-    document.querySelector('#divContents').style.height = '98vh'
+    //document.querySelector('#divContents').style.height = '98vh'
     console.log("EncodeData 👇");
     console.log(data.EncodeData);
     await certiCode(); // EncodeData가 설정된 후 certiCode 호출
@@ -473,7 +473,7 @@ button {
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 78vh;
+      height: 110vh;
       // height: 82dvh;
     }
     > .contents + button.default{margin: 0 0 1rem 0;}
