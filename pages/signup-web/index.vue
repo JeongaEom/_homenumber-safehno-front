@@ -476,11 +476,13 @@ button {
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 82vh;
-      height: 82dvh;
+      height: 78vh;
+      // height: 82dvh;
     }
   }
 }
+
+
 
 @media (max-height: 667px) {
   section {
@@ -490,6 +492,7 @@ button {
       height: 97vh;
       height: 97dvh;
     }
+    > .contents + button.default{margin: 0 0 1rem 0;}
   }
 }
 
