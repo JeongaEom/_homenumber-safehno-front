@@ -118,18 +118,12 @@ const validateEmail = () => {
 };
 
 const eventHpClick = () => {
-  // 휴대폰 본인 인증
-  // 팝업창 크기
-  const ww = 480;
-  const wh = 812;
-  // 팝업창 위치
-  const left = (document.documentElement.clientWidth - ww) / 2;
-  const top = (document.documentElement.clientHeight - wh) / 2;
-  window.open(
-    `${window.location.origin}/nid-request`,
-    "HOMENUMBER",
-    `width=${ww}, height=${wh}, top=${top}, left=${left}`
-  );
+
+	d.encData = true;
+	const element = document.querySelector('#divContents');
+  element.classList.add('medheight');
+
+
 };
 
 const CB_MESSAGE = async (e) => {
@@ -216,9 +210,9 @@ const verification = () => {
 
 const eventClick = async (data) => {
   if (data === "01") {
-  	document.getElementById("divContents").scrollTop=0
-    if (d.isActive) {
+  	if (d.isActive) {
       d.text = "02"; // 회원정보 입력으로 이동
+      document.getElementById('divContents').scrollIntoView(true); //0814 scroll top 교체 
       d.isActive = false;
     }
     console.log("app.tokenIssuId_: ", app.tokenIssuId);
@@ -250,6 +244,10 @@ watch(
     d.isActive = newValues.some((value) => value.trim() !== "");
   }
 );
+
+
+
+
 </script>
 
 <template>
@@ -296,7 +294,7 @@ watch(
           </div>
         </div>
         <div v-if="d.text === '02'">
-          <div class="inputDatas" id="divTab2" tabindex="1"> <!--add 0813-->
+          <div class="inputDatas" id="divTab2" tabindex="1"  > <!--add 0813-->
             <div class="inner">
               <ul>
                 <li>
@@ -475,15 +473,17 @@ button {
       height: 75vh;
       height: 75dvh;
     }
+    >.contents.medheight{ height: 75vh !important;}
   }
 }
 
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 110vh;
-      // height: 82dvh;
+      height: 86vh;
+      height: 86dvh;
     }
+    > .contents.medheight{ height: 110vh !important;}
     > .contents + button.default{margin: 0 0 1rem 0;}
   }
 }
