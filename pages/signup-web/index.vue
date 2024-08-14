@@ -119,7 +119,8 @@ const validateEmail = () => {
 
 const eventHpClick = () => {
 	d.encData = true;
-	//document.querySelector('#divContents').style.height = '100%'
+	const element = document.querySelector('#divContents');
+  element.classList.add('medheight');
 
 
 };
@@ -210,7 +211,7 @@ const eventClick = async (data) => {
   if (data === "01") {
     if (d.isActive) {
       d.text = "02"; // 회원정보 입력으로 이동
-      document.getElementById("divContents").scrollTop=0
+      document.getElementById('divContents').scrollIntoView(true); //0814 scroll top 교체 
       d.isActive = false;
     }
     console.log("app.tokenIssuId_: ", app.tokenIssuId);
@@ -242,6 +243,10 @@ watch(
     d.isActive = newValues.some((value) => value.trim() !== "");
   }
 );
+
+
+
+
 </script>
 
 <template>
@@ -288,7 +293,7 @@ watch(
           </div>
         </div>
         <div v-if="d.text === '02'">
-          <div class="inputDatas" id="divTab2" tabindex="1"> <!--add 0813-->
+          <div class="inputDatas" id="divTab2" tabindex="1"  > <!--add 0813-->
             <div class="inner">
               <ul>
                 <li>
@@ -467,15 +472,17 @@ button {
       height: 75vh;
       height: 75dvh;
     }
+    >.contents.medheight{ height: 75vh !important;}
   }
 }
 
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 110vh;
-      // height: 82dvh;
+      height: 86vh;
+      height: 86dvh;
     }
+    > .contents.medheight{ height: 110vh !important;}
     > .contents + button.default{margin: 0 0 1rem 0;}
   }
 }
