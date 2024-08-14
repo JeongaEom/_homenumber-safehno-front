@@ -193,8 +193,8 @@ a {
     }
   }
   .company {
-    position: fixed;
-    bottom: 14px;
+    // position: fixed;
+    // bottom: 14px;
     font-size: 14px;
   }
 }
