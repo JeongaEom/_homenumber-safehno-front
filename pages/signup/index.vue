@@ -60,6 +60,7 @@ onMounted(async () => {
     app.page = true;
   }
 
+	
   listTerms();
 });
 
@@ -473,8 +474,8 @@ button {
 @media (max-height: 740px) {
   section {
     > .contents {
-      height: 82vh;
-      height: 82dvh;
+      height: 85vh;
+      height: 85dvh;
     }
   }
 }

@@ -1,12 +1,13 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { hnoMyGet } from "@/api";
+import { hnoMyGet, provhnoTermsAgree, closeTypeGet } from "@/api";
 import { formatNb } from "@/utils";
 
 const router = useRouter();
 const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
+const hnoSearchType = localStorage.getItem("hnoSearchType");
 
 definePageMeta({
   name: "homenumberList"
@@ -19,7 +20,13 @@ const d = reactive({
   topText: "등록된 홈넘버가<br />존재하지 않습니다.",
   btntext: "내 홈넘버 보기",
   type: "contents-end",
-  btn: "none"
+  btn: "none",
+  text: "개인정보 제3자 제공 동의",
+  termsGrpCd: "1010005",
+  termsCd: "1020007",
+  termsVer: "1",
+  termsWithoutFirst: []
+  
 });
 
 const hnbIssuance = () => {
@@ -44,7 +51,10 @@ onMounted(async () => {
     fetchHnoMyGet();
     app.page = true;
   }
-
+  if (!app.closeType) {
+    const result = await closeTypeGet();
+    console.log("result: ", result);
+  }
   // console.log("isError_홈넘버 회원조회: ", isError);
 
   console.log("app.tokenIssuId_마이 홈넘버: ", app.tokenIssuId);
@@ -84,7 +94,39 @@ const nextClick = async () => {
   console.log("selectedItem", selectedItem);
   myGetStore.selectedItem = selectedItem;
   myGetStore.isMyHnoYn = d.isMyHnoYn;
-  router.push("/personalInformation");
+    
+  //경로 삭제
+  //router.push("/personalInformation");
+  const params =
+    hnoSearchType === "multi"
+      ? [
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
+          myGetStore.selectedItem.hnoNo,
+          myGetStore.selectedItem.subCd,
+          myGetStore.infoProvAuthNo,
+          d.termsCd,
+          d.termsVer,
+          "Y"
+        ]
+      : [
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
+          shno.hnoNo,
+          shno.subCd,
+          shno.infoProvAuthNo,
+          d.termsCd,
+          d.termsVer,
+          "N"
+        ];
+
+  await provhnoTermsAgree(...params);
+  
+  //PostMessage 보내기
+
+  
 };
 
 console.log("d.isActive_홈넘버 조회:", d.isActive);

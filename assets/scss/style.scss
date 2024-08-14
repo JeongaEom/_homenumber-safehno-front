@@ -201,7 +201,9 @@ button.red-active {
   color: $wt;
   border: none;
 }
-
+button.hide {
+  display: none;
+}
 /* margin */
 .mb-btm-6 {
   margin-bottom: 6px;

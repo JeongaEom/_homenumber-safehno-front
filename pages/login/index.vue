@@ -21,8 +21,8 @@ if (import.meta.env.MODE === "production") {
   pwd = "";
 } else {
   // 로컬, 개발에만 아이디, 비번 고정
-  id = "jaeom50";
-  pwd = "eja3249eja**";
+  id = "spraut";
+  pwd = "asdfqwer1!";
 }
 
 const d = reactive({

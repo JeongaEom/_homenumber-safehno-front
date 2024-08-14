@@ -3,12 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cross-env NUXT_PORT=3002 NUXT_ENV=local nuxt dev",
+    "dev": "cross-env NUXT_PORT=3002 NUXT_ENV=local nuxt dev --host",
     "build": "nuxt build",
     "generate-dev": "cross-env NUXT_ENV=development nuxt generate",
     "generate-live": "cross-env NUXT_ENV=production nuxi generate",
-    "deploy-dev": "aws s3 --profile homnumbermeta-dev sync C:/Workspace/GitLab/homenumber-safehno-front/.output/public s3://dev-safehno-front",
-    "deploy-live": "aws s3 --profile homnumbermeta sync C:/Workspace/GitLab/homenumber-safehno-front/.output/public s3://safehno.homenumber.co.kr",
+    "deploy-dev": "aws s3 --profile homnumbermeta-dev sync /Users/siyoung/git/homenumber-safehno-front/.output/public s3://dev-safehno-front",
+    "deploy-live": "aws s3 --profile homnumbermeta sync /Users/siyoung/git/homenumber-safehno-front/.output/public s3://safehno.homenumber.co.kr",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

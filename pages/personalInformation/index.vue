@@ -95,6 +95,10 @@ onMounted(async () => {
 });
 
 const endClick = async () => {
+	console.log('app.tokenIssuId : '+app.tokenIssuId)
+	console.log('app.encData : '+app.encData)
+	console.log('app.sign : '+app.sign)
+	console.log('hnoSearchType : '+hnoSearchType)
   const params =
     hnoSearchType === "multi"
       ? [

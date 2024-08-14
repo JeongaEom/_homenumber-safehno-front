@@ -1,12 +1,14 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { noauthHnoGet } from "@/api";
+import { noauthHnoGet, provhnoTermsAgree, closeTypeGet } from "@/api";
 
 const route = useRoute();
 const router = useRouter();
 const app = useAppStore();
 const shno = useSingleHnoStore();
+const myGetStore = useHnoMyGetStore();
+const hnoSearchType = localStorage.getItem("hnoSearchType");
 
 definePageMeta({
   name: "homenumberInquiry"
@@ -42,7 +44,12 @@ const d = reactive({
   },
   data: false, // false 홈넘버, 보안키 입력 | true 홈넘버 조회 리스트
   hnoNo: hnoNo,
-  scrtky: scrtky
+  scrtky: scrtky,
+  text: "개인정보 제3자 제공 동의",
+  termsGrpCd: "1010005",
+  termsCd: "1020007",
+  termsVer: "1",
+  termsWithoutFirst: []
 });
 
 onMounted(async () => {
@@ -50,7 +57,10 @@ onMounted(async () => {
   if (!isErrorNon) {
     app.page = true;
   }
-
+  if (!app.closeType) {
+    const result = await closeTypeGet();
+    console.log("result: ", result);
+  }
   if (shno.hnoNo) {
     d.data = true;
   }
@@ -70,8 +80,38 @@ const eventClick = async () => {
   }
 };
 
-const nextClick = () => {
-  router.push("/personalInformation");
+const nextClick = async () => {
+  //router.push("/personalInformation");
+  const params =
+    hnoSearchType === "multi"
+      ? [
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
+          myGetStore.selectedItem.hnoNo,
+          myGetStore.selectedItem.subCd,
+          myGetStore.infoProvAuthNo,
+          d.termsCd,
+          d.termsVer,
+          "Y"
+        ]
+      : [
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
+          shno.hnoNo,
+          shno.subCd,
+          shno.infoProvAuthNo,
+          d.termsCd,
+          d.termsVer,
+          "N"
+        ];
+
+  await provhnoTermsAgree(...params);
+  
+  //PostMessage 보내기
+  
+  
 };
 </script>
 
