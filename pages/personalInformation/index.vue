@@ -2,7 +2,7 @@
 import { reactive, onMounted } from "vue";
 import { provhnoTermsAgree, termsList, closeTypeGet } from "@/api";
 
-// const router = useRouter();
+const router = useRouter();
 const app = useAppStore();
 const myGetStore = useHnoMyGetStore();
 const termsStore = useTermsStore();
@@ -124,7 +124,8 @@ const endClick = async () => {
           "N"
         ];
 
-  await provhnoTermsAgree(...params);
+  //await provhnoTermsAgree(...params);
+  router.push("/issuance");
 };
 </script>
 

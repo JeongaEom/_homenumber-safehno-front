@@ -31,7 +31,8 @@ const d = reactive({
 
 const hnbIssuance = () => {
   //발급
-  router.replace("/issuance");
+  //router.replace("/issuance");
+  router.push("/personalInformation");
 };
 
 const fetchHnoMyGet = async () => {
