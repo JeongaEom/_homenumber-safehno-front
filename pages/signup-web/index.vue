@@ -118,11 +118,24 @@ const validateEmail = () => {
 };
 
 const eventHpClick = () => {
-
-	d.encData = true;
-	const element = document.querySelector('#divContents');
+  // 휴대폰 본인 인증
+  const element = document.querySelector('#divContents');
   element.classList.add('medheight');
-
+  
+  d.encData = true; //TEST용
+  
+  // 팝업창 크기
+  // const ww = 480;
+  // const wh = 812;
+  
+  // // 팝업창 위치
+  // const left = (document.documentElement.clientWidth - ww) / 2;
+  // const top = (document.documentElement.clientHeight - wh) / 2;
+  // window.open(
+  //   `${window.location.origin}/nid-request`,
+  //   "HOMENUMBER",
+  //   `width=${ww}, height=${wh}, top=${top}, left=${left}`
+  // );
 
 };
 
