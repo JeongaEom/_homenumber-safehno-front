@@ -18,7 +18,7 @@ const d = reactive({
   crtfcNo: "",
   cdCommand: "stop",
   time: "",
-  isNext: false, // true는 휴대폰 인증 | false는 수정
+  isNext: true, // true는 휴대폰 인증 | false는 수정
   scrtky: "",
   addrNcm: get.addrNcm,
   topText: "홈넘버 수정이<br />성공적으로 이루어졌습니다.",
