@@ -264,8 +264,8 @@ watch(
 </script>
 
 <template>
-  <TitleSignup :text="d.text" />
   <section>
+    <TitleSignup :text="d.text" />
     <div class="contents" id="divContents" v-if="!d.completed">
       <div class="subs-title" v-if="d.text !== '03'">
         <div>{{ titleText }}</div>
@@ -415,12 +415,15 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-section {
+section {height: 100%;
+  >.title-sign{padding: 0 0 10px;}
   > .contents {
     margin-top: 0;
     margin-bottom: 1.5rem;
+    overflow: hidden;
+    height: auto;
     .sub-ct {
-      height: 415px;
+      height: auto; /* height: 415px;*/
       position: relative;
       z-index: 1;
     }
@@ -467,10 +470,11 @@ button {
 
 //팝업창
 @media (min-height: 769px) and (max-width: 820px) {
-  section {
+  section { overflow:hidden;
+    height: auto;
     > .contents {
-      height: 62vh;
-      height: 62dvh;
+      overflow:hidden;
+      height: auto;
     }
   }
 }
@@ -478,23 +482,41 @@ button {
 //모바일 사이즈별
 @media (max-height: 768px) {
   section {
-    overflow: auto;
-    height: 72vh;
-    height: 72dvh;
+    overflow:hidden;
+    height: auto;
     > .contents {
       overflow: hidden;
-      height: 75vh;
-      height: 75dvh;
+      // height: 75vh;
+      // height: 75dvh;
+      height:auto;
     }
-    >.contents.medheight{ height: 75vh !important;}
+    >.contents.medheight{ height:120vh !important;}
+    > .contents + button.default{margin: -1rem 0 1rem 0;}
+  }
+}
+@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
+  // 높이가 높은 모바일
+  section {
+    overflow:hidden;
+    height: auto;
+    > .contents {
+      overflow: hidden;
+      height:auto;
+    }
+    > .contents + button.default{margin: -1rem 0 1rem 0;}
   }
 }
 
+
 @media (max-height: 740px) {
   section {
+    overflow:hidden;
+    height: auto;
     > .contents {
-      height: 86vh;
-      height: 86dvh;
+      overflow: hidden;
+      // height: 86vh;
+      // height: 86dvh;
+      height:auto;
     }
     > .contents.medheight{ height: 110vh !important;}
     > .contents + button.default{margin: 0 0 1rem 0;}
@@ -505,11 +527,11 @@ button {
 
 @media (max-height: 667px) {
   section {
-    height: 69vh;
-    height: 69dvh;
+    overflow:hidden;
+    height: auto;
     > .contents {
-      height: 97vh;
-      height: 97dvh;
+      overflow:hidden;
+      height: auto;
     }
    
   }
@@ -517,24 +539,16 @@ button {
 
 @media (max-height: 568px) {
   section {
-    height: 63vh;
-    height: 63dvh;
+    overflow:hidden;
+    height: auto;
     > .contents {
-      height: 106vh;
-      height: 106dvh;
+      overflow:hidden;
+      height: auto;
     }
   }
 }
 
-@media (min-width: 344px) and (max-width: 430px) and (min-height: 812px) and (max-height: 935px) {
-  // 높이가 높은 모바일
-  section {
-    > .contents {
-      height: 64vh;
-      height: 64dvh;
-    }
-  }
-}
+
 
 @media (max-height: 480px) {
   // 높이가 낮은 모바일
