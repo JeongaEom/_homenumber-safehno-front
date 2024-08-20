@@ -226,7 +226,8 @@ const eventClick = async (data) => {
   if (data === "01") {
   	if (d.isActive) {
       d.text = "02"; // 회원정보 입력으로 이동
-      document.getElementById('divContents').scrollIntoView(true); //0814 scroll top 교체 
+      //document.getElementById('divContents').scrollIntoView(true); //0814 scroll top 교체 
+      document.getElementById('divContents').scrollTop=0;
       d.isActive = false;
     }
     console.log("app.tokenIssuId_: ", app.tokenIssuId);
