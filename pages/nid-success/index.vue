@@ -32,8 +32,7 @@ onMounted(() => {
       {
         msg: "AUTH_COMPLETE",
         EncodeData: r.query.EncodeData
-      },
-      FE_DOMAIN
+      },'*'
     );
     window.close();
   } else {

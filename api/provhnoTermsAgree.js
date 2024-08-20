@@ -48,8 +48,7 @@ const provhnoTermsAgree = (
               sign: data.sign,
               satk: app.satk,
               retUrl: data.retUrl
-            },
-            data.retUrl
+            },'*'
           );
         } else {
           console.warn("window.parent가 존재하지 않습니다.");
@@ -64,8 +63,7 @@ const provhnoTermsAgree = (
               sign: data.sign,
               satk: app.satk,
               retUrl: data.retUrl
-            },
-            data.retUrl
+            },'*'
           );
           window.close();
         } else {

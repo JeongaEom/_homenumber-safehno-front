@@ -5,7 +5,7 @@ import { closeTypeGet } from "@/api";
 const route = useRoute();
 const app = useAppStore();
 
-const closeClick = async () => {
+const closeClickHeader = async () => {
   if (!app.closeType) {
     const result = await closeTypeGet();
     console.log("result: ", result);
@@ -20,8 +20,7 @@ const closeClick = async () => {
           msg: "SAFE_HNO_CLOSE",
           satk: app.satk,
           closeMenuCd: route.path === "/personalInformation" ? "3" : "0"
-        },
-        app.retUrl
+        },'*'
       );
     } else {
       console.warn("window.parent가 존재하지 않습니다.");
@@ -53,11 +52,11 @@ const clickEvent = () => {
         />
       </div>
     </div>
-    <div class="close">
+    <div v-if="!app.isBrowser" class="close">
       <img
         src="@/assets/images/icon-close.png"
         alt="닫기"
-        @click="closeClick"
+        @click="closeClickHeader"
       />
     </div>
   </header>

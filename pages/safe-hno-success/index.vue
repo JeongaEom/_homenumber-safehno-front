@@ -8,8 +8,7 @@ onMounted(() => {
       endData: "ENDDATA",
       sign: "SIGN",
       retUrl: "https://www.naver.com"
-    },
-    "http://localhost:3002"
+    },'*'
   );
   window.close();
 });

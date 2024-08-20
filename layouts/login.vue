@@ -13,13 +13,14 @@ const closeClick = async () => {
   if (app.closeType === "1450001") {
     // iframe 일땐 window.parent | popup 일땐 window.opener 사용
     if (window.parent) {
+      console.log('after postMessage');
       window.parent.postMessage(
         {
           msg: "SAFE_HNO_CLOSE",
           satk: app.satk,
+          retUrl: app.retUrl,
           closeMenuCd: "0"
-        },
-        app.retUrl
+        },'*'
       );
     } else {
       console.warn("window.parent가 존재하지 않습니다.");

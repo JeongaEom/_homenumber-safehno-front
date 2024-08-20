@@ -70,14 +70,18 @@ const CB_MESSAGE = (e) => {
   const { data } = e;
   if (data.msg === "SAFE_HNO_SUCCESS") {
     console.log("SAFE_HNO_SUCCESS 👇");
+    console.log("e.origin::"+e.origin);
     console.log(data);
     d.result = data;
   } else if (data.msg === "SAFE_HNO_CLOSE") {
     console.log("SAFE_HNO_CLOSE 👇");
+    console.log("e.origin::"+e.origin);
     console.log(data);
     d.result = data;
+	
   } else if (data.msg === "SAFE_HNO_SIGNUP") {
     console.log("SAFE_HNO_SIGNUP 👇");
+    console.log("e.origin::"+e.origin);
     console.log(data);
     d.result = data;
   }

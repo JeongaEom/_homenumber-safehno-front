@@ -78,10 +78,8 @@ const signupClick = () => {
       {
         msg: "SAFE_HNO_SIGNUP",
         url: "https://dev-safehno.homenumber.co.kr/signup-web"
-      },
-      app.retUrl
+      },'*'
     );
-    console.log("postMessage-SAFE_HNO_SIGNUP");
   } else {
     console.warn("window.parent가 존재하지 않습니다.");
   }

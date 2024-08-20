@@ -82,36 +82,22 @@ const eventClick = async () => {
 
 const nextClick = async () => {
   //router.push("/personalInformation");
-  const params =
-    hnoSearchType === "multi"
-      ? [
-          app.tokenIssuId,
-          app.encData,
-          app.sign,
-          myGetStore.selectedItem.hnoNo,
-          myGetStore.selectedItem.subCd,
-          myGetStore.infoProvAuthNo,
-          d.termsCd,
-          d.termsVer,
-          "Y"
-        ]
-      : [
-          app.tokenIssuId,
-          app.encData,
-          app.sign,
-          shno.hnoNo,
-          shno.subCd,
-          shno.infoProvAuthNo,
-          d.termsCd,
-          d.termsVer,
-          "N"
-        ];
-
-  await provhnoTermsAgree(...params);
-  
+ 
   //PostMessage 보내기
-  
-  
+  		if (window.parent) {
+          window.parent.postMessage(
+            {
+              msg: "SAFE_HNO_SUCCESS",
+              tokenIssuId: app.tokenIssuId,
+              encData: app.encData,
+              sign: app.sign,
+              satk: app.satk,
+              retUrl: app.retUrl
+            },'*'
+          );
+        } else {
+          console.warn("window.parent가 존재하지 않습니다.");
+        }
 };
 </script>
 

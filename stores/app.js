@@ -27,7 +27,7 @@ export const useAppStore = defineStore("app", {
       let url;
       if (import.meta.env.MODE === "development") {
         // 개발
-        url = "https://dev-safehno.homenumber.co.kr/";
+        url = "https://dev-safehno.homenumber.co.kr";
       } else if (import.meta.env.MODE === "production") {
         // 운영
         url = "https://safehno.homenumber.co.kr";

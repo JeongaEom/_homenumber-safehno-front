@@ -31,7 +31,7 @@ const d = reactive({
   validId1: false,
   validId2: false,
   topText:
-    "회원 가입이 완료되었습니다.<br /> 이 창을 닫고 쇼핑을 계속하실 수 있습니다.",
+    "회원 가입이 완료되었습니다.<br><br> 롯데홈쇼핑으로 돌아가서 주문을 완료해주세요.<br><br>아이폰의 경우, 좌측 상단 ◀ 버튼을 클릭하여 이전 화면으로 이동할 수 있습니다.",
   btntext: "로그인",
   type: "signup-web",
   completed: false,
@@ -122,20 +122,20 @@ const eventHpClick = () => {
   const element = document.querySelector('#divContents');
   element.classList.add('medheight');
   
-  d.encData = true; //TEST용
+  //d.encData = true; //TEST용
   
+  // 휴대폰 본인 인증
   // 팝업창 크기
-  // const ww = 480;
-  // const wh = 812;
-  
-  // // 팝업창 위치
-  // const left = (document.documentElement.clientWidth - ww) / 2;
-  // const top = (document.documentElement.clientHeight - wh) / 2;
-  // window.open(
-  //   `${window.location.origin}/nid-request`,
-  //   "HOMENUMBER",
-  //   `width=${ww}, height=${wh}, top=${top}, left=${left}`
-  // );
+  const ww = 480;
+  const wh = 812;
+  // 팝업창 위치
+  const left = (document.documentElement.clientWidth - ww) / 2;
+  const top = (document.documentElement.clientHeight - wh) / 2;
+  window.open(
+    `${window.location.origin}/nid-request`,
+    "HOMENUMBER",
+    `width=${ww}, height=${wh}, top=${top}, left=${left}`
+  );
 
 };
 
