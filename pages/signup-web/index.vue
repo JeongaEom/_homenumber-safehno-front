@@ -9,6 +9,7 @@ const auth = useAuthStore();
 
 
 definePageMeta({
+  layout: "signup-default",
   name: "signup-web"
 });
 
@@ -266,7 +267,7 @@ watch(
 <template>
   <section>
     <TitleSignup :text="d.text" />
-    <div class="contents" id="divContents" v-if="!d.completed">
+    <div class="contents"  v-if="!d.completed">
       <div class="subs-title" v-if="d.text !== '03'">
         <div>{{ titleText }}</div>
       </div>
