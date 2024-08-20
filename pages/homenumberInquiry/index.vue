@@ -23,7 +23,7 @@ if (import.meta.env.MODE === "production") {
   scrtky = "";
 } else {
   // 로컬, 개발에만 아이디, 비번 고정
-  hnoNo = "10034205960";
+  hnoNo = "10076767777";
   scrtky = "1234";
 }
 
@@ -83,21 +83,21 @@ const eventClick = async () => {
 const nextClick = async () => {
   //router.push("/personalInformation");
  
-  //PostMessage 보내기
-  		if (window.parent) {
-          window.parent.postMessage(
-            {
-              msg: "SAFE_HNO_SUCCESS",
-              tokenIssuId: app.tokenIssuId,
-              encData: app.encData,
-              sign: app.sign,
-              satk: app.satk,
-              retUrl: app.retUrl
-            },'*'
-          );
-        } else {
-          console.warn("window.parent가 존재하지 않습니다.");
-        }
+  const params =
+    	[
+          app.tokenIssuId,
+          app.encData,
+          app.sign,
+          shno.hnoNo,
+          shno.subCd,
+          shno.infoProvAuthNo,
+          d.termsCd,
+          d.termsVer,
+          "N"
+        ];
+    //console.log('hnoSearchType:'+hnoSearchType);
+	//console.log(params);
+  await provhnoTermsAgree(...params);
 };
 </script>
 
