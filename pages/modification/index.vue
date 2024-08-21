@@ -411,14 +411,14 @@ console.log("d.isActive1_수정:", d.isActive1);
 
 .hp {
   margin-top: 20px;
-  height: 57vh;
-  height: 57dvh;
+  height: 56vh;
+  height: 56dvh;
 }
 
 .modifi {
   margin-top: 20px;
-  height: 53dvh;
-  height: 53dvh;
+  height: 51dvh;
+  height: 51dvh;
 }
 
 .phone {
