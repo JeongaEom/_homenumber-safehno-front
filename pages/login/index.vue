@@ -77,7 +77,7 @@ const signupClick = () => {
     window.parent.postMessage(
       {
         msg: "SAFE_HNO_SIGNUP",
-        url: "https://dev-safehno.homenumber.co.kr/signup-web"
+        url: app.link()+"/signup-web"
       },'*'
     );
   } else {
