@@ -38,9 +38,12 @@ const closeClick = () => {
   height: 100%;
   overflow: auto;
   max-width: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .inner {
     background-color: #fefefe;
-    margin: 17rem auto;
+    margin: 0 auto;
     padding: 20px;
     border: 1px solid $c-g400;
     box-shadow: 0 5px 10px $c-g400;
